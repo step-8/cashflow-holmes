@@ -1,15 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: var(--font-family);
-  max-width: 100vw;
-  max-height: 100vh;
-}
-
 .page-wrapper {
   display: flex;
   padding: 0.5em;
@@ -40,7 +28,7 @@ body {
 }
 
 header>h2 {
-  font-size: 2.5em;
+  font-size: var(--page-header);
 }
 
 a {
@@ -68,7 +56,7 @@ a {
   border-bottom-left-radius: 1em;
   display: flex;
   align-items: center;
-  font-size: 1.3em;
+  font-size: var(--plain-font);
   gap: 1.5em;
   padding: 0.5em 0.8em;
 }
@@ -113,4 +101,9 @@ a {
   align-self: center;
   position: relative;
   top: 5%;
+}
+
+.ratrace-tile {
+  width: 200px;
+  border: var(--def-border);
 }

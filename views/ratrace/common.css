@@ -2,4 +2,18 @@
   --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   --bgColor: dimgrey;
   --def-border: 0.5px solid black;
+  --page-header: 2.5em;
+  --plain-font: 1.3em;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  max-width: 100vw;
+  max-height: 100vh;
 }
