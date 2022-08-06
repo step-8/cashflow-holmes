@@ -7,6 +7,7 @@
 }
 
 #board {
+  width: 85vw;
   max-width: 85vw;
   max-height: 100%;
   justify-content: stretch;
@@ -19,7 +20,7 @@
   height: 100%;
   display: flex;
   flex-flow: column;
-  gap: 2em;
+  gap: 1.5vmax;
   overflow: hidden;
 }
 
@@ -58,7 +59,7 @@ a {
   display: flex;
   align-items: center;
   font-size: var(--plain-font);
-  gap: 1.5em;
+  gap: 1.2vmax;
   padding: 0.5em 0.8em;
 }
 
@@ -68,7 +69,8 @@ a {
 }
 
 #loan-options>div {
-  padding: 1em;
+  padding: 0.7vmax;
+  font-size: 1vmax;
   border: var(--def-border)
 }
 
@@ -95,13 +97,12 @@ a {
 }
 
 .ratrace-tile {
-  width: 200px;
   border: var(--def-border);
 }
 
 #board {
   display: grid;
-  width: fit-content;
+  justify-content: stretch;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(6, 1fr);
 }
