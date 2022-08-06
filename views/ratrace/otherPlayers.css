@@ -1,0 +1,64 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.other-players-wrapper {
+  padding: 1em;
+  width: 50%;
+  border: var(--def-border);
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+  left: 25%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heading {
+  font-weight: bold;
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+.players-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  width: 50%;
+  margin: 5em auto;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  text-align: center;
+}
+
+.icon {
+  border-radius: 50%;
+  aspect-ratio: 1;
+  width: 2.5em;
+  border: var(--def-border);
+}
+
+.name {
+  aspect-ratio: 8;
+  width: 30%;
+}
+
+.profession {
+  aspect-ratio: 8;
+  width: 30%;
+}
