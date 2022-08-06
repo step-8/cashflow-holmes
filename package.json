@@ -9,7 +9,7 @@
   "scripts": {
     "setup": "bash bin/setup.sh",
     "start": "node .",
-    "test": "mocha -r test/"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
