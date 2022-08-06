@@ -62,3 +62,27 @@
   aspect-ratio: 8;
   width: 30%;
 }
+
+.lightblue {
+  background-color: lightblue;
+}
+
+.green {
+  background-color: green;
+}
+
+.orange {
+  background-color: orange;
+}
+
+.red {
+  background-color: red;
+}
+
+.brown {
+  background-color: brown;
+}
+
+.yellow {
+  background-color: yellow;
+}
