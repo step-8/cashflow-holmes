@@ -6,6 +6,16 @@
   --plain-font: 1.2vmax;
   --primary: #2e152f;
   --secondary-light: #f2e1c8;
+  --deal-border: #40b34e;
+  --deal-bg: #d7edda;
+  --doodad-border: #ec2135;
+  --doodad-bg: #f9d2d6;
+  --payday-border: #f4c937;
+  --payday-bg: #fbf1d6;
+  --market-border: #417fd7;
+  --market-bg: #d2e4f4;
+  --others-border: #7746f0;
+  --others-bg: #e3dbf8;
 }
 
 * {
