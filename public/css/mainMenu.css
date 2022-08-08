@@ -111,3 +111,12 @@
   gap: 3em;
   padding-left: 5em;
 }
+
+.join-error {
+  width: 10vmax;
+  position: relative;
+  top: 17vmax;
+  left: 10vmax;
+  color: red;
+  text-align: center;
+}
