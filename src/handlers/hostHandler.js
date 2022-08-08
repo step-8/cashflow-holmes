@@ -1,6 +1,6 @@
 const hostHandler = (req, res) => {
   if (!req.session.username) {
-    res.redirect('/login');
+    res.sendStatus(401);
     return;
   }
 

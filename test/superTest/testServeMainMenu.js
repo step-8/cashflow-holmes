@@ -2,10 +2,10 @@ const request = require('supertest');
 const { createApp } = require('../../src/app');
 
 const config = {};
+const req = request(createApp(config));
 
-describe('GET /host', () => {
+describe('GET /', () => {
   let cookie = '';
-  const req = request(createApp(config));
   beforeEach((done) => {
     req
       .post('/login')
@@ -18,17 +18,18 @@ describe('GET /host', () => {
       });
   });
 
-  it('Should give 401 if not logged in', (done) => {
-    request(createApp(config))
-      .get('/host')
-      .expect(401, done);
-  });
-
-  it('Should redirect to /host-lobby if logged in', (done) => {
+  it('Should redirect to /login if not login', (done) => {
     req
-      .get('/host')
-      .set('Cookie', cookie)
-      .expect('location', '/host-lobby')
+      .get('/')
+      .expect('location', '/login')
       .expect(302, done);
   });
+
+  it('Should say ok if logged in', (done) => {
+    req
+      .get('/')
+      .set('Cookie', cookie)
+      .expect(200, done);
+  });
+
 });
