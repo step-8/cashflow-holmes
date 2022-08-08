@@ -4,7 +4,7 @@ const { userExists } = require('./validateUserInfo.js');
 const validateUserCreds = ({ credentials }) => (req, res, next) => {
   const { username: usernameRaw, password: passwordRaw } = req.body;
   const username = usernameRaw.toLowerCase();
-  
+
   const userData = userExists(credentials, username);
   const password = getDigest(passwordRaw);
 
@@ -13,7 +13,7 @@ const validateUserCreds = ({ credentials }) => (req, res, next) => {
     next();
     return;
   }
-  
+
   res.cookie('status', 'creds invalid');
   res.redirect('/login');
 };

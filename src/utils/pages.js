@@ -90,4 +90,70 @@ const HOST_LOBBY = `<html>
 
 </html>`;
 
-module.exports = { MAIN_MENU_PAGE, HOST_LOBBY };
+const GUEST_LOBBY = `<html>
+
+<head>
+  <title>Cash Flow</title>
+  <script src="js/commonLib.js"></script>
+  <script src="js/drawLobby.js"></script>
+  <link rel="stylesheet" href="css/lobby.css">
+  <link rel="stylesheet" href="css/common.css">
+  <script src="https://kit.fontawesome.com/74138aff63.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="page">
+    <div class="lobby">
+      <div class="room-id">
+        Room-Id :
+      </div>
+      <div class="players">
+        <div id="player-1" class="player">
+          <div class="profile-color grey">
+            <i class="fa-solid fa-plus"></i>
+          </div>
+          <div class="player-name"></div>
+        </div>
+        <div id="player-2" class="player">
+          <div class="profile-color grey">
+            <i class="fa-solid fa-plus"></i>
+          </div>
+          <div class="player-name"></div>
+        </div>
+        <div id="player-3" class="player">
+          <div class="profile-color grey">
+            <i class="fa-solid fa-plus"></i>
+          </div>
+          <div class="player-name"></div>
+        </div>
+        <div id="player-4" class="player">
+          <div class="profile-color grey">
+            <i class="fa-solid fa-plus"></i>
+          </div>
+          <div class="player-name"></div>
+        </div>
+        <div id="player-5" class="player">
+          <div class="profile-color grey">
+            <i class="fa-solid fa-plus"></i>
+          </div>
+          <div class="player-name"></div>
+        </div>
+        <div id="player-6" class="player">
+          <div class="profile-color grey">
+            <i class="fa-solid fa-plus"></i>
+          </div>
+          <div class="player-name"></div>
+        </div>
+      </div>
+    </div>
+    <div class="menu  interaction-box">
+      <div class="btn-wrapper">
+        <div class="btn" id="leave-btn">Leave</div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>`;
+
+module.exports = { MAIN_MENU_PAGE, HOST_LOBBY, GUEST_LOBBY };
