@@ -1,0 +1,8 @@
+#! /bin/bash
+
+npm run test &>/dev/null
+
+if [[ $? != 0 ]]; then
+  echo "Some of the tests are failing."
+  exit 1
+fi
