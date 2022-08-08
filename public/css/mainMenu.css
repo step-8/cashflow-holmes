@@ -1,3 +1,58 @@
+.page {
+  display: flex;
+  padding: 0.5em;
+  column-gap: 0.5em;
+  height: 100vh;
+  width: 100vw;
+  font-size: 1.8em;
+}
+
+.background {
+  width: 75%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 10em;
+}
+
+.background img {
+  width: 70%;
+  aspect-ratio: 1.2;
+}
+
+.menu {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 60%;
+  aspect-ratio: 2;
+}
+
+.btn {
+  text-align: center;
+  padding: 0.8em;
+  background-color: aliceblue;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn a {
+  text-decoration: none;
+  color: black;
+}
+
 .page-wrapper {
   height: 100%;
   width: 100%;
@@ -37,4 +92,22 @@
 .button {
   border: 1px solid black;
   width: 4vmax;
+}
+
+.interaction-box {
+  border: 0.2em solid black;
+  border-bottom: none;
+  border-right: none;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 40%;
+  border-top-left-radius: 200%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3em;
+  padding-left: 5em;
 }
