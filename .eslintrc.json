@@ -38,7 +38,7 @@
     "getter-return": "error",
     "grouped-accessor-pairs": "warn",
     "global-require": "error",
-    "handle-callback-err": "error",
+    "handle-callback-err": "off",
     "id-length": "error",
     "key-spacing": "error",
     "max-len": "off",

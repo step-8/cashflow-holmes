@@ -38,3 +38,12 @@
   border: 1px solid black;
   width: 4vmax;
 }
+
+.join-error {
+  width: 10vmax;
+  position: relative;
+  top: 17vmax;
+  left: 10vmax;
+  color: red;
+  text-align: center;
+}
