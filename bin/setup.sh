@@ -1,6 +1,7 @@
 echo "PORT='8000'
 PUBLIC='./public'
 REGISTER_PAGE='./views/register.html'
+LOGIN_PAGE='./views/login.html'
 CRED_PATH='./private/credentials.json'
 SECRET='CASH-FLOW'
 ENV='dev'

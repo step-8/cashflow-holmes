@@ -1,11 +1,33 @@
 <html>
 
   <head>
-    <title></title>
+    <title>Cashflow - Login</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/register.css">
   </head>
 
   <body>
-
+    <div class="page-wrapper">
+      <div id="main-image">
+        <img src="images/cashflow-image-big.png" alt="Cashflow" title="Cashflow">
+      </div>
+      <div class="interaction-box">
+        <h2 class="heading">Login</h2>
+        <form action="/login" method="post">
+          <div>
+            <input type="text" name="username" id="username-input" placeholder="Username" required>
+          </div>
+          <div>
+            <input type="password" name="password" id="password-input" placeholder="Password" required>
+          </div>
+          <div class="submit-button">
+            <input type="submit" value="Login">
+          </div>
+          <div id="message">__MESSAGE__</div>
+        </form>
+        <div id="suggestion">Not an user? <a href="/register">Register</a></div>
+      </div>
+    </div>
   </body>
 
 </html>

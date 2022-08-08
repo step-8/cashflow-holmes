@@ -15,4 +15,4 @@ const validateUserInfo = ({ credentials }) => (req, res, next) => {
   next();
 };
 
-module.exports = { validateUserInfo };
+module.exports = { validateUserInfo, userExists };

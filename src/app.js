@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const { registerRouter } = require('./routers/register.js');
+const { loginRouter } = require('./routers/login.js');
 const { readCredentials } = require('./helpers/readCredentials.js');
 const { hostHandler } = require('./handlers/hostHandler.js');
 const { serveMainMenu } = require('./handlers/serveMainMenu.js');
@@ -31,16 +32,11 @@ const createApp = (config) => {
   app.use(express.static(config.PUBLIC));
   app.get('/', serveMainMenu);
   app.get('/host', hostHandler);
-  app.use('/register',
-    registerRouter(express.Router(), config));
+  app.use('/register', registerRouter(express.Router(), config));
+  app.use('/login', loginRouter(express.Router(), config));
 
-  app.post('/login', (req, res) => {
-    req.session.username = 'gayatri';
-    res.end();
-  });
-
-  const gameId = 123;
   app.use((req, res, next) => {
+    const gameId = 123;
     req.gameId = gameId;
     next();
   });
