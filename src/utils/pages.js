@@ -10,9 +10,9 @@ const MAIN_MENU_PAGE = `<html>
 
 <body>
   <div class="page">
-    <div class="background">
-      <img src="images/cashflow-image-big.png" alt="">
-    </div>
+    <div id="main-image">
+        <img src="images/cashflow-image-big.png" alt="Cashflow" title="Cashflow">
+      </div>
     <div class="menu interaction-box">
       <div class="btn-wrapper">
         <div class="btn" id="host-btn"><a href="/host">Host</a></div>

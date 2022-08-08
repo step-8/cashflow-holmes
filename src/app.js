@@ -8,10 +8,7 @@ const { readCredentials } = require('./helpers/readCredentials.js');
 const { hostHandler } = require('./handlers/hostHandler.js');
 const { serveMainMenu } = require('./handlers/serveMainMenu.js');
 const { joinHandler } = require('./handlers/joinHandler.js');
-
-const joinLobbyHandler = (req, res) => {
-  res.end('This is the join Lobby');
-};
+const { joinLobbyHandler } = require('./handlers/joinLobbyHandler.js');
 
 const createApp = (config) => {
   const app = express();
@@ -26,7 +23,7 @@ const createApp = (config) => {
   app.use(express.urlencoded({ extended: true }));
 
   if (config.ENV === 'dev') {
-    app.use(morgan('tiny'));
+    app.use(morgan('dev'));
   }
 
   app.use(express.static(config.PUBLIC));
@@ -35,9 +32,16 @@ const createApp = (config) => {
   app.use('/register', registerRouter(express.Router(), config));
   app.use('/login', loginRouter(express.Router(), config));
 
+  const gameId = 123;
+  const game = {
+    gameId,
+    colors: ['lightblue', 'green', 'orange', 'red', 'brown', 'yellow'],
+    players: []
+  };
+
   app.use((req, res, next) => {
-    const gameId = 123;
-    req.gameId = gameId;
+    req.gameId = game.gameId;
+    req.game = game;
     next();
   });
 

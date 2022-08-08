@@ -7,20 +7,6 @@
   font-size: 1.8vmax;
 }
 
-.background {
-  width: 75%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-right: 10em;
-}
-
-.background img {
-  width: 70%;
-  aspect-ratio: 1.2;
-}
-
 .menu {
   width: 25%;
   height: 100%;
@@ -68,8 +54,8 @@
   width: 12vmax;
   border: var(--def-border);
   position: relative;
-  top: 15vmax;
-  left: 22vmax;
+  top: 16vmax;
+  left: 20vmax;
   background-color: white;
 }
 
@@ -116,9 +102,19 @@
 .join-error {
   width: 12vmax;
   position: relative;
-  top: 17vmax;
-  left: 22vmax;
+  top: 14vmax;
+  left: 20vmax;
   color: red;
   text-align: center;
-  background-color: white;
+}
+
+#main-image {
+  margin: 5vmax;
+  height: 90vh;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+#main-image img {
+  height: 100%;
 }
