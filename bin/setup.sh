@@ -19,7 +19,7 @@ fi' >.git/hooks/pre-commit
 chmod +x .git/hooks/pre-commit
 
 mkdir "private"
-echo '{}' >private/credentials.json
+echo '{}' > private/credentials.json
 
 echo "Installing dependencies..."
 npm install

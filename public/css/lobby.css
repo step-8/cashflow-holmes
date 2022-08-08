@@ -1,6 +1,5 @@
 .page {
   display: flex;
-  padding: 0.5em;
   column-gap: 0.5em;
   height: 100vh;
   width: 100vw;
@@ -154,21 +153,21 @@
   grid-column: 1;
 }
 
-
 .interaction-box {
-  border: 0.2em solid black;
+  border: 0.5vmax solid black;
   border-bottom: none;
   border-right: none;
   display: flex;
   flex-direction: column;
   position: absolute;
   right: 0;
-  height: 96.5%;
+  height: 100%;
   width: 40%;
   border-top-left-radius: 200%;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3em;
-  padding-left: 5em;
+  gap: 3vmax;
+  padding-left: 5vmax;
+  padding-top: 5vmax;
 }

@@ -10,7 +10,7 @@ const validateUserCreds = ({ credentials }) => (req, res, next) => {
 
   if (userData && userData.password === password) {
     req.session.username = username;
-    next();
+    res.redirect('/');
     return;
   }
 
