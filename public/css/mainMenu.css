@@ -4,21 +4,7 @@
   column-gap: 0.5em;
   height: 100vh;
   width: 100vw;
-  font-size: 1.8em;
-}
-
-.background {
-  width: 75%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-right: 10em;
-}
-
-.background img {
-  width: 70%;
-  aspect-ratio: 1.2;
+  font-size: 1.8vmax;
 }
 
 .menu {
@@ -64,12 +50,13 @@
 }
 
 .join-popup-wrapper {
-  height: 13vmax;
-  width: 10vmax;
+  height: 15vmax;
+  width: 12vmax;
   border: var(--def-border);
   position: relative;
-  top: 15vmax;
-  left: 10vmax;
+  top: 16vmax;
+  left: 20vmax;
+  background-color: white;
 }
 
 .join-form {
@@ -113,10 +100,21 @@
 }
 
 .join-error {
-  width: 10vmax;
+  width: 12vmax;
   position: relative;
-  top: 17vmax;
-  left: 10vmax;
+  top: 14vmax;
+  left: 20vmax;
   color: red;
   text-align: center;
+}
+
+#main-image {
+  margin: 5vmax;
+  height: 90vh;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+#main-image img {
+  height: 100%;
 }
