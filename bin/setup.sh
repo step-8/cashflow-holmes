@@ -3,6 +3,7 @@ PUBLIC='./public'
 REGISTER_PAGE='./views/register.html'
 CRED_PATH='./private/credentials.json'
 SECRET='CASH-FLOW'
+ENV='dev'
 " > .env
 
 mkdir "private";

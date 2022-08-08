@@ -4,7 +4,7 @@
   column-gap: 0.5em;
   height: 100vh;
   width: 100vw;
-  font-size: 1.8em;
+  font-size: 1.8vmax;
 }
 
 .background {
@@ -64,12 +64,13 @@
 }
 
 .join-popup-wrapper {
-  height: 13vmax;
-  width: 10vmax;
+  height: 15vmax;
+  width: 12vmax;
   border: var(--def-border);
   position: relative;
   top: 15vmax;
-  left: 10vmax;
+  left: 22vmax;
+  background-color: white;
 }
 
 .join-form {
@@ -113,10 +114,11 @@
 }
 
 .join-error {
-  width: 10vmax;
+  width: 12vmax;
   position: relative;
   top: 17vmax;
-  left: 10vmax;
+  left: 22vmax;
   color: red;
   text-align: center;
+  background-color: white;
 }

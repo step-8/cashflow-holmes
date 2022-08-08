@@ -2,7 +2,7 @@ const MAIN_MENU_PAGE = `<html>
 
 <head>
   <title>Cash Flow</title>
-  <script src="js/frontEndDom.js"></script>
+  <script src="js/commonLib.js"></script>
   <script src="js/joinPopup.js"></script>
   <link rel="stylesheet" href="css/mainMenu.css">
   <link rel="stylesheet" href="css/common.css">
@@ -11,7 +11,7 @@ const MAIN_MENU_PAGE = `<html>
 <body>
   <div class="page">
     <div class="background">
-      <img src="images/cashflow image big.png" alt="">
+      <img src="images/cashflow-image-big.png" alt="">
     </div>
     <div class="menu interaction-box">
       <div class="btn-wrapper">
