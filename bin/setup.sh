@@ -3,10 +3,23 @@ PUBLIC='./public'
 REGISTER_PAGE='./views/register.html'
 CRED_PATH='./private/credentials.json'
 SECRET='CASH-FLOW'
-" > .env
+" >.env
 
-mkdir "private";
-echo '{}' > private/credentials.json 
+echo '#! /bin/bash
+
+echo Running tests
+
+npm run test &>/dev/null
+
+if [[ $? != 0 ]]; then
+  echo "Some of the tests are failing."
+  exit 1
+fi' >.git/hooks/pre-commit
+
+chmod +x .git/hooks/pre-commit
+
+mkdir "private"
+echo '{}' >private/credentials.json
 
 echo "Installing dependencies..."
 npm install
