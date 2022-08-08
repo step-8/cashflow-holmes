@@ -7,3 +7,84 @@
 body {
   font-family: var(--font-family);
 }
+
+.page-wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.interaction-box {
+  border: 0.5vmax solid black;
+  border-bottom: none;
+  border-right: none;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 40%;
+  border-top-left-radius: 200%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3vmax;
+  padding-left: 5vmax;
+  padding-top: 5vmax;
+}
+
+.heading {
+  font-size: 4.5vmax;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2vmax;
+}
+
+input[type=text], input[type=password] {
+  font-size: 2vmax;
+  text-align: center;
+  border-style: none;
+  outline: none;
+  border-bottom: 2px solid black;
+}
+
+.submit-button {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+.submit-button>input {
+  padding: 0.3vmax;
+  font-size: 1.5vmax;
+  cursor: pointer;
+}
+
+#message {
+  color: red;
+  height: 1vmax;
+  text-align: center;
+}
+
+#suggestion {
+  font-size: 1vmax;
+}
+
+#suggestion a {
+  text-decoration: none;
+}
+
+#main-image {
+  margin: 5vmax;
+  height: 90vh;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+#main-image img{
+  height: 100%;
+}
