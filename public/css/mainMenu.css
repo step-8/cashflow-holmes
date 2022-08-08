@@ -1,10 +1,12 @@
+body {
+  font-family: var(--font-family);
+}
+
 .page {
+  height: 100%;
   display: flex;
-  padding: 0.5em;
-  column-gap: 0.5em;
-  height: 100vh;
-  width: 100vw;
-  font-size: 1.8vmax;
+  align-items: center;
+  width: fit-content;
 }
 
 .menu {
@@ -22,6 +24,7 @@
   gap: 1em;
   width: 60%;
   aspect-ratio: 2;
+  font-size: 2vmax;
 }
 
 .btn {
@@ -82,7 +85,7 @@
 }
 
 .interaction-box {
-  border: 0.2em solid black;
+  border: 0.5vmax solid black;
   border-bottom: none;
   border-right: none;
   display: flex;
@@ -95,8 +98,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3em;
-  padding-left: 5em;
+  gap: 3vmax;
+  padding-left: 5vmax;
+  padding-top: 5vmax;
 }
 
 .join-error {
