@@ -7,9 +7,7 @@ SECRET='CASH-FLOW'
 
 echo '#! /bin/bash
 
-echo Running tests
-
-npm run test &>/dev/null
+npm run test
 
 if [[ $? != 0 ]]; then
   echo "Some of the tests are failing."
