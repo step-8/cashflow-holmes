@@ -1,4 +1,7 @@
 echo 'PORT="8000"' > .env
+mkdir "private";
+echo '{}' > private/credentials.json 
+
 echo "Installing dependencies..."
 npm install
 

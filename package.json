@@ -9,7 +9,7 @@
   "scripts": {
     "setup": "bash bin/setup.sh",
     "start": "node .",
-    "test": "mocha"
+    "test": "mocha --recursive"
   },
   "repository": {
     "type": "git",
@@ -22,8 +22,11 @@
   },
   "homepage": "https://github.com/step-8/cashflow-holmes#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.1",
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "eslint": "^8.21.0",
