@@ -3,9 +3,15 @@ const removePopup = (event) => {
   joinPopupEle.remove();
 };
 
-const showInvalidMessage = () => {
+const showInvalidMessage = (xhr) => {
+  let message = 'Invalid Room id';
+
+  if (xhr.status === 423) {
+    message = 'Room is full';
+  }
+
   const pageEle = document.querySelector('#page-wrapper');
-  const errorMessage = html(['div', { className: 'join-error' }, 'Invalid room id']);
+  const errorMessage = html(['div', { className: 'join-error' }, message]);
   pageEle.append(errorMessage);
 };
 
