@@ -3,8 +3,8 @@ const { persistCredentials } = require('./src/handlers/saveUserCredentials.js');
 require('dotenv').config();
 
 const main = () => {
-  const { PORT, PUBLIC, REGISTER_PAGE, CRED_PATH, SECRET, ENV } = process.env;
-  const config = { PORT, PUBLIC, REGISTER_PAGE, CRED_PATH, SECRET, persistCredentials, ENV };
+  const { PORT } = process.env;
+  const config = { ...process.env, persistCredentials };
   const app = createApp(config);
 
   app.listen(PORT,

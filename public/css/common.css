@@ -16,6 +16,13 @@
   --market-bg: #d2e4f4;
   --others-border: #7746f0;
   --others-bg: #e3dbf8;
+  --blue-p: #99f3ff;
+  --green-p: #94e9a1;
+  --yellow-p: #fbf07f;
+  --pink-p: #ffb3b9;
+  --violet-p: #b39afe;
+  --orange-p: #ffae56;
+  --grey-p: rgb(210 210 210);
 }
 
 * {

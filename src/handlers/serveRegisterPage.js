@@ -15,4 +15,4 @@ const serveRegisterPage = (config) => (req, res) => {
   res.send(page);
 };
 
-module.exports = {serveRegisterPage};
+module.exports = { serveRegisterPage };

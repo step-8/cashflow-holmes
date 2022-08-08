@@ -12,9 +12,10 @@ const config = {
 describe('GET /host', () => {
   let cookie = '';
   const req = request(createApp(config));
-  beforeEach((done) => {
+  before((done) => {
     req
-      .post('/login')
+      .post('/register')
+      .send('username=user&password=123')
       .end((err, res) => {
         if (err) {
           return;
