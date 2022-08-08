@@ -1,0 +1,40 @@
+.page-wrapper {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: transparent;
+}
+
+.join-popup-wrapper {
+  height: 13vmax;
+  width: 10vmax;
+  border: var(--def-border);
+  position: relative;
+  top: 15vmax;
+  left: 10vmax;
+}
+
+.join-form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0.5vmax;
+}
+
+.room-id {
+  width: 80%;
+  outline: 0;
+  border-style: none;
+  border-bottom: var(--def-border);
+  text-align: center;
+}
+
+.button {
+  border: 1px solid black;
+  width: 4vmax;
+}

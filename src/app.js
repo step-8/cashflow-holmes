@@ -5,5 +5,4 @@ const createApp = (config) => {
   return app;
 };
 
-
 module.exports = { createApp };
