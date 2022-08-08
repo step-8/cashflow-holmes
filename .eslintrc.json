@@ -1,95 +1,98 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true,
-        "node": true,
-        "mocha": true
-    },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "rules": {
-        "indent": [
-            "error",
-            2
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
-        "camelcase": "error",
-        "class-methods-use-this": "warn",
-        "comma-spacing": "error",
-        "arrow-spacing": "error",
-        "no-var": "error",
-        "brace-style": "error",
-        "eol-last": "warn",
-        "eqeqeq": "warn",
-        "getter-return": "error",
-        "grouped-accessor-pairs": "warn",
-        "global-require": "error",
-        "handle-callback-err": "error",
-        "id-length": "error",
-        "key-spacing": "error",
-        "max-len": "off",
-        "max-params": [
-            "error",
-            {
-                "max": 8
-            }
-        ],
-        "no-console": "warn",
-        "no-eval": "error",
-        "no-implicit-globals": "error",
-        "prefer-const": "error",
-        "no-magic-numbers": "warn",
-        "no-process-exit": "error",
-        "no-return-assign": "error",
-        "no-useless-return": "off",
-        "no-mixed-operators": "off",
-        "complexity": [
-            "warn",
-            20
-        ],
-        "default-param-last": "error",
-        "no-constructor-return": "error",
-        "no-invalid-this": "error",
-        "no-lone-blocks": "error",
-        "no-loop-func": "error",
-        "no-proto": "error",
-        "prefer-spread": "warn",
-        "no-useless-call": "error",
-        "no-param-reassign": "warn",
-        "no-multi-spaces": "warn",
-        "semi-spacing": "error",
-        "no-multiple-empty-lines": [
-            "warn",
-            {
-                "max": 2
-            }
-        ]
-    },
-    "overrides": [
-        {
-            "files": [
-                "test*.js",
-                "index.js"
-            ],
-            "rules": {
-                "no-magic-numbers": "off",
-                "max-statements": "off",
-                "no-console": "off"
-            }
-        }
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true,
+    "mocha": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "indent": [
+      "error",
+      2
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "camelcase": "error",
+    "class-methods-use-this": "warn",
+    "comma-spacing": "error",
+    "arrow-spacing": "error",
+    "no-var": "error",
+    "brace-style": "error",
+    "eol-last": "warn",
+    "eqeqeq": "warn",
+    "getter-return": "error",
+    "grouped-accessor-pairs": "warn",
+    "global-require": "error",
+    "handle-callback-err": "error",
+    "id-length": "error",
+    "key-spacing": "error",
+    "max-len": "off",
+    "max-params": [
+      "error",
+      {
+        "max": 8
+      }
+    ],
+    "no-console": "warn",
+    "no-eval": "error",
+    "no-implicit-globals": "error",
+    "prefer-const": "error",
+    "no-magic-numbers": "warn",
+    "no-process-exit": "error",
+    "no-return-assign": "error",
+    "no-useless-return": "off",
+    "no-mixed-operators": "off",
+    "complexity": [
+      "warn",
+      20
+    ],
+    "default-param-last": "error",
+    "no-constructor-return": "error",
+    "no-invalid-this": "error",
+    "no-lone-blocks": "error",
+    "no-loop-func": "error",
+    "no-proto": "error",
+    "prefer-spread": "warn",
+    "no-useless-call": "error",
+    "no-param-reassign": "warn",
+    "no-multi-spaces": "warn",
+    "semi-spacing": "error",
+    "no-multiple-empty-lines": [
+      "warn",
+      {
+        "max": 2
+      }
     ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "*",
+        "test*.js",
+        "index.js"
+      ],
+      "rules": {
+        "no-magic-numbers": "off",
+        "max-statements": "off",
+        "no-console": "off",
+        "no-undef": "warn",
+        "no-unused-vars": "off"
+      }
+    }
+  ]
 }
