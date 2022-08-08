@@ -1,4 +1,13 @@
-echo 'PORT="8000"' > .env
+echo "PORT='8000'
+PUBLIC='./public'
+REGISTER_PAGE='./views/register.html'
+CRED_PATH='./private/credentials.json'
+SECRET='CASH-FLOW'
+" > .env
+
+mkdir "private";
+echo '{}' > private/credentials.json 
+
 echo "Installing dependencies..."
 npm install
 
