@@ -49,12 +49,4 @@ describe('POST /join', () => {
         .expect(400, done);
     });
   });
-
-  describe('GET /join-lobby', () => {
-    it('Should give status of 200', (done) => {
-      request(app)
-        .get('/join-lobby')
-        .expect(200, done);
-    });
-  });
 });

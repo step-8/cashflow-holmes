@@ -19,6 +19,7 @@ const createApp = (config) => {
     resave: false,
     saveUninitialized: false,
   }));
+
   app.use(cookieParser());
   app.use(express.urlencoded({ extended: true }));
 
