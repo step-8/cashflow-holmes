@@ -1,7 +1,13 @@
 const request = require('supertest');
 const { createApp } = require('../../src/app');
 
-const config = {};
+const config = {
+  PUBLIC: './public',
+  REGISTER_PAGE: './views/register.html',
+  CRED_PATH: './test/test.json',
+  SECRET: 'test',
+  persistCredentials: () => (req, res) => res.redirect('/')
+};
 
 describe('GET /host', () => {
   let cookie = '';

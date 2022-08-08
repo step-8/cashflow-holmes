@@ -11,6 +11,7 @@ describe('Register', () => {
   };
 
   it('When requested /register GET', (done) => {
+
     supertest(createApp(config))
       .get('/register')
       .expect(/html/)
