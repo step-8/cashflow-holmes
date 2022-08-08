@@ -1,0 +1,174 @@
+.page {
+  display: flex;
+  column-gap: 0.5em;
+  height: 100vh;
+  width: 100vw;
+  font-size: 1.8vmax;
+}
+
+.lobby {
+  padding: 1em;
+  width: 75%;
+  height: 100%;
+  font-size: 1.6vmax;
+}
+
+.menu {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 60%;
+  aspect-ratio: 2;
+}
+
+.btn {
+  text-align: center;
+  padding: 0.8em;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn a {
+  text-decoration: none;
+  color: black;
+}
+
+.room-id {
+  margin-left: 4em;
+  width: 60%;
+  height: 5%;
+}
+
+.players {
+  width: 80%;
+  height: 80%;
+  display: grid;
+  justify-content: stretch;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.player {
+  display: flex;
+  padding: 1em;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.profile-color {
+  width: 40%;
+  aspect-ratio: 1;
+  background-color: azure;
+  border-radius: 50%;
+  margin-bottom: 0.4em;
+}
+
+.player-name {
+  width: 80%;
+  height: 20%;
+  text-align: center;
+  overflow: hidden;
+}
+
+.profile-color i {
+  width: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5vmax;
+}
+
+.blue {
+  background-color: var(--blue-p);
+}
+
+.green {
+  background-color: var(--green-p);
+}
+
+.yellow {
+  background-color: var(--yellow-p);
+}
+
+.pink {
+  background-color: var(--pink-p);
+}
+
+.violet {
+  background-color: var(--violet-p);
+}
+
+.orange {
+  background-color: var(--orange-p);
+}
+
+.grey {
+  background-color: var(--grey-p);
+}
+
+#player-1 {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+#player-2 {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+
+#player-3 {
+  grid-row: 1;
+  grid-column: 3;
+}
+
+
+#player-4 {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+
+#player-5 {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+
+#player-6 {
+  grid-row: 3;
+  grid-column: 1;
+}
+
+.interaction-box {
+  border: 0.5vmax solid black;
+  border-bottom: none;
+  border-right: none;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 40%;
+  border-top-left-radius: 200%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3vmax;
+  padding-left: 5vmax;
+  padding-top: 5vmax;
+}
