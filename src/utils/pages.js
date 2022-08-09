@@ -19,9 +19,9 @@ const MAIN_MENU_PAGE = `<html>
         <div class="logout fas fa-sign-out-alt"></div>
       </a>
       <div class="btn-wrapper">
-        <div class="btn" id="host-btn"><a href="/host">Host</a></div>
+        <a href="/host"><div class="btn" id="host-btn">Host</div></a>
         <div class="btn" id="join-btn" onclick="createJoinPopup()">Join</div>
-        <div class="btn" id="how-to-play-btn"><a href="/help">How To Play</a></div>
+        <a href="/help"><div class="btn" id="how-to-play-btn">How To Play</div></a>
       </div>
     </div>
   </div>
