@@ -50,43 +50,7 @@ const HOST_LOBBY = `<html>
       </div>
       <div id="error-message" class="message"></div>
       </div>
-      <div class="players">
-        <div id="player-1" class="player">
-          <div class="profile-color grey">
-            <i class="fa-solid fa-plus"></i>
-          </div>
-          <div class="player-name"></div>
-        </div>
-        <div id="player-2" class="player">
-          <div class="profile-color grey">
-            <i class="fa-solid fa-plus"></i>
-          </div>
-          <div class="player-name"></div>
-        </div>
-        <div id="player-3" class="player">
-          <div class="profile-color grey">
-            <i class="fa-solid fa-plus"></i>
-          </div>
-          <div class="player-name"></div>
-        </div>
-        <div id="player-4" class="player">
-          <div class="profile-color grey">
-            <i class="fa-solid fa-plus"></i>
-          </div>
-          <div class="player-name"></div>
-        </div>
-        <div id="player-5" class="player">
-          <div class="profile-color grey">
-            <i class="fa-solid fa-plus"></i>
-          </div>
-          <div class="player-name"></div>
-        </div>
-        <div id="player-6" class="player">
-          <div class="profile-color grey">
-            <i class="fa-solid fa-plus"></i>
-          </div>
-          <div class="player-name"></div>
-        </div>
+      <div id="players" class="players">
       </div>
     </div>
     <div class="menu  interaction-box">
@@ -120,43 +84,7 @@ const GUEST_LOBBY = `<html>
       </div>
       <div class="message" id="waiting-message">Waiting for host to start the game...</div>
       </div>
-      <div class="players">
-        <div id="player-1" class="player">
-          <div class="profile-color grey">
-            <i class="fa-solid fa-plus"></i>
-          </div>
-          <div class="player-name"></div>
-        </div>
-        <div id="player-2" class="player">
-          <div class="profile-color grey">
-            <i class="fa-solid fa-plus"></i>
-          </div>
-          <div class="player-name"></div>
-        </div>
-        <div id="player-3" class="player">
-          <div class="profile-color grey">
-            <i class="fa-solid fa-plus"></i>
-          </div>
-          <div class="player-name"></div>
-        </div>
-        <div id="player-4" class="player">
-          <div class="profile-color grey">
-            <i class="fa-solid fa-plus"></i>
-          </div>
-          <div class="player-name"></div>
-        </div>
-        <div id="player-5" class="player">
-          <div class="profile-color grey">
-            <i class="fa-solid fa-plus"></i>
-          </div>
-          <div class="player-name"></div>
-        </div>
-        <div id="player-6" class="player">
-          <div class="profile-color grey">
-            <i class="fa-solid fa-plus"></i>
-          </div>
-          <div class="player-name"></div>
-        </div>
+      <div id="players" class="players">
       </div>
     </div>
     <div class="menu  interaction-box">

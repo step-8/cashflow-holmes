@@ -1,23 +1,54 @@
 (function () {
   const addPlayerInfo = ({ color, username }, index) => {
-    const playerEle = document.querySelector(`#player-${index + 1}`);
-    const colorEle = playerEle.querySelector('.profile-color');
-    const nameEle = playerEle.querySelector('.player-name');
-    colorEle.replaceChildren();
-    nameEle.innerText = username;
-    colorEle.className = `${color} profile-color`;
+    const template = [
+      'div', { id: `player-${index + 1}`, className: 'player' },
+      ['div', { className: `profile-color ${color}` }, ''],
+      ['div', { className: 'player-name' }, username]
+    ];
+
+    return html(template);
   };
 
   const drawLobby = (xhr) => {
     const { gameID, players } = JSON.parse(xhr.response);
     const roomIdEle = document.querySelector('.room-id');
     roomIdEle.innerText = `Room Id : ${gameID}`;
-    players.forEach(addPlayerInfo);
+    const playersElement = document.querySelector('#players');
+    playersElement.innerText = '';
+
+    players.forEach((player, index) => {
+      const playerEle = addPlayerInfo(player, index);
+      playersElement.append(playerEle);
+    });
+
+    drawEmptyGrid(players.length);
+  };
+
+  const drawPlaceHolder = (id) => {
+    const template = [
+      'div', { id: `player-${id}`, className: 'player' },
+      ['div', { className: 'profile-color grey' },
+        ['i', { className: 'fa-solid fa-plus' }]
+      ],
+      ['div', { className: 'player-name' }, '']
+    ];
+
+    return html(template);
+  };
+
+  const drawEmptyGrid = (startingIndex) => {
+    const playersElement = document.querySelector('#players');
+    for (let index = startingIndex; index < 6; index++) {
+      const placeHolder = drawPlaceHolder(index + 1);
+      playersElement.append(placeHolder);
+    }
   };
 
   const main = () => {
-    const req = { method: 'get', url: '/api/game' };
-    xhrRequest(req, 200, drawLobby);
+    setInterval(() => {
+      const req = { method: 'get', url: '/api/game' };
+      xhrRequest(req, 200, drawLobby);
+    }, 100);
   };
   window.onload = main;
 })();
