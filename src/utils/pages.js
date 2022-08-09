@@ -150,7 +150,7 @@ const GUEST_LOBBY = `<html>
     </div>
     <div class="menu  interaction-box">
       <div class="btn-wrapper">
-        <div class="btn" id="leave-btn">Leave</div>
+        <div class="btn" id="leave-btn"><a href="/leave-lobby">Leave</a></div>
       </div>
     </div>
   </div>

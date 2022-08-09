@@ -35,6 +35,7 @@ describe('Join', () => {
         .expect(400, done);
     });
   });
+
   describe('GET /guest-lobby', () => {
     it('Should give 200 with guest lobby page', (done) => {
       request(app)
@@ -42,6 +43,16 @@ describe('Join', () => {
         .set('Cookie', cookies.join(';'))
         .expect(/Room-Id :/)
         .expect(200, done);
+    });
+  });
+
+  describe('GET /leave-lobby', () => {
+    it('Should give 302 when player leaves the lobby', (done) => {
+      request(app)
+        .get('/leave-lobby')
+        .set('Cookie', cookies.join(';'))
+        .expect('location', '/')
+        .expect(302, done);
     });
   });
 });
