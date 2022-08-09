@@ -6,12 +6,18 @@ const createGameID = () => {
 };
 
 const hostLobbyHandler = (req, res) => {
+  if (req.session.gameID) {
+    res.send(HOST_LOBBY);
+    return;
+  }
+
   const gameID = createGameID();
   req.game.assignGameID(gameID);
 
   const { username } = req.session;
   req.game.addPlayer(username);
 
+  req.session.gameID = gameID;
   res.send(HOST_LOBBY);
 };
 

@@ -1,7 +1,7 @@
 const request = require('supertest');
-const { createApp } = require('../../src/app.js');
+const { createApp } = require('../../src/app');
 
-describe('Join', () => {
+describe('ApiRouter', () => {
   let app;
   let cookies;
 
@@ -26,21 +26,12 @@ describe('Join', () => {
       });
   });
 
-  describe('POST /join', () => {
-    it('Should send status code of 400 for invalid room id', (done) => {
+  describe('GET /game', () => {
+    it('Should give status code of 200 with game state', (done) => {
       request(app)
-        .post('/join')
+        .get('/api/game')
         .set('Cookie', cookies.join(';'))
-        .send('roomId=12')
-        .expect(400, done);
-    });
-  });
-  describe('GET /guest-lobby', () => {
-    it('Should give 200 with guest lobby page', (done) => {
-      request(app)
-        .get('/guest-lobby')
-        .set('Cookie', cookies.join(';'))
-        .expect(/Room-Id :/)
+        .expect('content-type', /json/)
         .expect(200, done);
     });
   });

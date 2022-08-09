@@ -1,14 +1,19 @@
 const joinHandler = (req, res, next) => {
-  const { roomId } = req.body;
-  const { gameId, players } = req.game;
-  if (players.length >= 6) {
-    res.sendStatus(423);
-    return;
-  }
+  const { gameID: roomId } = req.body;
 
-  if (gameId === +roomId) {
-    res.sendStatus(200);
-    return;
+  console.log(req.session);
+  console.log(!!req.game);
+  if (req.game) {
+    const { game } = req;
+    if (game.isLobbyFull()) {
+      res.sendStatus(423);
+      return;
+    }
+
+    if (game.isValidGameID(+roomId)) {
+      res.sendStatus(200);
+      return;
+    }
   }
   res.sendStatus(400);
 };

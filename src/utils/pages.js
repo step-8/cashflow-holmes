@@ -31,6 +31,8 @@ const HOST_LOBBY = `<html>
   <title>Cash Flow</title>
   <link rel="stylesheet" href="css/lobby.css">
   <link rel="stylesheet" href="css/common.css">
+  <script src="js/commonLib.js"></script>
+  <script src="js/drawLobby.js"></script>
   <script src="https://kit.fontawesome.com/74138aff63.js" crossorigin="anonymous"></script>
 </head>
 
@@ -38,7 +40,7 @@ const HOST_LOBBY = `<html>
   <div class="page">
     <div class="lobby">
       <div class="room-id">
-        Room-Id : __room_id__
+        Room-Id : 
       </div>
       <div class="players">
         <div id="player-1" class="player">

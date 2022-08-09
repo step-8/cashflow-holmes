@@ -14,7 +14,7 @@ describe('GET /host', () => {
   const req = request(createApp(config));
   before((done) => {
     req
-      .post('/register')
+      .post('/login')
       .send('username=user&password=123')
       .end((err, res) => {
         if (err) {
