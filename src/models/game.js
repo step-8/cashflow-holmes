@@ -7,13 +7,17 @@ class Game {
   #players;
   #maxPlayers;
   #deck;
-  constructor(gameID, colors, professions) {
-    this.#gameID = gameID;
+  constructor(colors, professions) {
+    this.#gameID = null;
     this.#colors = colors;
     this.#professions = professions;
     this.#maxPlayers = 6;
     this.#players = [];
     this.#deck = {};
+  }
+
+  assignGameID(gameID) {
+    this.#gameID = gameID;
   }
 
   #getPlayerIndex(username) {

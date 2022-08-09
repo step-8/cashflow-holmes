@@ -11,6 +11,7 @@ const { joinHandler } = require('./handlers/joinHandler.js');
 const { joinLobbyHandler } = require('./handlers/joinLobbyHandler.js');
 const { hostLobbyHandler } = require('./handlers/hostLobbyHandler.js');
 const { serveGameDetails } = require('./handlers/serveGameDetails.js');
+const { injectGame } = require('./handlers/injectGame.js');
 
 const createApp = (config) => {
   const app = express();
@@ -34,19 +35,7 @@ const createApp = (config) => {
   app.use('/register', registerRouter(express.Router(), config));
   app.use('/login', loginRouter(express.Router(), config));
 
-  const gameId = 123;
-  const game = {
-    gameId,
-    colors: ['blue', 'green', 'pink', 'yellow', 'violet', 'orange'],
-    players: []
-  };
-
-  app.use((req, res, next) => {
-    req.gameId = game.gameId;
-    req.game = game;
-    next();
-  });
-
+  app.use(injectGame());
   app.get('/host', hostHandler);
   app.get('/host-lobby', hostLobbyHandler);
   app.get('/api/game', serveGameDetails);
