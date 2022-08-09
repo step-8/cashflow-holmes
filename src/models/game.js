@@ -8,13 +8,19 @@ class Game {
   #players;
   #maxPlayers;
   #deck;
+  #isGameStarted;
   constructor(colors, professions) {
     this.#gameID = null;
+    this.#isGameStarted = false;
     this.#colors = shuffle(colors);
     this.#professions = shuffle(professions);
     this.#maxPlayers = 6;
     this.#players = [];
     this.#deck = {};
+  }
+
+  start() {
+    this.#isGameStarted = true;
   }
 
   assignGameID(gameID) {
@@ -61,6 +67,7 @@ class Game {
 
   get state() {
     return {
+      isGameStarted: this.#isGameStarted,
       gameID: this.#gameID,
       players: this.allPlayerDetails
     };

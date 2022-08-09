@@ -10,9 +10,8 @@ const verifyGameState = (xhr) => {
     return;
   }
 
-  const { origin } = window.location;
-  const url = '/show-profession';
-  window.location.replace(`${origin}${url}`);
+  const req = { method: 'get', url: '/start-game' };
+  xhrRequest(req, 200, showProfessions);
 };
 
 const startGame = (event) => {

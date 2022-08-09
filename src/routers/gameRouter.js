@@ -7,12 +7,14 @@ const { guestLobbyHandler } = require('../handlers/guestLobbyHandler.js');
 const { injectGame } = require('../handlers/injectGame.js');
 const { leaveLobbyHandler } = require('../handlers/leaveLobbyHandler.js');
 const { logoutHandler } = require('../handlers/logout.js');
+const { startGameHandler } = require('../handlers/startGameHandler.js');
 
 
 const createGameRouter = (router) => {
   router.use(injectGame());
   router.get('/', serveMainMenu);
   router.get('/host', hostHandler);
+  router.get('/start-game', startGameHandler);
   router.post('/join', joinHandler);
   router.use('/api', createApiRouter());
   router.get('/host-lobby', hostLobbyHandler);

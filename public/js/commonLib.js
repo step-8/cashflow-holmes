@@ -48,3 +48,9 @@ const html = ([tag, attributes, ...content]) => {
 
   return tagEle;
 };
+
+const showProfessions = () => {
+  const { origin } = window.location;
+  const url = '/show-profession';
+  window.location.replace(`${origin}${url}`);
+};

@@ -10,7 +10,13 @@
   };
 
   const drawLobby = (xhr) => {
-    const { gameID, players } = JSON.parse(xhr.response);
+    const { gameID, players, isGameStarted } = JSON.parse(xhr.response);
+
+    if (isGameStarted) {
+      showProfessions();
+      return;
+    }
+
     const roomIdEle = document.querySelector('.room-id');
     roomIdEle.innerText = `Room Id : ${gameID}`;
     const playersElement = document.querySelector('#players');
