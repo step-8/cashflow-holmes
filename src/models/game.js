@@ -26,7 +26,7 @@ class Game {
 
   #isUserAlreadyJoined(username) {
     const playerStatus = this.#getPlayerIndex(username);
-    return playerStatus === -1;
+    return playerStatus > -1;
   }
 
   addPlayer(username) {

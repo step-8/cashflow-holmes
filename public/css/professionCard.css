@@ -1,0 +1,125 @@
+#profession-image>img {
+  width: 3vmax;
+  aspect-ratio: 3/4;
+}
+
+#profession-card {
+  width: 32vmax;
+  aspect-ratio: 8/9;
+  border: var(--def-border);
+  border-radius: 1vmax;
+  overflow: hidden;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1vmax;
+}
+
+#profession-card>div {
+  padding: 0.5vmax;
+}
+
+#profession-card>header {
+  background-color: rgb(34, 34, 34);
+  color: white;
+  display: flex;
+  column-gap: 1.5vmax;
+  padding: 0.5vmax;
+}
+
+#income-statement>h4,
+#balance-section>h4 {
+  font-weight: 100;
+  margin: 0.3vmax 0.3vmax;
+}
+
+#profession-details>div {
+  font-size: 0.7vmax;
+}
+
+#profession-details>h3 {
+  font-weight: 100;
+}
+
+#profession-card>div:nth-child(2) {
+  display: flex;
+  align-items: center;
+}
+
+#income-statement>h2,
+#balance-sheet h2 {
+  background-color: rgb(34, 34, 34);
+  color: white;
+  padding: 0.2vmax;
+}
+
+#balance-sheet {
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.3vmax;
+}
+
+#balance-sheet table {
+  width: 15.3vmax;
+}
+
+#cashflow-block {
+  border: var(--def-border);
+  padding: 0.5vmax;
+  margin: 1vmax;
+}
+
+table {
+  width: 18vmax;
+}
+
+table th,
+td {
+  border-bottom: var(--def-border);
+}
+
+table th {
+  text-align: left;
+}
+
+table td {
+  text-align: right;
+}
+
+#cashflow-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 0.3vmax;
+  width: 11vmax;
+}
+
+.values {
+  border: var(--def-border);
+  padding: 0.1vmax;
+  width: 6vmax;
+  display: flex;
+  justify-content: center;
+}
+
+.symbol {
+  font-weight: 800;
+}
+
+#total,
+#cashflow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 1.25vmax;
+}
+
+#passive-income,
+#total-expense {
+  border: 3px solid black;
+}
+
+#monthly-cashflow {
+  border: 3px dashed black;
+}

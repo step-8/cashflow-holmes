@@ -9,9 +9,9 @@
   };
 
   const drawLobby = (xhr) => {
-    const { gameId, players } = JSON.parse(xhr.response);
+    const { gameID, players } = JSON.parse(xhr.response);
     const roomIdEle = document.querySelector('.room-id');
-    roomIdEle.innerText = `Room Id : ${gameId}`;
+    roomIdEle.innerText = `Room Id : ${gameID}`;
     players.forEach(addPlayerInfo);
   };
 
