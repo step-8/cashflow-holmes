@@ -14,7 +14,7 @@ describe('GET /host', () => {
   const req = request(createApp(config));
   before((done) => {
     req
-      .post('/register')
+      .post('/login')
       .send('username=user&password=123')
       .end((err, res) => {
         if (err) {
@@ -28,7 +28,7 @@ describe('GET /host', () => {
   it('Should give 200 and serve host-lobby', (done) => {
     req
       .get('/host-lobby')
-      .set('Cookie', cookie)
+      .set('Cookie', cookie.join(';'))
       .expect(/lobby/)
       .expect(200, done);
   });

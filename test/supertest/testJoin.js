@@ -1,5 +1,5 @@
 const request = require('supertest');
-const { createApp } = require('../../src/app');
+const { createApp } = require('../../src/app.js');
 
 describe('Join', () => {
   let app;
@@ -18,14 +18,6 @@ describe('Join', () => {
   before(done => {
     app = createApp(config);
     request(app)
-      .post('/register')
-      .send('username=user&password=123')
-      .end(done);
-  });
-
-  beforeEach(done => {
-    app = createApp(config);
-    request(app)
       .post('/login')
       .send('username=user&password=123')
       .end((err, res) => {
@@ -33,11 +25,11 @@ describe('Join', () => {
         done();
       });
   });
-
   describe('POST /join', () => {
     it('Should send status code of 200 for valid room id', (done) => {
       request(app)
         .post('/join')
+        .set('Cookie', cookies.join(';'))
         .send('roomId=123')
         .expect(200, done);
     });
@@ -45,15 +37,16 @@ describe('Join', () => {
     it('Should send status code of 400 for invalid room id', (done) => {
       request(app)
         .post('/join')
+        .set('Cookie', cookies.join(';'))
         .send('roomId=12')
         .expect(400, done);
     });
   });
-
   describe('GET /guest-lobby', () => {
     it('Should give 200 with guest lobby page', (done) => {
       request(app)
         .get('/guest-lobby')
+        .set('Cookie', cookies.join(';'))
         .expect(/Room-Id :/)
         .expect(200, done);
     });

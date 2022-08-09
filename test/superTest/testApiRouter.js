@@ -18,14 +18,6 @@ describe('ApiRouter', () => {
   before(done => {
     app = createApp(config);
     request(app)
-      .post('/register')
-      .send('username=user&password=123')
-      .end(done);
-  });
-
-  beforeEach(done => {
-    app = createApp(config);
-    request(app)
       .post('/login')
       .send('username=user&password=123')
       .end((err, res) => {
@@ -38,6 +30,7 @@ describe('ApiRouter', () => {
     it('Should give status code of 200 with game state', (done) => {
       request(app)
         .get('/api/game')
+        .set('Cookie', cookies.join(';'))
         .expect('content-type', /json/)
         .expect(200, done);
     });
