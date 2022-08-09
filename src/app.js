@@ -9,6 +9,7 @@ const { hostHandler } = require('./handlers/hostHandler.js');
 const { serveMainMenu } = require('./handlers/serveMainMenu.js');
 const { joinHandler } = require('./handlers/joinHandler.js');
 const { joinLobbyHandler } = require('./handlers/joinLobbyHandler.js');
+const { hostLobbyHandler } = require('./handlers/hostLobbyHandler.js');
 
 const createApp = (config) => {
   const app = express();
@@ -29,7 +30,6 @@ const createApp = (config) => {
 
   app.use(express.static(config.PUBLIC));
   app.get('/', serveMainMenu);
-  app.get('/host', hostHandler);
   app.use('/register', registerRouter(express.Router(), config));
   app.use('/login', loginRouter(express.Router(), config));
 
@@ -46,6 +46,8 @@ const createApp = (config) => {
     next();
   });
 
+  app.get('/host', hostHandler);
+  app.get('/host-lobby', hostLobbyHandler);
   app.post('/join', joinHandler);
   app.get('/join-lobby', joinLobbyHandler);
 
