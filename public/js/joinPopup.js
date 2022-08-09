@@ -14,12 +14,17 @@ const showInvalidMessage = (xhr) => {
     message = 'Room is full';
   }
 
+  if (xhr.status === 401) {
+    window.location = '/host-lobby';
+    return;
+  }
+
   const pageEle = document.querySelector('#page-wrapper');
   const errorMessage = html(['div', { className: 'join-error' }, message]);
   pageEle.append(errorMessage);
 };
 
-const redirectToJoinLobby = () => {
+const redirectToLobby = () => {
   window.location = '/guest-lobby';
 };
 
@@ -27,7 +32,7 @@ const joinRoom = (event) => {
   event.preventDefault();
   const body = readFormData('#join-popup-form');
   const req = { method: 'post', url: '/join' };
-  xhrRequest(req, 200, redirectToJoinLobby, showInvalidMessage, body);
+  xhrRequest(req, 200, redirectToLobby, showInvalidMessage, body);
 };
 
 const createJoinPopup = (event) => {

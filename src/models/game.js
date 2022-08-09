@@ -36,12 +36,12 @@ class Game {
     return playerStatus > -1;
   }
 
-  addPlayer(username) {
+  addPlayer(username, role) {
     if (this.#isUserAlreadyJoined(username)) {
       return;
     }
 
-    const player = new Player(username);
+    const player = new Player(username, role);
     const playerIndex = this.#players.length;
     player.assignColor(this.#colors[playerIndex]);
     player.assignProfession(this.#professions[playerIndex]);
