@@ -9,7 +9,7 @@
 #board {
   width: 85vw;
   max-width: 85vw;
-  max-height: 100%;
+  max-height: 100vh;
   justify-content: stretch;
 }
 
@@ -97,6 +97,44 @@ a {
 
 .ratrace-tile {
   border: var(--def-border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ratrace-tile img{
+  width: 45%;
+  aspect-ratio: auto;
+}
+
+.card-deck img {
+  width: 50%;
+  aspect-ratio: auto;  
+}
+
+.deal {
+  background-color: var(--deal-bg);
+  border: 0.2vmax solid var(--deal-border);
+}
+
+.doodad {
+  background-color: var(--doodad-bg);
+  border: 0.2vmax solid var(--doodad-border);
+}
+
+.payday {
+  background-color: var(--payday-bg);
+  border: 0.2vmax solid var(--payday-border);
+}
+
+.market {
+  background-color: var(--market-bg);
+  border: 0.2vmax solid var(--market-border);
+}
+
+.purples {
+  background-color: var(--others-bg);
+  border: 0.2vmax solid var(--others-border);
 }
 
 #board {
@@ -243,9 +281,15 @@ a {
 }
 /* game area element positions  START*/
 
-.card-deck, #players, #game-stats {
+.card-deck, #players, #game-stats, #logs {
   border: 0.2vmax solid;
   border-radius: 0.5vmax;
+}
+
+.card-deck {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #market {
@@ -267,6 +311,10 @@ a {
   grid-column: 5;
   background-color: var(--deal-bg);
   border-color: var(--deal-border);
+}
+
+#big-deal img {
+  width: 60%;
 }
 
 #doodad {
@@ -292,13 +340,40 @@ a {
   background-color: whitesmoke;
   border: 0.2vmax dashed black;
   margin: 1vmax 0.5vmax;
+  display: flex;
+  flex-direction: column;
+}
+
+#game-stats .heading {
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.3vmax;
+  margin: 0.5vmax;
+  padding-bottom: 1vmax;
+}
+
+#game-stats table {
+  border-spacing: 0.5vmax;
+}
+
+#game-stats table th {
+  max-width: 50%;
+  text-align: right;
+}
+
+#game-stats table td {
+  max-width: 50%;
+  text-align: left;
+}
+
+#game-stats table tr {
+  padding: 0.3vmax 0;
 }
 
 .interaction-space {
   grid-row: 2/8;
   grid-column: 2/5;
   margin: 0 1vmax;
-  /* background-color: var(--deal-bg); */
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
