@@ -1,6 +1,5 @@
 const { createApp } = require('../../src/app.js');
 const supertest = require('supertest');
-const assert = require('assert');
 
 describe('Login', () => {
   let cookies;
@@ -16,8 +15,8 @@ describe('Login', () => {
   const request = supertest(createApp(config));
   before(done => {
     request
-      .post('/register')
-      .send('username=abcd&password=123')
+      .post('/login')
+      .send('username=user&password=123')
       .expect(res => {
         cookies = res.headers['set-cookie'];
       })
@@ -34,7 +33,7 @@ describe('Login', () => {
   it('should login the user /login POST', (done) => {
     request
       .post('/login')
-      .send('username=abcd&password=123')
+      .send('username=user&password=123')
       .expect('location', '/')
       .expect(302, done);
   });
