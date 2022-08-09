@@ -1,6 +1,6 @@
 const { GUEST_LOBBY } = require('../utils/pages.js');
 
-const joinLobbyHandler = (req, res) => {
+const guestLobbyHandler = (req, res) => {
   const { game } = req;
   const { username } = req.session;
   const color = game.colors.pop();
@@ -10,4 +10,4 @@ const joinLobbyHandler = (req, res) => {
   res.end(GUEST_LOBBY);
 };
 
-module.exports = { joinLobbyHandler };
+module.exports = { guestLobbyHandler };

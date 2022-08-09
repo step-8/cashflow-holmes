@@ -8,8 +8,8 @@ const { readCredentials } = require('./helpers/readCredentials.js');
 const { hostHandler } = require('./handlers/hostHandler.js');
 const { serveMainMenu } = require('./handlers/serveMainMenu.js');
 const { joinHandler } = require('./handlers/joinHandler.js');
-const { joinLobbyHandler } = require('./handlers/joinLobbyHandler.js');
-const { serveGameDetails } = require('./handlers/serveGameDetails.js');
+const { guestLobbyHandler } = require('./handlers/guestLobbyHandler.js');
+const { createApiRouter } = require('./routers/apiRouter.js');
 
 const createApp = (config) => {
   const app = express();
@@ -46,9 +46,10 @@ const createApp = (config) => {
     req.game = game;
     next();
   });
-  app.get('/api/game', serveGameDetails);
+
+  app.use('/api', createApiRouter());
   app.post('/join', joinHandler);
-  app.get('/join-lobby', joinLobbyHandler);
+  app.get('/guest-lobby', guestLobbyHandler);
 
   return app;
 };

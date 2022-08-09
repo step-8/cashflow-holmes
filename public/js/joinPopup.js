@@ -20,7 +20,7 @@ const showInvalidMessage = (xhr) => {
 };
 
 const redirectToJoinLobby = () => {
-  window.location = '/join-lobby';
+  window.location = '/guest-lobby';
 };
 
 const joinRoom = (event) => {
