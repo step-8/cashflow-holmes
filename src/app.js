@@ -29,6 +29,7 @@ const createApp = (config) => {
     res.end();
   });
 
+
   app.use('/register', registerRouter(express.Router(), config));
   app.use('/login', loginRouter(express.Router(), config));
   app.use(express.static(config.PUBLIC));

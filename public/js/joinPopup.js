@@ -4,6 +4,10 @@ const removePopup = (event) => {
 };
 
 const showInvalidMessage = (xhr) => {
+  if (document.querySelector('.join-error')) {
+    return;
+  }
+
   let message = 'Invalid Room id';
 
   if (xhr.status === 423) {
@@ -16,7 +20,7 @@ const showInvalidMessage = (xhr) => {
 };
 
 const redirectToJoinLobby = () => {
-  window.location = '/join-lobby';
+  window.location = '/guest-lobby';
 };
 
 const joinRoom = (event) => {
@@ -30,7 +34,7 @@ const createJoinPopup = (event) => {
     ['div', { className: 'page-wrapper', id: 'page-wrapper' },
       ['div', { className: 'join-popup-wrapper', id: 'join-popup' },
         [
-          'form', { className: 'join-form', id: 'join-popup-form' },
+          'form', { className: 'join-form', id: 'join-popup-form', onsubmit: (event) => joinRoom(event) },
           ['input', { type: 'text', name: 'roomId', placeholder: 'Room id', required: 'true', className: 'room-id' }],
           ['input', { type: 'button', className: 'button', value: 'Enter', onclick: (event) => joinRoom(event) }],
           ['button', { type: 'button', className: 'button', onclick: (event) => removePopup(event) }, 'Cancel']

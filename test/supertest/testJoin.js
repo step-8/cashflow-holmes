@@ -1,7 +1,7 @@
 const request = require('supertest');
 const { createApp } = require('../../src/app.js');
 
-describe('POST /join', () => {
+describe('Join', () => {
   let app;
   let cookies;
 
@@ -25,20 +25,30 @@ describe('POST /join', () => {
         done();
       });
   });
- 
-  it('Should send status code of 200 for valid room id', (done) => {
-    request(app)
-      .post('/join')
-      .set('Cookie', cookies.join(';'))
-      .send('roomId=123')
-      .expect(200, done);
-  });
+  describe('POST /join', () => { 
+    it('Should send status code of 200 for valid room id', (done) => {
+      request(app)
+        .post('/join')
+        .set('Cookie', cookies.join(';'))
+        .send('roomId=123')
+        .expect(200, done);
+    });
 
-  it('Should send status code of 400 for invalid room id', (done) => {
-    request(app)
-      .post('/join')
-      .set('Cookie', cookies.join(';'))
-      .send('roomId=12')
-      .expect(400, done);
+    it('Should send status code of 400 for invalid room id', (done) => {
+      request(app)
+        .post('/join')
+        .set('Cookie', cookies.join(';'))
+        .send('roomId=12')
+        .expect(400, done);
+    });
+  });
+  describe('GET /guest-lobby', () => {
+    it('Should give 200 with guest lobby page', (done) => {
+      request(app)
+        .get('/guest-lobby')
+        .set('Cookie', cookies.join(';'))
+        .expect(/Room-Id :/)
+        .expect(200, done);
+    });
   });
 });
