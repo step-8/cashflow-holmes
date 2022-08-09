@@ -26,7 +26,7 @@ describe('ApiRouter', () => {
       });
   });
 
-  describe('GET /game', () => {
+  describe('GET /api/game', () => {
     it('Should give status code of 200 with game state', (done) => {
       request(app)
         .get('/api/game')

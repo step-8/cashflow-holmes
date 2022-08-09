@@ -50,6 +50,9 @@ class Game {
 
   removePlayer(username) {
     const playerIndex = this.#getPlayerIndex(username);
+    if (playerIndex <= -1) {
+      return;
+    }
     this.#players.splice(playerIndex, 1);
   }
 
