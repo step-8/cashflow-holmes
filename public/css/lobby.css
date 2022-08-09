@@ -176,6 +176,10 @@
   display: flex;
 }
 
+#error-message {
+  color: red;
+}
+
 .message {
-  width: 25vmax;
+  width: 30vmax;
 }
