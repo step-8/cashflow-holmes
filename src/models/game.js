@@ -21,7 +21,7 @@ class Game {
   }
 
   #getPlayerIndex(username) {
-    return this.#players.findIndex(player => player.username === username);
+    return this.#players.findIndex(player => player.details.username === username);
   }
 
   #isUserAlreadyJoined(username) {
