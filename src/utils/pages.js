@@ -6,6 +6,7 @@ const MAIN_MENU_PAGE = `<html>
   <script src="js/joinPopup.js"></script>
   <link rel="stylesheet" href="css/mainMenu.css">
   <link rel="stylesheet" href="css/common.css">
+  <script src="https://kit.fontawesome.com/74138aff63.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -14,6 +15,9 @@ const MAIN_MENU_PAGE = `<html>
         <img src="images/cashflow-image-big.png" alt="Cashflow" title="Cashflow">
       </div>
     <div class="menu interaction-box">
+    <a href="/logout">
+        <div class="logout fas fa-sign-out-alt"></div>
+      </a>
       <div class="btn-wrapper">
         <div class="btn" id="host-btn"><a href="/host">Host</a></div>
         <div class="btn" id="join-btn" onclick="createJoinPopup()">Join</div>
