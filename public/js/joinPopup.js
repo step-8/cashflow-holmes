@@ -24,6 +24,7 @@ const redirectToJoinLobby = () => {
 };
 
 const joinRoom = (event) => {
+  event.preventDefault();
   const body = readFormData('#join-popup-form');
   const req = { method: 'post', url: '/join' };
   xhrRequest(req, 200, redirectToJoinLobby, showInvalidMessage, body);

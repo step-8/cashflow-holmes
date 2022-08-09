@@ -3,9 +3,7 @@ const { GUEST_LOBBY } = require('../utils/pages.js');
 const guestLobbyHandler = (req, res) => {
   const { game } = req;
   const { username } = req.session;
-  const color = game.colors.pop();
-  const player = { username, color };
-  game.players.push(player);
+  game.addPlayer(username);
 
   res.end(GUEST_LOBBY);
 };
