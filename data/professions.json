@@ -1,0 +1,302 @@
+[
+  {
+    "profession": "Doctor(MD)",
+    "income": {
+      "salary": 13200
+    },
+    "expenses": {
+      "taxes": 3200,
+      "homeMortgagePayment": 1900,
+      "schoolLoanPayment": 700,
+      "carLoanPayment": 300,
+      "creditCardPayment": 200,
+      "otherExpenses": 2000,
+      "bankLoanPayment": 0,
+      "perChildExpense": 700
+    },
+    "assets": {
+      "savings": 3500
+    },
+    "liabilities": {
+      "homeMortgage": 202000,
+      "schoolLoans": 150000,
+      "carLoans": 19000,
+      "creditCardDebt": 10000
+    }
+  },
+  {
+    "profession": "Janitor",
+    "income": {
+      "salary": 1600
+    },
+    "expenses": {
+      "taxes": 300,
+      "homeMortgagePayment": 200,
+      "schoolLoanPayment": 0,
+      "carLoanPayment": 100,
+      "creditCardPayment": 100,
+      "otherExpenses": 300,
+      "bankLoanPayment": 0,
+      "perChildExpense": 100
+    },
+    "assets": {
+      "savings": 600
+    },
+    "liabilities": {
+      "homeMortgage": 20000,
+      "schoolLoans": 0,
+      "carLoans": 4000,
+      "creditCardDebt": 3000
+    }
+  },
+  {
+    "profession": "Airline Pilot",
+    "income": {
+      "salary": 9500
+    },
+    "expenses": {
+      "taxes": 2000,
+      "homeMortgagePayment": 1000,
+      "schoolLoanPayment": 0,
+      "carLoanPayment": 300,
+      "creditCardPayment": 700,
+      "otherExpenses": 2000,
+      "bankLoanPayment": 0,
+      "perChildExpense": 400
+    },
+    "assets": {
+      "savings": 2500
+    },
+    "liabilities": {
+      "homeMortgage": 90000,
+      "schoolLoans": 0,
+      "carLoans": 15000,
+      "creditCardDebt": 22000
+    }
+  },
+  {
+    "profession": "Engineer",
+    "income": {
+      "salary": 4900
+    },
+    "expenses": {
+      "taxes": 1000,
+      "homeMortgagePayment": 700,
+      "schoolLoanPayment": 100,
+      "carLoanPayment": 200,
+      "creditCardPayment": 200,
+      "otherExpenses": 1000,
+      "bankLoanPayment": 0,
+      "perChildExpense": 400
+    },
+    "assets": {
+      "savings": 2500
+    },
+    "liabilities": {
+      "homeMortgage": 75000,
+      "schoolLoans": 12000,
+      "carLoans": 7000,
+      "creditCardDebt": 5000
+    }
+  },
+  {
+    "profession": "Secretary",
+    "income": {
+      "salary": 2500
+    },
+    "expenses": {
+      "taxes": 500,
+      "homeMortgagePayment": 400,
+      "schoolLoanPayment": 0,
+      "carLoanPayment": 100,
+      "creditCardPayment": 100,
+      "otherExpenses": 600,
+      "bankLoanPayment": 0,
+      "perChildExpense": 100
+    },
+    "assets": {
+      "savings": 700
+    },
+    "liabilities": {
+      "homeMortgage": 38000,
+      "schoolLoans": 0,
+      "carLoans": 4000,
+      "creditCardDebt": 3000
+    }
+  },
+  {
+    "profession": "Truck Driver",
+    "income": {
+      "salary": 2500
+    },
+    "expenses": {
+      "taxes": 500,
+      "homeMortgagePayment": 400,
+      "schoolLoanPayment": 0,
+      "carLoanPayment": 100,
+      "creditCardPayment": 100,
+      "otherExpenses": 600,
+      "bankLoanPayment": 0,
+      "perChildExpense": 200
+    },
+    "assets": {
+      "savings": 800
+    },
+    "liabilities": {
+      "homeMortgage": 38000,
+      "schoolLoans": 0,
+      "carLoans": 4000,
+      "creditCardDebt": 3000
+    }
+  },
+  {
+    "profession": "Lawyer",
+    "income": {
+      "salary": 7500
+    },
+    "expenses": {
+      "taxes": 1800,
+      "homeMortgagePayment": 1100,
+      "schoolLoanPayment": 300,
+      "carLoanPayment": 200,
+      "creditCardPayment": 200,
+      "otherExpenses": 1500,
+      "bankLoanPayment": 0,
+      "perChildExpense": 400
+    },
+    "assets": {
+      "savings": 2000
+    },
+    "liabilities": {
+      "homeMortgage": 115000,
+      "schoolLoans": 78000,
+      "carLoans": 11000,
+      "creditCardDebt": 7000
+    }
+  },
+  {
+    "profession": "Business MGR",
+    "income": {
+      "salary": 4600
+    },
+    "expenses": {
+      "taxes": 900,
+      "homeMortgagePayment": 700,
+      "schoolLoanPayment": 100,
+      "carLoanPayment": 100,
+      "creditCardPayment": 200,
+      "otherExpenses": 1000,
+      "bankLoanPayment": 0,
+      "perChildExpense": 300
+    },
+    "assets": {
+      "savings": 400
+    },
+    "liabilities": {
+      "homeMortgage": 75000,
+      "schoolLoans": 12000,
+      "carLoans": 6000,
+      "creditCardDebt": 4000
+    }
+  },
+  {
+    "profession": "Police Officer",
+    "income": {
+      "salary": 3000
+    },
+    "expenses": {
+      "taxes": 600,
+      "homeMortgagePayment": 400,
+      "schoolLoanPayment": 0,
+      "carLoanPayment": 100,
+      "creditCardPayment": 100,
+      "otherExpenses": 700,
+      "bankLoanPayment": 0,
+      "perChildExpense": 200
+    },
+    "assets": {
+      "savings": 500
+    },
+    "liabilities": {
+      "homeMortgage": 46000,
+      "schoolLoans": 0,
+      "carLoans": 5000,
+      "creditCardDebt": 3000
+    }
+  },
+  {
+    "profession": "Teacher(K-12)",
+    "income": {
+      "salary": 3300
+    },
+    "expenses": {
+      "taxes": 500,
+      "homeMortgagePayment": 500,
+      "schoolLoanPayment": 100,
+      "carLoanPayment": 100,
+      "creditCardPayment": 200,
+      "otherExpenses": 700,
+      "bankLoanPayment": 0,
+      "perChildExpense": 200
+    },
+    "assets": {
+      "savings": 400
+    },
+    "liabilities": {
+      "homeMortgage": 50000,
+      "schoolLoans": 12000,
+      "carLoans": 5000,
+      "creditCardDebt": 4000
+    }
+  },
+  {
+    "profession": "Nurse",
+    "income": {
+      "salary": 3100
+    },
+    "expenses": {
+      "taxes": 600,
+      "homeMortgagePayment": 400,
+      "schoolLoanPayment": 100,
+      "carLoanPayment": 100,
+      "creditCardPayment": 200,
+      "otherExpenses": 600,
+      "bankLoanPayment": 0,
+      "perChildExpense": 200
+    },
+    "assets": {
+      "savings": 500
+    },
+    "liabilities": {
+      "homeMortgage": 47000,
+      "schoolLoans": 6000,
+      "carLoans": 5000,
+      "creditCardDebt": 4000
+    }
+  },
+  {
+    "profession": "Mechanic",
+    "income": {
+      "salary": 2000
+    },
+    "expenses": {
+      "taxes": 400,
+      "homeMortgagePayment": 300,
+      "schoolLoanPayment": 0,
+      "carLoanPayment": 100,
+      "creditCardPayment": 100,
+      "otherExpenses": 400,
+      "bankLoanPayment": 0,
+      "perChildExpense": 100
+    },
+    "assets": {
+      "savings": 700
+    },
+    "liabilities": {
+      "homeMortgage": 31000,
+      "schoolLoans": 0,
+      "carLoans": 3000,
+      "creditCardDebt": 3000
+    }
+  }
+]

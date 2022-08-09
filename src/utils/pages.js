@@ -35,6 +35,7 @@ const HOST_LOBBY = `<html>
   <title>Cash Flow</title>
   <link rel="stylesheet" href="css/lobby.css">
   <link rel="stylesheet" href="css/common.css">
+  <script src="js/hostLobby.js"></script>
   <script src="js/commonLib.js"></script>
   <script src="js/drawLobby.js"></script>
   <script src="https://kit.fontawesome.com/74138aff63.js" crossorigin="anonymous"></script>
@@ -43,8 +44,11 @@ const HOST_LOBBY = `<html>
 <body>
   <div class="page">
     <div class="lobby">
+    <div id="lobby-header">
       <div class="room-id">
-        Room-Id : 
+        Room-Id :
+      </div>
+      <div id="error-message" class="message"></div>
       </div>
       <div class="players">
         <div id="player-1" class="player">
@@ -87,7 +91,7 @@ const HOST_LOBBY = `<html>
     </div>
     <div class="menu  interaction-box">
       <div class="btn-wrapper">
-        <div class="btn" id="start-btn">Start</div>
+        <div class="btn" id="start-btn" onclick="startGame(event)">Start</div>
         <div class="btn" id="cancel-btn">Cancel</div>
       </div>
     </div>

@@ -1,10 +1,8 @@
 const { Game } = require('../models/game.js');
+const professions = require('../../data/professions.json');
 
 const injectGame = () => {
   const colors = ['blue', 'green', 'yellow', 'pink', 'violet', 'orange'];
-  const professions = [
-    'doctor', 'police', 'pilot', 'janitor', 'lawyer', 'mechanic'
-  ];
   const game = new Game(colors, professions);
 
   return (req, res, next) => {

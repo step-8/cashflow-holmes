@@ -1,3 +1,4 @@
+const { shuffle } = require('../utils/shuffle.js');
 const { Player } = require('./player.js');
 
 class Game {
@@ -9,8 +10,8 @@ class Game {
   #deck;
   constructor(colors, professions) {
     this.#gameID = null;
-    this.#colors = colors;
-    this.#professions = professions;
+    this.#colors = shuffle(colors);
+    this.#professions = shuffle(professions);
     this.#maxPlayers = 6;
     this.#players = [];
     this.#deck = {};
