@@ -10,6 +10,7 @@ const { serveMainMenu } = require('./handlers/serveMainMenu.js');
 const { joinHandler } = require('./handlers/joinHandler.js');
 const { joinLobbyHandler } = require('./handlers/joinLobbyHandler.js');
 const { hostLobbyHandler } = require('./handlers/hostLobbyHandler.js');
+const { serveGameDetails } = require('./handlers/serveGameDetails.js');
 
 const createApp = (config) => {
   const app = express();
@@ -36,7 +37,7 @@ const createApp = (config) => {
   const gameId = 123;
   const game = {
     gameId,
-    colors: ['lightblue', 'green', 'orange', 'red', 'brown', 'yellow'],
+    colors: ['blue', 'green', 'pink', 'yellow', 'violet', 'orange'],
     players: []
   };
 
@@ -48,6 +49,7 @@ const createApp = (config) => {
 
   app.get('/host', hostHandler);
   app.get('/host-lobby', hostLobbyHandler);
+  app.get('/api/game', serveGameDetails);
   app.post('/join', joinHandler);
   app.get('/join-lobby', joinLobbyHandler);
 
