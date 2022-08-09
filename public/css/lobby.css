@@ -171,3 +171,11 @@
   padding-left: 5vmax;
   padding-top: 5vmax;
 }
+
+#lobby-header {
+  display: flex;
+}
+
+.message {
+  width: 25vmax;
+}

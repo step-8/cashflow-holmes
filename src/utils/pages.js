@@ -106,8 +106,11 @@ const GUEST_LOBBY = `<html>
 <body>
   <div class="page">
     <div class="lobby">
+      <div id="lobby-header">
       <div class="room-id">
         Room-Id :
+      </div>
+      <div class="message" id="waiting-message">Waiting for host to start the game...</div>
       </div>
       <div class="players">
         <div id="player-1" class="player">
