@@ -232,7 +232,9 @@ const PROFESSION_CARD = `<html>
       </div>
 
     </div>
-
+    <div class="close">
+      <div class="close-btn"><a href="/game-board">Close</a></div>
+    </div>
   </div>
 </body>
 

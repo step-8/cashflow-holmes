@@ -5,11 +5,11 @@
 
 #profession-card {
   width: 32vmax;
-  aspect-ratio: 8/9;
+  aspect-ratio: 9/12;
   border: var(--def-border);
   border-radius: 1vmax;
   overflow: hidden;
-  margin: auto;
+  margin: 2vmax auto;
   display: flex;
   flex-direction: column;
   row-gap: 1vmax;
@@ -122,4 +122,18 @@ table td {
 
 #monthly-cashflow {
   border: 3px dashed black;
+}
+
+.close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close-btn {
+  border: var(--def-border);
+  border-radius: 0.25vmax;
+  background-color: black;
+  color: white;
+  padding: 0.5vmax;
 }

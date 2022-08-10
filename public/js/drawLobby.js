@@ -51,10 +51,10 @@
   };
 
   const main = () => {
-    // setInterval(() => {
-    const req = { method: 'get', url: '/api/game' };
-    xhrRequest(req, 200, drawLobby);
-    // }, 100);
+    setInterval(() => {
+      const req = { method: 'get', url: '/api/game' };
+      xhrRequest(req, 200, drawLobby);
+    }, 100);
   };
   window.onload = main;
 })();
