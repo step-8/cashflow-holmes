@@ -4,8 +4,8 @@ const MAIN_MENU_PAGE = `<html>
   <title>Cash Flow</title>
   <script src="js/commonLib.js"></script>
   <script src="js/joinPopup.js"></script>
-  <link rel="stylesheet" href="css/mainMenu.css">
   <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/mainMenu.css">
   <script src="https://kit.fontawesome.com/74138aff63.js" crossorigin="anonymous"></script>
 </head>
 

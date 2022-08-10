@@ -1,33 +1,33 @@
 <html>
 
-  <head>
-    <title>Cashflow - Register</title>
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/register.css">
-  </head>
+<head>
+  <title>Cashflow - Register</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
 
-  <body>
-    <div class="page-wrapper">
-      <div id="main-image">
-        <img src="images/cashflow-image-big.png" alt="Cashflow" title="Cashflow">
-      </div>
-      <div class="interaction-box">
-        <h2 class="heading">Register</h2>
-        <form action="/register" method="post">
-          <div>
-            <input type="text" name="username" id="username-input" placeholder="Username" required>
-          </div>
-          <div>
-            <input type="password" name="password" id="password-input" placeholder="Password" required>
-          </div>
-          <div class="submit-button">
-            <input type="submit" value="Register">
-          </div>
-          <div id="message">__MESSAGE__</div>
-          </form>
-        <div id="suggestion">Already a user ? <a href="/login">Login</a></div>
-        </div>
+<body>
+  <div class="page-wrapper">
+    <div id="main-image">
+      <img src="images/cashflow-image-big.png" alt="Cashflow" title="Cashflow">
     </div>
-  </body>
+    <div class="interaction-box">
+      <h2 class="heading">Register</h2>
+      <form action="/register" method="post">
+        <div>
+          <input type="text" name="username" id="username-input" placeholder="Username" required>
+        </div>
+        <div>
+          <input type="password" name="password" id="password-input" placeholder="Password" required>
+        </div>
+        <div class="submit-button">
+          <input type="submit" value="Register">
+        </div>
+        <div id="message">__MESSAGE__</div>
+      </form>
+      <div id="suggestion">Already a user ? <a href="/login">Login</a></div>
+    </div>
+  </div>
+</body>
 
 </html>

@@ -9,39 +9,6 @@ body {
   width: fit-content;
 }
 
-.menu {
-  width: 25%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.btn-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  width: 60%;
-  aspect-ratio: 2;
-  font-size: 2vmax;
-}
-
-.btn {
-  text-align: center;
-  padding: 0.8em;
-  background-color: aliceblue;
-}
-
-.btn:hover {
-  cursor: pointer;
-}
-
-.btn a {
-  text-decoration: none;
-  color: black;
-}
-
 .page-wrapper {
   height: 100%;
   width: 100%;
@@ -81,22 +48,9 @@ body {
   text-align: center;
 }
 
-.interaction-box {
-  border: 0.5vmax solid black;
-  border-bottom: none;
-  border-right: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  right: 0;
-  height: 100%;
-  width: 40%;
-  border-top-left-radius: 200%;
-  gap: 3vmax;
-  padding-left: 5vmax;
-  padding-top: 5vmax;
+.button {
+  border: 1px solid black;
+  width: 4vmax;
 }
 
 .join-error {

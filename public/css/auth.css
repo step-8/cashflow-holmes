@@ -15,25 +15,6 @@ body {
   width: fit-content;
 }
 
-.interaction-box {
-  border: 0.5vmax solid black;
-  border-bottom: none;
-  border-right: none;
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  right: 0;
-  height: 100%;
-  width: 40%;
-  border-top-left-radius: 200%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3vmax;
-  padding-left: 5vmax;
-  padding-top: 5vmax;
-}
-
 .heading {
   font-size: 4.5vmax;
 }
@@ -44,7 +25,8 @@ form {
   gap: 2vmax;
 }
 
-input[type=text], input[type=password] {
+input[type=text],
+input[type=password] {
   font-size: 2vmax;
   text-align: center;
   border-style: none;
@@ -55,7 +37,7 @@ input[type=text], input[type=password] {
 .submit-button {
   display: flex;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
 }
 
 .submit-button>input {
@@ -85,6 +67,6 @@ input[type=text], input[type=password] {
   overflow: hidden;
 }
 
-#main-image img{
+#main-image img {
   height: 100%;
 }

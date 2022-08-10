@@ -13,37 +13,6 @@
   font-size: 1.6vmax;
 }
 
-.menu {
-  width: 25%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.btn-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  width: 60%;
-  aspect-ratio: 2;
-}
-
-.btn {
-  text-align: center;
-  padding: 0.8em;
-}
-
-.btn:hover {
-  cursor: pointer;
-}
-
-.btn a {
-  text-decoration: none;
-  color: black;
-}
-
 .room-id {
   margin-left: 4em;
   width: 60%;
@@ -91,34 +60,6 @@
   font-size: 2.5vmax;
 }
 
-.blue {
-  background-color: var(--blue-p);
-}
-
-.green {
-  background-color: var(--green-p);
-}
-
-.yellow {
-  background-color: var(--yellow-p);
-}
-
-.pink {
-  background-color: var(--pink-p);
-}
-
-.violet {
-  background-color: var(--violet-p);
-}
-
-.orange {
-  background-color: var(--orange-p);
-}
-
-.grey {
-  background-color: var(--grey-p);
-}
-
 #player-1 {
   grid-row: 1;
   grid-column: 1;
@@ -151,25 +92,6 @@
 #player-6 {
   grid-row: 3;
   grid-column: 1;
-}
-
-.interaction-box {
-  border: 0.5vmax solid black;
-  border-bottom: none;
-  border-right: none;
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  right: 0;
-  height: 100%;
-  width: 40%;
-  border-top-left-radius: 200%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3vmax;
-  padding-left: 5vmax;
-  padding-top: 5vmax;
 }
 
 #lobby-header {

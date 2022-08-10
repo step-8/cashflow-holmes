@@ -2,6 +2,8 @@
   --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   --bgColor: dimgrey;
   --def-border: 0.5px solid black;
+  --big-border: 0.2vmax solid black;
+  --def-curve: 0.5vmax;
   --page-header: 2.5vmax;
   --plain-font: 1.2vmax;
   --primary: #2e152f;
@@ -64,4 +66,80 @@ a {
   padding: 0.5vmax;
   border-radius: 0.25vmax;
   width: 40%;
+}
+
+.blue {
+  background-color: var(--blue-p);
+}
+
+.green {
+  background-color: var(--green-p);
+}
+
+.yellow {
+  background-color: var(--yellow-p);
+}
+
+.pink {
+  background-color: var(--pink-p);
+}
+
+.violet {
+  background-color: var(--violet-p);
+}
+
+.orange {
+  background-color: var(--orange-p);
+}
+
+.grey {
+  background-color: var(--grey-p);
+}
+
+.menu {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 60%;
+  aspect-ratio: 2;
+  font-size: 2vmax;
+}
+
+.btn {
+  text-align: center;
+  padding: 0.8em;
+  border: var(--big-border);
+  border-radius: var(--def-curve);
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.interaction-box {
+  border: 0.5vmax solid black;
+  border-bottom: none;
+  border-right: none;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 40%;
+  border-top-left-radius: 200%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3vmax;
+  padding-left: 5vmax;
+  padding-top: 5vmax;
 }
