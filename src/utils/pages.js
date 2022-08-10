@@ -56,7 +56,7 @@ const HOST_LOBBY = `<html>
     <div class="menu  interaction-box">
       <div class="btn-wrapper">
         <div class="btn" id="start-btn" onclick="startGame(event)">Start</div>
-        <div class="btn" id="cancel-btn">Cancel</div>
+        <div class="btn" id="cancel-btn"><a href="/cancel-game">Cancel</a></div>
       </div>
     </div>
   </div>
@@ -82,7 +82,7 @@ const GUEST_LOBBY = `<html>
       <div class="room-id">
         Room-Id :
       </div>
-      <div class="message" id="waiting-message">Waiting for host to start the game...</div>
+      <div class="message" id="message">Waiting for host to start the game...</div>
       </div>
       <div id="players" class="players">
       </div>

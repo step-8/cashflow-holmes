@@ -8,7 +8,7 @@ const { injectGame } = require('../handlers/injectGame.js');
 const { leaveLobbyHandler } = require('../handlers/leaveLobbyHandler.js');
 const { logoutHandler } = require('../handlers/logout.js');
 const { startGameHandler } = require('../handlers/startGameHandler.js');
-
+const { cancelGameHandler } = require('../handlers/cancelGameHandler.js');
 
 const createGameRouter = (router) => {
   router.use(injectGame());
@@ -20,6 +20,7 @@ const createGameRouter = (router) => {
   router.get('/host-lobby', hostLobbyHandler);
   router.get('/guest-lobby', guestLobbyHandler);
   router.get('/leave-lobby', leaveLobbyHandler);
+  router.get('/cancel-game', cancelGameHandler);
   router.use('/logout', logoutHandler);
 
   router.use(['/login', '/register'], (req, res) => res.redirect('/'));

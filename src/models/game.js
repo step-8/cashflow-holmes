@@ -1,6 +1,13 @@
 const { shuffle } = require('../utils/shuffle.js');
 const { Player } = require('./player.js');
 
+const GameStatus = {
+  started: 'started',
+  cancelled: 'cancelled',
+  waiting: 'waiting',
+  progress: 'inProgress'
+};
+
 class Game {
   #gameID;
   #colors;
@@ -8,7 +15,8 @@ class Game {
   #players;
   #maxPlayers;
   #deck;
-  #isGameStarted;
+  #isGameStarted; // This need to removed afterwards and to be included in status.
+  #status;
   constructor(colors, professions) {
     this.#gameID = null;
     this.#isGameStarted = false;
@@ -17,10 +25,15 @@ class Game {
     this.#maxPlayers = 6;
     this.#players = [];
     this.#deck = {};
+    this.#status = GameStatus.waiting;
   }
 
   start() {
     this.#isGameStarted = true;
+  }
+
+  cancel() {
+    this.#status = GameStatus.cancelled;
   }
 
   assignGameID(gameID) {
@@ -70,6 +83,7 @@ class Game {
 
   get state() {
     return {
+      status: this.#status,
       isGameStarted: this.#isGameStarted,
       gameID: this.#gameID,
       players: this.allPlayerDetails

@@ -9,11 +9,28 @@
     return html(template);
   };
 
+  const showCancelMessage = () => {
+    const errorMessageDiv = document.querySelector('#message');
+    errorMessageDiv.innerText = 'Game has been cancelled by host';
+    errorMessageDiv.style.color = 'red';
+
+    setTimeout(() => {
+      window.location = '/';
+    }, 3000);
+
+    return;
+  };
+
   const drawLobby = (xhr) => {
-    const { gameID, players, isGameStarted } = JSON.parse(xhr.response);
+    const { gameID, players, isGameStarted, status } = JSON.parse(xhr.response);
 
     if (isGameStarted) {
       showProfessions();
+      return;
+    }
+
+    if (status === 'cancelled') {
+      showCancelMessage();
       return;
     }
 
