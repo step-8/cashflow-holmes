@@ -116,7 +116,7 @@ const PROFESSION_CARD = `<html>
       </div>
       <div id="profession-details">
         <h3>Your Profession is</h3>
-        <h1 id="profession">LAWYER</h1>
+        <h1 id="profession"></h1>
         <div>Goal : Build your <strong>Passive Income</strong> to be greater than your <strong>Total Expenses</strong>.
         </div>
       </div>
@@ -131,7 +131,7 @@ const PROFESSION_CARD = `<html>
           <tbody>
             <tr>
               <th>Salary : </th>
-              <td id="salary">$7500</td>
+              <td id="salary"></td>
             </tr>
           </tbody>
         </table>
@@ -141,35 +141,35 @@ const PROFESSION_CARD = `<html>
           <tbody>
             <tr>
               <th>Taxes : </th>
-              <td id="taxes">$1800</td>
+              <td id="taxes"></td>
             </tr>
             <tr>
               <th>Home Mortgage Payment : </th>
-              <td id="home-mortgage-payment">$1100</td>
+              <td id="home-mortgage-payment"></td>
             </tr>
             <tr>
               <th>School Loan Payment : </th>
-              <td id="school-loan-payment">$300</td>
+              <td id="school-loan-payment"></td>
             </tr>
             <tr>
               <th>Car Loan Payment : </th>
-              <td id="car-loan-payment">$200</td>
+              <td id="car-loan-payment"></td>
             </tr>
             <tr>
               <th>Credit Card Payment : </th>
-              <td id="credit-card-payment">$200</td>
+              <td id="credit-card-payment"></td>
             </tr>
             <tr>
               <th>Other Expenses : </th>
-              <td id="other-expenses">$1500</td>
+              <td id="other-expenses"></td>
             </tr>
             <tr>
               <th>Bank Loan Payment : </th>
-              <td id="bank-loan-payment">$0</td>
+              <td id="bank-loan-payment"></td>
             </tr>
             <tr>
               <th>Per Child Expense : </th>
-              <td id="per-child-expense">$400</td>
+              <td id="per-child-expense"></td>
             </tr>
           </tbody>
         </table>
@@ -177,18 +177,18 @@ const PROFESSION_CARD = `<html>
       </div>
 
       <div id="cashflow-block">
-        <div class="values" id="income">$7500</div>
+        <div class="values" id="income"></div>
         <div class="symbol">+</div>
         <div class="values" id="passive-income">$0</div>
         <div id="total">
           <div class="symbol">=</div>
-          <div class="values" id="total-income">$7500</div>
+          <div class="values" id="total-income"></div>
         </div>
         <div class="symbol">-</div>
-        <div class="values" id="total-expense">$5100</div>
+        <div class="values" id="total-expense"></div>
         <div id="cashflow">
           <div class="symbol">=</div>
-          <div class="values" id="monthly-cashflow">$2400</div>
+          <div class="values" id="monthly-cashflow"></div>
         </div>
         <div>Monthly Cash Flow</div>
       </div>
@@ -203,7 +203,7 @@ const PROFESSION_CARD = `<html>
             <tbody>
               <tr>
                 <th>Savings : </th>
-                <td id="savings">$2000</td>
+                <td id="savings"></td>
               </tr>
             </tbody>
           </table>
@@ -214,19 +214,19 @@ const PROFESSION_CARD = `<html>
             <tbody>
               <tr>
                 <th>Home Mortgage : </th>
-                <td id="home-mortgage">$115000</td>
+                <td id="home-mortgage"></td>
               </tr>
               <tr>
                 <th>School Loans : </th>
-                <td id="school-loans">$78000</td>
+                <td id="school-loans"></td>
               </tr>
               <tr>
                 <th>Car Loans : </th>
-                <td id="car-loans">$11000</td>
+                <td id="car-loans"></td>
               </tr>
               <tr>
                 <th>Credit Card Debt : </th>
-                <td id="credit-card-debt">$7000</td>
+                <td id="credit-card-debt"></td>
               </tr>
             </tbody>
           </table>
@@ -242,4 +242,163 @@ const PROFESSION_CARD = `<html>
 
 </html>`;
 
-module.exports = { MAIN_MENU_PAGE, HOST_LOBBY, GUEST_LOBBY, PROFESSION_CARD };
+const RAT_RACE_BOARD = `<html>
+
+<head>
+  <title>Cashflow</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/board-style.css">
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <div id="board">
+      <div class="game-area">
+        <div class="card-deck" id="market">
+          <img src="images/ratrace/market.gif" alt="market">
+        </div>
+        <div class="card-deck" id="small-deal">
+          <img src="images/ratrace/deals.png" alt="deals">
+        </div>
+        <div class="card-deck" id="big-deal">
+          <img src="images/ratrace/deals.png" alt="deals">
+        </div>
+        <div class="card-deck" id="doodad">
+          <img src="images/ratrace/doodad.png" alt="doodad">
+        </div>
+        <div id="players"></div>
+        <div id="game-stats">
+          <div class="heading">Status</div>
+          <table>
+            <tr>
+              <th>Cash flow :</th>
+              <td id="cashflow-amount"></td>
+            </tr>
+            <tr>
+              <th>Cash :</th>
+              <td id="total-cash"></td>
+            </tr>
+            <tr>
+              <th>Expenses :</th>
+              <td id="expenses"></td>
+            </tr>
+            <tr>
+              <th>Passive Income :</th>
+              <td id="passive-income"></td>
+            </tr>
+          </table>
+        </div>
+        <div class="interaction-space">
+          <div id="interaction-screen"></div>
+          <div id="main-card"></div>
+          <div id="message-space"></div>
+        </div>
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-1">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile doodad" id="rat-tile-2">
+        <img src="images/ratrace/doodad.png" alt="doodad">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-3">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile purples" id="rat-tile-4">
+        <img src="images/ratrace/charity.svg" alt="charity">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-5">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile payday" id="rat-tile-6">
+        <img src="images/ratrace/payday.png" alt="payday">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-7">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile market" id="rat-tile-8">
+        <img src="images/ratrace/market.gif" alt="market">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-9">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile doodad" id="rat-tile-10">
+        <img src="images/ratrace/doodad.png" alt="doodad">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-11">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile purples" id="rat-tile-12">
+        <img src="images/ratrace/downsized.png" alt="downsized">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-13">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile payday" id="rat-tile-14">
+        <img src="images/ratrace/payday.png" alt="payday">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-15">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile market" id="rat-tile-16">
+        <img src="images/ratrace/market.gif" alt="market">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-17">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile doodad" id="rat-tile-18">
+        <img src="images/ratrace/doodad.png" alt="doodad">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-19">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile purples" id="rat-tile-20">
+        <img src="images/ratrace/child.png" alt="child">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-21">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile payday" id="rat-tile-22">
+        <img src="images/ratrace/payday.png" alt="payday">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-23">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile market" id="rat-tile-24">
+        <img src="images/ratrace/market.gif" alt="market">
+      </div>
+    </div>
+    <div id="game-panel">
+      <header>
+        <h2><a href="/">Cashflow</a></h2>
+      </header>
+      <nav id="game-nav">
+        <ul>
+          <li id="profile">
+            <span class="expands-indicator">«</span>
+            My profile
+          </li>
+          <li id="others-profile">
+            <span class="expands-indicator">«</span>
+            Other players
+          </li>
+          <li id="ledger">
+            <span class="expands-indicator">«</span>
+            Ledger
+          </li>
+        </ul>
+      </nav>
+      <div id="loan-options">
+        <div id="take-loan">Take loan</div>
+        <div id="pay-loan">Pay loan</div>
+      </div>
+      <div id="logs"></div>
+      <div id="dice-box"></div>
+      <div id="board-toggle"></div>
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>`;
+
+module.exports = { MAIN_MENU_PAGE, HOST_LOBBY, GUEST_LOBBY, PROFESSION_CARD, RAT_RACE_BOARD };
