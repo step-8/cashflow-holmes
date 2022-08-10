@@ -33,4 +33,13 @@ describe('Cancel Game', () => {
         .expect(302, done);
     });
   });
+  
+  describe('GET /remove-gameid', () => {
+    it('Should remove gameid from session', (done) => {
+      request(app)
+        .get('/remove-gameid')
+        .set('Cookie', cookies.join(';'))
+        .expect(200, done);
+    });
+  });
 });
