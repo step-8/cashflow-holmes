@@ -103,6 +103,8 @@ const PROFESSION_CARD = `<html>
   <title>Profession Card</title>
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/professionCard.css">
+  <script src="js/commonLib.js"></script>
+  <script src="js/showProfession.js"></script>
 </head>
 
 <body>
