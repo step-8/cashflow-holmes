@@ -4,7 +4,6 @@ const joinHandler = (req, res, next) => {
 
   const game = req.games.getGame(gameID);
   if (game) {
-    // const { game } = req;
     if (game.isLobbyFull()) {
       res.sendStatus(423);
       return;

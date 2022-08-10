@@ -9,13 +9,18 @@
     return html(template);
   };
 
+  const redirectToMainMenu = () => {
+    window.location = '/';
+  };
+
   const showCancelMessage = () => {
     const errorMessageDiv = document.querySelector('#message');
     errorMessageDiv.innerText = 'Game has been cancelled by host';
     errorMessageDiv.style.color = 'red';
 
     setTimeout(() => {
-      window.location = '/';
+      const req = {method: 'get', url: '/remove-gameid'};
+      xhrRequest(req, 200, redirectToMainMenu);
     }, 3000);
 
     return;

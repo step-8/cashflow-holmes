@@ -6,4 +6,9 @@ const cancelGameHandler = (req, res) => {
   return;
 };
 
-module.exports = { cancelGameHandler };
+const removeGameIdHandler = (req, res) => {
+  req.session.gameID = null;
+  res.end();
+};
+
+module.exports = { cancelGameHandler, removeGameIdHandler};
