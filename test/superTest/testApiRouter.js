@@ -35,11 +35,11 @@ describe('ApiRouter', () => {
   });
 
   describe('GET /api/profession', () => {
-    it('Should give status code of 400 when game is not started', (done) => {
+    it('Should give status code of 200 when player exists ', (done) => {
       request(app)
         .get('/api/profession')
         .set('Cookie', cookies.join(';'))
-        .expect(400, done);
+        .expect(200, done);
     });
   });
 });
