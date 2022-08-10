@@ -1,18 +1,11 @@
 const { createApp } = require('../../src/app.js');
 const supertest = require('supertest');
+const { testDeps: { config, session } } = require('../testDependencies');
 
 describe('Login', () => {
   let cookies;
-  const config = {
-    PUBLIC: './public',
-    REGISTER_PAGE: './views/register.html',
-    LOGIN_PAGE: './views/login.html',
-    CRED_PATH: './test/test.json',
-    SECRET: 'test',
-    persistCredentials: () => (req, res) => res.redirect('/')
-  };
 
-  const request = supertest(createApp(config));
+  const request = supertest(createApp(config, session));
   before(done => {
     request
       .post('/login')
@@ -24,7 +17,7 @@ describe('Login', () => {
   });
 
   it('should provide login page when requested /login GET', (done) => {
-    supertest(createApp(config))
+    supertest(createApp(config, session))
       .get('/login')
       .expect(/html/)
       .expect(200, done);

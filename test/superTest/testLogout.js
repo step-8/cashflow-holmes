@@ -1,20 +1,12 @@
 const { createApp } = require('../../src/app.js');
 const request = require('supertest');
 const assert = require('assert');
+const { testDeps: { config, session } } = require('../testDependencies');
 
 describe('Logout', () => {
   let cookies;
-  const config = {
-    PUBLIC: './public',
-    REGISTER_PAGE: './views/register.html',
-    CRED_PATH: './test/test.json',
-    SECRET: 'test',
-    persistCredentials: (config) => (req, res) => {
-      res.redirect('/');
-    }
-  };
-  
-  const app = createApp(config);
+
+  const app = createApp(config, session);
   before(done => {
     request(app)
       .post('/login')

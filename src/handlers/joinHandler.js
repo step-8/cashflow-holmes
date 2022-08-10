@@ -10,14 +10,13 @@ const joinHandler = (req, res, next) => {
     }
 
     const player = game.state.players.find(player => username === player.username);
-    if (player) {
-      if (player.role === 'host') {
-        res.sendStatus(401);
-        return;
-      }
+    if (player && player.role === 'host') {
+      res.sendStatus(401);
+      return;
     }
 
     if (game.isValidGameID(+gameID)) {
+      req.session.gameID = gameID;
       res.sendStatus(200);
       return;
     }

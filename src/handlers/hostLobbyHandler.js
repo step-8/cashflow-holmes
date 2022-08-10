@@ -7,18 +7,20 @@ const createGameID = () => {
 
 const hostLobbyHandler = (req, res) => {
   if (req.session.gameID) {
-    res.end(HOST_LOBBY);
+    res.send(HOST_LOBBY);
+    res.end();
     return;
   }
 
   const gameID = createGameID();
-  req.game.assignGameID(gameID);
+  req.session.gameID = gameID;
+  const username = req.session.username;
 
-  const { username } = req.session;
+  req.game.assignGameID(gameID);
   req.game.addPlayer(username, 'host');
 
-  req.session.gameID = gameID;
-  res.end(HOST_LOBBY);
+  res.send(HOST_LOBBY);
+  res.end();
 };
 
 module.exports = { hostLobbyHandler };

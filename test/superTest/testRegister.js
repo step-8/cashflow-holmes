@@ -1,25 +1,19 @@
 const { createApp } = require('../../src/app.js');
 const supertest = require('supertest');
 const assert = require('assert');
+const { testDeps: { config, session } } = require('../testDependencies');
 
 describe('Register', () => {
-  const config = {
-    PUBLIC: './public',
-    REGISTER_PAGE: './views/register.html',
-    CRED_PATH: './test/test.json',
-    SECRET: 'test',
-    persistCredentials: () => (req, res) => res.redirect('/')
-  };
 
   it('When requested /register GET', (done) => {
-    supertest(createApp(config))
+    supertest(createApp(config, session))
       .get('/register')
       .expect(/html/)
       .expect(200, done);
   });
 
   it('should register the new user /register POST', (done) => {
-    supertest(createApp(config))
+    supertest(createApp(config, session))
       .post('/register')
       .send('username=abcd&password=123')
       .expect('location', '/')
@@ -32,14 +26,14 @@ describe('Register', () => {
       REGISTER_PAGE: './views/register.html',
       CRED_PATH: './test/test.json',
       SECRET: 'test',
-      
+
       persistCredentials: (config) => (req, res) => {
         assert.equal(config.CRED_PATH, './test/test.json');
         res.redirect('/');
       }
     };
-      
-    supertest(createApp(config))
+
+    supertest(createApp(config, session))
       .post('/register')
       .send('username=abcd&password=123')
       .expect('location', '/')
