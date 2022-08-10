@@ -54,12 +54,13 @@ body {
 
 .join-popup-wrapper {
   height: 15vmax;
-  width: 12vmax;
+  width: 20vmax;
   border: var(--def-border);
   position: relative;
   top: 16vmax;
   left: 20vmax;
   background-color: white;
+  border-radius: 0.25vmax;
 }
 
 .join-form {
@@ -74,14 +75,10 @@ body {
 .room-id {
   width: 80%;
   outline: 0;
+  padding: 0.5vmax;
   border-style: none;
   border-bottom: var(--def-border);
   text-align: center;
-}
-
-.button {
-  border: 1px solid black;
-  width: 4vmax;
 }
 
 .interaction-box {
@@ -90,21 +87,20 @@ body {
   border-right: none;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   right: 0;
   height: 100%;
   width: 40%;
   border-top-left-radius: 200%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 3vmax;
   padding-left: 5vmax;
   padding-top: 5vmax;
 }
 
 .join-error {
-  width: 12vmax;
+  width: 20vmax;
   position: relative;
   top: 14vmax;
   left: 20vmax;

@@ -54,3 +54,14 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.button {
+  background: white;
+  border: var(--def-border);
+  color: black;
+  cursor: pointer;
+  display: block;
+  padding: 0.5vmax;
+  border-radius: 0.25vmax;
+  width: 40%;
+}
