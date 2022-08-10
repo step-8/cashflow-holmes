@@ -14,10 +14,12 @@ const hostLobbyHandler = (req, res) => {
 
   const gameID = createGameID();
   req.session.gameID = gameID;
-  const username = req.session.username;
 
-  req.game.assignGameID(gameID);
-  req.game.addPlayer(username, 'host');
+  req.games.newGame(gameID);
+  const game = req.games.getGame(gameID);
+
+  const username = req.session.username;
+  game.addPlayer(username, 'host');
 
   res.send(HOST_LOBBY);
   res.end();

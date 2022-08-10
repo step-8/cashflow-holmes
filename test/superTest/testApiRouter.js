@@ -17,6 +17,13 @@ describe('ApiRouter', () => {
       });
   });
 
+  before((done) => {
+    request(app)
+      .get('/host-lobby')
+      .set('Cookie', cookies)
+      .end(done);
+  });
+
   describe('GET /api/game', () => {
     it('Should give status code of 200 with game state', (done) => {
       request(app)

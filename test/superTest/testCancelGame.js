@@ -17,12 +17,20 @@ describe('Cancel Game', () => {
       });
   });
 
+  before((done) => {
+    request(app)
+      .get('/host-lobby')
+      .set('Cookie', cookies)
+      .end(done);
+  });
+
   describe('GET /cancel-game', () => {
-    it('Should give status code of 400 if id doesn\'t match', (done) => {
+    it('Should redirect to main menu after cancel ', (done) => {
       request(app)
         .get('/cancel-game')
         .set('Cookie', cookies.join(';'))
-        .expect(400, done);
+        .expect('location', '/')
+        .expect(302, done);
     });
   });
 });

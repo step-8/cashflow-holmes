@@ -2,14 +2,18 @@ const joinHandler = (req, res, next) => {
   const { gameID } = req.body;
   const { username } = req.session;
 
-  if (req.game) {
-    const { game } = req;
+  const game = req.games.getGame(gameID);
+  if (game) {
+    // const { game } = req;
     if (game.isLobbyFull()) {
       res.sendStatus(423);
       return;
     }
 
-    const player = game.state.players.find(player => username === player.username);
+    const player = game.state.players.find(
+      player => player.username === username
+    );
+
     if (player && player.role === 'host') {
       res.sendStatus(401);
       return;

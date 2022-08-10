@@ -17,11 +17,6 @@ const createApp = (config, session) => {
   }
   app.use(cookieParser());
   app.use(express.urlencoded({ extended: true }));
-  // app.use(session({
-  //   secret: config.SECRET,
-  //   resave: false,
-  //   saveUninitialized: false,
-  // }));
 
   app.use(protectedRoutes(createGameRouter(express.Router())));
   app.use(['/host', '/logout'], (req, res) => {

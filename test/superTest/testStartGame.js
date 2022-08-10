@@ -18,6 +18,13 @@ describe('GET /start-game', () => {
       });
   });
 
+  before((done) => {
+    req
+      .get('/host-lobby')
+      .set('Cookie', cookie)
+      .end(done);
+  });
+
   it('Should give 200 if game started successfully', (done) => {
     req
       .get('/start-game')

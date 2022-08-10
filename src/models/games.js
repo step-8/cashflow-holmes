@@ -29,7 +29,6 @@ class Games {
       const game = this.#games[gameID];
       const allPlayers = game.allPlayersDetails;
 
-      console.log(allPlayers);
       const player = allPlayers.find(player => player.username === username);
       if (player) {
         return game;

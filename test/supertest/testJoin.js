@@ -17,6 +17,13 @@ describe('Join', () => {
       });
   });
 
+  before((done) => {
+    request(app)
+      .get('/host-lobby')
+      .set('Cookie', cookies)
+      .end(done);
+  });
+
   describe('POST /join', () => {
     it('Should send status code of 400 for invalid room id', (done) => {
       request(app)

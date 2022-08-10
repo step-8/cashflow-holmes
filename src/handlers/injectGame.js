@@ -1,12 +1,20 @@
-const { Game } = require('../models/game.js');
+// const { Game } = require('../models/game.js');
 const professions = require('../../data/professions.json');
+const { Games } = require('../models/games.js');
 
 const injectGame = () => {
   const colors = ['blue', 'green', 'yellow', 'pink', 'violet', 'orange'];
-  const game = new Game(colors, professions);
+  const games = new Games(colors, professions);
+  // const game = new Game(colors, professions);
 
   return (req, res, next) => {
-    req.game = game;
+    req.games = games;
+
+    const gameID = req.session.gameID;
+    if (gameID) {
+      const game = games.getGame(gameID);
+      req.game = game;
+    }
     next();
   };
 };
