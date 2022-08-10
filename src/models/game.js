@@ -1,6 +1,11 @@
 const { shuffle } = require('../utils/shuffle.js');
 const { Player } = require('./player.js');
 
+const getNextAttrib = (players, type, attribs) => {
+  const playersAttribs = players.map(player => player.details[type]);
+  return attribs.find(attrib => !playersAttribs.includes(attrib));
+};
+
 const GameStatus = {
   started: 'started',
   cancelled: 'cancelled',
@@ -55,9 +60,13 @@ class Game {
     }
 
     const player = new Player(username, role);
-    const playerIndex = this.#players.length;
-    player.assignColor(this.#colors[playerIndex]);
-    player.assignProfession(this.#professions[playerIndex]);
+    player.assignColor(
+      getNextAttrib(this.#players, 'color', this.#colors)
+    );
+    player.assignProfession(
+      getNextAttrib(this.#players, 'profession', this.#professions)
+    );
+
     this.#players.push(player);
   }
 
