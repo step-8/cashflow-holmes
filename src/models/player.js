@@ -3,11 +3,13 @@ class Player {
   #color;
   #profession;
   #role;
+  #profile;
   constructor(username, role) {
     this.#username = username;
     this.#role = role;
     this.#color = null;
     this.#profession = null;
+    this.#profile = null;
   }
 
   assignColor(color) {
@@ -23,7 +25,8 @@ class Player {
       username: this.#username,
       role: this.#role,
       color: this.#color,
-      profession: this.#profession
+      profession: this.#profession,
+      profile: this.#profile
     };
   }
 }

@@ -26,30 +26,78 @@
       });
   };
 
+  const createIconEle = ({ color }) => {
+    const iconTemplate = ['div', { className: `${color} icon` }];
+    return html(iconTemplate);
+  };
+
+  const drawInitialPositions = (game) => {
+    const { players } = game;
+    const initialPosEle = getElement('#initial-positions');
+
+    const startEle = html(['div', { className: 'start' }, 'Start']);
+    initialPosEle.append(startEle);
+
+    players.forEach(player => {
+      const playerEle = createIconEle(player);
+      initialPosEle.append(playerEle);
+    });
+  };
+
+  // players.forEach(player => {
+  //   const { username, color } = player;
+  //   let name = username;
+
+  //   if (currentPlayer.username === username) {
+  //     name = username + '(you)';
+  //   }
+  //   const playerTemplate = ['div', { className: 'row', id: username },
+  //     ['div', { className: `${color} icon` }],
+  //     ['div', { className: 'name' }, name]
+  //   ];
+  //   const playerEle = html(playerTemplate);
+  //   playersEle.append(playerEle);
+  // });
+  // })
+  // .then(__ => highlightCurrentPlayer(game))
+
+  // players.forEach(player => {
+  //   const playerEle = createIconEle(player);
+  //   initialPosEle.append(playerEle);
+  // });
+  // };
+
+  // return game;
+  // };
+
+  const createPlayerEle = (player, playerName) => {
+    const { username, color } = player;
+    let name = username;
+
+    if (playerName === username) {
+      name = username + '(you)';
+    }
+    const playerTemplate = ['div', { className: 'row', id: username },
+      ['div', { className: `${color} icon` }],
+      ['div', { className: 'name' }, name]
+    ];
+
+    return html(playerTemplate);
+  };
+
   const drawPlayers = (game) => {
     const { players } = game;
     fetch('/api/player-info').then(res => res.json()).then(currentPlayer => {
-
       const playersEle = getElement('#players');
 
       players.forEach(player => {
-        const { username, color } = player;
-        let name = username;
-
-        if (currentPlayer.username === username) {
-          name = username + '(you)';
-        }
-        const playerTemplate = ['div', { className: 'row', id: username },
-          ['div', { className: `${color} icon` }],
-          ['div', { className: 'name' }, name]
-        ];
-        const playerEle = html(playerTemplate);
+        const playerEle = createPlayerEle(player, currentPlayer.username);
         playersEle.append(playerEle);
       });
-    })
-      .then(__ => highlightCurrentPlayer(game))
+
+      drawInitialPositions(game);
+    }).then(currentPlayer => highlightCurrentPlayer(game))
       .then(activateDice);
-    return game;
   };
 
   const diceFaces = {

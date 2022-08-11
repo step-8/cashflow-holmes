@@ -344,8 +344,9 @@ a {
   border-color: black;
   margin: 1vmax 0.5vmax;
   display: flex;
+  padding: 0.4vmax 1vmax;
   flex-direction: column;
-  gap: 1vmax;
+  gap: 0.3vmax;
 }
 
 #game-stats {
@@ -479,3 +480,18 @@ a {
 }
 
 /* dice box positions  End*/
+
+/* Initial player positions */
+
+#initial-positions {
+  grid-row: 8;
+  grid-column: 2/4;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-items: center;
+  padding: 1vmax;
+}
+
+.start {
+  font-weight: 900;
+}
