@@ -12,7 +12,8 @@ const {
   startGameHandler,
   cancelGameHandler,
   hostHandler,
-  removeGameIdHandler
+  removeGameIdHandler,
+  getUserInfoHandler
 } = require('../handlers/gameHandlers.js');
 
 const createGameRouter = (router) => {
@@ -26,6 +27,7 @@ const createGameRouter = (router) => {
   router.get('/guest-lobby', guestLobbyHandler);
   router.get('/leave-lobby', leaveLobbyHandler);
   router.get('/cancel-game', cancelGameHandler);
+  router.get('/get-user-info', getUserInfoHandler);
   router.get('/show-profession', showProfessionHandler);
   router.get('/game-board', gameBoardHandler);
   router.get('/remove-gameid', removeGameIdHandler);

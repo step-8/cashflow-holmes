@@ -42,6 +42,11 @@ const removeGameIdHandler = (req, res) => {
   res.end();
 };
 
+const getUserInfoHandler = (req, res) => {
+  res.json({ username: req.session.username });
+  res.end();
+};
+
 module.exports = {
   serveMainMenu,
   hostHandler,
@@ -50,5 +55,6 @@ module.exports = {
   guestLobbyHandler,
   showProfessionHandler,
   gameBoardHandler,
-  removeGameIdHandler
+  removeGameIdHandler,
+  getUserInfoHandler
 };
