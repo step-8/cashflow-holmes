@@ -32,6 +32,28 @@ describe('Join', () => {
         .send('gameID=12')
         .expect(400, done);
     });
+
+    it('Should send status code of 401 when host tries to join as a guest', (done) => {
+      request(app)
+        .post('/join')
+        .set('Cookie', cookies.join(';'))
+        .send('gameID=1')
+        .expect(401, done);
+    });
+    
+    it('Should send status code of 200 when player join game successfully', (done) => {
+      request(app)
+        .post('/register')
+        .send('username=a&password=123')
+        .end((err, res) => {
+          cookies = res.header['set-cookie'];
+          request(app)
+            .post('/join')
+            .set('Cookie', cookies.join(';'))
+            .send('gameID=1')
+            .expect(200, done);
+        });
+    });
   });
 
   describe('GET /guest-lobby', () => {

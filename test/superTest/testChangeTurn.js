@@ -2,7 +2,7 @@ const request = require('supertest');
 const { createApp } = require('../../src/app');
 const { testDeps: { config, session } } = require('../testDependencies');
 
-describe('Cancel Game', () => {
+describe('Change Turn', () => {
   let app;
   let cookies;
 

@@ -2,7 +2,7 @@ const request = require('supertest');
 const { createApp } = require('../../src/app');
 const { testDeps: { config, session } } = require('../testDependencies');
 
-describe('GET /host', () => {
+describe('GET /host-lobby', () => {
   let cookie = '';
   const req = request(createApp(config, session));
   before((done) => {
