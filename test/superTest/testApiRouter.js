@@ -42,4 +42,13 @@ describe('ApiRouter', () => {
         .expect(200, done);
     });
   });
+
+  describe('GET /api/player-info', () => {
+    it('Should give status code of 200 with player info', (done) => {
+      request(app)
+        .get('/api/player-info')
+        .set('Cookie', cookies.join(';'))
+        .expect(200, done);
+    });
+  });
 });
