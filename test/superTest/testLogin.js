@@ -30,4 +30,23 @@ describe('Login', () => {
       .expect('location', '/')
       .expect(302, done);
   });
+
+  before((done) => {
+    request
+      .post('/login')
+      .send('username=user&password=123456')
+      .expect(res => {
+        cookies = res.headers['set-cookie'];
+      })
+      .end(done);
+  });
+  
+  it('should show error when tried login with invalid creds/login POST',
+    (done) => {
+      request
+        .get('/login')
+        .set('Cookie', cookies)
+        .expect(/Invalid credentials/)
+        .expect(200, done);
+    });
 });

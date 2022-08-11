@@ -4,6 +4,7 @@ const assert = require('assert');
 const { testDeps: { config, session } } = require('../testDependencies');
 
 describe('Register', () => {
+  let cookies;
 
   it('When requested /register GET', (done) => {
     supertest(createApp(config, session))
@@ -18,6 +19,24 @@ describe('Register', () => {
       .send('username=abcd&password=123')
       .expect('location', '/')
       .expect(302, done);
+  });
+
+  before((done) => {
+    supertest(createApp(config, session))
+      .post('/register')
+      .send('username=user&password=123')
+      .expect(res => {
+        cookies = res.headers['set-cookie'];
+      })
+      .end(done);
+  });
+
+  it('should show error on register when username unavailable /register GET', (done) => {
+    supertest(createApp(config, session))
+      .get('/register')
+      .set('Cookie', cookies)
+      .expect(/Username not available/)
+      .expect(200, done);
   });
 
   it('should persist the userdata in the given file', (done) => {
