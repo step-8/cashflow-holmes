@@ -22,6 +22,7 @@ class Game {
   #deck;
   #isGameStarted; // This need to removed afterwards and to be included in status.
   #status;
+  #diceValue;
   constructor(colors, professions) {
     this.#gameID = null;
     this.#isGameStarted = false;
@@ -31,6 +32,11 @@ class Game {
     this.#players = [];
     this.#deck = {};
     this.#status = GameStatus.waiting;
+    this.#diceValue = null;
+  }
+
+  rollDice() {
+    this.#diceValue = Math.ceil(Math.random() * 6);
   }
 
   start() {
@@ -95,7 +101,8 @@ class Game {
       status: this.#status,
       isGameStarted: this.#isGameStarted,
       gameID: this.#gameID,
-      players: this.allPlayerDetails
+      players: this.allPlayerDetails,
+      diceValue: this.#diceValue
     };
   }
 }

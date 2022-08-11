@@ -47,6 +47,12 @@ const getUserInfoHandler = (req, res) => {
   res.end();
 };
 
+const rollDiceHandler = (req, res) => {
+  const { game } = req;
+  game.rollDice();
+  res.end();
+};
+
 module.exports = {
   serveMainMenu,
   hostHandler,
@@ -56,5 +62,6 @@ module.exports = {
   showProfessionHandler,
   gameBoardHandler,
   removeGameIdHandler,
-  getUserInfoHandler
+  getUserInfoHandler,
+  rollDiceHandler
 };
