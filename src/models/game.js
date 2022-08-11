@@ -6,7 +6,7 @@ const getNextAttrib = (players, type, attribs) => {
   return attribs.find(attrib => !playersAttribs.includes(attrib));
 };
 
-const GameStatus = {
+const gameStatus = {
   started: 'started',
   cancelled: 'cancelled',
   waiting: 'waiting',
@@ -19,19 +19,19 @@ class Game {
   #professions;
   #players;
   #maxPlayers;
-  #deck;
-  #isGameStarted; // This need to removed afterwards and to be included in status.
   #status;
   #diceValue;
+  #currentPlayerIndex;
+  #deck;
   constructor(colors, professions) {
     this.#gameID = null;
-    this.#isGameStarted = false;
     this.#colors = shuffle(colors);
     this.#professions = shuffle(professions);
     this.#maxPlayers = 6;
     this.#players = [];
+    this.#status = gameStatus.waiting;
+    this.#currentPlayerIndex = null;
     this.#deck = {};
-    this.#status = GameStatus.waiting;
     this.#diceValue = null;
   }
 
@@ -40,11 +40,12 @@ class Game {
   }
 
   start() {
-    this.#isGameStarted = true;
+    this.#status = gameStatus.started;
+    this.#currentPlayerIndex=0;
   }
 
   cancel() {
-    this.#status = GameStatus.cancelled;
+    this.#status = gameStatus.cancelled;
   }
 
   assignGameID(gameID) {
@@ -84,6 +85,11 @@ class Game {
     this.#players.splice(playerIndex, 1);
   }
 
+  changeTurn() {
+    ++this.#currentPlayerIndex;
+    this.#currentPlayerIndex= this.#currentPlayerIndex % this.#players.length;
+  }
+
   isValidGameID(gameID) {
     return this.#gameID === gameID;
   }
@@ -92,14 +98,22 @@ class Game {
     return this.#maxPlayers === this.#players.length;
   }
 
+  get currentPlayer() {
+    if (this.#currentPlayerIndex === null) {
+      return null;
+    }
+    return this.#players[this.#currentPlayerIndex].details;
+  }
+
   get allPlayerDetails() {
     return this.#players.map(player => player.details);
   }
 
   get state() {
+    const currentPlayer = this.currentPlayer;
     return {
+      currentPlayer,
       status: this.#status,
-      isGameStarted: this.#isGameStarted,
       gameID: this.#gameID,
       players: this.allPlayerDetails,
       diceValue: this.#diceValue

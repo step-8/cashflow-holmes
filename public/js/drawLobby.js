@@ -27,9 +27,9 @@
   };
 
   const drawLobby = (xhr) => {
-    const { gameID, players, isGameStarted, status } = JSON.parse(xhr.response);
+    const { gameID, players, status } = JSON.parse(xhr.response);
 
-    if (isGameStarted) {
+    if (status === 'started') {
       showProfessions();
       return;
     }

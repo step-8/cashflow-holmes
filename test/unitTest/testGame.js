@@ -52,11 +52,30 @@ describe('Game', () => {
     game.addPlayer('p6');
     assert.ok(game.isLobbyFull());
   });
-
+  
   it('Should give false if the lobby is not full ', () => {
     const game = new Game(colors, professions);
     game.assignGameID(1234);
     game.addPlayer('p1');
     assert.ok(!game.isLobbyFull());
+  });
+  
+  it('Should give the current player', () => {
+    const game = new Game(colors, professions);
+    game.assignGameID(1234);
+    game.addPlayer('p1');
+    game.addPlayer('p2');
+    game.start();
+    assert.ok(game.state.currentPlayer.username === 'p1');
+  });
+
+  it('Should change the turn to other player', () => {
+    const game = new Game(colors, professions);
+    game.assignGameID(1234);
+    game.addPlayer('p1', 'host');
+    game.addPlayer('p2', 'guest');
+    game.start();
+    game.changeTurn();
+    assert.ok(game.state.currentPlayer.username === 'p2');
   });
 });
