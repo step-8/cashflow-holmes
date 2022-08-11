@@ -9,7 +9,9 @@
   "scripts": {
     "setup": "bash bin/setup.sh",
     "start": "node .",
-    "test": "mocha --recursive"
+    "test": "mocha --recursive",
+    "report": "npx c8 npm test",
+    "coverage": "npx c8 -r html npm test; open coverage/index.html"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "c8": "^7.12.0",
     "eslint": "^8.21.0",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
