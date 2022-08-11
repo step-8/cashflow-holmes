@@ -52,7 +52,6 @@
     });
   };
 
-
   const createPlayerEle = (player, playerName) => {
     const { username, color } = player;
     let name = username;
@@ -68,6 +67,22 @@
     return html(playerTemplate);
   };
 
+  const drawStatus = (player) => {
+    const { profile } = player;
+    const cashEle = getElement('#total-cash');
+    cashEle.innerText = addDollar(profile.cash);
+
+    const cfEle = getElement('#cashflow-amount');
+    cfEle.innerText = addDollar(profile.cashFlow);
+
+    const expensesEle = getElement('#expenses');
+    expensesEle.innerText = addDollar(profile.totalExpenses);
+
+    const passiveIncome = getElement('#passive-income');
+    passiveIncome.innerText = addDollar(profile.passiveIncome);
+
+  };
+
   const drawPlayers = (game) => {
     const { players } = game;
     fetch('/api/player-info').then(res => res.json()).then(currentPlayer => {
@@ -79,11 +94,10 @@
       });
 
       drawInitialPositions(game);
-    })
-      .then(currentPlayer => highlightCurrentPlayer(game))
-      .then(activateDice)
-      .then(drawDice);
-    return game;
+      console.log(currentPlayer);
+      drawStatus(currentPlayer);
+    }).then(currentPlayer => highlightCurrentPlayer(game))
+      .then(activateDice);
   };
 
   const diceFaces = {
@@ -116,7 +130,7 @@
   };
 
   const drawDice = (game) => {
-    const { diceValue } = game;
+    const diceValue = Math.ceil(Math.random() * 6);
     const dice = document.querySelector('.dice');
     dice.replaceWith(html(diceFaces[diceValue]));
     return game;

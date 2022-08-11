@@ -1,9 +1,9 @@
 const { Game } = require('../../src/models/game');
 const assert = require('assert');
+const professions = require('../../data/professions.json');
 
 describe('Game', () => {
   const colors = ['a', 'b', 'c', 'd', 'e', 'f'];
-  const professions = colors.reverse();
   const game = new Game(colors, professions);
 
   it('Should assign a game id', () => {

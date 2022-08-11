@@ -81,6 +81,7 @@ class Game {
       getNextAttrib(this.#players, 'profession', this.#professions)
     );
 
+    player.createProfile();
     this.#players.push(player);
   }
 

@@ -1,3 +1,4 @@
+const { Profile } = require('./profile.js');
 class Player {
   #username;
   #color;
@@ -26,13 +27,17 @@ class Player {
     this.#profession = profession;
   }
 
+  createProfile() {
+    this.#profile = new Profile(this.#profession);
+  }
+
   get details() {
     return {
       username: this.#username,
       role: this.#role,
       color: this.#color,
       profession: this.#profession,
-      profile: this.#profile,
+      profile: this.#profile.details,
       isRolledDice: this.#isRolledDice
     };
   }
