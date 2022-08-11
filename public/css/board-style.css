@@ -102,14 +102,14 @@ a {
   align-items: center;
 }
 
-.ratrace-tile img{
+.ratrace-tile img {
   width: 45%;
   aspect-ratio: auto;
 }
 
 .card-deck img {
   width: 50%;
-  aspect-ratio: auto;  
+  aspect-ratio: auto;
 }
 
 .deal {
@@ -269,6 +269,7 @@ a {
   grid-row: 2/6;
   grid-column: 2/8;
 }
+
 /* grid element positions end */
 
 .game-area {
@@ -279,9 +280,13 @@ a {
   grid-template-rows: repeat(8, 1fr);
   justify-content: stretch;
 }
+
 /* game area element positions  START*/
 
-.card-deck, #players, #game-stats, #logs {
+.card-deck,
+#players,
+#game-stats,
+#logs {
   border: 0.2vmax solid;
   border-radius: 0.5vmax;
 }
@@ -299,7 +304,7 @@ a {
   border-color: var(--market-border);
 }
 
-#small-deal{
+#small-deal {
   grid-row: 7/9;
   grid-column: 1;
   background-color: var(--deal-bg);
@@ -332,6 +337,9 @@ a {
   background-color: whitesmoke;
   border-color: black;
   margin: 1vmax 0.5vmax;
+  display: flex;
+  flex-direction: column;
+  gap: 1vmax;
 }
 
 #game-stats {

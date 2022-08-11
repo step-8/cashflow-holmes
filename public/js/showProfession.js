@@ -1,12 +1,4 @@
 (function () {
-  const getElement = (selector) => {
-    return document.querySelector(selector);
-  };
-
-  const addDollar = (text) => {
-    return `$ ${text}`;
-  };
-
   const drawLiabilites = (profession) => {
     const liabilityIds = [
       ['#home-mortgage', 'homeMortgage'],

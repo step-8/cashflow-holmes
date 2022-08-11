@@ -54,3 +54,11 @@ const showProfessions = () => {
   const url = '/show-profession';
   window.location.replace(`${origin}${url}`);
 };
+
+const getElement = (selector) => {
+  return document.querySelector(selector);
+};
+
+const addDollar = (text) => {
+  return `$ ${text}`;
+};

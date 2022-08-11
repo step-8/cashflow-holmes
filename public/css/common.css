@@ -143,3 +143,22 @@ a {
   padding-left: 5vmax;
   padding-top: 5vmax;
 }
+
+.icon {
+  border-radius: 50%;
+  aspect-ratio: 1;
+  width: 2.5em;
+  border: var(--def-border);
+}
+
+.name {
+  aspect-ratio: 8;
+  width: 30%;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  text-align: center;
+}
