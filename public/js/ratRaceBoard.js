@@ -8,8 +8,7 @@
   };
 
   const rollDice = () => {
-    fetch('/change-turn')
-      .then(console.log('Here'));
+    fetch('/roll-dice');
     return;
   };
 
@@ -17,13 +16,22 @@
     fetch('/get-user-info')
       .then(res => res.json())
       .then(userInfo => {
-        if (userInfo.username === game.currentPlayer.username) {
-          const dice = document.querySelector('#dice-box');
+        const { username, isRolledDice } = game.currentPlayer;
+        const dice = document.querySelector('#dice-box');
+
+        if (userInfo.username === username && !isRolledDice) {
           dice.style.opacity = 1;
           dice.style.border = '2px solid black';
+          dice.style.zIndex = 0;
           dice.onclick = rollDice;
+        } else {
+          dice.style.opacity = 0.5;
+          dice.style.border = '2px dashed black';
+          dice.onclick = null;
         }
+
       });
+    return game;
   };
 
   const createIconEle = ({ color }) => {
@@ -44,31 +52,6 @@
     });
   };
 
-  // players.forEach(player => {
-  //   const { username, color } = player;
-  //   let name = username;
-
-  //   if (currentPlayer.username === username) {
-  //     name = username + '(you)';
-  //   }
-  //   const playerTemplate = ['div', { className: 'row', id: username },
-  //     ['div', { className: `${color} icon` }],
-  //     ['div', { className: 'name' }, name]
-  //   ];
-  //   const playerEle = html(playerTemplate);
-  //   playersEle.append(playerEle);
-  // });
-  // })
-  // .then(__ => highlightCurrentPlayer(game))
-
-  // players.forEach(player => {
-  //   const playerEle = createIconEle(player);
-  //   initialPosEle.append(playerEle);
-  // });
-  // };
-
-  // return game;
-  // };
 
   const createPlayerEle = (player, playerName) => {
     const { username, color } = player;
@@ -96,8 +79,11 @@
       });
 
       drawInitialPositions(game);
-    }).then(currentPlayer => highlightCurrentPlayer(game))
-      .then(activateDice);
+    })
+      .then(currentPlayer => highlightCurrentPlayer(game))
+      .then(activateDice)
+      .then(drawDice);
+    return game;
   };
 
   const diceFaces = {
@@ -130,7 +116,7 @@
   };
 
   const drawDice = (game) => {
-    const diceValue = Math.ceil(Math.random() * 6);
+    const { diceValue } = game;
     const dice = document.querySelector('.dice');
     dice.replaceWith(html(diceFaces[diceValue]));
     return game;

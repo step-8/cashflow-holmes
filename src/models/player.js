@@ -4,12 +4,18 @@ class Player {
   #profession;
   #role;
   #profile;
+  #isRolledDice;
   constructor(username, role) {
     this.#username = username;
     this.#role = role;
     this.#color = null;
     this.#profession = null;
     this.#profile = null;
+    this.#isRolledDice = false;
+  }
+
+  set rolledDice(status) {
+    this.#isRolledDice = status;
   }
 
   assignColor(color) {
@@ -26,7 +32,8 @@ class Player {
       role: this.#role,
       color: this.#color,
       profession: this.#profession,
-      profile: this.#profile
+      profile: this.#profile,
+      isRolledDice: this.#isRolledDice
     };
   }
 }

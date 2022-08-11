@@ -52,14 +52,14 @@ describe('Game', () => {
     game.addPlayer('p6');
     assert.ok(game.isLobbyFull());
   });
-  
+
   it('Should give false if the lobby is not full ', () => {
     const game = new Game(colors, professions);
     game.assignGameID(1234);
     game.addPlayer('p1');
     assert.ok(!game.isLobbyFull());
   });
-  
+
   it('Should give the current player', () => {
     const game = new Game(colors, professions);
     game.assignGameID(1234);
@@ -77,5 +77,15 @@ describe('Game', () => {
     game.start();
     game.changeTurn();
     assert.ok(game.state.currentPlayer.username === 'p2');
+  });
+
+  it('Should change the rolled dice of current player to true', () => {
+    const game = new Game(colors, professions);
+    game.assignGameID(1234);
+    game.addPlayer('p1', 'host');
+    game.addPlayer('p2', 'guest');
+    game.start();
+    game.rollDice();
+    assert.ok(game.state.currentPlayer.isRolledDice);
   });
 });

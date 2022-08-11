@@ -32,16 +32,23 @@ class Game {
     this.#status = gameStatus.waiting;
     this.#currentPlayerIndex = null;
     this.#deck = {};
-    this.#diceValue = null;
+    this.#diceValue = 1;
   }
 
   rollDice() {
     this.#diceValue = Math.ceil(Math.random() * 6);
+    const currentPlayer = this.#players[this.#currentPlayerIndex];
+    currentPlayer.rolledDice = true;
+  }
+
+  resetDice() {
+    const currentPlayer = this.#players[this.#currentPlayerIndex];
+    currentPlayer.rolledDice = false;
   }
 
   start() {
     this.#status = gameStatus.started;
-    this.#currentPlayerIndex=0;
+    this.#currentPlayerIndex = 0;
   }
 
   cancel() {
@@ -87,7 +94,8 @@ class Game {
 
   changeTurn() {
     ++this.#currentPlayerIndex;
-    this.#currentPlayerIndex= this.#currentPlayerIndex % this.#players.length;
+    this.#currentPlayerIndex = this.#currentPlayerIndex % this.#players.length;
+    this.resetDice();
   }
 
   isValidGameID(gameID) {
