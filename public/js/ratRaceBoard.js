@@ -52,6 +52,42 @@
     return game;
   };
 
+  const diceFaces = {
+    '1': ['div', { className: 'dice' }, ['div', { className: 'dot one-1' }]],
+    '2': ['div', { className: 'dice' },
+      ['div', { className: 'dot two-1' }],
+      ['div', { className: 'dot two-2' }]],
+    '3': ['div', { className: 'dice' },
+      ['div', { className: 'dot three-1' }],
+      ['div', { className: 'dot three-2' }],
+      ['div', { className: 'dot three-3' }]],
+    '4': ['div', { className: 'dice' },
+      ['div', { className: 'dot four-1' }],
+      ['div', { className: 'dot four-2' }],
+      ['div', { className: 'dot four-3' }],
+      ['div', { className: 'dot four-4' }]],
+    '5': ['div', { className: 'dice' },
+      ['div', { className: 'dot five-1' }],
+      ['div', { className: 'dot five-2' }],
+      ['div', { className: 'dot five-3' }],
+      ['div', { className: 'dot five-4' }],
+      ['div', { className: 'dot five-5' }]],
+    '6': ['div', { className: 'dice' },
+      ['div', { className: 'dot six-1' }],
+      ['div', { className: 'dot six-2' }],
+      ['div', { className: 'dot six-3' }],
+      ['div', { className: 'dot six-4' }],
+      ['div', { className: 'dot six-5' }],
+      ['div', { className: 'dot six-6' }]],
+  };
+
+  const drawDice = (game) => {
+    const diceValue = Math.ceil(Math.random() * 6);
+    const dice = document.querySelector('.dice');
+    dice.replaceWith(html(diceFaces[diceValue]));
+    return game;
+  };
+
   const main = () => {
     fetch('/api/game').then(res => res.json())
       .then(drawPlayers);

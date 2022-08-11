@@ -84,9 +84,14 @@ a {
   border: var(--def-border);
   border-style: dashed;
   width: 85%;
+  min-width: 70px;
   align-self: center;
   aspect-ratio: 2.2;
   opacity: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
 
 #board-toggle {
@@ -407,3 +412,70 @@ a {
   grid-row: 6;
   grid-column: 1/7;
 }
+
+/* dice box positions  Start*/
+#dice-box .dice {
+  width: 65px;
+  aspect-ratio: 1;
+  border: var(--def-border);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dot {
+  position: absolute;
+  width: 0.7vmax;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.two-1,
+.three-1,
+.four-1,
+.five-1,
+.six-1 {
+  top: 15%;
+  left: 15%;
+}
+
+.four-3,
+.five-3,
+.six-4 {
+  left: 15%;
+  bottom: 15%;
+}
+
+.one-1,
+.three-2,
+.five-5 {
+  position: initial;
+}
+
+.four-2,
+.five-2,
+.six-3 {
+  top: 15%;
+  right: 15%;
+}
+
+.two-2,
+.three-3,
+.four-4,
+.five-4,
+.six-6 {
+  bottom: 15%;
+  right: 15%;
+}
+
+.six-2 {
+  left: 15%;
+}
+
+.six-5 {
+  right: 15%;
+}
+
+/* dice box positions  End*/
