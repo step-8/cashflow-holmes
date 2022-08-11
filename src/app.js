@@ -1,11 +1,11 @@
 const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
-const { registerRouter } = require('./routers/register.js');
-const { loginRouter } = require('./routers/login.js');
+const { registerRouter, loginRouter } = require('./routers/authRouter.js');
 const { readCredentials } = require('./helpers/readCredentials.js');
 const { protectedRoutes } = require('./middleware/protectedRouter.js');
 const { createGameRouter } = require('./routers/gameRouter.js');
+const { authenticate } = require('./handlers/authHandlers.js');
 
 const createApp = (config, session) => {
   const app = express();
@@ -17,26 +17,12 @@ const createApp = (config, session) => {
   }
   app.use(cookieParser());
   app.use(express.urlencoded({ extended: true }));
-
-  app.use(protectedRoutes(createGameRouter(express.Router())));
-  app.use(['/host', '/logout'], (req, res) => {
-    res.status(401);
-    res.end();
-  });
-
-
-  app.use('/register', registerRouter(express.Router(), config));
-  app.use('/login', loginRouter(express.Router(), config));
-
   app.use(express.static(config.PUBLIC));
 
-  app.get('/', (req, res, next) => {
-    if (!req.session.username) {
-      res.redirect('/login');
-      return;
-    }
-    next();
-  });
+  app.use(['/register', '/login'], authenticate);
+  app.use('/register', registerRouter(express.Router(), config));
+  app.use('/login', loginRouter(express.Router(), config));
+  app.use(protectedRoutes(createGameRouter(express.Router())));
 
   return app;
 };

@@ -406,4 +406,28 @@ const RAT_RACE_BOARD = `<html>
 
 </html>`;
 
-module.exports = { MAIN_MENU_PAGE, HOST_LOBBY, GUEST_LOBBY, PROFESSION_CARD, RAT_RACE_BOARD };
+const NOT_FOUND = `<html>
+
+<head>
+  <title>Cashflow - Login</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <div id="main-image">
+      <img src="images/cashflow-image-big.png" alt="Cashflow" title="Cashflow">
+    </div>
+    <div class="interaction-box">
+      <div>
+        <div>404</div>
+        <a href="/">Home</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>`;
+
+module.exports = { MAIN_MENU_PAGE, HOST_LOBBY, GUEST_LOBBY, PROFESSION_CARD, RAT_RACE_BOARD, NOT_FOUND };

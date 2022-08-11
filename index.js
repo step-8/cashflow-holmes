@@ -1,6 +1,6 @@
 const { createApp } = require('./src/app');
 const expressSession = require('express-session');
-const { persistCredentials } = require('./src/handlers/saveUserCredentials.js');
+const { persistCredentials } = require('./src/handlers/authHandlers.js');
 require('dotenv').config();
 
 const main = () => {

@@ -1,10 +1,9 @@
 const protectedRoutes = (gameRouter) => (req, res, next) => {
-  if (req.session.username) {
-    gameRouter(req, res, next);
+  if (!req.session.username) {
+    res.redirect('/login');
     return;
   }
-
-  next();
+  gameRouter(req, res, next);
 };
 
 module.exports = { protectedRoutes };

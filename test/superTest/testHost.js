@@ -21,7 +21,7 @@ describe('GET /host', () => {
   it('Should give 401 if not logged in', (done) => {
     request(createApp(config, session))
       .get('/host')
-      .expect(401, done);
+      .expect(302, done);
   });
 
   it('Should redirect to /host-lobby if logged in', (done) => {
