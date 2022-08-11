@@ -8,7 +8,8 @@
   };
 
   const rollDice = () => {
-    console.log('Rolling Dice');
+    fetch('/change-turn')
+      .then(console.log('Here'));
     return;
   };
 

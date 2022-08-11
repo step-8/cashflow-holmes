@@ -53,6 +53,12 @@ const rollDiceHandler = (req, res) => {
   res.end();
 };
 
+const changeTurnHandler = (req, res) => {
+  const { game } = req;
+  game.changeTurn();
+  res.end();
+};
+
 module.exports = {
   serveMainMenu,
   hostHandler,
@@ -63,5 +69,6 @@ module.exports = {
   gameBoardHandler,
   removeGameIdHandler,
   getUserInfoHandler,
-  rollDiceHandler
+  rollDiceHandler,
+  changeTurnHandler
 };
