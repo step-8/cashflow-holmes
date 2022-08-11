@@ -18,7 +18,7 @@ const joinHandler = (req, res, next) => {
       return;
     }
 
-    if (game.isValidGameID(+gameID)) {
+    if (game.isValidGameID(+gameID) && game.state.status !== 'cancelled') {
       req.session.gameID = gameID;
       res.sendStatus(200);
       return;

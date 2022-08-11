@@ -1,4 +1,4 @@
-function copyArray(source, array) {
+const copyArray = (source, array) => {
   let index = -1;
   const length = source.length;
 
@@ -7,9 +7,9 @@ function copyArray(source, array) {
     array[index] = source[index];
   }
   return array;
-}
+};
 
-function shuffle(array) {
+const shuffle = (array) => {
   const length = array == null ? 0 : array.length;
   if (!length) {
     return [];
@@ -24,6 +24,6 @@ function shuffle(array) {
     result[index] = value;
   }
   return result;
-}
+};
 
 module.exports = { shuffle };

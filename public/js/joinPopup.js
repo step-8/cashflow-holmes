@@ -8,10 +8,10 @@ const showInvalidMessage = (xhr) => {
     return;
   }
 
-  let message = 'Invalid Room id';
+  let message = 'Invalid Game id';
 
   if (xhr.status === 423) {
-    message = 'Room is full';
+    message = 'lobby is full';
   }
 
   if (xhr.status === 401) {
@@ -28,7 +28,7 @@ const redirectToLobby = () => {
   window.location = '/guest-lobby';
 };
 
-const joinRoom = (event) => {
+const joinGame = (event) => {
   event.preventDefault();
   const body = readFormData('#join-popup-form');
   const req = { method: 'post', url: '/join' };
@@ -40,9 +40,9 @@ const createJoinPopup = (event) => {
     ['div', { className: 'page-wrapper', id: 'page-wrapper' },
       ['div', { className: 'join-popup-wrapper', id: 'join-popup' },
         [
-          'form', { className: 'join-form', id: 'join-popup-form', onsubmit: (event) => joinRoom(event) },
-          ['input', { type: 'text', name: 'gameID', placeholder: 'Room id', autofocus: 'true', required: 'true', className: 'room-id' }],
-          ['input', { type: 'button', className: 'button', value: 'Enter', onclick: (event) => joinRoom(event) }],
+          'form', { className: 'join-form', id: 'join-popup-form', onsubmit: (event) => joinGame(event) },
+          ['input', { type: 'text', name: 'gameID', placeholder: 'Game id', autofocus: 'true', required: 'true', className: 'game-id' }],
+          ['input', { type: 'button', className: 'button', value: 'Enter', onclick: (event) => joinGame(event) }],
           ['button', { type: 'button', className: 'button', onclick: (event) => removePopup(event) }, 'Cancel']
         ]
       ]

@@ -25,11 +25,11 @@ describe('Join', () => {
   });
 
   describe('POST /join', () => {
-    it('Should send status code of 400 for invalid room id', (done) => {
+    it('Should send status code of 400 for invalid game id', (done) => {
       request(app)
         .post('/join')
         .set('Cookie', cookies.join(';'))
-        .send('roomId=12')
+        .send('gameID=12')
         .expect(400, done);
     });
   });
@@ -39,7 +39,7 @@ describe('Join', () => {
       request(app)
         .get('/guest-lobby')
         .set('Cookie', cookies.join(';'))
-        .expect(/Room Id :/)
+        .expect(/Game Id :/)
         .expect(200, done);
     });
   });

@@ -1,10 +1,5 @@
 const { HOST_LOBBY } = require('../utils/pages.js');
 
-const createGameID = () => {
-  const date = new Date();
-  return date.getTime() % 10000;
-};
-
 const hostLobbyHandler = (req, res) => {
   if (req.session.gameID) {
     res.send(HOST_LOBBY);
@@ -12,10 +7,11 @@ const hostLobbyHandler = (req, res) => {
     return;
   }
 
-  const gameID = createGameID();
+  req.games.newGame();
+  const gameID = req.games.latestGameID;
+
   req.session.gameID = gameID;
 
-  req.games.newGame(gameID);
   const game = req.games.getGame(gameID);
 
   const username = req.session.username;

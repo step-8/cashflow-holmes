@@ -39,8 +39,8 @@
       return;
     }
 
-    const roomIdEle = document.querySelector('.room-id');
-    roomIdEle.innerText = `Room Id : ${gameID}`;
+    const gameIdEle = document.querySelector('.game-id');
+    gameIdEle.innerText = `Game Id : ${gameID}`;
     const playersElement = document.querySelector('#players');
     playersElement.innerText = '';
 

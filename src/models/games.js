@@ -4,16 +4,23 @@ class Games {
   #colors;
   #professions;
   #games;
+  #latestGameID;
   constructor(colors, professions) {
     this.#colors = colors;
     this.#professions = professions;
+    this.#latestGameID = 0;
     this.#games = {};
   }
 
-  newGame(gameID) {
+  get latestGameID() {
+    return this.#latestGameID;
+  }
+
+  newGame() {
+    this.#latestGameID++;
     const game = new Game(this.#colors, this.#professions);
-    game.assignGameID(gameID);
-    this.#games[gameID] = game;
+    game.assignGameID(this.#latestGameID);
+    this.#games[this.#latestGameID] = game;
   }
 
   endGame(gameID) {
