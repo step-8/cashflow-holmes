@@ -86,6 +86,7 @@ a {
   width: 85%;
   align-self: center;
   aspect-ratio: 2.2;
+  opacity: 0.5;
 }
 
 #board-toggle {
