@@ -42,6 +42,7 @@
   const drawInitialPositions = (game) => {
     const { players } = game;
     const initialPosEle = getElement('#initial-positions');
+    initialPosEle.innerText = '';
 
     const startEle = html(['div', { className: 'start' }, 'Start']);
     initialPosEle.append(startEle);
@@ -87,6 +88,7 @@
     const { players } = game;
     fetch('/api/player-info').then(res => res.json()).then(currentPlayer => {
       const playersEle = getElement('#players');
+      playersEle.innerText = '';
 
       players.forEach(player => {
         const playerEle = createPlayerEle(player, currentPlayer.username);
@@ -94,7 +96,6 @@
       });
 
       drawInitialPositions(game);
-      console.log(currentPlayer);
       drawStatus(currentPlayer);
     }).then(currentPlayer => highlightCurrentPlayer(game))
       .then(activateDice)
@@ -138,8 +139,10 @@
   };
 
   const main = () => {
-    fetch('/api/game').then(res => res.json())
-      .then(drawPlayers);
+    setInterval(() => {
+      fetch('/api/game').then(res => res.json())
+        .then(drawPlayers);
+    }, 200);
   };
 
   window.onload = main;
