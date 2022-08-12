@@ -442,6 +442,13 @@ a {
   justify-content: space-around;
 }
 
+#main-card .actions-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
 #main-card .actions .action-btn {
   width: 20%;
   height: 80%;

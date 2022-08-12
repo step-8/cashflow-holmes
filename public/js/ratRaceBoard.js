@@ -43,8 +43,7 @@
   const decideCard = (game) => {
     fetch('/card/card-type')
       .then(res => res.json())
-      .then(drawDeals)
-      .then(card => fetch('/change-turn'));
+      .then(drawDeals);
     return game;
   };
 
@@ -131,18 +130,27 @@
 
   const createActions = (family, type) => {
     const actionTexts = actions[family][type];
-    return actionTexts.map(action => {
+    return html(['div', { className: 'actions-wrapper' }, ...actionTexts.map(action => {
       return ['div',
         {
           className: 'button action-btn', id: `action-${action.toLowerCase()}`
         },
         action
       ];
-    });
+    })]);
+  };
+
+  const createCardTemplate = (currentCard) => {
+    return ['div', {},
+      ['div', { className: 'card-heading' }, currentCard.heading || ''],
+      ['div', { className: 'description' }, currentCard.description || ''],
+      ['div', { className: 'rule' }, currentCard.rule || ''],
+      ['div', { className: 'actions' }]
+    ];
   };
 
   const drawCard = (game) => {
-    const { currentCard } = game;
+    const { currentCard, currentPlayer } = game;
     const cardEle = getElement('#main-card');
     if (currentCard === 'deals') {
       return;
@@ -150,6 +158,7 @@
 
     if (!currentCard) {
       cardEle.innerHTML = '';
+      return;
     }
 
     let { family } = currentCard;
@@ -158,17 +167,23 @@
       family = 'deal';
     }
 
-    const cardTemplate = ['div', {},
-      ['div', { className: 'card-heading' }, currentCard.heading],
-      ['div', { className: 'description' }, currentCard.description],
-      ['div', { className: 'rule' }, currentCard.rule || ''],
-      ['div', { className: 'actions' }, ...createActions(family, currentCard.type)]
-    ];
-
+    const cardTemplate = createCardTemplate(currentCard);
     const newCard = html(cardTemplate);
     newCard.classList.add(family);
     newCard.id = 'main-card';
     cardEle.replaceWith(newCard);
+
+    let actions = null;
+    fetch('/get-user-info')
+      .then(res => res.json())
+      .then(userInfo => {
+        const { username } = userInfo;
+        if (currentPlayer.username === username) {
+          actions = createActions(family, currentCard.type);
+          console.log(getElement('.actions'));
+          getElement('.actions').append(actions);
+        }
+      });
   };
 
   const drawPlayers = (game) => {
