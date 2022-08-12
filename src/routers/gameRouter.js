@@ -4,6 +4,8 @@ const { hostLobbyHandler } = require('../handlers/hostLobbyHandler.js');
 const { injectGame } = require('../handlers/injectGame.js');
 const { leaveLobbyHandler } = require('../handlers/leaveLobbyHandler.js');
 const { logoutHandler } = require('../handlers/logout.js');
+const { NOT_FOUND } = require('../utils/pages.js');
+const { cardTypeHandler } = require('../handlers/cardHandlers.js');
 const {
   gameBoardHandler,
   guestLobbyHandler,
@@ -15,9 +17,8 @@ const {
   removeGameIdHandler,
   getUserInfoHandler,
   rollDiceHandler,
-  changeTurnHandler
+  changeTurnHandler,
 } = require('../handlers/gameHandlers.js');
-const { NOT_FOUND } = require('../utils/pages.js');
 
 const createGameRouter = (router) => {
   router.use(injectGame());
@@ -37,7 +38,7 @@ const createGameRouter = (router) => {
   router.get('/game-board', gameBoardHandler);
   router.get('/remove-gameid', removeGameIdHandler);
   router.use('/logout', logoutHandler);
-
+  router.use('/card/card-type', cardTypeHandler);
   router.use(['/login', '/register'], (req, res) => res.redirect('/'));
   router.use((req, res) => {
     res.status(404);

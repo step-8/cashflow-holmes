@@ -7,8 +7,50 @@
     return game;
   };
 
+  const cardEvent = (type) => {
+    return type;
+  };
+
+  const chooseDealType = () => {
+    const mainCard = getElement('#main-card');
+    mainCard.innerText = '';
+    const description = html(['div', { className: 'description' }, 'Choose Big or Small deal ?']);
+    const cardTemplate =
+      [
+        'div', { className: 'actions' },
+        ['div', { className: 'action-btn button', id: 'small-deal', onclick: (event) => cardEvent('small-deal') }, 'Small Deal'],
+        ['div', { className: 'action-btn button', id: 'big-deal', onclick: (event) => cardEvent('big-deal') }, 'Big Deal']
+      ];
+
+    const card = html(cardTemplate);
+    mainCard.append(description);
+    mainCard.append(card);
+  };
+
+  const drawDeals = (card) => {
+    const { type } = card;
+    if (type === 'deals') {
+      chooseDealType();
+      return card;
+    }
+    cardEvent(type);
+    return card;
+  };
+
+  const decideCard = (game) => {
+    fetch('/card/card-type')
+      .then(res => res.json())
+      .then(drawDeals)
+      .then(card => fetch('/change-turn'));
+    return game;
+  };
+
   const rollDice = () => {
-    fetch('/roll-dice').then(res => res).then(fetch('/change-turn'));
+    fetch('/roll-dice')
+      .then(res => res)
+      .then(fetch('/api/game')
+        .then(res => res.json())
+        .then(decideCard));
     return;
   };
 
@@ -171,6 +213,7 @@
     });
     return game;
   };
+
 
   const main = () => {
     setInterval(() => {

@@ -411,7 +411,7 @@ const RAT_RACE_BOARD = `<html>
 const NOT_FOUND = `<html>
 
 <head>
-  <title>Cashflow - Login</title>
+  <title>Not Found</title>
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/auth.css">
 </head>
