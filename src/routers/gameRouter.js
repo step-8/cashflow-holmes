@@ -17,6 +17,7 @@ const {
   rollDiceHandler,
   changeTurnHandler
 } = require('../handlers/gameHandlers.js');
+const { NOT_FOUND } = require('../utils/pages.js');
 
 const createGameRouter = (router) => {
   router.use(injectGame());
@@ -38,6 +39,10 @@ const createGameRouter = (router) => {
   router.use('/logout', logoutHandler);
 
   router.use(['/login', '/register'], (req, res) => res.redirect('/'));
+  router.use((req, res) => {
+    res.status(404);
+    res.end(NOT_FOUND);
+  });
   return router;
 };
 

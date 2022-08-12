@@ -15,10 +15,6 @@ body {
   width: fit-content;
 }
 
-.heading {
-  font-size: 4.5vmax;
-}
-
 form {
   display: flex;
   flex-direction: column;

@@ -40,4 +40,11 @@ describe('GET /', () => {
       .expect(200, done);
   });
 
+  it('Should show not found page when url is not found', (done) => {
+    req
+      .get('/not')
+      .set('Cookie', cookie.join(';'))
+      .expect(/Page not found/)
+      .expect(404, done);
+  });
 });

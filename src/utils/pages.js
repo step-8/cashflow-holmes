@@ -420,9 +420,10 @@ const NOT_FOUND = `<html>
       <img src="images/cashflow-image-big.png" alt="Cashflow" title="Cashflow">
     </div>
     <div class="interaction-box">
-      <div>
-        <div>404</div>
-        <a href="/">Home</a>
+      <div class="not-found-wrapper">
+        <div class="heading">404</div>
+        <div class="heading">Page not found</div>
+        <div class="home-button"><a href="/">Home</a></div>
       </div>
     </div>
   </div>
