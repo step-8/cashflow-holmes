@@ -8,7 +8,7 @@
   };
 
   const rollDice = () => {
-    fetch('/roll-dice');
+    fetch('/roll-dice').then(res => res).then(fetch('/change-turn'));
     return;
   };
 
