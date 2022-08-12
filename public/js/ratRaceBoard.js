@@ -9,8 +9,7 @@
 
   const cardEvent = (type) => {
     fetch(`/card/${type}`)
-      .then(res => res.json())
-      .then(drawCard);
+      .then(res => res.json());
     return type;
   };
 
@@ -141,8 +140,13 @@
     });
   };
 
-  const drawCard = (currentCard) => {
+  const drawCard = (game) => {
+    const { currentCard } = game;
     const cardEle = getElement('#main-card');
+    if (currentCard === 'deals') {
+      return;
+    }
+
     if (!currentCard) {
       cardEle.innerHTML = '';
     }
@@ -180,7 +184,8 @@
       drawStatus(currentPlayer);
     }).then(__ => highlightCurrentPlayer(game))
       .then(activateDice)
-      .then(drawDice);
+      .then(drawDice)
+      .then(drawCard);
     return game;
   };
 

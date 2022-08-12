@@ -3,6 +3,7 @@ const cardTypeHandler = (req, res) => {
   const { currentPlayer, ratRace } = game.state;
   const { currentPosition } = currentPlayer;
   const type = ratRace.getCardType(currentPosition);
+  game.currentCard = 'deals';
   res.json({ type });
 };
 
