@@ -25,6 +25,7 @@ class Game {
   #diceValue;
   #currentPlayerIndex;
   #ratRace;
+
   constructor(colors, professions) {
     this.#gameID = null;
     this.#colors = shuffle(colors);
@@ -41,6 +42,7 @@ class Game {
     this.#diceValue = Math.ceil(Math.random() * 6);
     const currentPlayer = this.#players[this.#currentPlayerIndex];
     currentPlayer.rolledDice = true;
+    this.#moveCurrentPlayer(this.#diceValue);
   }
 
   resetDice() {
@@ -101,6 +103,12 @@ class Game {
     this.resetDice();
   }
 
+  #moveCurrentPlayer(steps) {
+    this.#players[this.#currentPlayerIndex].move(steps);
+    // Adding change turn, should be removed after card events 
+    // this.changeTurn();
+  }
+
   isValidGameID(gameID) {
     return this.#gameID === gameID;
   }
@@ -121,9 +129,8 @@ class Game {
   }
 
   get state() {
-    const currentPlayer = this.currentPlayer;
     return {
-      currentPlayer,
+      currentPlayer: this.currentPlayer,
       status: this.#status,
       gameID: this.#gameID,
       players: this.allPlayerDetails,

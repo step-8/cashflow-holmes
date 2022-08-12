@@ -86,6 +86,7 @@ describe('Game', () => {
     game.addPlayer('p2', 'guest');
     game.start();
     game.rollDice();
+
     assert.ok(game.state.currentPlayer.isRolledDice);
   });
 });

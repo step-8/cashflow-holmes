@@ -149,6 +149,7 @@ a {
   aspect-ratio: 1;
   width: 2.5em;
   border: var(--def-border);
+  z-index: 1;
 }
 
 .name {

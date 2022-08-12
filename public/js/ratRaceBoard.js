@@ -18,7 +18,6 @@
       .then(userInfo => {
         const { username, isRolledDice } = game.currentPlayer;
         const dice = document.querySelector('#dice-box');
-
         if (userInfo.username === username && !isRolledDice) {
           dice.style.opacity = 1;
           dice.style.border = '2px solid black';
@@ -34,23 +33,18 @@
     return game;
   };
 
-  const createIconEle = ({ color }) => {
-    const iconTemplate = ['div', { className: `${color} icon` }];
+  const createIconEle = ({ color, username }) => {
+    const iconTemplate = ['div', { className: `${color} icon`, id: `icon-${username}` }];
     return html(iconTemplate);
   };
 
   const drawInitialPositions = (game) => {
     const { players } = game;
-    const initialPosEle = getElement('#initial-positions');
-    initialPosEle.innerText = '';
+    // const initialPosEle = getElement('#initial-positions');
 
     const startEle = html(['div', { className: 'start' }, 'Start']);
     initialPosEle.append(startEle);
 
-    players.forEach(player => {
-      const playerEle = createIconEle(player);
-      initialPosEle.append(playerEle);
-    });
   };
 
   const createPlayerEle = (player, playerName) => {
@@ -95,11 +89,11 @@
         playersEle.append(playerEle);
       });
 
-      drawInitialPositions(game);
       drawStatus(currentPlayer);
-    }).then(currentPlayer => highlightCurrentPlayer(game))
+    }).then(__ => highlightCurrentPlayer(game))
       .then(activateDice)
       .then(drawDice);
+    return game;
   };
 
   const diceFaces = {
@@ -138,11 +132,29 @@
     return game;
   };
 
+  const drawPlayerPosition = ({ players }) => {
+    players.forEach((player) => {
+      const { username, currentPosition } = player;
+      let playerIcon = document.querySelector(`#icon-${username}`);
+
+      if (playerIcon) {
+        playerIcon.remove();
+      }
+
+      playerIcon = createIconEle(player);
+      const boardTile = document.querySelector(`#rat-tile-${currentPosition}`);
+      boardTile.appendChild(playerIcon);
+    });
+  };
+
   const main = () => {
+    fetch('/api/game').then(res => res.json())
+      .then(drawInitialPositions);
     setInterval(() => {
       fetch('/api/game').then(res => res.json())
-        .then(drawPlayers);
-    }, 200);
+        .then(drawPlayers)
+        .then(drawPlayerPosition);
+    }, 500);
   };
 
   window.onload = main;

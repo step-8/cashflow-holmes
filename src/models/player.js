@@ -6,6 +6,7 @@ class Player {
   #role;
   #profile;
   #isRolledDice;
+  #currentPosition;
   constructor(username, role) {
     this.#username = username;
     this.#role = role;
@@ -13,6 +14,7 @@ class Player {
     this.#profession = null;
     this.#profile = null;
     this.#isRolledDice = false;
+    this.#currentPosition = 0;
   }
 
   set rolledDice(status) {
@@ -31,14 +33,22 @@ class Player {
     this.#profile = new Profile(this.#profession);
   }
 
+  move(steps) {
+    this.#currentPosition = (this.#currentPosition + steps) % 25;
+    if (this.#currentPosition === 0) {
+      this.#currentPosition = 1;
+    }
+  }
+
   get details() {
     return {
       username: this.#username,
       role: this.#role,
       color: this.#color,
-      profession: this.#profession,
+      profession: {...this.#profession},
       profile: this.#profile.details,
-      isRolledDice: this.#isRolledDice
+      isRolledDice: this.#isRolledDice,
+      currentPosition: this.#currentPosition
     };
   }
 }
