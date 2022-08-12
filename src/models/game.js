@@ -25,6 +25,7 @@ class Game {
   #diceValue;
   #currentPlayerIndex;
   #ratRace;
+  #currentCard;
 
   constructor(colors, professions) {
     this.#gameID = null;
@@ -36,6 +37,7 @@ class Game {
     this.#currentPlayerIndex = null;
     this.#diceValue = 1;
     this.#ratRace = new RatRace(deck);
+    this.#currentCard = null;
   }
 
   rollDice() {
@@ -117,6 +119,10 @@ class Game {
     return this.#maxPlayers === this.#players.length;
   }
 
+  set currentCard(card) {
+    this.#currentCard = card;
+  }
+
   get currentPlayer() {
     if (this.#currentPlayerIndex === null) {
       return null;
@@ -135,8 +141,8 @@ class Game {
       gameID: this.#gameID,
       players: this.allPlayerDetails,
       diceValue: this.#diceValue,
-      ratRace: this.#ratRace,
-      currentCard: this.#ratRace.getCard('market')
+      currentCard: this.#currentCard,
+      ratRace: this.#ratRace
     };
   }
 }

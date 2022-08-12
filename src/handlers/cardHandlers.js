@@ -6,4 +6,12 @@ const cardTypeHandler = (req, res) => {
   res.json({ type });
 };
 
-module.exports = { cardTypeHandler };
+const serveCard = (req, res) => {
+  const { game } = req;
+  const { type } = req.params;
+  const card = game.state.ratRace.getCard(type);
+  game.currentCard = card;
+  res.json(card);
+};
+
+module.exports = { cardTypeHandler, serveCard };

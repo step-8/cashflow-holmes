@@ -8,6 +8,9 @@
   };
 
   const cardEvent = (type) => {
+    fetch(`/card/${type}`)
+      .then(res => res.json())
+      .then(drawCard);
     return type;
   };
 
@@ -18,8 +21,8 @@
     const cardTemplate =
       [
         'div', { className: 'actions' },
-        ['div', { className: 'action-btn button', id: 'small-deal', onclick: (event) => cardEvent('small-deal') }, 'Small Deal'],
-        ['div', { className: 'action-btn button', id: 'big-deal', onclick: (event) => cardEvent('big-deal') }, 'Big Deal']
+        ['div', { className: 'action-btn button', id: 'small-deal', onclick: (event) => cardEvent('smallDeal') }, 'Small Deal'],
+        ['div', { className: 'action-btn button', id: 'big-deal', onclick: (event) => cardEvent('bigDeal') }, 'Big Deal']
       ];
 
     const card = html(cardTemplate);
@@ -138,8 +141,7 @@
     });
   };
 
-  const drawCard = (game) => {
-    const { currentCard } = game;
+  const drawCard = (currentCard) => {
     const cardEle = getElement('#main-card');
     if (!currentCard) {
       cardEle.innerHTML = '';
@@ -178,8 +180,7 @@
       drawStatus(currentPlayer);
     }).then(__ => highlightCurrentPlayer(game))
       .then(activateDice)
-      .then(drawDice)
-      .then(drawCard);
+      .then(drawDice);
     return game;
   };
 
