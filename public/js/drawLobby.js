@@ -19,7 +19,7 @@
     errorMessageDiv.style.color = 'red';
 
     setTimeout(() => {
-      const req = {method: 'get', url: '/remove-gameid'};
+      const req = { method: 'get', url: '/remove-gameid' };
       xhrRequest(req, 200, redirectToMainMenu);
     }, 3000);
 
@@ -39,8 +39,6 @@
       return;
     }
 
-    const gameIdEle = document.querySelector('.game-id');
-    gameIdEle.innerText = `Game Id : ${gameID}`;
     const playersElement = document.querySelector('#players');
     playersElement.innerText = '';
 

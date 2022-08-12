@@ -16,8 +16,8 @@ const hostLobbyHandler = (req, res) => {
 
   const username = req.session.username;
   game.addPlayer(username, 'host');
-
-  res.send(HOST_LOBBY);
+  const hostHtml = HOST_LOBBY.replace('__GAME_ID__', gameID);
+  res.send(hostHtml);
   res.end();
 };
 

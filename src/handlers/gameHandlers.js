@@ -23,10 +23,12 @@ const cancelGameHandler = (req, res) => {
 
 const guestLobbyHandler = (req, res) => {
   const { game } = req;
+  const { gameID } = game.state;
   const { username } = req.session;
-  game.addPlayer(username, 'guest');
 
-  res.end(GUEST_LOBBY);
+  game.addPlayer(username, 'guest');
+  const guestHtml = GUEST_LOBBY.replace('__GAME_ID__', gameID);
+  res.end(guestHtml);
 };
 
 const showProfessionHandler = (req, res) => {
