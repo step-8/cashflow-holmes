@@ -26,3 +26,5 @@ npm install
 
 echo "Setting Commit Template..."
 git config --local commit.template .github/git_commit_template
+
+chmod u+x ./bin/new_test.sh
