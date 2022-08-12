@@ -111,6 +111,33 @@
 
   };
 
+  const actions = {
+    deal: {
+      realEstate: ['BUY', 'SKIP'],
+      stock: ['BUY', 'SKIP'],
+      MLM: ['ROLL', 'SKIP'],
+    },
+    market: {
+      realEstate: ['SELL', 'SKIP'],
+      lottery: ['ROLL']
+    },
+    doodad: {
+      doodad: ['OK']
+    }
+  };
+
+  const createActions = (family, type) => {
+    const actionTexts = actions[family][type];
+    return actionTexts.map(action => {
+      return ['div',
+        {
+          className: 'button action-btn', id: `action-${action.toLowerCase()}`
+        },
+        action
+      ];
+    });
+  };
+
   const drawCard = (game) => {
     const { currentCard } = game;
     const cardEle = getElement('#main-card');
@@ -118,17 +145,21 @@
       cardEle.innerHTML = '';
     }
 
+    let { family } = currentCard;
+    const deals = ['smallDeal', 'bigDeal'];
+    if (deals.includes(family)) {
+      family = 'deal';
+    }
+
     const cardTemplate = ['div', {},
       ['div', { className: 'card-heading' }, currentCard.heading],
       ['div', { className: 'description' }, currentCard.description],
-      ['div', { className: 'rule' }, currentCard.rule],
-      ['div', { className: 'actions' }, ['div', {
-        className: 'button action-btn'
-      }, 'OK']]
+      ['div', { className: 'rule' }, currentCard.rule || ''],
+      ['div', { className: 'actions' }, ...createActions(family, currentCard.type)]
     ];
 
     const newCard = html(cardTemplate);
-    newCard.classList.add(currentCard.family);
+    newCard.classList.add(family);
     newCard.id = 'main-card';
     cardEle.replaceWith(newCard);
   };
