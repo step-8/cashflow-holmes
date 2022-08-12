@@ -97,7 +97,8 @@
       console.log(currentPlayer);
       drawStatus(currentPlayer);
     }).then(currentPlayer => highlightCurrentPlayer(game))
-      .then(activateDice);
+      .then(activateDice)
+      .then(drawDice);
   };
 
   const diceFaces = {
@@ -130,7 +131,7 @@
   };
 
   const drawDice = (game) => {
-    const diceValue = Math.ceil(Math.random() * 6);
+    const { diceValue } = game;
     const dice = document.querySelector('.dice');
     dice.replaceWith(html(diceFaces[diceValue]));
     return game;
