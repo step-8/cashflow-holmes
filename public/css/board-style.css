@@ -458,7 +458,7 @@ a {
 #dice-box .dice {
   width: 65px;
   aspect-ratio: 1;
-  border: var(--def-border);
+  border: 2px solid black;
   position: relative;
   display: flex;
   align-items: center;

@@ -146,9 +146,19 @@
     return game;
   };
 
-  const drawPlayerPosition = ({ players }) => {
+  const drawPlayerPosition = (game) => {
+    const { players, currentPlayer } = game;
     players.forEach((player) => {
       const { username, currentPosition } = player;
+
+      if (currentPlayer.username === username) {
+        setTimeout(() => {
+          const playerIcon = document.querySelector(`#icon-${username}`);
+          const shadow = playerIcon.style.boxShadow;
+          playerIcon.style.boxShadow = shadow ? 'none' : '0px 0px 2px 4px red';
+        }, 100);
+      }
+
       let playerIcon = document.querySelector(`#icon-${username}`);
 
       if (playerIcon) {
@@ -159,13 +169,14 @@
       const boardTile = document.querySelector(`#rat-tile-${currentPosition}`);
       boardTile.appendChild(playerIcon);
     });
+    return game;
   };
 
   const main = () => {
     setInterval(() => {
       fetch('/api/game').then(res => res.json())
-        .then(drawPlayers)
-        .then(drawPlayerPosition);
+        .then(drawPlayerPosition)
+        .then(drawPlayers);
     }, 500);
   };
 
