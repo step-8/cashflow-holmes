@@ -34,9 +34,9 @@ class Player {
   }
 
   move(steps) {
-    this.#currentPosition = (this.#currentPosition + steps) % 25;
+    this.#currentPosition = (this.#currentPosition + steps) % 24;
     if (this.#currentPosition === 0) {
-      this.#currentPosition = 1;
+      this.#currentPosition = 24;
     }
   }
 
