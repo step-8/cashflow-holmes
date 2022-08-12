@@ -10,7 +10,9 @@
   };
 
   const redirectToMainMenu = () => {
-    window.location = '/';
+    const formEle = document.createElement('form');
+    formEle.action = '/';
+    formEle.submit();
   };
 
   const showCancelMessage = () => {
@@ -19,15 +21,15 @@
     errorMessageDiv.style.color = 'red';
 
     setTimeout(() => {
-      const req = { method: 'get', url: '/remove-gameid' };
-      xhrRequest(req, 200, redirectToMainMenu);
+      fetch('/remove-gameid')
+        .then(redirectToMainMenu);
     }, 3000);
 
     return;
   };
 
-  const drawLobby = (xhr) => {
-    const { gameID, players, status } = JSON.parse(xhr.response);
+  const drawLobby = (response) => {
+    const { gameID, players, status } = response;
 
     if (status === 'started') {
       showProfessions();
@@ -72,9 +74,10 @@
 
   const main = () => {
     setInterval(() => {
-      const req = { method: 'get', url: '/api/game' };
-      xhrRequest(req, 200, drawLobby);
-    }, 100);
+      fetch('/api/game')
+        .then(req => req.json())
+        .then(drawLobby);
+    }, 500);
   };
   window.onload = main;
 })();
