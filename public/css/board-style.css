@@ -403,13 +403,51 @@ a {
   grid-column: 1/7;
 }
 
+/* Card design starts */
+
 #main-card {
   grid-row: 2/6;
   grid-column: 2/6;
   margin: 1vmax;
   border-radius: 0.5vmax;
   border: 0.2vmax solid black;
+  padding: 0.5em;
 }
+
+#main-card .card-title {
+  font-size: 1.3vmax;
+  font-weight: 500;
+  width: 100%;
+  height: 20%;
+}
+
+#main-card .description {
+  width: 100%;
+  height: 30%;
+}
+
+#main-card .rule {
+  width: 100%;
+  height: 35%;
+}
+
+#main-card .actions {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: space-around;
+}
+
+#main-card .actions .action-btn {
+  width: 20%;
+  height: 80%;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card design ends */
 
 #message-space {
   grid-row: 6;

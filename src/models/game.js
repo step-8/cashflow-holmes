@@ -134,7 +134,8 @@ class Game {
       status: this.#status,
       gameID: this.#gameID,
       players: this.allPlayerDetails,
-      diceValue: this.#diceValue
+      diceValue: this.#diceValue,
+      currentCard: this.#ratRace.getCard('market')
     };
   }
 }
