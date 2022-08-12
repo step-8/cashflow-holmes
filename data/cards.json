@@ -1,0 +1,120 @@
+{
+  "smallDeal": [
+    {
+      "id": "smallDealRealEstate01",
+      "type": "realEstate",
+      "symbol": "2BR/1BA",
+      "heading": "House for Sale - 2BR/1BA",
+      "description": "Low down payment to pick up this 2/1 house. Owner/seller unexpectedly moving out of town. Right person will do well.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 50000,
+      "mortgage": 47000,
+      "downPayment": 3000,
+      "cashFlow": 100
+    },
+    {
+      "id": "smallDealRealEstate02",
+      "type": "realEstate",
+      "symbol": "3BR/1BA",
+      "heading": "House for Sale - 3BR/1BA",
+      "description": "Low down payment to pick up this 3/1 house. Owner/seller unexpectedly moving out of town. Right person will do well.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 75000,
+      "mortgage": 70000,
+      "downPayment": 5000,
+      "cashFlow": 300
+    },
+    {
+      "id": "smallDealStock01",
+      "type": "stock",
+      "symbol": "OK4U",
+      "heading": "Stock - OK4U Drug Co.",
+      "description": "Interest rates cripple share price of this long time maker of medicines.",
+      "rule": "Only you may buy as many shares as you want at this price.Everyone may sell at this price.",
+      "price": 5,
+      "range": [
+        5,
+        30
+      ]
+    },
+    {
+      "id": "smallDealMLM01",
+      "type": "MLM",
+      "heading": "Multi-Level Marketing Buy-in",
+      "description": "Company is looking to spread the reach of the newest venture.",
+      "rule": "If you choose to buy in pay $500. Every payday roll 1 die. Die=1-3, No returns. Die=4-6, Collect $500",
+      "cost": 500
+    }
+  ],
+  "bigDeal": [
+    {
+      "id": "bigDealRealEstate01",
+      "type": "realEstate",
+      "symbol": "4-Plex",
+      "heading": "4-Plex for sale",
+      "description": "Nice, well-maintained 4-Plex in good neighbourhood. Stable tenants, positive cash flow, minor repairs.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 225000,
+      "mortgage": 210000,
+      "downPayment": 15000,
+      "cashFlow": 700
+    },
+    {
+      "id": "bigDealRealEstate02",
+      "type": "realEstate",
+      "symbol": "4-Plex",
+      "heading": "4-Plex for sale",
+      "description": "Nice, well-maintained 4-Plex in good neighbourhood. Stable tenants, positive cash flow, minor repairs.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 225000,
+      "mortgage": 210000,
+      "downPayment": 15000,
+      "cashFlow": 700
+    }
+  ],
+  "market": [
+    {
+      "id": "marketBuyer01",
+      "type": "realEstate",
+      "heading": "Plex Buyer",
+      "symbol": "Plex",
+      "description": "Buyer offers $25,000 per unit for all units in any combination of duplexes, 4-plexes, or 8-plexes. Has own financing.",
+      "isCash": true,
+      "extraCash": 5000
+    },
+    {
+      "id": "marketBuyer02",
+      "type": "realEstate",
+      "heading": "Plex Buyer",
+      "symbol": "Plex",
+      "description": "Buyer offers $25,000 per unit for all units in any combination of duplexes, 4-plexes, or 8-plexes. Has own financing.",
+      "isCash": false,
+      "percent": 5
+    },
+    {
+      "id": "marketLottery01",
+      "type": "lottery",
+      "symbol": "OK4U",
+      "heading": "Stock - OK4U Drug Co.",
+      "description": "OK4U begins trail on possible life saving drug. Side effects are untested. Could change the world... if it works.",
+      "rule": "Cardholder rolls 1 die. Die=1-3,Double. Die=4-6,Half the stocks."
+    }
+  ],
+  "doodad": [
+    {
+      "id": "doodad01",
+      "type": "doodad",
+      "heading": "Child needs braces",
+      "cost": 4000,
+      "isMandatory": false,
+      "rule": "If you have a child"
+    },
+    {
+      "id": "doodad02",
+      "type": "doodad",
+      "heading": "New gym clothes",
+      "cost": 300,
+      "isMandatory": true
+    }
+  ]
+}

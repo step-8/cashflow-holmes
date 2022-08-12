@@ -1,6 +1,7 @@
-class Ratrace {
+class RatRace {
   #tiles;
-  constructor() {
+  #deck;
+  constructor(deck) {
     this.#tiles = {
       'deals': [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23],
       'payday': [6, 14],
@@ -10,6 +11,7 @@ class Ratrace {
       'downsized': [12],
       'baby': [20]
     };
+    this.#deck = deck;
   }
 
   getCardType(tilePosition) {
@@ -19,6 +21,14 @@ class Ratrace {
       }
     }
   }
+
+  getCard(type) {
+    const validTypes = ['smallDeal', 'bigDeal', 'market', 'doodad'];
+    if (validTypes.includes(type)) {
+      return this.#deck[type][0];
+    }
+    return;
+  }
 }
 
-module.exports = { Ratrace };
+module.exports = { RatRace };

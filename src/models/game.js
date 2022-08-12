@@ -1,5 +1,7 @@
 const { shuffle } = require('../utils/shuffle.js');
 const { Player } = require('./player.js');
+const deck = require('../../data/cards.json');
+const { RatRace } = require('./ratRace.js');
 
 const getNextAttrib = (players, type, attribs) => {
   const playersAttribs = players.map(player => player.details[type]);
@@ -22,7 +24,7 @@ class Game {
   #status;
   #diceValue;
   #currentPlayerIndex;
-  #deck;
+  #ratRace;
   constructor(colors, professions) {
     this.#gameID = null;
     this.#colors = shuffle(colors);
@@ -31,8 +33,8 @@ class Game {
     this.#players = [];
     this.#status = gameStatus.waiting;
     this.#currentPlayerIndex = null;
-    this.#deck = {};
     this.#diceValue = 1;
+    this.#ratRace = new RatRace(deck);
   }
 
   rollDice() {
