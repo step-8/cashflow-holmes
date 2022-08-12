@@ -15,15 +15,15 @@ class Profile {
     this.#passiveIncome = 0;
   }
 
-  calculateCashFlow() {
-    return this.calculateTotalIncome() - this.calculateTotalExpenses();
+  #calculateCashFlow() {
+    return this.#calculateTotalIncome() - this.#calculateTotalExpenses();
   }
 
-  calculateTotalIncome() {
-    return this.#income.salary;
+  #calculateTotalIncome() {
+    return this.#income.salary + this.#passiveIncome;
   }
 
-  calculateTotalExpenses() {
+  #calculateTotalExpenses() {
     let totalExpenses = 0;
 
     Object.values(this.#expenses).forEach(val => {
@@ -40,11 +40,11 @@ class Profile {
       expenses: this.#expenses,
       assets: this.#assets,
       liabilities: this.#liabilities,
-      totalIncome: this.calculateTotalIncome(),
-      totalExpenses: this.calculateTotalExpenses(),
-      cashFlow: this.calculateCashFlow(),
+      totalIncome: this.#calculateTotalIncome(),
+      totalExpenses: this.#calculateTotalExpenses(),
+      cashFlow: this.#calculateCashFlow(),
       passiveIncome: this.#passiveIncome,
-      cash: this.calculateTotalIncome() - this.calculateTotalExpenses() + this.#assets.savings
+      cash: this.#calculateCashFlow() + this.#assets.savings
     };
   }
 }
