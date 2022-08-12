@@ -72,15 +72,21 @@
   const drawCard = (game) => {
     const { currentCard } = game;
     const cardEle = getElement('#main-card');
+    if (!currentCard) {
+      cardEle.innerHTML = '';
+    }
+
     const cardTemplate = ['div', {},
       ['div', { className: 'card-heading' }, currentCard.heading],
       ['div', { className: 'description' }, currentCard.description],
       ['div', { className: 'rule' }, currentCard.rule],
-      ['div', { className: 'actions' }, 'OK']
+      ['div', { className: 'actions' }, ['div', {
+        className: 'button action-btn'
+      }, 'OK']]
     ];
 
     const newCard = html(cardTemplate);
-    newCard.classList.add(currentCard.type);
+    newCard.classList.add(currentCard.family);
     newCard.id = 'main-card';
     cardEle.replaceWith(newCard);
   };
