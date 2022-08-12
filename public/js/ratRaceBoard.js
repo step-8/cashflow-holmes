@@ -69,6 +69,22 @@
 
   };
 
+  const drawCard = (game) => {
+    const { currentCard } = game;
+    const cardEle = getElement('#main-card');
+    const cardTemplate = ['div', {},
+      ['div', { className: 'card-heading' }, currentCard.heading],
+      ['div', { className: 'description' }, currentCard.description],
+      ['div', { className: 'rule' }, currentCard.rule],
+      ['div', { className: 'actions' }, 'OK']
+    ];
+
+    const newCard = html(cardTemplate);
+    newCard.classList.add(currentCard.type);
+    newCard.id = 'main-card';
+    cardEle.replaceWith(newCard);
+  };
+
   const drawPlayers = (game) => {
     const { players } = game;
     fetch('/api/player-info').then(res => res.json()).then(currentPlayer => {
@@ -83,7 +99,8 @@
       drawStatus(currentPlayer);
     }).then(__ => highlightCurrentPlayer(game))
       .then(activateDice)
-      .then(drawDice);
+      .then(drawDice)
+      .then(drawCard);
     return game;
   };
 
