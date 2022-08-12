@@ -15,13 +15,14 @@
 
   const chooseDealType = () => {
     const mainCard = getElement('#main-card');
+    mainCard.className = 'deal';
     mainCard.innerText = '';
-    const description = html(['div', { className: 'description' }, 'Choose Big or Small deal ?']);
+    const description = html(['div', { className: 'card-heading' }, 'Choose Big or Small deal ?']);
     const cardTemplate =
       [
         'div', { className: 'actions' },
-        ['div', { className: 'action-btn button', id: 'small-deal', onclick: (event) => cardEvent('smallDeal') }, 'Small Deal'],
-        ['div', { className: 'action-btn button', id: 'big-deal', onclick: (event) => cardEvent('bigDeal') }, 'Big Deal']
+        ['div', { className: ' button action-btn', id: 'small-deal', onclick: (event) => cardEvent('smallDeal') }, 'Small'],
+        ['div', { className: ' button action-btn', id: 'big-deal', onclick: (event) => cardEvent('bigDeal') }, 'Big']
       ];
 
     const card = html(cardTemplate);

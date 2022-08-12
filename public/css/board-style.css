@@ -412,6 +412,9 @@ a {
   border-radius: 0.5vmax;
   border: 0.2vmax solid black;
   padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 #main-card .card-heading {
@@ -419,6 +422,7 @@ a {
   font-weight: 500;
   width: 100%;
   height: 20%;
+  text-align: center;
 }
 
 #main-card .description {
@@ -445,6 +449,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: white;
 }
 
 /* Card design ends */
