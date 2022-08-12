@@ -38,15 +38,6 @@
     return html(iconTemplate);
   };
 
-  const drawInitialPositions = (game) => {
-    const { players } = game;
-    // const initialPosEle = getElement('#initial-positions');
-
-    const startEle = html(['div', { className: 'start' }, 'Start']);
-    initialPosEle.append(startEle);
-
-  };
-
   const createPlayerEle = (player, playerName) => {
     const { username, color } = player;
     let name = username;
@@ -148,8 +139,6 @@
   };
 
   const main = () => {
-    fetch('/api/game').then(res => res.json())
-      .then(drawInitialPositions);
     setInterval(() => {
       fetch('/api/game').then(res => res.json())
         .then(drawPlayers)

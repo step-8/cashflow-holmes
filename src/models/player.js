@@ -45,7 +45,7 @@ class Player {
       username: this.#username,
       role: this.#role,
       color: this.#color,
-      profession: {...this.#profession},
+      profession: this.#profession,
       profile: this.#profile.details,
       isRolledDice: this.#isRolledDice,
       currentPosition: this.#currentPosition

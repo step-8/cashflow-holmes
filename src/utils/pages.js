@@ -269,7 +269,9 @@ const RAT_RACE_BOARD = `<html>
           <img src="images/ratrace/doodad.png" alt="doodad">
         </div>
         <div id="players"></div>
-        <div id="rat-tile-0"></div>
+        <div id="rat-tile-0">
+        <div class="start">Start</div>
+        </div>
         <div id="game-stats">
           <div class="heading">Status</div>
           <table>
