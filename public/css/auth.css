@@ -37,9 +37,13 @@ input[type=password] {
 }
 
 .submit-button>input {
-  padding: 0.3vmax;
+  padding: 0.4vmax 1vmax;
   font-size: 1.5vmax;
   cursor: pointer;
+  border: var(--big-border);
+  border-radius: 0.7vmax;
+  background-color: white;
+  color: black;
 }
 
 #message {

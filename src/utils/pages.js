@@ -266,15 +266,19 @@ const RAT_RACE_BOARD = `<html>
       <div class="game-area">
         <div class="card-deck" id="market">
           <img src="images/ratrace/market.gif" alt="market">
+          <div class="tile-name">Market</div>
         </div>
         <div class="card-deck" id="small-deal">
           <img src="images/ratrace/deals.png" alt="deals">
+            <div class="tile-name">Deal</div>
         </div>
         <div class="card-deck" id="big-deal">
           <img src="images/ratrace/deals.png" alt="deals">
+            <div class="tile-name">Deal</div>
         </div>
         <div class="card-deck" id="doodad">
           <img src="images/ratrace/doodad.png" alt="doodad">
+          <div class="tile-name">Doodad</div>
         </div>
         <div id="players"></div>
         <div id="rat-tile-0">
@@ -308,76 +312,148 @@ const RAT_RACE_BOARD = `<html>
         </div>
       </div>
       <div class="ratrace-tile deal" id="rat-tile-1">
-        <img src="images/ratrace/deals.png" alt="deals">
+        <div class="tile-info">
+          <img src="images/ratrace/deals.png" alt="deals">
+            <div class="tile-name">Deal</div>
+        </div>
       </div>
       <div class="ratrace-tile doodad" id="rat-tile-2">
-        <img src="images/ratrace/doodad.png" alt="doodad">
+        <div class="tile-info">
+          <img src="images/ratrace/doodad.png" alt="doodad">
+          <div class="tile-name">Doodad</div>
+        </div>
       </div>
       <div class="ratrace-tile deal" id="rat-tile-3">
-        <img src="images/ratrace/deals.png" alt="deals">
+        <div class="tile-info">
+          <img src="images/ratrace/deals.png" alt="deals">
+            <div class="tile-name">Deal</div>
+        </div>
       </div>
       <div class="ratrace-tile purples" id="rat-tile-4">
-        <img src="images/ratrace/charity.svg" alt="charity">
+        <div class="tile-info">
+          <img src="images/ratrace/charity.svg" alt="charity">
+          <div class="tile-name">Charity</div>
+        </div>
       </div>
       <div class="ratrace-tile deal" id="rat-tile-5">
-        <img src="images/ratrace/deals.png" alt="deals">
+        <div class="tile-info">
+          <img src="images/ratrace/deals.png" alt="deals">
+            <div class="tile-name">Deal</div>
+        </div>
       </div>
       <div class="ratrace-tile payday" id="rat-tile-6">
-        <img src="images/ratrace/payday.png" alt="payday">
+        <div class="tile-info">
+          <img src="images/ratrace/payday.png" alt="payday">
+          <div class="tile-name">Pay Day</div>
+        </div>
       </div>
       <div class="ratrace-tile deal" id="rat-tile-7">
-        <img src="images/ratrace/deals.png" alt="deals">
+        <div class="tile-info">
+          <img src="images/ratrace/deals.png" alt="deals">
+            <div class="tile-name">Deal</div>
+        </div>
       </div>
       <div class="ratrace-tile market" id="rat-tile-8">
-        <img src="images/ratrace/market.gif" alt="market">
+        <div class="tile-info">
+          <img src="images/ratrace/market.gif" alt="market">
+          <div class="tile-name">Market</div>
+        </div>
       </div>
       <div class="ratrace-tile deal" id="rat-tile-9">
-        <img src="images/ratrace/deals.png" alt="deals">
+        <div class="tile-info">
+          <img src="images/ratrace/deals.png" alt="deals">
+            <div class="tile-name">Deal</div>
+        </div>
       </div>
       <div class="ratrace-tile doodad" id="rat-tile-10">
-        <img src="images/ratrace/doodad.png" alt="doodad">
+        <div class="tile-info">
+          <img src="images/ratrace/doodad.png" alt="doodad">
+          <div class="tile-name">Doodad</div>
+        </div>
       </div>
       <div class="ratrace-tile deal" id="rat-tile-11">
-        <img src="images/ratrace/deals.png" alt="deals">
+        <div class="tile-info">
+          <img src="images/ratrace/deals.png" alt="deals">
+            <div class="tile-name">Deal</div>
+        </div>
       </div>
       <div class="ratrace-tile purples" id="rat-tile-12">
-        <img src="images/ratrace/downsized.png" alt="downsized">
+        <div class="tile-info">
+          <img src="images/ratrace/downsized.png" alt="downsized">
+          <div class="tile-name">Downsized</div>
+        </div>
       </div>
       <div class="ratrace-tile deal" id="rat-tile-13">
-        <img src="images/ratrace/deals.png" alt="deals">
+        <div class="tile-info">
+          <img src="images/ratrace/deals.png" alt="deals">
+            <div class="tile-name">Deal</div>
+        </div>
       </div>
       <div class="ratrace-tile payday" id="rat-tile-14">
-        <img src="images/ratrace/payday.png" alt="payday">
+        <div class="tile-info">
+          <img src="images/ratrace/payday.png" alt="payday">
+          <div class="tile-name">Pay Day</div>
+        </div>
       </div>
       <div class="ratrace-tile deal" id="rat-tile-15">
-        <img src="images/ratrace/deals.png" alt="deals">
+        <div class="tile-info">
+          <img src="images/ratrace/deals.png" alt="deals">
+            <div class="tile-name">Deal</div>
+        </div>
       </div>
       <div class="ratrace-tile market" id="rat-tile-16">
-        <img src="images/ratrace/market.gif" alt="market">
+        <div class="tile-info">
+          <img src="images/ratrace/market.gif" alt="market">
+          <div class="tile-name">Market</div>
+        </div>
       </div>
       <div class="ratrace-tile deal" id="rat-tile-17">
-        <img src="images/ratrace/deals.png" alt="deals">
+        <div class="tile-info">
+          <img src="images/ratrace/deals.png" alt="deals">
+            <div class="tile-name">Deal</div>
+        </div>
       </div>
       <div class="ratrace-tile doodad" id="rat-tile-18">
-        <img src="images/ratrace/doodad.png" alt="doodad">
+        <div class="tile-info">
+          <img src="images/ratrace/doodad.png" alt="doodad">
+          <div class="tile-name">Doodad</div>
+        </div>
       </div>
       <div class="ratrace-tile deal" id="rat-tile-19">
-        <img src="images/ratrace/deals.png" alt="deals">
+        <div class="tile-info">
+          <img src="images/ratrace/deals.png" alt="deals">
+            <div class="tile-name">Deal</div>
+        </div>
       </div>
       <div class="ratrace-tile purples" id="rat-tile-20">
-        <img src="images/ratrace/child.png" alt="child">
+        <div class="tile-info">
+          <img src="images/ratrace/child.png" alt="child">
+          <div class="tile-name">Child</div>
+        </div>
       </div>
       <div class="ratrace-tile deal" id="rat-tile-21">
-        <img src="images/ratrace/deals.png" alt="deals">
+        <div class="tile-info">
+          <img src="images/ratrace/deals.png" alt="deals">
+            <div class="tile-name">Deal</div>
+        </div>
       </div>
       <div class="ratrace-tile payday" id="rat-tile-22">
-        <img src="images/ratrace/payday.png" alt="payday">
+        <div class="tile-info">
+          <img src="images/ratrace/payday.png" alt="payday">
+          <div class="tile-name">Pay Day</div>
+        </div>
       </div>
       <div class="ratrace-tile deal" id="rat-tile-23">
-        <img src="images/ratrace/deals.png" alt="deals">
+        <div class="tile-info">
+          <img src="images/ratrace/deals.png" alt="deals">
+            <div class="tile-name">Deal</div>
+        </div>
       </div>
       <div class="ratrace-tile market" id="rat-tile-24">
-        <img src="images/ratrace/market.gif" alt="market">
+        <div class="tile-info">
+          <img src="images/ratrace/market.gif" alt="market">
+          <div class="tile-name">Market</div>
+        </div>
       </div>
     </div>
     <div id="game-panel">

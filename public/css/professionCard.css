@@ -9,7 +9,7 @@
 
 #profession-card {
   width: 38vmax;
-  aspect-ratio: 1.1;
+  height: fit-content;
   margin: 4vmax 10vmax;
   border: var(--def-border);
   border-radius: 1vmax;

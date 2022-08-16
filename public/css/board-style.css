@@ -106,13 +106,20 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  /* position: absolute; */
+}
+
+.tile-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 0.5vmax;
 }
 
 .ratrace-tile img {
   width: 45%;
   aspect-ratio: auto;
-  position: absolute;
 }
 
 .card-deck img {
@@ -304,6 +311,8 @@ a {
 
 .card-deck {
   display: flex;
+  flex-direction: column;
+  row-gap: 0.5vmax;
   justify-content: center;
   align-items: center;
 }
@@ -557,4 +566,12 @@ a {
 
 .start {
   font-weight: 900;
+}
+
+.tile-name {
+  font-weight: 500;
+}
+
+.ratrace-tile .icon {
+  position: absolute;
 }
