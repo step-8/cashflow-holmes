@@ -2,6 +2,7 @@ const { shuffle } = require('../utils/shuffle.js');
 const { Player } = require('./player.js');
 const deck = require('../../data/cards.json');
 const { RatRace } = require('./ratRace.js');
+const { Turn } = require('./turn.js');
 
 const getNextAttrib = (players, type, attribs) => {
   const playersAttribs = players.map(player => player.details[type]);
@@ -26,6 +27,7 @@ class Game {
   #currentPlayerIndex;
   #ratRace;
   #currentCard;
+  #currentTurn;
 
   constructor(colors, professions) {
     this.#gameID = null;
@@ -38,6 +40,7 @@ class Game {
     this.#diceValue = 1;
     this.#ratRace = new RatRace(deck);
     this.#currentCard = null;
+    this.#currentTurn = new Turn(this.#currentCard, null);
   }
 
   rollDice() {
@@ -55,6 +58,8 @@ class Game {
   start() {
     this.#status = gameStatus.started;
     this.#currentPlayerIndex = 0;
+    const currentPlayer = this.#players[this.#currentPlayerIndex];
+    this.#currentTurn.updatePlayer(currentPlayer);
   }
 
   cancel() {
@@ -102,7 +107,11 @@ class Game {
   changeTurn() {
     ++this.#currentPlayerIndex;
     this.#currentPlayerIndex = this.#currentPlayerIndex % this.#players.length;
+    const currentPlayer = this.#players[this.#currentPlayerIndex];
+    this.#currentTurn.updatePlayer(currentPlayer);
     this.resetDice();
+    this.turnCompleted = false;
+    this.#currentCard = null;
   }
 
   #moveCurrentPlayer(steps) {
@@ -121,6 +130,7 @@ class Game {
 
   set currentCard(card) {
     this.#currentCard = card;
+    this.#currentTurn.updateCard(card);
   }
 
   get currentPlayer() {
@@ -134,6 +144,10 @@ class Game {
     return this.#players.map(player => player.details);
   }
 
+  set turnCompleted(status) {
+    this.#currentTurn.turnComplete = status;
+  }
+
   get state() {
     return {
       currentPlayer: this.currentPlayer,
@@ -142,7 +156,8 @@ class Game {
       players: this.allPlayerDetails,
       diceValue: this.#diceValue,
       currentCard: this.#currentCard,
-      ratRace: this.#ratRace
+      ratRace: this.#ratRace,
+      isTurnEnded: this.#currentTurn.info.state
     };
   }
 }

@@ -23,7 +23,16 @@ class RatRace {
   }
 
   getCard(type) {
-    const validTypes = ['smallDeal', 'bigDeal', 'market', 'doodad'];
+    const validTypes = [
+      'smallDeal',
+      'bigDeal',
+      'market',
+      'doodad',
+      'charity',
+      'baby',
+      'downsized',
+      'payday'
+    ];
     if (validTypes.includes(type)) {
       return { ...this.#deck[type][0], family: type };
     }

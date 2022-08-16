@@ -140,7 +140,10 @@ a {
   border: 0.2vmax solid var(--market-border);
 }
 
-.purples {
+.purples,
+.downsized,
+.baby,
+.charity {
   background-color: var(--others-bg);
   border: 0.2vmax solid var(--others-border);
 }

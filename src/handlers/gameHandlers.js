@@ -57,7 +57,9 @@ const rollDiceHandler = (req, res) => {
 
 const changeTurnHandler = (req, res) => {
   const { game } = req;
-  game.changeTurn();
+  if (game.state.isTurnEnded) {
+    game.changeTurn();
+  }
   res.end();
 };
 

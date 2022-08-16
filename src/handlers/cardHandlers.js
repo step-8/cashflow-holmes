@@ -15,4 +15,26 @@ const serveCard = (req, res) => {
   res.json(card);
 };
 
-module.exports = { cardTypeHandler, serveCard };
+
+const cardActionsHandler = (req, res) => {
+  const { action } = req.body;
+  if (action === 'ok') {
+    req.game.turnCompleted = true;
+  }
+
+  if (action === 'buy') {
+    req.game.turnCompleted = true;
+  }
+
+  if (action === 'skip') {
+    req.game.turnCompleted = true;
+  }
+
+  if (action === 'sell') {
+    req.game.turnCompleted = true;
+  }
+  res.end();
+};
+
+
+module.exports = { cardTypeHandler, serveCard, cardActionsHandler };

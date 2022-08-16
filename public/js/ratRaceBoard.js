@@ -113,6 +113,21 @@
 
   };
 
+  const performAction = (event) => {
+    const actionDiv = event.target;
+    const [__, action] = actionDiv.id.split('-');
+    fetch('/card/card-action', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `action=${action}`
+    })
+      .then(() => {
+        fetch('/change-turn');
+      });
+  };
+
   const actions = {
     deal: {
       realEstate: ['BUY', 'SKIP'],
@@ -125,6 +140,18 @@
     },
     doodad: {
       doodad: ['OK']
+    },
+    payday: {
+      payday: ['OK']
+    },
+    baby: {
+      baby: ['OK']
+    },
+    charity: {
+      charity: ['OK', 'SKIP']
+    },
+    downsized: {
+      downsized: ['OK']
     }
   };
 
@@ -133,7 +160,9 @@
     return html(['div', { className: 'actions-wrapper' }, ...actionTexts.map(action => {
       return ['div',
         {
-          className: 'button action-btn', id: `action-${action.toLowerCase()}`
+          className: 'button action-btn',
+          id: `action-${action.toLowerCase()}`,
+          onclick: performAction
         },
         action
       ];
@@ -158,6 +187,7 @@
 
     if (!currentCard) {
       cardEle.innerHTML = '';
+      cardEle.classList = '';
       return;
     }
 
@@ -180,7 +210,6 @@
         const { username } = userInfo;
         if (currentPlayer.username === username) {
           actions = createActions(family, currentCard.type);
-          console.log(getElement('.actions'));
           getElement('.actions').append(actions);
         }
       });
