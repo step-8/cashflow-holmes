@@ -1,9 +1,10 @@
 (function () {
-  const addPlayerInfo = ({ color, username }, index) => {
+  const addPlayerInfo = ({ color, username, role }, index) => {
+    const playerName = role === 'host' ? `${username} (${role})` : username;
     const template = [
       'div', { id: `player-${index + 1}`, className: 'player' },
       ['div', { className: `profile-color ${color}` }, ''],
-      ['div', { className: 'player-name' }, username]
+      ['div', { className: 'player-name' }, playerName]
     ];
 
     return html(template);
