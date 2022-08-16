@@ -1,21 +1,25 @@
+.page-wrapper {
+  display: flex;
+}
+
 #profession-image>img {
   width: 3vmax;
   aspect-ratio: 3/4;
 }
 
 #profession-card {
-  width: 32vmax;
-  aspect-ratio: 9/12;
+  width: 38vmax;
+  aspect-ratio: 1.1;
+  margin: 4vmax 10vmax;
   border: var(--def-border);
   border-radius: 1vmax;
   overflow: hidden;
-  margin: 2vmax auto;
   display: flex;
   flex-direction: column;
   row-gap: 1vmax;
 }
 
-#profession-card>div {
+#profession-card>main {
   padding: 0.5vmax;
 }
 
@@ -41,7 +45,7 @@
   font-weight: 100;
 }
 
-#profession-card>div:nth-child(2) {
+#profession-card>main>div:nth-child(1) {
   display: flex;
   align-items: center;
 }
@@ -56,7 +60,7 @@
 #balance-sheet {
   display: flex;
   flex-direction: row;
-  column-gap: 0.3vmax;
+  justify-content: space-between;
 }
 
 #balance-sheet table {
@@ -66,23 +70,23 @@
 #cashflow-block {
   border: var(--def-border);
   padding: 0.5vmax;
-  margin: 1vmax;
+  margin-left: 4vmax;
 }
 
-table {
+#profession-card table {
   width: 18vmax;
 }
 
-table th,
-td {
+#profession-card table th,
+#profession-card table td {
   border-bottom: var(--def-border);
 }
 
-table th {
+#profession-card table th {
   text-align: left;
 }
 
-table td {
+#profession-card table td {
   text-align: right;
 }
 
@@ -136,4 +140,27 @@ table td {
   background-color: black;
   color: white;
   padding: 0.5vmax;
+}
+
+#other-players table {
+  width: 50%;
+  border-collapse: collapse;
+  padding: 1vmax;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+#other-players td,
+#other-players th {
+  padding: 1vmax;
+  text-align: left;
+}
+
+#other-players th {
+  background-color: black;
+  color: white;
+}
+
+#other-players tr {
+  border-bottom: var(--def-border);
 }

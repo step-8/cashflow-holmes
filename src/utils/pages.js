@@ -115,134 +115,135 @@ const PROFESSION_CARD = `<html>
 </head>
 
 <body>
-  <div id="profession-card">
-
-    <header>
-      <div id="profession-image">
-        <img src="images/lawyer.png" alt="Lawyer">
-      </div>
-      <div id="profession-details">
-        <h3>Your Profession is</h3>
-        <h1 id="profession"></h1>
-        <div>Goal : Build your <strong>Passive Income</strong> to be greater than your <strong>Total Expenses</strong>.
+  <div class="page-wrapper">
+    <div id="profession-card">
+      <header>
+        <div id="profession-image">
+          <img src="images/lawyer.png" alt="Lawyer">
         </div>
-      </div>
-    </header>
-
-    <div>
-      <div id="income-statement">
-        <h4>INCOME STATEMENT</h4>
-
-        <h2>1. Income</h2>
-        <table>
-          <tbody>
-            <tr>
-              <th>Salary : </th>
-              <td id="salary"></td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h2>2. Expenses</h2>
-        <table>
-          <tbody>
-            <tr>
-              <th>Taxes : </th>
-              <td id="taxes"></td>
-            </tr>
-            <tr>
-              <th>Home Mortgage Payment : </th>
-              <td id="home-mortgage-payment"></td>
-            </tr>
-            <tr>
-              <th>School Loan Payment : </th>
-              <td id="school-loan-payment"></td>
-            </tr>
-            <tr>
-              <th>Car Loan Payment : </th>
-              <td id="car-loan-payment"></td>
-            </tr>
-            <tr>
-              <th>Credit Card Payment : </th>
-              <td id="credit-card-payment"></td>
-            </tr>
-            <tr>
-              <th>Other Expenses : </th>
-              <td id="other-expenses"></td>
-            </tr>
-            <tr>
-              <th>Bank Loan Payment : </th>
-              <td id="bank-loan-payment"></td>
-            </tr>
-            <tr>
-              <th>Per Child Expense : </th>
-              <td id="per-child-expense"></td>
-            </tr>
-          </tbody>
-        </table>
-
-      </div>
-
-      <div id="cashflow-block">
-        <div class="values" id="income"></div>
-        <div class="symbol">+</div>
-        <div class="values" id="passive-income">$0</div>
-        <div id="total">
-          <div class="symbol">=</div>
-          <div class="values" id="total-income"></div>
+        <div id="profession-details">
+          <h3>Your Profession is</h3>
+          <h1 id="profession"></h1>
+          <div>Goal : Build your <strong>Passive Income</strong> to be greater than your <strong>Total
+              Expenses</strong>.
+          </div>
         </div>
-        <div class="symbol">-</div>
-        <div class="values" id="total-expense"></div>
-        <div id="cashflow">
-          <div class="symbol">=</div>
-          <div class="values" id="monthly-cashflow"></div>
-        </div>
-        <div>Monthly Cash Flow</div>
-      </div>
-    </div>
-
-    <div id="balance-section">
-      <h4>BALANCE SHEET</h4>
-      <div id="balance-sheet">
-        <div>
-          <h2>3. Assets</h2>
+      </header>
+      <main>
+      <div>
+        <div id="income-statement">
+          <h4>INCOME STATEMENT</h4>
+          <h2>1. Income</h2>
           <table>
             <tbody>
               <tr>
-                <th>Savings : </th>
-                <td id="savings"></td>
+                <th>Salary : </th>
+                <td id="salary"></td>
+              </tr>
+            </tbody>
+          </table>
+          <h2>2. Expenses</h2>
+          <table>
+            <tbody>
+              <tr>
+                <th>Taxes : </th>
+                <td id="taxes"></td>
+              </tr>
+              <tr>
+                <th>Home Mortgage Payment : </th>
+                <td id="home-mortgage-payment"></td>
+              </tr>
+              <tr>
+                <th>School Loan Payment : </th>
+                <td id="school-loan-payment"></td>
+              </tr>
+              <tr>
+                <th>Car Loan Payment : </th>
+                <td id="car-loan-payment"></td>
+              </tr>
+              <tr>
+                <th>Credit Card Payment : </th>
+                <td id="credit-card-payment"></td>
+              </tr>
+              <tr>
+                <th>Other Expenses : </th>
+                <td id="other-expenses"></td>
+              </tr>
+              <tr>
+                <th>Bank Loan Payment : </th>
+                <td id="bank-loan-payment"></td>
+              </tr>
+              <tr>
+                <th>Per Child Expense : </th>
+                <td id="per-child-expense"></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div>
-          <h2>4. Liabilities</h2>
-          <table>
-            <tbody>
-              <tr>
-                <th>Home Mortgage : </th>
-                <td id="home-mortgage"></td>
-              </tr>
-              <tr>
-                <th>School Loans : </th>
-                <td id="school-loans"></td>
-              </tr>
-              <tr>
-                <th>Car Loans : </th>
-                <td id="car-loans"></td>
-              </tr>
-              <tr>
-                <th>Credit Card Debt : </th>
-                <td id="credit-card-debt"></td>
-              </tr>
-            </tbody>
-          </table>
+        <div id="cashflow-block">
+          <div class="values" id="income"></div>
+          <div class="symbol">+</div>
+          <div class="values" id="passive-income">$0</div>
+          <div id="total">
+            <div class="symbol">=</div>
+            <div class="values" id="total-income"></div>
+          </div>
+          <div class="symbol">-</div>
+          <div class="values" id="total-expense"></div>
+          <div id="cashflow">
+            <div class="symbol">=</div>
+            <div class="values" id="monthly-cashflow"></div>
+          </div>
+          <div>Monthly Cash Flow</div>
         </div>
       </div>
-
+      
+      <div id="balance-section">
+        <h4>BALANCE SHEET</h4>
+        <div id="balance-sheet">
+          <div>
+            <h2>3. Assets</h2>
+            <table>
+              <tbody>
+                <tr>
+                  <th>Savings : </th>
+                  <td id="savings"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h2>4. Liabilities</h2>
+            <table>
+              <tbody>
+                <tr>
+                  <th>Home Mortgage : </th>
+                  <td id="home-mortgage"></td>
+                </tr>
+                <tr>
+                  <th>School Loans : </th>
+                  <td id="school-loans"></td>
+                </tr>
+                <tr>
+                  <th>Car Loans : </th>
+                  <td id="car-loans"></td>
+                </tr>
+                <tr>
+                  <th>Credit Card Debt : </th>
+                  <td id="credit-card-debt"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
     </div>
+    </main>
+    <div class="interaction-box" id="other-players">
     <div class="close">
-      <div class="close-btn"><a href="/game-board">Close</a></div>
+        <div class="close-btn"><a href="/game-board">Play</a></div>
+      </div>
     </div>
   </div>
 </body>

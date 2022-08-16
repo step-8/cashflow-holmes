@@ -359,7 +359,7 @@ a {
   grid-column: 5;
   background-color: whitesmoke;
   border: 0.2vmax dashed black;
-  margin: 1vmax 0.5vmax;
+  margin: 1vmax 0.1vmax;
   display: flex;
   flex-direction: column;
 }

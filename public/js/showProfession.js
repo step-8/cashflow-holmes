@@ -61,9 +61,41 @@
     drawLiabilites(profession);
   };
 
+  const createPlayers = ({ players }, { username }) => {
+    const table = document.createElement('table');
+    const heading = ['tr', {},
+      ['th', {}, 'Player'],
+      ['th', {}, 'Profession']
+    ];
+    table.appendChild(html(heading));
+
+    players.forEach(player => {
+      const playerName = player.username === username ? `${username}(you)` : player.username;
+      const playerTemplate = [
+        'tr', {},
+        ['td', {}, playerName],
+        ['td', {}, player.profession.profession],
+      ];
+      table.appendChild(html(playerTemplate));
+    });
+    getElement('#other-players').prepend(table);
+  };
+
+  const drawPlayers = (game) => {
+    fetch('/get-user-info')
+      .then(res => res.json())
+      .then(userInfo => {
+        createPlayers(game, userInfo);
+      });
+  };
+
   const showProfession = () => {
     const req = { method: 'get', url: '/api/profession' };
     xhrRequest(req, 200, drawProfession);
+
+    fetch('/api/game')
+      .then(req => req.json())
+      .then(drawPlayers);
   };
   window.onload = showProfession;
 })();
