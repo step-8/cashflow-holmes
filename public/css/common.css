@@ -119,6 +119,7 @@ a {
   padding: 0.8em;
   border: var(--big-border);
   border-radius: var(--def-curve);
+  background-color: white;
 }
 
 .btn:hover {

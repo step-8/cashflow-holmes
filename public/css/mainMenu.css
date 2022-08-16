@@ -20,12 +20,11 @@ body {
 }
 
 .join-popup-wrapper {
-  height: 15vmax;
-  width: 20vmax;
-  border: var(--def-border);
+  height: 28vmax;
+  width: 22vmax;
   position: relative;
   top: 16vmax;
-  left: 20vmax;
+  left: 72vmax;
   background-color: white;
   border-radius: 0.25vmax;
 }
@@ -40,17 +39,17 @@ body {
 }
 
 .game-id {
-  width: 80%;
+  width: 60%;
   outline: 0;
   padding: 0.5vmax;
   border-style: none;
-  border-bottom: var(--def-border);
+  border-bottom: var(--big-border);
   text-align: center;
+  font-size: 2vmax;
 }
 
-.button {
-  border: 1px solid black;
-  width: 4vmax;
+.font-size {
+  font-size: 1.2vmax;
 }
 
 .join-error {

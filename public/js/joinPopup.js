@@ -42,8 +42,10 @@ const createJoinPopup = (event) => {
         [
           'form', { className: 'join-form', id: 'join-popup-form', onsubmit: (event) => joinGame(event) },
           ['input', { type: 'text', name: 'gameID', placeholder: 'Game id', autofocus: 'true', required: 'true', className: 'game-id' }],
-          ['input', { type: 'button', className: 'button', value: 'Enter', onclick: (event) => joinGame(event) }],
-          ['button', { type: 'button', className: 'button', onclick: (event) => removePopup(event) }, 'Cancel']
+          ['div', { className: 'btn-wrapper' },
+            ['button', { type: 'button', className: 'btn font-size', onclick: (event) => joinGame(event) }, 'Enter'],
+            ['button', { type: 'button', className: 'btn font-size', onclick: (event) => removePopup(event) }, 'Cancel']
+          ]
         ]
       ]
     ];
