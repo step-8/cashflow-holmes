@@ -180,6 +180,13 @@
     ];
   };
 
+  const updateCurrentCardDetails = (card, player) => {
+    if (card.family === 'payday') {
+      card.description = `Received pay of ${player.profile.cashFlow}`;
+    }
+    return;
+  };
+
   const drawCard = (game) => {
     const { currentCard, currentPlayer } = game;
     if (currentCard === 'deals') {
@@ -199,6 +206,7 @@
       family = 'deal';
     }
 
+    updateCurrentCardDetails(currentCard, currentPlayer);
     const cardTemplate = createCardTemplate(currentCard);
     const newCard = html(cardTemplate);
     newCard.classList.add(family);
