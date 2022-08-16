@@ -12,12 +12,15 @@ class Turn {
   payday() {
     this.#currentPlayer.payday();
     this.#turnCompleted = true;
-    return;
+  }
+
+  doodad() {
+    this.#currentPlayer.doodad(this.#card.cost);
+    this.#turnCompleted = true;
   }
 
   skip() {
     this.#turnCompleted = true;
-    return;
   }
 
   set turnComplete(state) {

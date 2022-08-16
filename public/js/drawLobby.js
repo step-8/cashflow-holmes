@@ -11,7 +11,6 @@
   };
 
   const redirectToMainMenu = () => {
-    console.log('inside redirect to main menu');
     const formEle = document.createElement('form');
     const body = document.querySelector('body');
     formEle.action = '/';

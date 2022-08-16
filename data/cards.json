@@ -102,19 +102,19 @@
   ],
   "doodad": [
     {
+      "id": "doodad02",
+      "type": "doodad",
+      "heading": "New gym clothes",
+      "cost": 300,
+      "isMandatory": true
+    },
+    {
       "id": "doodad01",
       "type": "doodad",
       "heading": "Child needs braces",
       "cost": 4000,
       "isMandatory": false,
       "rule": "If you have a child"
-    },
-    {
-      "id": "doodad02",
-      "type": "doodad",
-      "heading": "New gym clothes",
-      "cost": 300,
-      "isMandatory": true
     }
   ],
   "payday": [

@@ -39,6 +39,10 @@ class Profile {
     this.updateCash(this.#calculateCashFlow());
   }
 
+  doodad(cost) {
+    this.updateCash(-cost);
+  }
+
   updateCash(amount) {
     this.#cash += amount;
   }

@@ -37,6 +37,10 @@ class Player {
     this.#profile.payday();
   }
 
+  doodad(cost) {
+    this.#profile.doodad(cost);
+  }
+
   move(steps) {
     this.#currentPosition = (this.#currentPosition + steps) % 24;
     if (this.#currentPosition === 0) {

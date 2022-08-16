@@ -16,9 +16,13 @@ const serveCard = (req, res) => {
 };
 
 const acceptCard = (game, family) => {
-  // console.log(family);
   if (family === 'payday') {
     game.state.currentTurn.payday();
+    return;
+  }
+
+  if (family === 'doodad') {
+    game.state.currentTurn.doodad();
     return;
   }
 

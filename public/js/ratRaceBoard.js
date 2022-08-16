@@ -173,9 +173,10 @@
 
   const createCardTemplate = (currentCard) => {
     return ['div', {},
-      ['div', { className: 'card-heading' }, currentCard.heading || ''],
+      ['div', { className: 'card-heading' }, currentCard.heading.toUpperCase() || ''],
       ['div', { className: 'description' }, currentCard.description || ''],
       ['div', { className: 'rule' }, currentCard.rule || ''],
+      ['div', { className: 'cost' }, currentCard.cost || ''],
       ['div', { className: 'actions' }]
     ];
   };
