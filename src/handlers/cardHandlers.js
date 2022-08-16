@@ -19,19 +19,19 @@ const serveCard = (req, res) => {
 const cardActionsHandler = (req, res) => {
   const { action } = req.body;
   if (action === 'ok') {
-    req.game.turnCompleted = true;
+    req.game.state.currentTurn.skip();
   }
 
   if (action === 'buy') {
-    req.game.turnCompleted = true;
+    req.game.state.currentTurn.skip();
   }
 
   if (action === 'skip') {
-    req.game.turnCompleted = true;
+    req.game.state.currentTurn.skip();
   }
 
   if (action === 'sell') {
-    req.game.turnCompleted = true;
+    req.game.state.currentTurn.skip();
   }
   res.end();
 };

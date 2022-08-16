@@ -157,6 +157,7 @@ class Game {
       diceValue: this.#diceValue,
       currentCard: this.#currentCard,
       ratRace: this.#ratRace,
+      currentTurn: this.#currentTurn,
       isTurnEnded: this.#currentTurn.info.state
     };
   }

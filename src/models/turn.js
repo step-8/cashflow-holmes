@@ -18,8 +18,7 @@ class Turn {
     return;
   }
 
-  pass() {
-    //End Turn.
+  skip() {
     this.#turnCompleted = true;
     return;
   }
@@ -38,6 +37,7 @@ class Turn {
 
   get info() {
     return {
+      player: this.#currentPlayer,
       card: this.#card, //No need of card
       state: this.#turnCompleted
     };
