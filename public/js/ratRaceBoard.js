@@ -172,11 +172,20 @@
   };
 
   const createCardTemplate = (currentCard) => {
+    let { cost, downPayment } = currentCard;
+    if (cost) {
+      cost = `cost: ${currentCard.cost}`;
+    }
+    if (downPayment) {
+      downPayment = `down payment: ${currentCard.downPayment}`;
+    }
+
     return ['div', {},
       ['div', { className: 'card-heading' }, currentCard.heading.toUpperCase() || ''],
       ['div', { className: 'description' }, currentCard.description || ''],
       ['div', { className: 'rule' }, currentCard.rule || ''],
-      ['div', { className: 'cost' }, currentCard.cost || ''],
+      ['div', { className: 'cost' }, cost || ''],
+      ['div', { className: 'cost' }, downPayment || ''],
       ['div', { className: 'actions' }]
     ];
   };
