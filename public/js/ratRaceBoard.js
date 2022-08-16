@@ -26,8 +26,8 @@
       ];
 
     const card = html(cardTemplate);
-    mainCard.append(description);
-    mainCard.append(card);
+    mainCard.appendChild(description);
+    mainCard.appendChild(card);
   };
 
   const drawDeals = (card) => {
@@ -180,11 +180,11 @@
 
   const drawCard = (game) => {
     const { currentCard, currentPlayer } = game;
-    const cardEle = getElement('#main-card');
     if (currentCard === 'deals') {
       return;
     }
 
+    const cardEle = getElement('#main-card');
     if (!currentCard) {
       cardEle.innerHTML = '';
       cardEle.classList = '';

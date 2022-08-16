@@ -413,7 +413,7 @@ a {
   grid-column: 2/6;
   margin: 1vmax;
   border-radius: 0.5vmax;
-  border: 0.2vmax solid black;
+  /* border: 0.2vmax solid none; */
   padding: 0.5em;
   display: flex;
   flex-direction: column;
