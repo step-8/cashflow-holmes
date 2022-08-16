@@ -41,6 +41,10 @@ class Player {
     this.#profile.doodad(cost);
   }
 
+  buyRealEstate(card) {
+    this.#profile.addAsset(card);
+  }
+
   move(steps) {
     this.#currentPosition = (this.#currentPosition + steps) % 24;
     if (this.#currentPosition === 0) {

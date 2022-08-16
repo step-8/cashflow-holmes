@@ -92,6 +92,7 @@ a {
   align-items: center;
   justify-content: center;
   gap: 20px;
+  cursor: pointer;
 }
 
 #board-toggle {

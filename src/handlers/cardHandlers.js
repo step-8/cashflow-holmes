@@ -29,16 +29,23 @@ const acceptCard = (game, family) => {
   game.state.currentTurn.skip();
 };
 
+const buyDeal = (game, type) => {
+  if (type === 'realEstate') {
+    game.state.currentTurn.buyRealEstate();
+    return;
+  }
+  game.state.currentTurn.skip();
+};
 
 const cardActionsHandler = (req, res) => {
-  const { action, family } = req.body;
+  const { action, family, type } = req.body;
   const { game } = req;
   if (action === 'ok') {
     acceptCard(game, family);
   }
 
   if (action === 'buy') {
-    game.state.currentTurn.skip();
+    buyDeal(game, type);
   }
 
   if (action === 'skip') {

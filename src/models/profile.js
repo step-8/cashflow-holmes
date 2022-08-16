@@ -17,12 +17,22 @@ class Profile {
     this.#cash = this.#calculateCashFlow() + this.#assets.savings;
   }
 
+  #calculatePassiveIncome() {
+    let passiveIncome = 0;
+
+    this.#income.realEstates.forEach(realEstate => {
+      passiveIncome += realEstate.cashFlow;
+    });
+
+    return passiveIncome;
+  }
+
   #calculateCashFlow() {
     return this.#calculateTotalIncome() - this.#calculateTotalExpenses();
   }
 
   #calculateTotalIncome() {
-    return this.#income.salary + this.#passiveIncome;
+    return this.#income.salary + this.#calculatePassiveIncome();
   }
 
   #calculateTotalExpenses() {
@@ -35,12 +45,24 @@ class Profile {
     return totalExpenses;
   }
 
+  //change name.
   payday() {
     this.updateCash(this.#calculateCashFlow());
   }
 
   doodad(cost) {
     this.updateCash(-cost);
+  }
+
+  addAsset(card) {
+    if (this.#cash < card.downPayment) {
+      return;
+    }
+
+    this.#assets.realEstates.push(card);
+    this.#income.realEstates.push(card);
+    this.#liabilities.realEstates.push(card);
+    this.updateCash(-card.downPayment);
   }
 
   updateCash(amount) {
@@ -57,7 +79,7 @@ class Profile {
       totalIncome: this.#calculateTotalIncome(),
       totalExpenses: this.#calculateTotalExpenses(),
       cashFlow: this.#calculateCashFlow(),
-      passiveIncome: this.#passiveIncome,
+      passiveIncome: this.#calculatePassiveIncome(),
       cash: this.#cash
     };
   }

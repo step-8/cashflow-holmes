@@ -19,6 +19,12 @@ class Turn {
     this.#turnCompleted = true;
   }
 
+  buyRealEstate() {
+    this.#currentPlayer.buyRealEstate(this.#card);
+    this.#turnCompleted = true;
+    return;
+  }
+
   skip() {
     this.#turnCompleted = true;
   }
