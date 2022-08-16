@@ -15,9 +15,12 @@ const MAIN_MENU_PAGE = `<html>
         <img src="images/cashflow-image-big.png" alt="Cashflow" title="Cashflow">
       </div>
     <div class="menu interaction-box">
+    <div class="user-info-wrapper">
+    <div class="username">__USERNAME__</div>
     <a href="/logout">
         <div class="logout fas fa-sign-out-alt"></div>
       </a>
+      </div>
       <div class="btn-wrapper">
         <a href="/host"><div class="btn" id="host-btn">Host</div></a>
         <div class="btn" id="join-btn" onclick="createJoinPopup()">Join</div>
@@ -53,6 +56,9 @@ const HOST_LOBBY = `<html>
       </div>
     </div>
     <div class="menu  interaction-box">
+    <div class="user-info-wrapper">
+    <div class="username">__USERNAME__</div>
+      </div>
       <div class="btn-wrapper">
         <div class="btn" id="start-btn" onclick="startGame(event)">Start</div>
         <a href="/cancel-game"><div class="btn" id="cancel-btn">Cancel</div></a>
@@ -71,7 +77,6 @@ const GUEST_LOBBY = `<html>
   <script src="js/drawLobby.js"></script>
   <link rel="stylesheet" href="css/lobby.css">
   <link rel="stylesheet" href="css/common.css">
-  <script src="https://kit.fontawesome.com/74138aff63.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -87,6 +92,9 @@ const GUEST_LOBBY = `<html>
       </div>
     </div>
     <div class="menu  interaction-box">
+    <div class="user-info-wrapper">
+    <div class="username">__USERNAME__</div>
+      </div>
       <div class="btn-wrapper">
         <div class="btn" id="leave-btn"><a href="/leave-lobby">Leave</a></div>
       </div>

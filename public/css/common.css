@@ -40,12 +40,20 @@ body {
   max-height: 100vh;
 }
 
-
-.logout {
-  position: absolute;
-  top: 100px;
+.user-info-wrapper {
+  width: 12vmax;
+  position: fixed;
+  top: 7vmax;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   right: 50px;
   font-size: 1.7vmax;
+}
+
+.username {
+  width: 70%;
+  overflow: hidden;
 }
 
 .logout:hover {

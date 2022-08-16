@@ -1,7 +1,9 @@
 const { RAT_RACE_BOARD, GUEST_LOBBY, MAIN_MENU_PAGE, PROFESSION_CARD } = require('../utils/pages.js');
 
 const serveMainMenu = (req, res) => {
-  res.send(MAIN_MENU_PAGE);
+  const { username } = req.session;
+  const htmlPage = MAIN_MENU_PAGE.replace('__USERNAME__', username);
+  res.send(htmlPage);
 };
 
 const hostHandler = (req, res) => {
@@ -27,7 +29,9 @@ const guestLobbyHandler = (req, res) => {
   const { username } = req.session;
 
   game.addPlayer(username, 'guest');
-  const guestHtml = GUEST_LOBBY.replace('__GAME_ID__', gameID);
+  const guestHtml = GUEST_LOBBY
+    .replace('__GAME_ID__', gameID)
+    .replace('__USERNAME__', username);
   res.end(guestHtml);
 };
 
