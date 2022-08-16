@@ -23,10 +23,10 @@ const acceptCard = (game, family) => {
 
   if (family === 'doodad') {
     game.state.currentTurn.doodad();
-    return;
+    return 1;
   }
 
-  game.state.currentTurn.skip();
+  return game.state.currentTurn.skip();
 };
 
 const buyDeal = (game, type) => {
@@ -41,7 +41,8 @@ const cardActionsHandler = (req, res) => {
   const { action, family, type } = req.body;
   const { game } = req;
   if (action === 'ok') {
-    acceptCard(game, family);
+    if (acceptCard(game, family))
+      res.sendStatus(200);
   }
 
   if (action === 'buy') {

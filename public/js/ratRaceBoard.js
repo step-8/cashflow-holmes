@@ -113,6 +113,13 @@
 
   };
 
+  const addDoodadMessage = (res) => {
+    const messageBox = getElement('#message-space');
+    const message = html(['div', { className: 'success' }, 'You\'re done with doodad']);
+    messageBox.appendChild(message);
+    return res;
+  };
+
   const performAction = (event, family, type) => {
     const actionDiv = event.target;
     const [__, action] = actionDiv.id.split('-');
@@ -123,6 +130,12 @@
       },
       body: `action=${action}&family=${family}&type=${type}`
     })
+      .then((res) => {
+        if (res.status === 200 && family === 'doodad') {
+          addDoodadMessage(res);
+        }
+        return res;
+      })
       .then(() => {
         fetch('/change-turn');
       });
@@ -322,7 +335,7 @@
       fetch('/api/game').then(res => res.json())
         .then(drawPlayerPosition)
         .then(drawPlayers);
-    }, 500);
+    }, 200);
   };
 
   window.onload = main;

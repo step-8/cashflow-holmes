@@ -576,3 +576,9 @@ a {
 .ratrace-tile .icon {
   position: absolute;
 }
+
+.success {
+  color: green;
+  text-align: center;
+  font-size: 2vmax;
+}
