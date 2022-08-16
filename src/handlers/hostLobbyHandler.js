@@ -2,7 +2,8 @@ const { HOST_LOBBY } = require('../utils/pages.js');
 
 const hostLobbyHandler = (req, res) => {
   if (req.session.gameID) {
-    res.send(HOST_LOBBY);
+    const hostHtml = HOST_LOBBY.replace('__GAME_ID__', req.session.gameID);
+    res.send(hostHtml);
     res.end();
     return;
   }

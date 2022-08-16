@@ -10,8 +10,11 @@
   };
 
   const redirectToMainMenu = () => {
+    console.log('inside redirect to main menu');
     const formEle = document.createElement('form');
+    const body = document.querySelector('body');
     formEle.action = '/';
+    body.append(formEle);
     formEle.submit();
   };
 
@@ -55,9 +58,7 @@
   const drawPlaceHolder = (id) => {
     const template = [
       'div', { id: `player-${id}`, className: 'player' },
-      ['div', { className: 'profile-color grey' },
-        ['i', { className: 'fa-solid fa-plus' }]
-      ],
+      ['div', { className: 'profile-color grey' }, 'Waiting...'],
       ['div', { className: 'player-name' }, '']
     ];
 

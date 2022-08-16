@@ -2,7 +2,7 @@ const verifyGameState = (xhr) => {
   const { players } = JSON.parse(xhr.response);
   if (players.length < 2) {
     const errorMessageDiv = document.querySelector('#error-message');
-    errorMessageDiv.innerText = 'No other players joined in the game';
+    errorMessageDiv.innerText = 'Insufficient players(2 or more required).';
 
     setTimeout(() => {
       errorMessageDiv.innerText = '';

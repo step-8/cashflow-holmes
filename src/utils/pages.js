@@ -38,7 +38,6 @@ const HOST_LOBBY = `<html>
   <script src="js/hostLobby.js"></script>
   <script src="js/commonLib.js"></script>
   <script src="js/drawLobby.js"></script>
-  <script src="https://kit.fontawesome.com/74138aff63.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
