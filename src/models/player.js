@@ -33,6 +33,10 @@ class Player {
     this.#profile = new Profile(this.#profession);
   }
 
+  payday() {
+    this.#profile.payday();
+  }
+
   move(steps) {
     this.#currentPosition = (this.#currentPosition + steps) % 24;
     if (this.#currentPosition === 0) {

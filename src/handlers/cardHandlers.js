@@ -15,23 +15,34 @@ const serveCard = (req, res) => {
   res.json(card);
 };
 
+const acceptCard = (game, family) => {
+  // console.log(family);
+  if (family === 'payday') {
+    game.state.currentTurn.payday();
+    return;
+  }
+
+  game.state.currentTurn.skip();
+};
+
 
 const cardActionsHandler = (req, res) => {
-  const { action } = req.body;
+  const { action, family } = req.body;
+  const { game } = req;
   if (action === 'ok') {
-    req.game.state.currentTurn.skip();
+    acceptCard(game, family);
   }
 
   if (action === 'buy') {
-    req.game.state.currentTurn.skip();
+    game.state.currentTurn.skip();
   }
 
   if (action === 'skip') {
-    req.game.state.currentTurn.skip();
+    game.state.currentTurn.skip();
   }
 
   if (action === 'sell') {
-    req.game.state.currentTurn.skip();
+    game.state.currentTurn.skip();
   }
   res.end();
 };

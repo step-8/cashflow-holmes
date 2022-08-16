@@ -9,11 +9,8 @@ class Turn {
     this.#turnCompleted = false;
   }
 
-  accept() {
-    //Change player profile according to card options.
-    //Add the card to player log.
-    this.#currentPlayer;
-    this.#card;
+  payday() {
+    this.#currentPlayer.payday();
     this.#turnCompleted = true;
     return;
   }

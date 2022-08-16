@@ -5,6 +5,7 @@ class Profile {
   #assets;
   #liabilities;
   #passiveIncome;
+  #cash;
 
   constructor({ profession, income, expenses, assets, liabilities }) {
     this.#profession = profession;
@@ -13,6 +14,7 @@ class Profile {
     this.#assets = assets;
     this.#liabilities = liabilities;
     this.#passiveIncome = 0;
+    this.#cash = this.#calculateCashFlow() + this.#assets.savings;
   }
 
   #calculateCashFlow() {
@@ -33,6 +35,14 @@ class Profile {
     return totalExpenses;
   }
 
+  payday() {
+    this.updateCash(this.#calculateCashFlow());
+  }
+
+  updateCash(amount) {
+    this.#cash += amount;
+  }
+
   get details() {
     return {
       profession: this.#profession,
@@ -44,7 +54,7 @@ class Profile {
       totalExpenses: this.#calculateTotalExpenses(),
       cashFlow: this.#calculateCashFlow(),
       passiveIncome: this.#passiveIncome,
-      cash: this.#calculateCashFlow() + this.#assets.savings
+      cash: this.#cash
     };
   }
 }

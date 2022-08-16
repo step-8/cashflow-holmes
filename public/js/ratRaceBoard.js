@@ -113,7 +113,7 @@
 
   };
 
-  const performAction = (event) => {
+  const performAction = (event, family) => {
     const actionDiv = event.target;
     const [__, action] = actionDiv.id.split('-');
     fetch('/card/card-action', {
@@ -121,7 +121,7 @@
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: `action=${action}`
+      body: `action=${action}&family=${family}`
     })
       .then(() => {
         fetch('/change-turn');
@@ -162,7 +162,9 @@
         {
           className: 'button action-btn',
           id: `action-${action.toLowerCase()}`,
-          onclick: performAction
+          onclick: (event) => {
+            performAction(event, family);
+          }
         },
         action
       ];
