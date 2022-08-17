@@ -55,7 +55,7 @@
       chooseDealType();
       return card;
     }
-    
+
     cardEvent(type);
     return card;
   };
@@ -251,6 +251,24 @@
     return;
   };
 
+  const drawActions = (userInfo, family, currentCard, currentPlayer) => {
+    const { username } = userInfo;
+    let actions = '';
+    if (currentPlayer.username === username) {
+      actions = createActions(family, currentCard.type);
+    }
+    getElement('.actions').append(actions);
+  };
+
+  const createCard = (currentCard, currentPlayer, family) => {
+    updateCurrentCardDetails(currentCard, currentPlayer);
+    const cardTemplate = createCardTemplate(currentCard);
+    const newCard = html(cardTemplate);
+    newCard.classList.add(family);
+    newCard.id = 'main-card';
+    return newCard;
+  };
+
   const drawCard = (game) => {
     const { currentCard, currentPlayer } = game;
     if (currentCard === 'deals') {
@@ -270,22 +288,13 @@
       family = 'deal';
     }
 
-    updateCurrentCardDetails(currentCard, currentPlayer);
-    const cardTemplate = createCardTemplate(currentCard);
-    const newCard = html(cardTemplate);
-    newCard.classList.add(family);
-    newCard.id = 'main-card';
+    const newCard = createCard(currentCard, currentPlayer, family);
     cardEle.replaceWith(newCard);
 
-    let actions = null;
     API.userInfo()
       .then(res => res.json())
       .then(userInfo => {
-        const { username } = userInfo;
-        if (currentPlayer.username === username) {
-          actions = createActions(family, currentCard.type);
-          getElement('.actions').append(actions);
-        }
+        drawActions(userInfo, family, currentCard, currentPlayer);
       });
   };
 
