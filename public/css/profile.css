@@ -11,12 +11,14 @@
   font-size: 1vmax;
 }
 
-.income-statement {
-  height: 50%;
+.income-statement,
+.balance-sheet {
+  height: 40%;
   border: var(--def-border);
 }
 
-.income-container {
+.income-container,
+.balance-container {
   display: flex;
   justify-content: space-around;
 }

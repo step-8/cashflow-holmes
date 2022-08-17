@@ -56,6 +56,17 @@ const createMyProfile = (game) => {
               createExpensesTable(profile.expenses)
             ]
           ],
+        ],
+        ['div', { className: 'balance-sheet' },
+          ['h2', {}, 'Balance sheet'],
+          ['div', { className: 'balance-container' },
+            ['div', { className: 'assets' },
+              ['h3', {}, 'Assets']
+            ],
+            ['div', { className: 'liabilities' },
+              ['h3', {}, 'Liabilities']
+            ],
+          ]
         ]
       ],
       ['div', { className: 'close' },
