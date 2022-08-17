@@ -4,7 +4,6 @@ class Profile {
   #expenses;
   #assets;
   #liabilities;
-  #passiveIncome;
   #cash;
 
   constructor({ profession, income, expenses, assets, liabilities }) {
@@ -13,7 +12,10 @@ class Profile {
     this.#expenses = expenses;
     this.#assets = assets;
     this.#liabilities = liabilities;
-    this.#passiveIncome = 0;
+    this.#cash = 0;
+  }
+
+  setDefaults() {
     this.#cash = this.#calculateCashFlow() + this.#assets.savings;
   }
 
@@ -45,12 +47,11 @@ class Profile {
     return totalExpenses;
   }
 
-  //change name.
-  payday() {
+  addPay() {
     this.updateCash(this.#calculateCashFlow());
   }
 
-  doodad(cost) {
+  deductDoodad(cost) {
     this.updateCash(-cost);
   }
 

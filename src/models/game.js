@@ -116,8 +116,6 @@ class Game {
 
   #moveCurrentPlayer(steps) {
     this.#players[this.#currentPlayerIndex].move(steps);
-    // Adding change turn, should be removed after card events 
-    // this.changeTurn();
   }
 
   isValidGameID(gameID) {

@@ -31,14 +31,15 @@ class Player {
 
   createProfile() {
     this.#profile = new Profile(this.#profession);
+    this.#profile.setDefaults();
   }
 
   payday() {
-    this.#profile.payday();
+    this.#profile.addPay();
   }
 
   doodad(cost) {
-    this.#profile.doodad(cost);
+    this.#profile.deductDoodad(cost);
   }
 
   buyRealEstate(card) {
