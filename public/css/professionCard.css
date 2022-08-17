@@ -2,12 +2,12 @@
   display: flex;
 }
 
-#profession-image>img {
+.profession-image>img {
   width: 3vmax;
   aspect-ratio: 3/4;
 }
 
-#profession-card {
+.profession-card {
   width: 38vmax;
   height: fit-content;
   margin: 4vmax 10vmax;
@@ -19,11 +19,11 @@
   row-gap: 1vmax;
 }
 
-#profession-card>main {
+.profession-card>main {
   padding: 0.5vmax;
 }
 
-#profession-card>header {
+.profession-card>header {
   background-color: rgb(34, 34, 34);
   color: white;
   display: flex;
@@ -31,66 +31,66 @@
   padding: 0.5vmax;
 }
 
-#income-statement>h4,
-#balance-section>h4 {
+.income-statement>h4,
+.balance-section>h4 {
   font-weight: 100;
   margin: 0.3vmax 0.3vmax;
 }
 
-#profession-details>div {
+.profession-details>div {
   font-size: 0.7vmax;
 }
 
-#profession-details>h3 {
+.profession-details>h3 {
   font-weight: 100;
 }
 
-#profession-card>main>div:nth-child(1) {
+.profession-card>main>div:nth-child(1) {
   display: flex;
   align-items: center;
 }
 
-#income-statement>h2,
-#balance-sheet h2 {
+.income-statement>h2,
+.balance-sheet h2 {
   background-color: rgb(34, 34, 34);
   color: white;
   padding: 0.2vmax;
 }
 
-#balance-sheet {
+.balance-sheet {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-#balance-sheet table {
+.balance-sheet table {
   width: 15.3vmax;
 }
 
-#cashflow-block {
+.cashflow-block {
   border: var(--def-border);
   padding: 0.5vmax;
   margin-left: 4vmax;
 }
 
-#profession-card table {
+.profession-card table {
   width: 18vmax;
 }
 
-#profession-card table th,
-#profession-card table td {
+.profession-card table th,
+.profession-card table td {
   border-bottom: var(--def-border);
 }
 
-#profession-card table th {
+.profession-card table th {
   text-align: left;
 }
 
-#profession-card table td {
+.profession-card table td {
   text-align: right;
 }
 
-#cashflow-block {
+.cashflow-block {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -110,8 +110,8 @@
   font-weight: 800;
 }
 
-#total,
-#cashflow {
+.total,
+.cashflow {
   width: 100%;
   display: flex;
   align-items: center;
@@ -119,16 +119,16 @@
   column-gap: 1.25vmax;
 }
 
-#passive-income,
-#total-expense {
+.passive-income,
+.total-expense {
   border: 3px solid black;
 }
 
-#monthly-cashflow {
+.monthly-cashflow {
   border: 3px dashed black;
 }
 
-#other-players table {
+.other-players table {
   width: 50%;
   border-collapse: collapse;
   padding: 1vmax;
@@ -136,17 +136,17 @@
   font-weight: 500;
 }
 
-#other-players td,
-#other-players th {
+.other-players td,
+.other-players th {
   padding: 1vmax;
   text-align: left;
 }
 
-#other-players th {
+.other-players th {
   background-color: black;
   color: white;
 }
 
-#other-players tr {
+.other-players tr {
   border-bottom: var(--def-border);
 }

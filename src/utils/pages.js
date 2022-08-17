@@ -120,14 +120,14 @@ const PROFESSION_CARD = `<html>
 
 <body>
   <div class="page-wrapper">
-    <div id="profession-card">
+    <div id="profession-card" class="profession-card">
       <header>
-        <div id="profession-image">
+        <div id="profession-image" class="profession-image">
           <img src="images/lawyer.png" alt="Lawyer">
         </div>
-        <div id="profession-details">
+        <div id="profession-details" class="profession-details">
           <h3>Your Profession is</h3>
-          <h1 id="profession"></h1>
+          <h1 id="profession" class="profession"></h1>
           <div>Goal : Build your <strong>Passive Income</strong> to be greater than your <strong>Total
               Expenses</strong>.
           </div>
@@ -135,14 +135,14 @@ const PROFESSION_CARD = `<html>
       </header>
       <main>
       <div>
-        <div id="income-statement">
+        <div id="income-statement" class="income-statement">
           <h4>INCOME STATEMENT</h4>
           <h2>1. Income</h2>
           <table>
             <tbody>
               <tr>
                 <th>Salary : </th>
-                <td id="salary"></td>
+                <td id="salary" class="salary"></td>
               </tr>
             </tbody>
           </table>
@@ -155,56 +155,56 @@ const PROFESSION_CARD = `<html>
               </tr>
               <tr>
                 <th>Home Mortgage Payment : </th>
-                <td id="home-mortgage-payment"></td>
+                <td id="home-mortgage-payment" ></td>
               </tr>
               <tr>
                 <th>School Loan Payment : </th>
-                <td id="school-loan-payment"></td>
+                <td id="school-loan-payment" ></td>
               </tr>
               <tr>
                 <th>Car Loan Payment : </th>
-                <td id="car-loan-payment"></td>
+                <td id="car-loan-payment" ></td>
               </tr>
               <tr>
                 <th>Credit Card Payment : </th>
-                <td id="credit-card-payment"></td>
+                <td id="credit-card-payment" ></td>
               </tr>
               <tr>
                 <th>Other Expenses : </th>
-                <td id="other-expenses"></td>
+                <td id="other-expenses" ></td>
               </tr>
               <tr>
                 <th>Bank Loan Payment : </th>
-                <td id="bank-loan-payment"></td>
+                <td id="bank-loan-payment" ></td>
               </tr>
               <tr>
                 <th>Per Child Expense : </th>
-                <td id="per-child-expense"></td>
+                <td id="per-child-expense" ></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div id="cashflow-block">
+        <div id="cashflow-block" class="cashflow-block">
           <div class="values" id="income"></div>
           <div class="symbol">+</div>
           <div class="values" id="passive-income">$0</div>
-          <div id="total">
+          <div id="total" class="total">
             <div class="symbol">=</div>
             <div class="values" id="total-income"></div>
           </div>
           <div class="symbol">-</div>
           <div class="values" id="total-expense"></div>
-          <div id="cashflow">
+          <div id="cashflow" class="cashflow">
             <div class="symbol">=</div>
-            <div class="values" id="monthly-cashflow"></div>
+            <div class="values" id="monthly-cashflow" class="monthly-cashflow"></div>
           </div>
           <div>Monthly Cash Flow</div>
         </div>
       </div>
       
-      <div id="balance-section">
+      <div id="balance-section" class="balance-section">
         <h4>BALANCE SHEET</h4>
-        <div id="balance-sheet">
+        <div id="balance-sheet" class="balance-sheet">
           <div>
             <h2>3. Assets</h2>
             <table>
@@ -244,7 +244,7 @@ const PROFESSION_CARD = `<html>
       
     </div>
     </main>
-    <div class="interaction-box" id="other-players">
+    <div class="interaction-box other-players" id="other-players">
     <div class="close">
         <div class="close-btn"><a href="/game-board">Play</a></div>
       </div>
