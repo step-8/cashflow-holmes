@@ -47,8 +47,7 @@ class Game {
   }
 
   rollDice() {
-    // this.#diceValue = Math.ceil(Math.random() * 6);
-    this.#diceValue = 2;
+    this.#diceValue = Math.ceil(Math.random() * 6);
     const currentPlayer = this.#players[this.#currentPlayerIndex];
     currentPlayer.rolledDice = true;
     this.#moveCurrentPlayer(this.#diceValue);
