@@ -40,25 +40,24 @@
     monthlyCFEle.innerText = addDollar(profession.income.salary - totalExpenses);
   };
 
-  const drawProfession = (xhr) => {
-    const profession = JSON.parse(xhr.response);
+  const drawProfession = (playerProfession) => {
     const nameEle = getElement('#profession');
-    nameEle.innerText = profession.profession;
+    nameEle.innerText = playerProfession.profession;
 
     const salaryEle = getElement('#salary');
-    salaryEle.innerText = addDollar(profession.income.salary);
+    salaryEle.innerText = addDollar(playerProfession.income.salary);
 
     const savingsEle = getElement('#savings');
-    savingsEle.innerText = addDollar(profession.assets.savings);
+    savingsEle.innerText = addDollar(playerProfession.assets.savings);
 
     const incomeEle = getElement('#income');
-    incomeEle.innerText = addDollar(profession.income.salary);
+    incomeEle.innerText = addDollar(playerProfession.income.salary);
 
     const totalIncomeEle = getElement('#total-income');
-    totalIncomeEle.innerText = addDollar(profession.income.salary);
+    totalIncomeEle.innerText = addDollar(playerProfession.income.salary);
 
-    drawExpenses(profession);
-    drawLiabilites(profession);
+    drawExpenses(playerProfession);
+    drawLiabilites(playerProfession);
   };
 
   const createPlayers = ({ players }, { username }) => {
@@ -70,11 +69,12 @@
     table.appendChild(html(heading));
 
     players.forEach(player => {
-      const playerName = player.username === username ? `${username}(you)` : player.username;
+      const playerName = player.username === username
+        ? `${username} ⇦` : player.username;
       const playerTemplate = [
         'tr', {},
         ['td', {}, playerName],
-        ['td', {}, player.profession.profession],
+        ['td', {}, player.profession.profession]
       ];
       table.appendChild(html(playerTemplate));
     });
@@ -90,8 +90,9 @@
   };
 
   const showProfession = () => {
-    const req = { method: 'get', url: '/api/profession' };
-    xhrRequest(req, 200, drawProfession);
+    fetch('/api/profession')
+      .then(req => req.json())
+      .then(drawProfession);
 
     fetch('/api/game')
       .then(req => req.json())
