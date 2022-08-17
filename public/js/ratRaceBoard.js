@@ -1,4 +1,22 @@
 (function () {
+  class Log {
+    #logs;
+
+    constructor() {
+      this.#logs = [];
+    }
+
+    mergeLogs(logs) {
+      const unLoggedLogsLength = logs.length - this.#logs.length;
+
+      if (unLoggedLogsLength <= 0) {
+        return [];
+      }
+      this.#logs = logs;
+      return logs.slice(-unLoggedLogsLength);
+    }
+  }
+
   const highlightCurrentPlayer = (game) => {
     const { username } = game.currentPlayer;
     const currentPlayerEle = document.querySelector(`#${username}`);
@@ -349,12 +367,31 @@
     return game;
   };
 
+  const createLog = (log) => {
+    return ['div', { className: 'log' }, `${log.username} ${log.message}`];
+  };
+
+  const addLogs = (game, logs) => {
+    const newLogs = logs.mergeLogs(game.logs);
+    if (newLogs.length <= 0) {
+      return;
+    }
+
+    const logsDiv = document.querySelector('#logs');
+    newLogs.forEach(log => {
+      logsDiv.appendChild(html(createLog(log)));
+    });
+
+    logsDiv.scrollTop = logsDiv.scrollHeight;
+  };
 
   const main = () => {
+    const logs = new Log();
     setInterval(() => {
       fetch('/api/game').then(res => res.json())
         .then(drawPlayerPosition)
-        .then(drawPlayers);
+        .then(drawPlayers)
+        .then((game) => addLogs(game, logs));
     }, 1000);
   };
 

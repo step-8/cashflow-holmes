@@ -78,6 +78,22 @@ a {
   width: 85%;
   height: 35%;
   align-self: center;
+  overflow: scroll;
+}
+
+#logs::-webkit-scrollbar {
+  display: none;
+}
+
+#logs>div:last-child {
+  font-weight: 600;
+  color: black;
+}
+
+#logs .log {
+  width: 100%;
+  padding: 0.4vmax 0.8vmax;
+  color: gray;
 }
 
 #dice-box {

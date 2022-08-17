@@ -51,7 +51,7 @@ class Game {
     const currentPlayer = this.#players[this.#currentPlayerIndex];
     currentPlayer.rolledDice = true;
     this.#moveCurrentPlayer(this.#diceValue);
-    this.#log.addLog(currentPlayer.details.username, 'rolled the dice');
+    this.#log.addLog(currentPlayer.details.username, `rolled ${this.#diceValue}`);
   }
 
   resetDice() {

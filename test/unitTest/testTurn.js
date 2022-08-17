@@ -6,7 +6,7 @@ describe('Turn', () => {
   const identity = (__) => assert.ok(true);
   const log = new Log();
   const player = {
-    details: { username: 'user' },
+    details: { username: 'user', profile: { cashFlow: 100 } },
     doodad: identity,
     payday: identity,
     buyRealEstate: identity
@@ -37,7 +37,7 @@ describe('Turn', () => {
       assert.ok(turn.info.state);
       assert.deepStrictEqual(
         log.getAllLogs(),
-        [{ username: 'user', message: 'received pay' }]
+        [{ username: 'user', message: 'received pay of 100' }]
       );
     });
   });
@@ -50,7 +50,7 @@ describe('Turn', () => {
       assert.ok(turn.info.state);
       assert.deepStrictEqual(
         log.getAllLogs(),
-        [{ username: 'user', message: `payed ${card.cost} on doodad` }]
+        [{ username: 'user', message: `payed ${card.cost} on ${card.heading}` }]
       );
     });
   });
@@ -76,7 +76,7 @@ describe('Turn', () => {
       assert.ok(turn.info.state);
       assert.deepStrictEqual(
         log.getAllLogs(),
-        [{ username: 'user', message: 'skipped the card' }]
+        [{ username: 'user', message: `skipped ${card.symbol}` }]
       );
     });
   });

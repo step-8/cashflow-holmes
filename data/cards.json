@@ -128,14 +128,16 @@
     {
       "id": "charity",
       "heading": "charity",
-      "type": "charity"
+      "type": "charity",
+      "symbol": "charity"
     }
   ],
   "downsized": [
     {
       "id": "downsized",
       "heading": "downsized",
-      "type": "downsized"
+      "type": "downsized",
+      "symbol": "downsized"
     }
   ],
   "baby": [

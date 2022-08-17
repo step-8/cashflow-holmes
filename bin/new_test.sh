@@ -34,8 +34,9 @@ function main() {
   if [[ "${testDir}" == "superTest" ]]
   then
     echo "${TESTS}" > test/${testDir}/${testFile}
+  else
+    echo "const assert = require('assert');" > test/${testDir}/${testFile}
   fi
-  echo "const assert = require('assert');" > test/${testDir}/${testFile}
   code test/${testDir}/${testFile}
 }
 

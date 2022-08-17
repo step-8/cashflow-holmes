@@ -15,16 +15,20 @@ class Turn {
     return this.#currentPlayer.details.username;
   }
 
+  #cashflow() {
+    return this.#currentPlayer.details.profile.cashFlow;
+  }
+
   payday() {
     this.#currentPlayer.payday();
-    this.#log.addLog(this.#username(), 'received pay');
+    this.#log.addLog(this.#username(), `received pay of ${this.#cashflow()}`);
     this.#turnCompleted = true;
   }
 
   doodad() {
     const cost = this.#card.cost;
     this.#currentPlayer.doodad(cost);
-    this.#log.addLog(this.#username(), `payed ${cost} on doodad`);
+    this.#log.addLog(this.#username(), `payed ${cost} on ${this.#card.heading}`);
     this.#turnCompleted = true;
   }
 
@@ -36,7 +40,7 @@ class Turn {
   }
 
   skip() {
-    this.#log.addLog(this.#username(), 'skipped the card');
+    this.#log.addLog(this.#username(), `skipped ${this.#card.symbol}`);
     this.#turnCompleted = true;
   }
 
