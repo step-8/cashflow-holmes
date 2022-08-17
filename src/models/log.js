@@ -5,8 +5,8 @@ class Log {
     this.#logs = [];
   }
 
-  addLog(username, message) {
-    this.#logs.push({ username, message });
+  addLog({ username, color }, message) {
+    this.#logs.push({ username, color, message });
   }
 
   getAllLogs() {

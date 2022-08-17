@@ -51,7 +51,12 @@ class Game {
     const currentPlayer = this.#players[this.#currentPlayerIndex];
     currentPlayer.rolledDice = true;
     this.#moveCurrentPlayer(this.#diceValue);
-    this.#log.addLog(currentPlayer.details.username, `rolled ${this.#diceValue}`);
+    this.#log.addLog(
+      {
+        username: currentPlayer.details.username,
+        color: currentPlayer.details.color
+      },
+      `rolled ${this.#diceValue}`);
   }
 
   resetDice() {
@@ -132,7 +137,21 @@ class Game {
 
   set currentCard(card) {
     this.#currentCard = card;
+    const currentPlayer = this.#players[this.#currentPlayerIndex];
     this.#currentTurn.updateCard(card);
+
+    //Abstract the currentPlayer to be an reference.
+    // Need to remove after fixing deals.
+    if (card === 'deals') {
+      return;
+    }
+
+    this.#log.addLog(
+      {
+        username: currentPlayer.details.username,
+        color: currentPlayer.details.color
+      },
+      `landed on ${this.#currentCard.family}`);
   }
 
   get currentPlayer() {

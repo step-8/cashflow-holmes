@@ -11,8 +11,10 @@ class Turn {
     this.#log = log;
   }
 
-  #username() {
-    return this.#currentPlayer.details.username;
+  #playerInfo() {
+    const username = this.#currentPlayer.details.username;
+    const color = this.#currentPlayer.details.color;
+    return { username, color };
   }
 
   #cashflow() {
@@ -21,26 +23,26 @@ class Turn {
 
   payday() {
     this.#currentPlayer.payday();
-    this.#log.addLog(this.#username(), `received pay of ${this.#cashflow()}`);
+    this.#log.addLog(this.#playerInfo(), `received pay of ${this.#cashflow()}`);
     this.#turnCompleted = true;
   }
 
   doodad() {
     const cost = this.#card.cost;
     this.#currentPlayer.doodad(cost);
-    this.#log.addLog(this.#username(), `payed ${cost} on ${this.#card.heading}`);
+    this.#log.addLog(this.#playerInfo(), `payed ${cost} on ${this.#card.heading}`);
     this.#turnCompleted = true;
   }
 
   buyRealEstate() {
     this.#currentPlayer.buyRealEstate(this.#card);
-    this.#log.addLog(this.#username(), `bought ${this.#card.symbol}`);
+    this.#log.addLog(this.#playerInfo(), `bought ${this.#card.symbol}`);
     this.#turnCompleted = true;
     return;
   }
 
   skip() {
-    this.#log.addLog(this.#username(), `skipped ${this.#card.symbol}`);
+    this.#log.addLog(this.#playerInfo(), `skipped ${this.#card.symbol}`);
     this.#turnCompleted = true;
   }
 

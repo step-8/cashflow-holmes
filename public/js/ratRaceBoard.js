@@ -368,7 +368,8 @@
   };
 
   const createLog = (log) => {
-    return ['div', { className: 'log' }, `${log.username} ${log.message}`];
+    const userSpan = ['div', { className: `${log.color} icon`, }];
+    return ['div', { className: 'log' }, userSpan, ['span', {}, `${log.message}`]];
   };
 
   const addLogs = (game, logs) => {
