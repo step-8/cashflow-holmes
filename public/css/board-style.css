@@ -86,6 +86,11 @@ a {
   display: none;
 }
 
+#logs .log-icon {
+  width: 8%;
+  aspect-ratio: 1;
+}
+
 #logs>div:last-child {
   font-weight: 600;
   color: black;

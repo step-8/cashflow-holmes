@@ -368,7 +368,7 @@
   };
 
   const createLog = (log) => {
-    const userSpan = ['div', { className: `${log.color} icon`, }];
+    const userSpan = ['div', { className: `${log.color} icon log-icon`, }];
     return ['div', { className: 'log' }, userSpan, ['span', {}, `${log.message}`]];
   };
 
