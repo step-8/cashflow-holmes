@@ -10,6 +10,12 @@ Cashflow, is a board game designed by Robert Kiyosaki, which aims to teach the p
 
 [ Read more ](https://en.wikipedia.org/wiki/Cash_flow)
 
+---
+
+## [Play](https://cashflow-holmes.herokuapp.com/)
+
+---
+
 ## INSTALLATION
 
 ---
