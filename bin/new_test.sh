@@ -35,6 +35,7 @@ function main() {
   then
     echo "${TESTS}" > test/${testDir}/${testFile}
   fi
+  echo "const assert = require('assert');" > test/${testDir}/${testFile}
   code test/${testDir}/${testFile}
 }
 
