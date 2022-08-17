@@ -82,7 +82,7 @@
   };
 
   const drawPlayers = (game) => {
-    fetch('/get-user-info')
+    API.userInfo()
       .then(res => res.json())
       .then(userInfo => {
         createPlayers(game, userInfo);
@@ -90,11 +90,11 @@
   };
 
   const showProfession = () => {
-    fetch('/api/profession')
+    API.getProfession()
       .then(req => req.json())
       .then(drawProfession);
 
-    fetch('/api/game')
+    API.getGame()
       .then(req => req.json())
       .then(drawPlayers);
   };

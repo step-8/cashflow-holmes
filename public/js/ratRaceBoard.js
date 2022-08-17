@@ -26,8 +26,8 @@
   };
 
   const cardEvent = (type) => {
-    fetch(`/card/${type}`)
-      .then(res => res.json());
+    API.assignCard(type);
+
     return type;
   };
 
@@ -50,32 +50,34 @@
 
   const drawDeals = (card) => {
     const { type } = card;
+
     if (type === 'deals') {
       chooseDealType();
       return card;
     }
+    
     cardEvent(type);
     return card;
   };
 
   const decideCard = (game) => {
-    fetch('/card/card-type')
+    API.decideCard()
       .then(res => res.json())
       .then(drawDeals);
     return game;
   };
 
   const rollDice = () => {
-    fetch('/roll-dice')
+    API.rollDice()
       .then(res => res)
-      .then(fetch('/api/game')
+      .then(API.getGame()
         .then(res => res.json())
         .then(decideCard));
     return;
   };
 
   const activateDice = (game) => {
-    fetch('/get-user-info')
+    API.userInfo()
       .then(res => res.json())
       .then(userInfo => {
         const { username, isRolledDice } = game.currentPlayer;
@@ -83,10 +85,11 @@
         if (userInfo.username === username && !isRolledDice) {
           dice.style.opacity = 1;
           dice.style.border = '2px solid black';
-          dice.style.zIndex = 0;
+          dice.style.zIndex = 1;
           dice.onclick = rollDice;
         } else {
           dice.style.opacity = 0.5;
+          dice.style.zIndex = -1;
           dice.style.border = '2px dashed black';
           dice.onclick = null;
         }
@@ -167,7 +170,7 @@
       },
       body: `action=${action}&family=${family}&type=${type}`
     };
-    fetch('/card/card-action', options)
+    API.cardAction(options)
       .then((res) => {
         if (family === 'doodad') {
           addDoodadMessage(res);
@@ -175,7 +178,7 @@
         return res;
       })
       .then(() => {
-        fetch('/change-turn');
+        API.changeTurn();
       });
   };
 
@@ -275,7 +278,7 @@
     cardEle.replaceWith(newCard);
 
     let actions = null;
-    fetch('/get-user-info')
+    API.userInfo()
       .then(res => res.json())
       .then(userInfo => {
         const { username } = userInfo;
@@ -288,17 +291,18 @@
 
   const drawPlayers = (game) => {
     const { players } = game;
-    fetch('/api/player-info').then(res => res.json()).then(currentPlayer => {
-      const playersEle = getElement('#players');
-      playersEle.innerText = '';
+    API.playerInfo()
+      .then(res => res.json()).then(currentPlayer => {
+        const playersEle = getElement('#players');
+        playersEle.innerText = '';
 
-      players.forEach(player => {
-        const playerEle = createPlayerEle(player, currentPlayer.username);
-        playersEle.append(playerEle);
-      });
+        players.forEach(player => {
+          const playerEle = createPlayerEle(player, currentPlayer.username);
+          playersEle.append(playerEle);
+        });
 
-      drawStatus(currentPlayer);
-    }).then(__ => highlightCurrentPlayer(game))
+        drawStatus(currentPlayer);
+      }).then(__ => highlightCurrentPlayer(game))
       .then(activateDice)
       .then(drawDice)
       .then(drawCard);
@@ -389,7 +393,8 @@
   const main = () => {
     const logs = new Log();
     setInterval(() => {
-      fetch('/api/game').then(res => res.json())
+      API.getGame()
+        .then(res => res.json())
         .then(drawPlayerPosition)
         .then(drawPlayers)
         .then((game) => addLogs(game, logs));

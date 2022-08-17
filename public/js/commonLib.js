@@ -1,21 +1,3 @@
-const identity = (ele) => ele;
-
-const xhrRequest = (req, onStatus, handler, altHandler = identity, body = '') => {
-  const xhr = new XMLHttpRequest();
-
-  xhr.onload = () => {
-    if (xhr.status === onStatus) {
-      return handler(xhr);
-    }
-    altHandler(xhr);
-  };
-
-  const contentType = req['content-type'] || 'application/x-www-form-urlencoded';
-  xhr.open(req.method, req.url);
-  xhr.setRequestHeader('content-type', contentType);
-  xhr.send(body);
-};
-
 const resetForm = (selector) => {
   const form = document.querySelector(selector);
   form.reset();

@@ -31,10 +31,8 @@ const redirectToLobby = () => {
 const joinGame = (event) => {
   event.preventDefault();
   const body = readFormData('#join-popup-form');
-  // API.joinGame(body)
-  // .then(joinResponse => )
-  // const req = { method: 'post', url: '/join' };
-  fetch('/join', { method: 'post', body: body })
+  
+  API.joinGame({ method: 'post', body: body })
     .then(resolve => {
       if (resolve.ok) {
         redirectToLobby();

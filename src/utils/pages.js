@@ -2,6 +2,7 @@ const MAIN_MENU_PAGE = `<html>
 
 <head>
   <title>Cash Flow</title>
+  <script src="js/api.js"></script>
   <script src="js/commonLib.js"></script>
   <script src="js/joinPopup.js"></script>
   <link rel="stylesheet" href="css/common.css">
@@ -38,6 +39,7 @@ const HOST_LOBBY = `<html>
   <title>Cash Flow</title>
   <link rel="stylesheet" href="css/lobby.css">
   <link rel="stylesheet" href="css/common.css">
+  <script src="js/api.js"></script>
   <script src="js/commonLib.js"></script>
   <script src="js/hostLobby.js"></script>
   <script src="js/drawLobby.js"></script>
@@ -73,6 +75,7 @@ const GUEST_LOBBY = `<html>
 
 <head>
   <title>Cash Flow</title>
+  <script src="js/api.js"></script>
   <script src="js/commonLib.js"></script>
   <script src="js/drawLobby.js"></script>
   <link rel="stylesheet" href="css/lobby.css">
@@ -110,6 +113,7 @@ const PROFESSION_CARD = `<html>
   <title>Profession Card</title>
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/professionCard.css">
+  <script src="js/api.js"></script>
   <script src="js/commonLib.js"></script>
   <script src="js/showProfession.js"></script>
 </head>
@@ -258,6 +262,7 @@ const RAT_RACE_BOARD = `<html>
   <link rel="stylesheet" href="css/board-style.css">
   <link rel="stylesheet" href="css/professionCard.css">
   <link rel="stylesheet" href="css/profile.css">
+  <script src="js/api.js"></script>
   <script src="js/commonLib.js"></script>
   <script src="js/ratRaceBoard.js"></script>
   <script src="js/showMyProfile.js"></script>

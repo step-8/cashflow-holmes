@@ -15,8 +15,7 @@
     errorMessageDiv.innerText = 'Game has been cancelled by host';
     errorMessageDiv.style.color = 'red';
     
-    fetch('/remove-gameid')
-      .catch(error => console.log('cannot request /remove-gameid'));
+    API.cancelGame();
 
     setTimeout(() => {
       reqPage('/');
@@ -69,7 +68,7 @@
 
   const main = () => {
     setInterval(() => {
-      fetch('/api/game')
+      API.getGame()
         .then(req => req.json())
         .then(drawLobby);
     }, 500);
