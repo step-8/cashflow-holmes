@@ -1,5 +1,11 @@
 .profile-wrapper {
-  width: 100%;
+  position: relative;
+  width: 50%;
   height: 100%;
+  left: 50%;
   background-color: silver;
+}
+
+.profile-wrapper table {
+  color: white;
 }

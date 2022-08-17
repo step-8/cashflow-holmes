@@ -616,9 +616,8 @@ a {
 
 #expansion-window {
   position: absolute;
-  left: 42.5vw;
-  z-index: 1;
-  width: 42vw;
+  z-index: -1;
+  width: 85vw;
   height: 100vh;
   max-width: 85vw;
   max-height: 100vh;
