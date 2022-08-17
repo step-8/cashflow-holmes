@@ -25,38 +25,9 @@
     return game;
   };
 
-  const cardEvent = (type) => {
-    API.assignCard(type);
-
-    return type;
-  };
-
-  const chooseDealType = () => {
-    const mainCard = getElement('#main-card');
-    mainCard.className = 'deal';
-    mainCard.innerText = '';
-    const description = html(['div', { className: 'card-heading' }, 'Choose Big or Small deal ?']);
-    const cardTemplate =
-      [
-        'div', { className: 'actions' },
-        ['div', { className: ' button action-btn', id: 'small-deal', onclick: (event) => cardEvent('smallDeal') }, 'Small'],
-        ['div', { className: ' button action-btn', id: 'big-deal', onclick: (event) => cardEvent('bigDeal') }, 'Big']
-      ];
-
-    const card = html(cardTemplate);
-    mainCard.appendChild(description);
-    mainCard.appendChild(card);
-  };
-
   const drawDeals = (card) => {
     const { type } = card;
-
-    if (type === 'deals') {
-      chooseDealType();
-      return card;
-    }
-
-    cardEvent(type);
+    API.assignCard(type);
     return card;
   };
 
@@ -184,6 +155,7 @@
 
   const actions = {
     deal: {
+      deal: ['SMALL', 'BIG'],
       realEstate: ['BUY', 'SKIP'],
       stock: ['BUY', 'SKIP'],
       MLM: ['ROLL', 'SKIP'],
@@ -271,23 +243,15 @@
 
   const drawCard = (game) => {
     const { currentCard, currentPlayer } = game;
-    if (currentCard === 'deals') {
-      return;
-    }
-
     const cardEle = getElement('#main-card');
+
     if (!currentCard) {
       cardEle.innerHTML = '';
       cardEle.classList = '';
       return;
     }
 
-    let { family } = currentCard;
-    const deals = ['smallDeal', 'bigDeal'];
-    if (deals.includes(family)) {
-      family = 'deal';
-    }
-
+    const { family } = currentCard;
     const newCard = createCard(currentCard, currentPlayer, family);
     cardEle.replaceWith(newCard);
 
@@ -361,7 +325,7 @@
       const { username, currentPosition } = player;
       const boardTile = document.querySelector(`#rat-tile-${currentPosition}`);
       let playerIcon = document.getElementById(`icon-${username}`);
-      
+
       if (!playerIcon) {
         playerIcon = createIconEle(player);
       }
@@ -395,7 +359,7 @@
     logsDiv.scrollTop = logsDiv.scrollHeight;
   };
 
-  
+
   const drawScreen = (game, logs) => {
     drawPlayerPosition(game);
     drawPlayersList(game);
@@ -403,7 +367,7 @@
   };
 
   const prevState = { game: '' };
-  
+
   const draw = (logs) => {
     return res => {
       const newState = res.stateHash;

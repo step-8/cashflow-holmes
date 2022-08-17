@@ -1,3 +1,10 @@
+const getFamily = (deals, type) => {
+  if (deals.includes(type)) {
+    type = 'deal';
+  }
+  return type;
+};
+
 class RatRace {
   #tiles;
   #deck;
@@ -23,9 +30,9 @@ class RatRace {
   }
 
   getCard(type) {
+    const deals = ['smallDeal', 'bigDeal'];
     const validTypes = [
-      'smallDeal',
-      'bigDeal',
+      ...deals,
       'market',
       'doodad',
       'charity',
@@ -33,8 +40,17 @@ class RatRace {
       'downsized',
       'payday'
     ];
+
+    if (type === 'deals') {
+      return {
+        heading: 'Choose Big or Small Deal',
+        family: 'deal',
+        type: 'deal'
+      };
+    }
+
     if (validTypes.includes(type)) {
-      return { ...this.#deck[type][0], family: type };
+      return { ...this.#deck[type][0], family: getFamily(deals, type) };
     }
     return;
   }

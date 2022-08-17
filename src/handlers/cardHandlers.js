@@ -3,13 +3,15 @@ const cardTypeHandler = (req, res) => {
   const { currentPlayer, ratRace } = game.state;
   const { currentPosition } = currentPlayer;
   const type = ratRace.getCardType(currentPosition);
-  game.currentCard = 'deals';
+  // game.currentCard = 'deals';
   res.json({ type });
 };
 
 const serveCard = (req, res) => {
   const { game } = req;
-  const { type } = req.params;
+  const { currentPlayer, ratRace } = game.state;
+  const { currentPosition } = currentPlayer;
+  const type = ratRace.getCardType(currentPosition);
   const card = game.state.ratRace.getCard(type);
   game.currentCard = card;
   res.json(card);
@@ -37,9 +39,19 @@ const buyDeal = (game, type) => {
   game.state.currentTurn.skip();
 };
 
+const setCard = (game, action) => {
+  const card = game.state.ratRace.getCard(`${action}Deal`);
+  game.currentCard = card;
+};
+
 const cardActionsHandler = (req, res) => {
   const { action, family, type } = req.body;
   const { game } = req;
+  const deals = ['small', 'big'];
+  if (deals.includes(action)) {
+    setCard(game, action);
+  }
+
   if (action === 'ok') {
     let status = 200;
     if (!acceptCard(game, family)) {
