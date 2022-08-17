@@ -3,6 +3,7 @@ const { Player } = require('./player.js');
 const deck = require('../../data/cards.json');
 const { RatRace } = require('./ratRace.js');
 const { Turn } = require('./turn.js');
+const { Log } = require('./log.js');
 
 const getNextAttrib = (players, type, attribs) => {
   const playersAttribs = players.map(player => player.details[type]);
@@ -28,6 +29,7 @@ class Game {
   #ratRace;
   #currentCard;
   #currentTurn;
+  #log;
 
   constructor(colors, professions) {
     this.#gameID = null;
@@ -40,7 +42,8 @@ class Game {
     this.#diceValue = 1;
     this.#ratRace = new RatRace(deck);
     this.#currentCard = null;
-    this.#currentTurn = new Turn(this.#currentCard, null);
+    this.#log = new Log();
+    this.#currentTurn = new Turn(this.#currentCard, null, this.#log);
   }
 
   rollDice() {
@@ -49,6 +52,7 @@ class Game {
     const currentPlayer = this.#players[this.#currentPlayerIndex];
     currentPlayer.rolledDice = true;
     this.#moveCurrentPlayer(this.#diceValue);
+    this.#log.addLog(currentPlayer.details.username, 'rolled the dice');
   }
 
   resetDice() {
@@ -157,7 +161,8 @@ class Game {
       currentCard: this.#currentCard,
       ratRace: this.#ratRace,
       currentTurn: this.#currentTurn,
-      isTurnEnded: this.#currentTurn.info.state
+      isTurnEnded: this.#currentTurn.info.state,
+      logs: this.#log.getAllLogs()
     };
   }
 }
