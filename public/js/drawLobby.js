@@ -10,29 +10,23 @@
     return html(template);
   };
 
-  const redirectToMainMenu = () => {
-    const formEle = document.createElement('form');
-    const body = document.querySelector('body');
-    formEle.action = '/';
-    body.append(formEle);
-    formEle.submit();
-  };
-
   const showCancelMessage = () => {
     const errorMessageDiv = document.querySelector('#message');
     errorMessageDiv.innerText = 'Game has been cancelled by host';
     errorMessageDiv.style.color = 'red';
+    
+    fetch('/remove-gameid')
+      .catch(error => console.log('cannot request /remove-gameid'));
 
     setTimeout(() => {
-      fetch('/remove-gameid')
-        .then(redirectToMainMenu);
-    }, 3000);
+      reqPage('/');
+    }, 2500);
 
     return;
   };
 
   const drawLobby = (response) => {
-    const { gameID, players, status } = response;
+    const { players, status } = response;
 
     if (status === 'started') {
       reqPage('/show-profession');
