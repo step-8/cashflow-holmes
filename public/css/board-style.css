@@ -626,3 +626,23 @@ a {
   max-width: 85vw;
   max-height: 100vh;
 }
+
+.pulsate {
+  animation-name: pulsate;
+  animation-duration: 450ms;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes pulsate {
+  from {
+    transform: scale(1);
+    border: none;
+  }
+  
+  to {
+    transform: scale(1.18);
+    border: none;
+  }
+}

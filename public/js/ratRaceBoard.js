@@ -356,26 +356,23 @@
 
   const drawPlayerPosition = (game) => {
     const { players, currentPlayer } = game;
+    console.log(game);
     players.forEach((player) => {
       const { username, currentPosition } = player;
+      const boardTile = document.querySelector(`#rat-tile-${currentPosition}`);
+      let playerIcon = document.getElementById(`icon-${username}`);
+      
+      if (!playerIcon) {
+        playerIcon = createIconEle(player);
+      }
+
+      boardTile.appendChild(playerIcon);
 
       if (currentPlayer.username === username) {
-        setTimeout(() => {
-          const playerIcon = document.querySelector(`#icon-${username}`);
-          const shadow = playerIcon.style.boxShadow;
-          playerIcon.style.boxShadow = shadow ? 'none' : '0px 0px 2px 4px red';
-        }, 100);
+        playerIcon.classList.add('pulsate');
+      } else {
+        playerIcon.classList.remove('pulsate');
       }
-
-      let playerIcon = document.querySelector(`#icon-${username}`);
-
-      if (playerIcon) {
-        playerIcon.remove();
-      }
-
-      playerIcon = createIconEle(player);
-      const boardTile = document.querySelector(`#rat-tile-${currentPosition}`);
-      boardTile.appendChild(playerIcon);
     });
     return game;
   };
