@@ -4,6 +4,7 @@ const deck = require('../../data/cards.json');
 const { RatRace } = require('./ratRace.js');
 const { Turn } = require('./turn.js');
 const { Log } = require('./log.js');
+const { toWords } = require('../utils/camelCaseToWords.js');
 
 const getNextAttrib = (players, type, attribs) => {
   const playersAttribs = players.map(player => player.details[type]);
@@ -151,7 +152,7 @@ class Game {
         username: currentPlayer.details.username,
         color: currentPlayer.details.color
       },
-      `landed on ${this.#currentCard.family}`);
+      `landed on ${toWords(this.#currentCard.family)}`);
   }
 
   get currentPlayer() {

@@ -91,6 +91,10 @@ a {
   aspect-ratio: 1;
 }
 
+#logs .log-msg {
+  width: 90%;
+}
+
 #logs>div:last-child {
   font-weight: 600;
   color: black;

@@ -144,7 +144,8 @@
     {
       "id": "baby",
       "heading": "New Baby",
-      "type": "baby"
+      "type": "baby",
+      "symbol": "New Babe"
     }
   ]
 }
