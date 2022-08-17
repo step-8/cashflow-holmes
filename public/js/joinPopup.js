@@ -3,19 +3,19 @@ const removePopup = (event) => {
   joinPopupEle.remove();
 };
 
-const showInvalidMessage = (xhr) => {
+const showInvalidMessage = (resolve) => {
   if (document.querySelector('.join-error')) {
     return;
   }
 
   let message = 'Invalid Game id';
 
-  if (xhr.status === 423) {
+  if (resolve.status === 423) {
     message = 'lobby is full';
   }
 
-  if (xhr.status === 401) {
-    window.location = '/host-lobby';
+  if (resolve.status === 401) {
+    reqPage('/host-lobby');
     return;
   }
 
@@ -25,14 +25,24 @@ const showInvalidMessage = (xhr) => {
 };
 
 const redirectToLobby = () => {
-  window.location = '/guest-lobby';
+  reqPage('/guest-lobby');
 };
 
 const joinGame = (event) => {
   event.preventDefault();
   const body = readFormData('#join-popup-form');
-  const req = { method: 'post', url: '/join' };
-  xhrRequest(req, 200, redirectToLobby, showInvalidMessage, body);
+  // API.joinGame(body)
+  // .then(joinResponse => )
+  // const req = { method: 'post', url: '/join' };
+  fetch('/join', { method: 'post', body: body })
+    .then(resolve => {
+      if (resolve.ok) {
+        redirectToLobby();
+        return;
+      }
+      showInvalidMessage(resolve);
+    })
+    .catch((err) => console.log('ERROR', err));
 };
 
 const createJoinPopup = (event) => {
