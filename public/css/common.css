@@ -198,3 +198,18 @@ a {
   align-items: center;
   row-gap: 2vmax;
 }
+
+.close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close-btn {
+  border: var(--def-border);
+  border-radius: 0.25vmax;
+  background-color: black;
+  color: white;
+  padding: 0.5vmax;
+  cursor: pointer;
+}

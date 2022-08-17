@@ -144,13 +144,13 @@
   const addDoodadMessage = (res) => {
     const messages = {
       200: 'You\'re done with doodad',
-      400: 'Insufficient balance. Take loan to proceed'
+      207: 'Insufficient balance. Take loan to proceed'
     };
 
     createDoodadMessage(messages[200], 'success');
 
-    if (res.status === 400) {
-      message = messages[400];
+    if (res.status === 207) {
+      message = messages[207];
       createDoodadMessage(message, 'warning');
     }
 

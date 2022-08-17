@@ -60,6 +60,7 @@ a {
   font-size: var(--plain-font);
   gap: 1.2vmax;
   padding: 0.5em 0.8em;
+  cursor: pointer;
 }
 
 #loan-options {
@@ -603,4 +604,14 @@ a {
   color: red;
   text-align: center;
   font-size: 1vmax;
+}
+
+#expansion-window {
+  position: absolute;
+  left: 42.5vw;
+  z-index: 1;
+  width: 42vw;
+  height: 100vh;
+  max-width: 85vw;
+  max-height: 100vh;
 }

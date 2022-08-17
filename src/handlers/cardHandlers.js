@@ -43,7 +43,7 @@ const cardActionsHandler = (req, res) => {
   if (action === 'ok') {
     let status = 200;
     if (!acceptCard(game, family)) {
-      status = 400;
+      status = 207;
     }
     res.sendStatus(status);
   }

@@ -128,20 +128,6 @@
   border: 3px dashed black;
 }
 
-.close {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.close-btn {
-  border: var(--def-border);
-  border-radius: 0.25vmax;
-  background-color: black;
-  color: white;
-  padding: 0.5vmax;
-}
-
 #other-players table {
   width: 50%;
   border-collapse: collapse;

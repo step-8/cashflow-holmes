@@ -256,8 +256,11 @@ const RAT_RACE_BOARD = `<html>
   <title>Cashflow</title>
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/board-style.css">
+  <link rel="stylesheet" href="css/professionCard.css">
+  <link rel="stylesheet" href="css/profile.css">
   <script src="js/commonLib.js"></script>
   <script src="js/ratRaceBoard.js"></script>
+  <script src="js/showMyProfile.js"></script>
 </head>
 
 <body>
@@ -456,15 +459,18 @@ const RAT_RACE_BOARD = `<html>
         </div>
       </div>
     </div>
+    <div id="expansion-window"></div> 
     <div id="game-panel">
       <header>
         <h2><a href="/">Cashflow</a></h2>
       </header>
       <nav id="game-nav">
         <ul>
-          <li id="profile">
-            <span class="expands-indicator">«</span>
-            My profile
+          <li id="my-profile">
+            <div onclick="showMyProfile()">
+              <span class="expands-indicator">«</span>
+              My profile
+            </div>
           </li>
           <li id="others-profile">
             <span class="expands-indicator">«</span>

@@ -17,6 +17,8 @@
     },
     "assets": {
       "savings": 3500,
+      "preciousMetals": [],
+      "stocks": [],
       "realEstates": []
     },
     "liabilities": {
@@ -24,6 +26,7 @@
       "schoolLoans": 150000,
       "carLoans": 19000,
       "creditCardDebt": 10000,
+      "bankLoan": 0,
       "realEstates": []
     }
   },
