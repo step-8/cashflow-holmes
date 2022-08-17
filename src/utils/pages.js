@@ -38,8 +38,8 @@ const HOST_LOBBY = `<html>
   <title>Cash Flow</title>
   <link rel="stylesheet" href="css/lobby.css">
   <link rel="stylesheet" href="css/common.css">
-  <script src="js/hostLobby.js"></script>
   <script src="js/commonLib.js"></script>
+  <script src="js/hostLobby.js"></script>
   <script src="js/drawLobby.js"></script>
 </head>
 

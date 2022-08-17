@@ -12,7 +12,7 @@ const hostHandler = (req, res) => {
 
 const startGameHandler = (req, res) => {
   req.game.start();
-  res.end();
+  res.redirect('/show-profession');
 };
 
 const cancelGameHandler = (req, res) => {

@@ -49,10 +49,13 @@ const html = ([tag, attributes, ...content]) => {
   return tagEle;
 };
 
-const showProfessions = () => {
-  const { origin } = window.location;
-  const url = '/show-profession';
-  window.location.replace(`${origin}${url}`);
+const reqPage = (action) => {
+  const form = document.createElement('form');
+  getElement('body').append(form);
+
+  form.action = action;
+  form.style.visibility = 'hidden';
+  form.submit();
 };
 
 const getElement = (selector) => {

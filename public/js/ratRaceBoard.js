@@ -335,7 +335,7 @@
       fetch('/api/game').then(res => res.json())
         .then(drawPlayerPosition)
         .then(drawPlayers);
-    }, 500);
+    }, 1000);
   };
 
   window.onload = main;

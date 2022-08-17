@@ -29,6 +29,7 @@ describe('GET /start-game', () => {
     req
       .get('/start-game')
       .set('Cookie', cookie.join(';'))
-      .expect(200, done);
+      .expect('location', '/show-profession')
+      .expect(302, done);
   });
 });

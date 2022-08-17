@@ -35,7 +35,7 @@
     const { gameID, players, status } = response;
 
     if (status === 'started') {
-      showProfessions();
+      reqPage('/show-profession');
       return;
     }
 
