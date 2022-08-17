@@ -31,4 +31,12 @@ describe('Player', () => {
     assert.strictEqual(profile.profession, 'Doctor(MD)');
     assert.strictEqual(profile.cash, expectedCash);
   });
+
+  it('Should move to 24 if position is 0', () => {
+    const player = new Player('p3', 'guest');
+    player.assignProfession(expectedProfession);
+    player.createProfile();
+    player.move(24);
+    assert.strictEqual(player.details.currentPosition, 24);
+  });
 });
