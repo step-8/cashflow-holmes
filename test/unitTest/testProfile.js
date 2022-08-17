@@ -54,15 +54,6 @@ describe('Profile', () => {
     });
   });
 
-  describe('deductDoodad', () => {
-    it('Should deduct doodad amount from the cash', () => {
-      const profile = new Profile(profession);
-      profile.setDefaults();
-      profile.deductDoodad(100);
-      assert.strictEqual(profile.details.cash, 7600);
-    });
-  });
-
   describe('addAsset', () => {
     it('Should not add asset if player has insufficient cash', () => {
       const profile = new Profile(profession);

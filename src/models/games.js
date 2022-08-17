@@ -31,18 +31,6 @@ class Games {
     return this.#games[gameID];
   }
 
-  getGameByUsername(username) {
-    for (const gameID in this.#games) {
-      const game = this.#games[gameID];
-      const allPlayers = game.allPlayersDetails;
-
-      const player = allPlayers.find(player => player.username === username);
-      if (player) {
-        return game;
-      }
-    }
-  }
-
   isValidGameKey(gameID) {
     if (this.#games[gameID]) {
       return true;
