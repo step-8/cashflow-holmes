@@ -298,7 +298,7 @@
       });
   };
 
-  const drawPlayers = (game) => {
+  const drawPlayersList = (game) => {
     const { players } = game;
     API.playerInfo()
       .then(res => res.json()).then(currentPlayer => {
@@ -356,7 +356,7 @@
 
   const drawPlayerPosition = (game) => {
     const { players, currentPlayer } = game;
-    console.log(game);
+
     players.forEach((player) => {
       const { username, currentPosition } = player;
       const boardTile = document.querySelector(`#rat-tile-${currentPosition}`);
@@ -365,7 +365,6 @@
       if (!playerIcon) {
         playerIcon = createIconEle(player);
       }
-
       boardTile.appendChild(playerIcon);
 
       if (currentPlayer.username === username) {
@@ -396,15 +395,34 @@
     logsDiv.scrollTop = logsDiv.scrollHeight;
   };
 
+  
+  const drawScreen = (game, logs) => {
+    drawPlayerPosition(game);
+    drawPlayersList(game);
+    addLogs(game, logs);
+  };
+
+  const prevState = { game: '' };
+  
+  const draw = (logs) => {
+    return res => {
+      const newState = res.stateHash;
+
+      if (newState !== prevState.game) {
+        drawScreen(res, logs);
+        prevState.game = newState;
+      }
+    };
+  };
+
   const main = () => {
     const logs = new Log();
+
     setInterval(() => {
       API.getGame()
         .then(res => res.json())
-        .then(drawPlayerPosition)
-        .then(drawPlayers)
-        .then((game) => addLogs(game, logs));
-    }, 1000);
+        .then(draw(logs));
+    }, 500);
   };
 
   window.onload = main;
