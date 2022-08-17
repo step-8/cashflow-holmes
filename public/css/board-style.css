@@ -580,5 +580,11 @@ a {
 .success {
   color: green;
   text-align: center;
-  font-size: 2vmax;
+  font-size: 1vmax;
+}
+
+.warning {
+  color: red;
+  text-align: center;
+  font-size: 1vmax;
 }

@@ -41,7 +41,7 @@ const createGameRouter = (router) => {
   router.get('/card/card-type', cardTypeHandler);
   router.post('/card/card-action', cardActionsHandler);
   router.get('/card/:type', serveCard);
-  router.use(['/login', '/register'], (req, res) => res.redirect('/'));
+
   router.use((req, res) => {
     res.status(404);
     res.end(NOT_FOUND);

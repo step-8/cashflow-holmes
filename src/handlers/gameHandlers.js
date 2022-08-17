@@ -25,14 +25,13 @@ const cancelGameHandler = (req, res) => {
 
 const guestLobbyHandler = (req, res) => {
   const { game } = req;
-  const { gameID } = game.state;
-  const { username } = req.session;
+  const { username, gameID } = req.session;
 
   game.addPlayer(username, 'guest');
   const guestHtml = GUEST_LOBBY
     .replace('__GAME_ID__', gameID)
     .replace('__USERNAME__', username);
-  res.end(guestHtml);
+  res.send(guestHtml);
 };
 
 const showProfessionHandler = (req, res) => {
@@ -50,7 +49,6 @@ const removeGameIdHandler = (req, res) => {
 
 const getUserInfoHandler = (req, res) => {
   res.json({ username: req.session.username });
-  res.end();
 };
 
 const rollDiceHandler = (req, res) => {

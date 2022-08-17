@@ -41,6 +41,10 @@ class Turn {
     this.#currentPlayer = player;
   }
 
+  canPlayerContinue() {
+    return this.#currentPlayer.canContinue();
+  }
+
   get info() {
     return {
       player: this.#currentPlayer,

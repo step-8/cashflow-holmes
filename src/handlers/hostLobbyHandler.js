@@ -5,10 +5,9 @@ const hostLobbyHandler = (req, res) => {
   let hostHtml = HOST_LOBBY
     .replace('__USERNAME__', username);
 
-  if (req.session.gameID) {
+  if (gameID) {
     hostHtml = hostHtml.replace('__GAME_ID__', gameID);
     res.send(hostHtml);
-    res.end();
     return;
   }
 
@@ -20,7 +19,6 @@ const hostLobbyHandler = (req, res) => {
 
   hostHtml = hostHtml.replace('__GAME_ID__', latestGameID);
   res.send(hostHtml);
-  res.end();
 };
 
 module.exports = { hostLobbyHandler };

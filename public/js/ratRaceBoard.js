@@ -113,25 +113,45 @@
 
   };
 
-  const addDoodadMessage = (res) => {
+  const createDoodadMessage = (message, className) => {
     const messageBox = getElement('#message-space');
-    const message = html(['div', { className: 'success' }, 'You\'re done with doodad']);
-    messageBox.appendChild(message);
+    const messageEle = html(['div', { className }, message]);
+    messageBox.appendChild(messageEle);
+
+    setTimeout(() => {
+      messageEle.remove();
+    }, 2000);
+  };
+
+  const addDoodadMessage = (res) => {
+    const messages = {
+      200: 'You\'re done with doodad',
+      400: 'Insufficient balance. Take loan to proceed'
+    };
+
+    createDoodadMessage(messages[200], 'success');
+
+    if (res.status === 400) {
+      message = messages[400];
+      createDoodadMessage(message, 'warning');
+    }
+
     return res;
   };
 
   const performAction = (event, family, type) => {
     const actionDiv = event.target;
     const [__, action] = actionDiv.id.split('-');
-    fetch('/card/card-action', {
+    const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: `action=${action}&family=${family}&type=${type}`
-    })
+    };
+    fetch('/card/card-action', options)
       .then((res) => {
-        if (res.status === 200 && family === 'doodad') {
+        if (family === 'doodad') {
           addDoodadMessage(res);
         }
         return res;

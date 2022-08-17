@@ -39,4 +39,19 @@ describe('Player', () => {
     player.move(24);
     assert.strictEqual(player.details.currentPosition, 24);
   });
+
+  it('Should return true when cash is above 0', () => {
+    const player = new Player('p3', 'guest');
+    player.assignProfession(expectedProfession);
+    player.createProfile();
+    assert.ok(player.canContinue());
+  });
+
+  it('Should return false when cash is less than 0', () => {
+    const player = new Player('p3', 'guest');
+    player.assignProfession(expectedProfession);
+    player.createProfile();
+    player.doodad(30000);
+    assert.ok(!player.canContinue());
+  });
 });

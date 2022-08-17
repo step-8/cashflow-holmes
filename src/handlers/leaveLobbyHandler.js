@@ -3,6 +3,7 @@ const leaveLobbyHandler = (req, res) => {
   const { username } = req.session;
 
   game.removePlayer(username);
+  req.session.gameID = null;
   res.redirect('/');
 };
 

@@ -3,3 +3,4 @@ private/
 .env
 todo/
 coverage/
+countLinesAndFiles.sh

@@ -38,6 +38,10 @@ class Player {
     this.#profile.addPay();
   }
 
+  canContinue() {
+    return this.#profile.details.cash > 0;
+  }
+
   doodad(cost) {
     this.#profile.deductDoodad(cost);
   }
