@@ -4,8 +4,47 @@
   height: 100%;
   left: 50%;
   background-color: silver;
+  font-size: 1vmax;
+}
+
+.board-name {
+  font-size: 1vmax;
+}
+
+.income-statement {
+  height: 50%;
+  border: var(--def-border);
+}
+
+.income-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.profile-wrapper>header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1vmax 2vmax;
+  font-size: 1vmax;
+  font-weight: 600;
+}
+
+.salary-wrapper {
+  display: flex;
+  gap: 1vmax;
+}
+
+.my-details {
+  display: flex;
+  gap: 1vmax;
 }
 
 .profile-wrapper table {
-  color: white;
+  font-size: 1vmax;
+}
+
+.profile-wrapper table th {
+  text-align: left;
+  font-weight: 400;
+  padding-right: 1vmax;
 }
