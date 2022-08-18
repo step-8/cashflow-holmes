@@ -40,8 +40,44 @@ const createProfileHeader = ({ username, profession, color }) => {
   ];
 };
 
-const createRealEstateTable = ({ realEstates }) => {
+const createRealEstateIncome = ({ realEstates }) => {
   return ['div', {}];
+};
+
+const createRealEstateLiabilities = ({ realEstates }) => {
+  return ['table', {},
+    ['thead', {},
+      ['th', {}, 'Real Estate/Business'],
+      ['th', {}, 'Mortgage/Liability'],
+    ]
+  ];
+};
+
+const createAssetsTable = ({ assets }) => {
+  return ['div', {}];
+};
+
+const createLiabilitiesTable = ({ liabilities }) => {
+  const wrapper = ['div', {}];
+
+  const liabilitiesTable = ['table', {}];
+  const liabilityDetails = Object.entries(liabilities);
+
+  liabilityDetails.forEach(([key, val]) => {
+    if (key === 'realEstates') {
+      return;
+    }
+    const liabilityHeader = ['th', {}, key];
+    const liabilityValue = ['td', {}, val];
+    const row = ['tr', {}, liabilityHeader, liabilityValue];
+    liabilitiesTable.push(row);
+  });
+
+  const realEstateTable = createRealEstateLiabilities(liabilities);
+
+  wrapper.push(liabilitiesTable, realEstateTable);
+
+  return wrapper;
 };
 
 const generateProfile = (game, userInfo) => {
@@ -63,7 +99,7 @@ const generateProfile = (game, userInfo) => {
                 ['p', {}, profile.income.salary]
               ],
               ['h4', {}, 'Real estate :'],
-              createRealEstateTable(profile.income)
+              createRealEstateIncome(profile.income)
             ],
             ['div', { className: 'expenses' },
               ['h3', {}, 'Expenses'],
@@ -75,10 +111,12 @@ const generateProfile = (game, userInfo) => {
           ['h2', {}, 'Balance sheet'],
           ['div', { className: 'balance-container' },
             ['div', { className: 'assets' },
-              ['h3', {}, 'Assets']
+              ['h3', {}, 'Assets'],
+              createAssetsTable(profile)
             ],
             ['div', { className: 'liabilities' },
-              ['h3', {}, 'Liabilities']
+              ['h3', {}, 'Liabilities'],
+              createLiabilitiesTable(profile)
             ],
           ]
         ]
