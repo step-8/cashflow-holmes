@@ -40,51 +40,111 @@ const createProfileHeader = ({ username, profession, color }) => {
   ];
 };
 
+const createTwoColumnRow = (value1, value2) => {
+  const element1 = ['td', {}, value1];
+  const element2 = ['td', {}, value2];
+  const row = ['tr', {}, element1, element2];
+  return row;
+};
+
+const createThreeColumnRow = (value1, value2, value3) => {
+  const element1 = ['td', {}, value1];
+  const element2 = ['td', {}, value2];
+  const element3 = ['td', {}, value3];
+  const row = ['tr', {}, element1, element2, element3];
+  return row;
+};
+
 const createRealEstateIncome = ({ realEstates }) => {
-  return ['table', {},
+  const table = ['table', {},
     ['thead', {},
       ['th', {}, 'Real Estate/Business'],
       ['th', {}, 'Cash Flow'],
-    ]
+    ],
   ];
+
+  const tbody = ['tbody', {}];
+  realEstates.forEach(({ symbol, cashFlow }) => {
+    const row = createTwoColumnRow(symbol, cashFlow);
+    tbody.push(row);
+  });
+
+  table.push(tbody);
+  return table;
 };
 
 const createRealEstateLiabilities = ({ realEstates }) => {
-  return ['table', {},
+  const table = ['table', {},
     ['thead', {},
       ['th', {}, 'Real Estate/Business'],
       ['th', {}, 'Mortgage/Liability'],
     ]
   ];
+
+  const tbody = ['tbody', {}];
+  realEstates.forEach(({ symbol, mortgage }) => {
+    const row = createTwoColumnRow(symbol, mortgage);
+    tbody.push(row);
+  });
+
+  table.push(tbody);
+  return table;
 };
 
 const createRealEstateAssets = ({ realEstates }) => {
-  return ['table', {},
+  const table = ['table', {},
     ['thead', {},
       ['th', {}, 'Real Estate/Business'],
       ['th', {}, 'Down Payment'],
       ['th', {}, 'Cost'],
     ]
   ];
+
+  const tbody = ['tbody', {}];
+  realEstates.forEach(({ symbol, downPayment, cost }) => {
+    const row = createThreeColumnRow(symbol, downPayment, cost);
+    tbody.push(row);
+  });
+
+  table.push(tbody);
+  return table;
 };
 
 const createStocksTable = ({ stocks }) => {
-  return ['table', {},
+  const table = ['table', {},
     ['thead', {},
       ['th', {}, 'Stocks/Funds/CDs'],
       ['th', {}, 'No of Shares'],
       ['th', {}, 'Cost/Share'],
     ]
   ];
+
+  const tbody = ['tbody', {}];
+  stocks.forEach(({ symbol, count, price }) => {
+    const row = createThreeColumnRow(symbol, count, count * price);
+    tbody.push(row);
+  });
+
+  table.push(tbody);
+  return table;
 };
 
 const createPreciousMetals = ({ preciousMetals }) => {
-  return ['table', {},
+  const table = ['table', {},
     ['thead', {},
       ['th', {}, 'Metal Name'],
       ['th', {}, 'Cost'],
     ]
   ];
+
+  const tbody = ['tbody', {}];
+  preciousMetals.forEach(({ name, cost }) => {
+    const row = createTwoColumnRow(name, cost);
+    tbody.push(row);
+  });
+
+  table.push(tbody);
+  return table;
 };
 
 const createLiabilitiesTable = ({ liabilities }) => {
@@ -114,7 +174,6 @@ const generateProfile = (game, userInfo) => {
   const { players } = game;
   const player = findPlayer(players, userInfo);
   const { profile } = player;
-
   const myProfileTemplate =
     ['div', { id: 'profile', className: 'profile-wrapper' },
       createProfileHeader(player),
@@ -141,7 +200,7 @@ const generateProfile = (game, userInfo) => {
           ['div', { className: 'balance-container' },
             ['div', { className: 'assets' },
               ['h3', {}, 'Assets'],
-              ['div', { className: 'salary-wrapper' },
+              ['div', { className: 'savings-wrapper' },
                 ['h4', {}, 'Savings :'],
                 ['p', {}, profile.assets.savings]
               ],

@@ -48,6 +48,8 @@
     },
     "assets": {
       "savings": 600,
+      "preciousMetals": [],
+      "stocks": [],
       "realEstates": []
     },
     "liabilities": {
@@ -76,6 +78,8 @@
     },
     "assets": {
       "savings": 2500,
+      "preciousMetals": [],
+      "stocks": [],
       "realEstates": []
     },
     "liabilities": {
@@ -104,6 +108,8 @@
     },
     "assets": {
       "savings": 2500,
+      "preciousMetals": [],
+      "stocks": [],
       "realEstates": []
     },
     "liabilities": {
@@ -132,6 +138,8 @@
     },
     "assets": {
       "savings": 700,
+      "preciousMetals": [],
+      "stocks": [],
       "realEstates": []
     },
     "liabilities": {
@@ -160,6 +168,8 @@
     },
     "assets": {
       "savings": 800,
+      "preciousMetals": [],
+      "stocks": [],
       "realEstates": []
     },
     "liabilities": {
@@ -188,6 +198,8 @@
     },
     "assets": {
       "savings": 2000,
+      "preciousMetals": [],
+      "stocks": [],
       "realEstates": []
     },
     "liabilities": {
@@ -216,6 +228,8 @@
     },
     "assets": {
       "savings": 400,
+      "preciousMetals": [],
+      "stocks": [],
       "realEstates": []
     },
     "liabilities": {
@@ -244,6 +258,8 @@
     },
     "assets": {
       "savings": 500,
+      "preciousMetals": [],
+      "stocks": [],
       "realEstates": []
     },
     "liabilities": {
@@ -272,6 +288,8 @@
     },
     "assets": {
       "savings": 400,
+      "preciousMetals": [],
+      "stocks": [],
       "realEstates": []
     },
     "liabilities": {
@@ -300,6 +318,8 @@
     },
     "assets": {
       "savings": 500,
+      "preciousMetals": [],
+      "stocks": [],
       "realEstates": []
     },
     "liabilities": {
@@ -328,6 +348,8 @@
     },
     "assets": {
       "savings": 700,
+      "preciousMetals": [],
+      "stocks": [],
       "realEstates": []
     },
     "liabilities": {

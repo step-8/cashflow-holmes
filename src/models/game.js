@@ -12,7 +12,6 @@ const getNextAttrib = (players, type, attribs) => {
 };
 
 const addLog = (log, username, color, card) => {
-  console.log(card.type);
   if (card.type !== 'deal') {
     log({ username, color }, `landed on ${toWords(card.family)}`);
     return;
@@ -110,7 +109,6 @@ class Game {
     player.assignProfession(
       getNextAttrib(this.#players, 'profession', this.#professions)
     );
-
     player.createProfile();
     this.#players.push(player);
   }
