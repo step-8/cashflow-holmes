@@ -11,6 +11,7 @@
   max-width: 85vw;
   max-height: 100vh;
   justify-content: stretch;
+  /* position: relative; */
 }
 
 #game-panel {
@@ -136,7 +137,9 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* position: absolute; */
+  flex-wrap: wrap;
+  gap: 0.2vmax;
+  position: relative;
 }
 
 .tile-info {
@@ -145,6 +148,7 @@ a {
   align-items: center;
   flex-direction: column;
   row-gap: 0.5vmax;
+  position: absolute;
 }
 
 .ratrace-tile img {
@@ -515,10 +519,13 @@ a {
 }
 
 /* dice box positions  Start*/
+
 #dice-box .dice {
   width: 65px;
   aspect-ratio: 1;
-  border: 2px solid black;
+  border: var(--def-border);
+  border-radius: 0.2vmax;
+  background-color: crimson;
   position: relative;
   display: flex;
   align-items: center;
@@ -531,7 +538,8 @@ a {
   width: 0.7vmax;
   aspect-ratio: 1;
   border-radius: 50%;
-  background-color: black;
+  background-color: white;
+  border: var(--def-border);
 }
 
 .two-1,
@@ -602,10 +610,6 @@ a {
   font-weight: 500;
 }
 
-.ratrace-tile .icon {
-  position: absolute;
-}
-
 .success {
   color: green;
   text-align: center;
@@ -638,11 +642,9 @@ a {
 @keyframes pulsate {
   from {
     transform: scale(1);
-    border: none;
   }
   
   to {
     transform: scale(1.18);
-    border: none;
   }
 }
