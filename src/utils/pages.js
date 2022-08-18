@@ -266,6 +266,7 @@ const RAT_RACE_BOARD = `<html>
   <script src="js/showLedger.js"></script>
   <script src="js/ratRaceBoard.js"></script>
   <script src="js/showMyProfile.js"></script>
+  <script src="js/showOtherPlayers.js"></script>
 </head>
 
 <body>
@@ -477,7 +478,7 @@ const RAT_RACE_BOARD = `<html>
               <span class="expands-indicator">«</span>
               My profile
           </li>
-          <li id="others-profile">
+          <li id="others-profile" onclick="showOtherPlayers()">
             <span class="expands-indicator">«</span>
             Other players
           </li>

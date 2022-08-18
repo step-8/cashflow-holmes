@@ -27,7 +27,7 @@ const removeBlurBackground = () => {
   boardEle.classList.remove('inactive');
 };
 
-const createProfileHeader = ({ username, profession, color }) => {
+const createExpansionHeader = ({ username, profession, color }) => {
   const professionName = profession.profession;
   return ['header', {},
     ['h3', { className: 'board-name' }, 'Rat Race'],
@@ -186,13 +186,22 @@ const showWindow = (windowElements) => {
   expansionEle.style.visibility = 'visible';
 };
 
-const generateProfile = (game, userInfo) => {
+const createCloseButton = (closeFn) => {
+  return ['div', { className: 'close' },
+    ['div', {
+      className: 'close-btn',
+      onclick: (event) => closeFn(event)
+    }, 'close']
+  ];
+};
+
+const generateProfile = (game, username) => {
   const { players } = game;
-  const player = findPlayer(players, userInfo.username);
+  const player = findPlayer(players, username);
   const { profile } = player;
   const myProfileTemplate =
     ['div', { id: 'profile', className: 'profile-wrapper' },
-      createProfileHeader(player),
+      createExpansionHeader(player),
       ['main', {},
         ['div', { className: 'income-statement' },
           ['h2', {}, 'Income statement'],
@@ -247,12 +256,7 @@ const generateProfile = (game, userInfo) => {
           ]
         ]
       ],
-      ['div', { className: 'close' },
-        ['div', {
-          className: 'close-btn',
-          onclick: (event) => closeMyProfile(event)
-        }, 'Close']
-      ]
+      createCloseButton(closeMyProfile)
     ];
 
   const myProfile = html(myProfileTemplate);
@@ -262,7 +266,7 @@ const generateProfile = (game, userInfo) => {
 const createMyProfile = (game) => {
   API.userInfo()
     .then(res => res.json())
-    .then(userInfo => generateProfile(game, userInfo));
+    .then(userInfo => generateProfile(game, userInfo.username));
 
   return game;
 };
@@ -274,7 +278,7 @@ const showMyProfile = () => {
     .then(blurBackground);
 };
 
-const closeMyProfile = (event) => {
+const closeExpansion = () => {
   const expansionEle = getElement('.expansion-window-screen');
 
   expansionEle.classList.remove('expand-window');
@@ -283,7 +287,11 @@ const closeMyProfile = (event) => {
   expansionEle.classList.add('inactive');
   expansionEle.style.visibility = 'hidden';
 
+  removeBlurBackground();
+};
+
+const closeMyProfile = (event) => {
+  closeExpansion();
   const profileEle = getElement('#profile');
   profileEle.remove();
-  removeBlurBackground();
 };

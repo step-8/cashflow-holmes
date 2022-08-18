@@ -36,7 +36,7 @@
   padding: 0.5vmax;
 }
 
-.profile-wrapper>header {
+.expansion-window-screen header {
   display: flex;
   justify-content: space-between;
   padding: 0vmax 1vmax;
