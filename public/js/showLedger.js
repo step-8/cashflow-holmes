@@ -11,10 +11,15 @@ const transactionItem = ({currentCash, amount, description, totalCash}) => ['div
   ['div', {}, totalCash],
 ];
 
+const classNames = {
+  windowHeader: 'window-header',
+  windowTitle: 'window-title',
+};
+
 const windowHeader = ({profession}, color, username) =>
-  ['div', {},
-    ['div', { className: 'window-title' }, 'Ledger'],
-    ['div', { className: 'my-details', },
+  ['div', { className: classNames.windowHeader},
+    ['div', { className: classNames.windowTitle }, 'Ledger'],
+    ['div', { className: 'my-details' },
       ['div', {},
         ['div', { id: 'username' }, username],
         ['div', { id: 'profession' }, profession],
@@ -25,7 +30,7 @@ const windowHeader = ({profession}, color, username) =>
       
 const ledgerHeader = () => [
   'div', { className: 'ledger-title' },
-  ...['Current Cash', 'Description', 'Total Cash'].map(
+  ...['Current Cash', 'Amount', 'Description', 'Total Cash'].map(
     heading => ['div', {}, heading])
 ];
 
@@ -59,13 +64,13 @@ const createLedgerWindow = (game) => {
 
 const showMyLedger = () => {
   const placeHolder = getElement('.expansion-window-screen');
+  placeHolder.replaceChildren('');
   placeHolder.appendChild(expansionWindowScreens.ledger);
 
   placeHolder.classList.remove('close-window');
   placeHolder.classList.remove('inactive');
   placeHolder.classList.add('expand-window');
   placeHolder.classList.add('active');
-  placeHolder.innerHtml = '';
   placeHolder.style.visibility = 'visible';
   
   const boardEle = getElement('#board');
@@ -76,11 +81,11 @@ const showMyLedger = () => {
 
 const closeMyLedger = () => {
   const placeHolder = getElement('.expansion-window-screen');
+
   placeHolder.classList.remove('expand-window');
   placeHolder.classList.remove('active');
   placeHolder.classList.add('close-window');
   placeHolder.classList.add('inactive');
-  placeHolder.innerHtml = '';
   placeHolder.style.visibility = 'hidden';
 
   const boardEle = getElement('#board');
