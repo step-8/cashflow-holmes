@@ -47,7 +47,7 @@ class Player {
   }
 
   buyRealEstate(card) {
-    this.#profile.addAsset(card);
+    return this.#profile.addAsset(card);
   }
 
   move(steps) {

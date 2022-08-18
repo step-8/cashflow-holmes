@@ -3,12 +3,14 @@ class Turn {
   #currentPlayer;
   #turnCompleted;
   #log;
+  #currentTransaction;
 
   constructor(card, currentPlayer, log) {
     this.#card = card;
     this.#currentPlayer = currentPlayer;
     this.#turnCompleted = false;
     this.#log = log;
+    this.#currentTransaction = null;
   }
 
   #playerInfo() {
@@ -19,6 +21,10 @@ class Turn {
 
   #cashflow() {
     return this.#currentPlayer.details.profile.cashFlow;
+  }
+
+  set transactionState(status) {
+    this.#currentTransaction = { family: this.#card.family, status };
   }
 
   payday() {
@@ -35,10 +41,13 @@ class Turn {
   }
 
   buyRealEstate() {
-    this.#currentPlayer.buyRealEstate(this.#card);
+    const status = this.#currentPlayer.buyRealEstate(this.#card);
+    this.transactionState = status;
+    if (!status) {
+      return;
+    }
     this.#log.addLog(this.#playerInfo(), `bought ${this.#card.symbol}`);
     this.#turnCompleted = true;
-    return;
   }
 
   skip() {
@@ -66,7 +75,8 @@ class Turn {
     return {
       player: this.#currentPlayer,
       card: this.#card, //No need of card
-      state: this.#turnCompleted
+      state: this.#turnCompleted,
+      transaction: this.#currentTransaction
     };
   }
 }

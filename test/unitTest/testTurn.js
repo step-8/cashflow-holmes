@@ -4,17 +4,20 @@ const assert = require('assert');
 
 describe('Turn', () => {
   const identity = (__) => assert.ok(true);
+  const successful = () => 1;
+  const failure = () => 0;
   const log = new Log();
   const player = {
     details: { username: 'user', color: 'c', profile: { cashFlow: 100 } },
     doodad: identity,
     payday: identity,
-    buyRealEstate: identity
+    buyRealEstate: successful
   };
   const card = {
     heading: 'New Card',
     symbol: 'a',
-    cost: 100
+    cost: 100,
+    family: 'deal'
   };
 
   it('Should update the card', () => {
@@ -56,14 +59,47 @@ describe('Turn', () => {
   });
 
   describe('buyRealEstate', () => {
-    it('Should invoke the players buyRealEstate', () => {
+    it('Should buy buyRealEstate set transaction as successful', () => {
       const log = new Log();
+      const player = {
+        details: { username: 'user', color: 'c', profile: { cashFlow: 100 } },
+        doodad: identity,
+        payday: identity,
+        buyRealEstate: successful
+      };
+
       const turn = new Turn(card, player, log);
       turn.buyRealEstate();
+
       assert.ok(turn.info.state);
       assert.deepStrictEqual(
         log.getAllLogs(),
         [{ username: 'user', color: 'c', message: `bought ${card.symbol}` }]
+      );
+
+      assert.deepStrictEqual(
+        turn.info.transaction,
+        { family: 'deal', status: 1 }
+      );
+    });
+
+    it('Should not buy buyRealEstate set transaction as failure', () => {
+      const log = new Log();
+      const player = {
+        details: { username: 'user', color: 'c', profile: { cashFlow: 100 } },
+        doodad: identity,
+        payday: identity,
+        buyRealEstate: failure
+      };
+
+      const turn = new Turn(card, player, log);
+      turn.buyRealEstate();
+
+      assert.ok(!turn.info.state);
+      assert.deepStrictEqual(log.getAllLogs(), []);
+      assert.deepStrictEqual(
+        turn.info.transaction,
+        { family: 'deal', status: 0 }
       );
     });
   });

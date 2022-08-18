@@ -57,13 +57,14 @@ class Profile {
 
   addAsset(card) {
     if (this.#cash < card.downPayment) {
-      return;
+      return 0;
     }
 
     this.#assets.realEstates.push(card);
     this.#income.realEstates.push(card);
     this.#liabilities.realEstates.push(card);
     this.updateCash(-card.downPayment);
+    return 1;
   }
 
   updateCash(amount) {
