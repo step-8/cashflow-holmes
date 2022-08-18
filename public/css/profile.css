@@ -27,6 +27,14 @@
   width: 45%;
 }
 
+.income-wrapper,
+.expenses-wrapper,
+.assets-wrapper,
+.liabilities-wrapper {
+  height: 13vmax;
+  overflow: scroll;
+}
+
 .profile-wrapper>header {
   display: flex;
   justify-content: space-between;
@@ -36,9 +44,15 @@
 
 .salary-wrapper,
 .savings-wrapper,
-.my-details {
+.my-details,
+.total-income-wrapper,
+.total-expenses-wrapper {
   display: flex;
   gap: 1vmax;
+}
+
+.my-details .icon {
+  width: 2.3em;
 }
 
 .profile-wrapper table {
@@ -46,7 +60,7 @@
   padding-top: 1vmax;
 }
 
-.profile-wrapper h3 {
+.profile-wrapper main h3 {
   padding: 0.5vmax 0;
   background-color: black;
   color: white;
@@ -57,4 +71,10 @@
   text-align: left;
   font-weight: 400;
   padding-right: 1vmax;
+}
+
+.total-income-wrapper,
+.total-expenses-wrapper {
+  padding-top: 0.5vmax;
+  font-weight: 600;
 }

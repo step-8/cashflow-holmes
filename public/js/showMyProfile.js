@@ -25,28 +25,28 @@ const removeBlurBackground = () => {
 const createProfileHeader = ({ username, profession, color }) => {
   const professionName = profession.profession;
   return ['header', {},
-    ['div', { className: 'board-name' }, 'Rat Race'],
+    ['h3', { className: 'board-name' }, 'Rat Race'],
     ['div', { className: 'my-details', },
       ['div', {},
         ['div', { id: 'username' }, username],
         ['div', { id: 'profession' }, professionName],
       ],
-      ['div', { className: `icon ${color}` }]
+      ['div', { className: `icon  ${color}` }]
     ]
   ];
 };
 
 const createTwoColumnRow = (value1, value2) => {
-  const element1 = ['td', {}, camelToSpace(value1)];
-  const element2 = ['td', {}, camelToSpace(value2)];
+  const element1 = ['td', {}, value1];
+  const element2 = ['td', {}, value2];
   const row = ['tr', {}, element1, element2];
   return row;
 };
 
 const createThreeColumnRow = (value1, value2, value3) => {
-  const element1 = ['td', {}, camelToSpace(value1)];
-  const element2 = ['td', {}, camelToSpace(value2)];
-  const element3 = ['td', {}, camelToSpace(value3)];
+  const element1 = ['td', {}, value1];
+  const element2 = ['td', {}, value2];
+  const element3 = ['td', {}, value3];
   const row = ['tr', {}, element1, element2, element3];
   return row;
 };
@@ -186,15 +186,27 @@ const generateProfile = (game, userInfo) => {
           ['div', { className: 'income-container' },
             ['div', { className: 'income' },
               ['h3', {}, 'Income'],
-              ['div', { className: 'salary-wrapper' },
-                ['h4', {}, 'Salary :'],
-                ['p', {}, profile.income.salary]
+              ['div', { className: 'income-wrapper' },
+                ['div', { className: 'salary-wrapper' },
+                  ['h4', {}, 'Salary :'],
+                  ['p', {}, profile.income.salary]
+                ],
+                createRealEstateIncome(profile.income),
               ],
-              createRealEstateIncome(profile.income)
+              ['div', { className: 'total-income-wrapper' },
+                ['div', {}, 'Total Income'],
+                ['div', {}, profile.totalIncome]
+              ]
             ],
             ['div', { className: 'expenses' },
               ['h3', {}, 'Expenses'],
-              createExpensesTable(profile.expenses)
+              ['div', { className: 'expenses-wrapper' },
+                createExpensesTable(profile.expenses)
+              ],
+              ['div', { className: 'total-expenses-wrapper' },
+                ['div', {}, 'Total Expenses'],
+                ['div', {}, profile.totalExpenses]
+              ]
             ]
           ],
         ],
@@ -203,17 +215,21 @@ const generateProfile = (game, userInfo) => {
           ['div', { className: 'balance-container' },
             ['div', { className: 'assets' },
               ['h3', {}, 'Assets'],
-              ['div', { className: 'savings-wrapper' },
-                ['h4', {}, 'Savings :'],
-                ['p', {}, profile.assets.savings]
+              ['div', { className: 'assets-wrapper' },
+                ['div', { className: 'savings-wrapper' },
+                  ['h4', {}, 'Savings :'],
+                  ['p', {}, profile.assets.savings]
+                ],
+                createPreciousMetals(profile.assets),
+                createStocksTable(profile.assets),
+                createRealEstateAssets(profile.assets),
               ],
-              createPreciousMetals(profile.assets),
-              createStocksTable(profile.assets),
-              createRealEstateAssets(profile.assets),
             ],
             ['div', { className: 'liabilities' },
               ['h3', {}, 'Liabilities'],
-              createLiabilitiesTable(profile)
+              ['div', { className: 'assets-wrapper' },
+                createLiabilitiesTable(profile)
+              ]
             ],
           ]
         ]

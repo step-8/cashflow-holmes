@@ -474,11 +474,9 @@ const RAT_RACE_BOARD = `<html>
       </header>
       <nav id="game-nav">
         <ul>
-          <li id="my-profile">
-            <div onclick="showMyProfile()">
+          <li id="my-profile" onclick="showMyProfile()">
               <span class="expands-indicator">«</span>
               My profile
-            </div>
           </li>
           <li id="others-profile">
             <span class="expands-indicator">«</span>
