@@ -41,7 +41,12 @@ const createProfileHeader = ({ username, profession, color }) => {
 };
 
 const createRealEstateIncome = ({ realEstates }) => {
-  return ['div', {}];
+  return ['table', {},
+    ['thead', {},
+      ['th', {}, 'Real Estate/Business'],
+      ['th', {}, 'Cash Flow'],
+    ]
+  ];
 };
 
 const createRealEstateLiabilities = ({ realEstates }) => {
@@ -53,8 +58,33 @@ const createRealEstateLiabilities = ({ realEstates }) => {
   ];
 };
 
-const createAssetsTable = ({ assets }) => {
-  return ['div', {}];
+const createRealEstateAssets = ({ realEstates }) => {
+  return ['table', {},
+    ['thead', {},
+      ['th', {}, 'Real Estate/Business'],
+      ['th', {}, 'Down Payment'],
+      ['th', {}, 'Cost'],
+    ]
+  ];
+};
+
+const createStocksTable = ({ stocks }) => {
+  return ['table', {},
+    ['thead', {},
+      ['th', {}, 'Stocks/Funds/CDs'],
+      ['th', {}, 'No of Shares'],
+      ['th', {}, 'Cost/Share'],
+    ]
+  ];
+};
+
+const createPreciousMetals = ({ preciousMetals }) => {
+  return ['table', {},
+    ['thead', {},
+      ['th', {}, 'Metal Name'],
+      ['th', {}, 'Cost'],
+    ]
+  ];
 };
 
 const createLiabilitiesTable = ({ liabilities }) => {
@@ -98,7 +128,6 @@ const generateProfile = (game, userInfo) => {
                 ['h4', {}, 'Salary :'],
                 ['p', {}, profile.income.salary]
               ],
-              ['h4', {}, 'Real estate :'],
               createRealEstateIncome(profile.income)
             ],
             ['div', { className: 'expenses' },
@@ -112,7 +141,13 @@ const generateProfile = (game, userInfo) => {
           ['div', { className: 'balance-container' },
             ['div', { className: 'assets' },
               ['h3', {}, 'Assets'],
-              createAssetsTable(profile)
+              ['div', { className: 'salary-wrapper' },
+                ['h4', {}, 'Savings :'],
+                ['p', {}, profile.assets.savings]
+              ],
+              createPreciousMetals(profile.assets),
+              createStocksTable(profile.assets),
+              createRealEstateAssets(profile.assets),
             ],
             ['div', { className: 'liabilities' },
               ['h3', {}, 'Liabilities'],
