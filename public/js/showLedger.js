@@ -4,10 +4,48 @@ const findPlayer = (players, playerName) => {
   return players.find(player => player.username === playerName);
 };
 
-const createPlayerLedger = ({ profile, color, username}) => {
-  const element = ['div', {}, username,
-    ['div', { onclick: closeMyLedger, className: 'close-btn' }, 'CLOSE']];
-  expansionWindowScreens.ledger = html(element);
+const transactionItem = ({currentCash, amount, description, totalCash}) => ['div', { className: 'ledger-entry' },
+  ['div', {}, currentCash],
+  ['div', {style: `color:${amount >= 0 ? 'green': 'red'}` }, amount],
+  ['div', {}, description],
+  ['div', {}, totalCash],
+];
+
+const windowHeader = ({profession}, color, username) =>
+  ['div', {},
+    ['div', { className: 'window-title' }, 'Ledger'],
+    ['div', { className: 'my-details', },
+      ['div', {},
+        ['div', { id: 'username' }, username],
+        ['div', { id: 'profession' }, profession],
+      ],
+      ['div', { className: `icon ${color}` }]
+    ]
+  ];
+      
+const ledgerHeader = () => [
+  'div', { className: 'ledger-title' },
+  ...['Current Cash', 'Description', 'Total Cash'].map(
+    heading => ['div', {}, heading])
+];
+
+const ledgerEntries = (transactions) =>
+  ['div', { className: 'ledger-entries' }, ...transactions.map(transactionItem)];
+
+const ledgerWindow =
+  (profile, color, username, profession) => ['div', { className: 'ledger-window' },
+    windowHeader(profession, color, username),
+    ['div', { className: 'ledger-view' }, 
+      ledgerHeader(),
+      ledgerEntries(profile.transactions)
+    ],
+    ['div', { onclick: closeMyLedger, className: 'close-btn' }, 'CLOSE']
+  ];
+
+const createPlayerLedger = ({ profile, color, username, profession }) => {
+  expansionWindowScreens.ledger = html(
+    ledgerWindow(profile, color, username, profession)
+  );
 };
 
 const createLedgerWindow = (game) => {
