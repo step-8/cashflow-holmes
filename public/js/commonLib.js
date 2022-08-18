@@ -57,3 +57,5 @@ const showMessage = (fn) => (game) => {
       }
     });
 };
+
+const camelToSpace = (word) => word.replace(/([A-Z])/g, ' $1').toLowerCase();

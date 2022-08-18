@@ -625,8 +625,8 @@ a {
 #expansion-window {
   position: absolute;
   z-index: -1;
-  width: 85vw;
-  height: 99vh;
+  width: 84vw;
+  height: 98vh;
   max-width: 85vw;
   max-height: 100vh;
 }
@@ -643,7 +643,7 @@ a {
   from {
     transform: scale(1);
   }
-  
+
   to {
     transform: scale(1.18);
   }

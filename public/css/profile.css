@@ -5,38 +5,37 @@
   left: 50%;
   background-color: silver;
   font-size: 1vmax;
-}
-
-.board-name {
-  font-size: 1vmax;
+  padding: 1vmax;
 }
 
 .income-statement,
 .balance-sheet {
   height: 40%;
-  border: var(--def-border);
 }
 
 .income-container,
 .balance-container {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+}
+
+.income,
+.expenses,
+.assets,
+.liabilities {
+  width: 45%;
 }
 
 .profile-wrapper>header {
   display: flex;
   justify-content: space-between;
   padding: 1vmax 2vmax;
-  font-size: 1vmax;
   font-weight: 600;
 }
 
 .salary-wrapper,
-.savings-wrapper {
-  display: flex;
-  gap: 1vmax;
-}
-
+.savings-wrapper,
 .my-details {
   display: flex;
   gap: 1vmax;
@@ -44,6 +43,14 @@
 
 .profile-wrapper table {
   font-size: 1vmax;
+  padding-top: 1vmax;
+}
+
+.profile-wrapper h3 {
+  padding: 0.5vmax 0;
+  background-color: black;
+  color: white;
+  padding-left: 1vmax;
 }
 
 .profile-wrapper table th {

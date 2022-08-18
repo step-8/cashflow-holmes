@@ -3,7 +3,7 @@ const createExpensesTable = (expenses) => {
   const expensesDetails = Object.entries(expenses);
 
   expensesDetails.forEach(([key, val]) => {
-    const expenseHeader = ['th', {}, key];
+    const expenseHeader = ['th', {}, camelToSpace(key)];
     const expenseValue = ['td', {}, val];
     const row = ['tr', {}, expenseHeader, expenseValue];
     wrapper.push(row);
@@ -41,16 +41,16 @@ const createProfileHeader = ({ username, profession, color }) => {
 };
 
 const createTwoColumnRow = (value1, value2) => {
-  const element1 = ['td', {}, value1];
-  const element2 = ['td', {}, value2];
+  const element1 = ['td', {}, camelToSpace(value1)];
+  const element2 = ['td', {}, camelToSpace(value2)];
   const row = ['tr', {}, element1, element2];
   return row;
 };
 
 const createThreeColumnRow = (value1, value2, value3) => {
-  const element1 = ['td', {}, value1];
-  const element2 = ['td', {}, value2];
-  const element3 = ['td', {}, value3];
+  const element1 = ['td', {}, camelToSpace(value1)];
+  const element2 = ['td', {}, camelToSpace(value2)];
+  const element3 = ['td', {}, camelToSpace(value3)];
   const row = ['tr', {}, element1, element2, element3];
   return row;
 };
@@ -157,7 +157,7 @@ const createLiabilitiesTable = ({ liabilities }) => {
     if (key === 'realEstates') {
       return;
     }
-    const liabilityHeader = ['th', {}, key];
+    const liabilityHeader = ['th', {}, camelToSpace(key)];
     const liabilityValue = ['td', {}, val];
     const row = ['tr', {}, liabilityHeader, liabilityValue];
     liabilitiesTable.push(row);
