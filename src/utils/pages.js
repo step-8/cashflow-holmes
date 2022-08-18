@@ -467,7 +467,6 @@ const RAT_RACE_BOARD = `<html>
       </div>
     </div>
     </div>
-    <div id="expansion-window"></div>
     <div id="game-panel">
       <header>
         <h2><a href="/">Cashflow</a></h2>

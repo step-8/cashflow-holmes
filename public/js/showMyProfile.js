@@ -167,10 +167,16 @@ const createLiabilitiesTable = ({ liabilities }) => {
 };
 
 const showWindow = (windowElements) => {
-  const expansionEle = getElement('#expansion-window');
-  expansionEle.style.zIndex = 2;
+  const expansionEle = getElement('.expansion-window-screen');
+
+  expansionEle.classList.remove('close-window');
+  expansionEle.classList.remove('inactive');
+  expansionEle.classList.add('expand-window');
+  expansionEle.classList.add('active');
   expansionEle.replaceChildren('');
   expansionEle.appendChild(windowElements);
+
+  expansionEle.style.visibility = 'visible';
 };
 
 const generateProfile = (game, userInfo) => {
@@ -262,8 +268,12 @@ const showMyProfile = () => {
 };
 
 const closeMyProfile = (event) => {
-  const expansionEle = getElement('#expansion-window');
-  expansionEle.style.zIndex = -1;
+  const expansionEle = getElement('.expansion-window-screen');
+  expansionEle.classList.remove('expand-window');
+  expansionEle.classList.remove('active');
+  expansionEle.classList.add('close-window');
+  expansionEle.classList.add('inactive');
+  expansionEle.style.visibility = 'hidden';
   const profileEle = getElement('#profile');
   profileEle.remove();
   removeBlurBackground();
