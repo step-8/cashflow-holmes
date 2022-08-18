@@ -44,14 +44,13 @@ describe('Player', () => {
     const player = new Player('p3', 'guest');
     player.assignProfession(expectedProfession);
     player.createProfile();
-    assert.ok(player.canContinue());
+    assert.ok(player.doodad());
   });
 
   it('Should return false when cash is less than 0', () => {
     const player = new Player('p3', 'guest');
     player.assignProfession(expectedProfession);
     player.createProfile();
-    player.doodad(30000);
-    assert.ok(!player.canContinue());
+    assert.ok(!player.doodad(30000));
   });
 });

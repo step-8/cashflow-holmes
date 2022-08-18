@@ -97,32 +97,6 @@
 
   };
 
-  const createDoodadMessage = (message, className) => {
-    const messageBox = getElement('#message-space');
-    const messageEle = html(['div', { className }, message]);
-    messageBox.appendChild(messageEle);
-
-    setTimeout(() => {
-      messageEle.remove();
-    }, 2000);
-  };
-
-  const addDoodadMessage = (res) => {
-    const messages = {
-      200: 'You\'re done with doodad',
-      207: 'Insufficient balance. Take loan to proceed'
-    };
-
-    createDoodadMessage(messages[200], 'success');
-
-    if (res.status === 207) {
-      message = messages[207];
-      createDoodadMessage(message, 'warning');
-    }
-
-    return res;
-  };
-
   const performAction = (event, family, type) => {
     const actionDiv = event.target;
     const [__, action] = actionDiv.id.split('-');
@@ -133,16 +107,10 @@
       },
       body: `action=${action}&family=${family}&type=${type}`
     };
-    API.cardAction(options)
-      .then((res) => {
-        if (family === 'doodad') {
-          addDoodadMessage(res);
-        }
-        return res;
-      })
-      .then(() => {
-        API.changeTurn();
-      });
+    API.cardAction(options);
+    API.getGame()
+      .then(res => res.json())
+      .then(drawMessages);
   };
 
   const actions = {
@@ -332,6 +300,52 @@
     return game;
   };
 
+  const createMessage = (message, className) => {
+    const messageBox = getElement('#message-space');
+    const messageEle = html(['div', { className }, message]);
+    messageBox.appendChild(messageEle);
+    API.resetTransaction();
+    API.changeTurn();
+
+    setTimeout(() => {
+      messageEle.remove();
+    }, 2000);
+  };
+
+
+  const messages = {
+    deal: {
+      0: 'Insufficient balance. Take loan to proceed',
+      1: 'Successfully purchased'
+    },
+    doodad: {
+      0: 'Insufficient balance. Take loan to proceed',
+      1: 'You are done with doodad'
+    }
+  };
+
+  const classes = {
+    0: 'warning',
+    1: 'success'
+  };
+
+  const drawMessages = (game) => {
+    if (!game.transaction || !game.currentCard) {
+      API.changeTurn();
+      return;
+    }
+
+    const { transaction: { family, status } } = game;
+    const message = () => {
+      if (family === game.currentCard.family) {
+        createMessage(messages[family][status], classes[status]);
+        return;
+      }
+    };
+
+    showMessage(message)(game);
+  };
+
   const createLog = (log) => {
     const userSpan = ['div', { className: `${log.color} icon log-icon`, }];
     return ['div', { className: 'log' }, userSpan, ['span', { className: 'log-msg' }, `${log.message}`]];
@@ -363,7 +377,6 @@
   const draw = (logs) => {
     return res => {
       const newState = res.stateHash;
-
       if (newState !== prevState.game) {
         drawScreen(res, logs);
         prevState.game = newState;

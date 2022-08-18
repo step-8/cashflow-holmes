@@ -43,7 +43,7 @@ class Player {
   }
 
   doodad(cost) {
-    this.#profile.deductDoodad(cost);
+    return this.#profile.deductDoodad(cost);
   }
 
   buyRealEstate(card) {

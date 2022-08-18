@@ -8,6 +8,11 @@ const serveCard = (req, res) => {
   res.json(card);
 };
 
+const resetTransaction = (req, res) => {
+  req.game.state.currentTurn.resetTransaction();
+  res.end();
+};
+
 const acceptCard = (game, family) => {
   if (family === 'payday') {
     game.state.currentTurn.payday();
@@ -44,11 +49,12 @@ const cardActionsHandler = (req, res) => {
   }
 
   if (action === 'ok') {
-    let status = 200;
-    if (!acceptCard(game, family)) {
-      status = 207;
-    }
-    res.sendStatus(status);
+    // let status = 200;
+    // if (!acceptCard(game, family)) {
+    //   status = 207;
+    // }
+    // res.sendStatus(status);
+    acceptCard(game, family);
   }
 
   if (action === 'buy') {
@@ -66,4 +72,4 @@ const cardActionsHandler = (req, res) => {
 };
 
 
-module.exports = { serveCard, cardActionsHandler };
+module.exports = { serveCard, cardActionsHandler, resetTransaction };

@@ -184,6 +184,7 @@ class Game {
       currentCard: this.#currentCard,
       ratRace: this.#ratRace,
       currentTurn: this.#currentTurn,
+      transaction: this.#currentTurn.info.transaction,
       isTurnEnded: this.#currentTurn.info.state,
       logs: this.#log.getAllLogs()
     };

@@ -52,7 +52,12 @@ class Profile {
   }
 
   deductDoodad(cost) {
+    if (this.#cash < cost) {
+      return 0;
+    }
+
     this.updateCash(-cost);
+    return 1;
   }
 
   addAsset(card) {

@@ -23,6 +23,10 @@ class Turn {
     return this.#currentPlayer.details.profile.cashFlow;
   }
 
+  resetTransaction() {
+    this.#currentTransaction = null;
+  }
+
   set transactionState(status) {
     this.#currentTransaction = { family: this.#card.family, status };
   }
@@ -35,7 +39,12 @@ class Turn {
 
   doodad() {
     const cost = this.#card.cost;
-    this.#currentPlayer.doodad(cost);
+    const status = this.#currentPlayer.doodad(cost);
+    this.transactionState = status;
+    if (!status) {
+      return;
+    }
+
     this.#log.addLog(this.#playerInfo(), `payed $${cost} on ${this.#card.heading}`);
     this.#turnCompleted = true;
   }

@@ -47,3 +47,13 @@ const getElement = (selector) => {
 const addDollar = (text) => {
   return `$ ${text}`;
 };
+
+const showMessage = (fn) => (game) => {
+  API.userInfo()
+    .then(res => res.json())
+    .then(({ username }) => {
+      if (game.currentPlayer.username === username) {
+        fn(game);
+      }
+    });
+};
