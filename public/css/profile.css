@@ -4,7 +4,7 @@
 
 .income-statement,
 .balance-sheet {
-  height: 40%;
+  height: 44%;
 }
 
 .income-container,
@@ -12,6 +12,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  padding-top: 0.5vmax;
 }
 
 .income,
@@ -25,14 +26,15 @@
 .expenses-wrapper,
 .assets-wrapper,
 .liabilities-wrapper {
-  height: 13vmax;
-  overflow: scroll;
+  height: 16vmax;
+  overflow-y: scroll;
+  padding: 0.5vmax;
 }
 
 .profile-wrapper>header {
   display: flex;
   justify-content: space-between;
-  padding: 1vmax 2vmax;
+  padding: 0vmax 1vmax;
   font-weight: 600;
 }
 
@@ -51,14 +53,14 @@
 
 .profile-wrapper table {
   font-size: 1vmax;
-  padding-top: 1vmax;
+  padding-bottom: 0.5vmax;
+  width: 15vmax;
 }
 
 .profile-wrapper main h3 {
-  padding: 0.5vmax 0;
+  padding: 0.5vmax;
   background-color: black;
   color: white;
-  padding-left: 1vmax;
 }
 
 .profile-wrapper table th {
@@ -70,5 +72,15 @@
 .total-income-wrapper,
 .total-expenses-wrapper {
   padding-top: 0.5vmax;
+  font-weight: 600;
+}
+
+.profile-wrapper table tbody th,
+.profile-wrapper table tbody td {
+  border-bottom: var(--def-border);
+  padding-top: 0.5vmax;
+}
+
+.profile-wrapper table thead th {
   font-weight: 600;
 }

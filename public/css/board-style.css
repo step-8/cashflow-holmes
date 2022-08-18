@@ -662,7 +662,9 @@ a {
   right: 0;
   width: 50%;
   height: 100%;
-  background-color: silver;
+  background-color: white;
+  border: var(--def-border);
+  box-shadow: 8px 8px 8px 8px black;
   z-index: -1;
   visibility: hidden;
 }
@@ -679,6 +681,7 @@ a {
     visibility: hidden;
     transform: translateX(100%);
   }
+
   to {
     transform: translateX(0);
     visibility: visible;
@@ -697,6 +700,7 @@ a {
     z-index: 1;
     visibility: visible;
   }
+
   to {
     transform: translateX(100%);
     z-index: 1;

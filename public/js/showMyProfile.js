@@ -1,15 +1,18 @@
 const createExpensesTable = (expenses) => {
-  const wrapper = ['table', {}];
+  const table = ['table', {}];
+  const wrapper = ['tbody', {}];
+
   const expensesDetails = Object.entries(expenses);
 
   expensesDetails.forEach(([key, val]) => {
-    const expenseHeader = ['th', {}, camelToSpace(key)];
+    const expenseHeader = ['th', {}, camelToCapitalize(key)];
     const expenseValue = ['td', {}, val];
     const row = ['tr', {}, expenseHeader, expenseValue];
     wrapper.push(row);
   });
 
-  return wrapper;
+  table.push(wrapper);
+  return table;
 };
 
 const blurBackground = () => {
@@ -54,7 +57,7 @@ const createThreeColumnRow = (value1, value2, value3) => {
 const createRealEstateIncome = ({ realEstates }) => {
   const table = ['table', {},
     ['thead', {},
-      ['th', {}, 'Real Estate/Business'],
+      ['th', {}, 'Real Estate'],
       ['th', {}, 'Cash Flow'],
     ],
   ];
@@ -72,8 +75,8 @@ const createRealEstateIncome = ({ realEstates }) => {
 const createRealEstateLiabilities = ({ realEstates }) => {
   const table = ['table', {},
     ['thead', {},
-      ['th', {}, 'Real Estate/Business'],
-      ['th', {}, 'Mortgage/Liability'],
+      ['th', {}, 'Real Estate'],
+      ['th', {}, 'Mortgage'],
     ]
   ];
 
@@ -90,7 +93,7 @@ const createRealEstateLiabilities = ({ realEstates }) => {
 const createRealEstateAssets = ({ realEstates }) => {
   const table = ['table', {},
     ['thead', {},
-      ['th', {}, 'Real Estate/Business'],
+      ['th', {}, 'Real Estate'],
       ['th', {}, 'Down Payment'],
       ['th', {}, 'Cost'],
     ]
@@ -109,9 +112,9 @@ const createRealEstateAssets = ({ realEstates }) => {
 const createStocksTable = ({ stocks }) => {
   const table = ['table', {},
     ['thead', {},
-      ['th', {}, 'Stocks/Funds/CDs'],
-      ['th', {}, 'No of Shares'],
-      ['th', {}, 'Cost/Share'],
+      ['th', {}, 'Stocks'],
+      ['th', {}, '# of Shares'],
+      ['th', {}, 'Cost'],
     ]
   ];
 
@@ -147,19 +150,21 @@ const createLiabilitiesTable = ({ liabilities }) => {
   const wrapper = ['div', {}];
 
   const liabilitiesTable = ['table', {}];
+  const liabilityWrapper = ['tbody', {}];
   const liabilityDetails = Object.entries(liabilities);
 
   liabilityDetails.forEach(([key, val]) => {
     if (key === 'realEstates') {
       return;
     }
-    const liabilityHeader = ['th', {}, camelToSpace(key)];
+    const liabilityHeader = ['th', {}, camelToCapitalize(key)];
     const liabilityValue = ['td', {}, val];
     const row = ['tr', {}, liabilityHeader, liabilityValue];
-    liabilitiesTable.push(row);
+    liabilityWrapper.push(row);
   });
 
   const realEstateTable = createRealEstateLiabilities(liabilities);
+  liabilitiesTable.push(liabilityWrapper);
 
   wrapper.push(liabilitiesTable, realEstateTable);
 

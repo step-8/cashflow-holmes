@@ -58,4 +58,8 @@ const showMessage = (fn) => (game) => {
     });
 };
 
-const camelToSpace = (word) => ('' + word).replace(/([A-Z])/g, ' $1').toLowerCase();
+const camelToCapitalize = (word) => {
+  const spacedWord = ('' + word).replace(/([A-Z])/g, ' $1').toLowerCase();
+  const [first, ...rest] = spacedWord;
+  return first.toUpperCase().concat(rest.join(''));
+};
