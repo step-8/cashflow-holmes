@@ -11,6 +11,15 @@ const getNextAttrib = (players, type, attribs) => {
   return attribs.find(attrib => !playersAttribs.includes(attrib));
 };
 
+const addLog = (log, username, color, card) => {
+  console.log(card.type);
+  if (card.type !== 'deal') {
+    log({ username, color }, `landed on ${toWords(card.family)}`);
+    return;
+  }
+  log({ username, color }, `chose ${toWords(card.cardName)}`);
+};
+
 const gameStatus = {
   started: 'started',
   cancelled: 'cancelled',
@@ -141,18 +150,15 @@ class Game {
     const currentPlayer = this.#players[this.#currentPlayerIndex];
     this.#currentTurn.updateCard(card);
 
-    //Abstract the currentPlayer to be an reference.
-    // Need to remove after fixing deals.
-    if (card === 'deals') {
+    const username = currentPlayer.details.username;
+    const color = currentPlayer.details.color;
+
+    const cards = ['smallDeal', 'bigDeal'];
+    if (cards.includes(card.cardName)) {
+      this.#log.addLog({ username, color }, `chose ${toWords(card.cardName)}`);
       return;
     }
-
-    this.#log.addLog(
-      {
-        username: currentPlayer.details.username,
-        color: currentPlayer.details.color
-      },
-      `landed on ${toWords(this.#currentCard.family)}`);
+    this.#log.addLog({ username, color }, `landed on ${toWords(card.family)}`);
   }
 
   get currentPlayer() {

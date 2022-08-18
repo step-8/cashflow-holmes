@@ -1,12 +1,3 @@
-const cardTypeHandler = (req, res) => {
-  const { game } = req;
-  const { currentPlayer, ratRace } = game.state;
-  const { currentPosition } = currentPlayer;
-  const type = ratRace.getCardType(currentPosition);
-  // game.currentCard = 'deals';
-  res.json({ type });
-};
-
 const serveCard = (req, res) => {
   const { game } = req;
   const { currentPlayer, ratRace } = game.state;
@@ -75,4 +66,4 @@ const cardActionsHandler = (req, res) => {
 };
 
 
-module.exports = { cardTypeHandler, serveCard, cardActionsHandler };
+module.exports = { serveCard, cardActionsHandler };

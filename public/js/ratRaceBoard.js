@@ -25,16 +25,8 @@
     return game;
   };
 
-  const drawDeals = (card) => {
-    const { type } = card;
-    API.assignCard(type);
-    return card;
-  };
-
   const decideCard = (game) => {
-    API.decideCard()
-      .then(res => res.json())
-      .then(drawDeals);
+    API.assignCard();
     return game;
   };
 

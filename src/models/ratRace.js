@@ -50,7 +50,7 @@ class RatRace {
     }
 
     if (validTypes.includes(type)) {
-      return { ...this.#deck[type][0], family: getFamily(deals, type) };
+      return { ...this.#deck[type][0], family: getFamily(deals, type), cardName: type };
     }
     return;
   }
