@@ -22,23 +22,36 @@ const removeBlurBackground = () => {
   boardEle.style.filter = 'blur(0px)';
 };
 
-const createMyProfile = (game) => {
-  const { username, color, profile } = game.currentPlayer;
-  const { profession } = game.currentPlayer.profession;
-  createExpensesTable(profile.expenses);
+const findPlayer = (players, { username }) => {
+  return players.find(player => player.username === username);
+};
+
+const createProfileHeader = ({ username, profession, color }) => {
+  const professionName = profession.profession;
+  return ['header', {},
+    ['div', { className: 'board-name' }, 'Rat Race'],
+    ['div', { className: 'my-details', },
+      ['div', {},
+        ['div', { id: 'username' }, username],
+        ['div', { id: 'profession' }, professionName],
+      ],
+      ['div', { className: `icon ${color}` }]
+    ]
+  ];
+};
+
+const createRealEstateTable = ({ realEstates }) => {
+  return ['div', {}];
+};
+
+const generateProfile = (game, userInfo) => {
+  const { players } = game;
+  const player = findPlayer(players, userInfo);
+  const { profile } = player;
 
   const myProfileTemplate =
     ['div', { id: 'profile', className: 'profile-wrapper' },
-      ['header', {},
-        ['div', { className: 'board-name' }, 'Rat Race'],
-        ['div', { className: 'my-details', },
-          ['div', {},
-            ['div', { id: 'username' }, username],
-            ['div', { id: 'profession' }, profession],
-          ],
-          ['div', { className: `icon ${color}` }]
-        ]
-      ],
+      createProfileHeader(player),
       ['main', {},
         ['div', { className: 'income-statement' },
           ['h2', {}, 'Income statement'],
@@ -49,7 +62,8 @@ const createMyProfile = (game) => {
                 ['h4', {}, 'Salary :'],
                 ['p', {}, profile.income.salary]
               ],
-              ['h4', {}, 'Real estate :']
+              ['h4', {}, 'Real estate :'],
+              createRealEstateTable(profile.income)
             ],
             ['div', { className: 'expenses' },
               ['h3', {}, 'Expenses'],
@@ -82,11 +96,18 @@ const createMyProfile = (game) => {
   expansionEle.style.zIndex = 2;
   expansionEle.replaceChildren('');
   expansionEle.appendChild(myProfile);
+};
+
+const createMyProfile = (game) => {
+  API.userInfo()
+    .then(res => res.json())
+    .then(userInfo => generateProfile(game, userInfo));
+
   return game;
 };
 
 const showMyProfile = () => {
-  fetch('/api/game')
+  API.getGame()
     .then(res => res.json())
     .then(createMyProfile)
     .then(blurBackground);
