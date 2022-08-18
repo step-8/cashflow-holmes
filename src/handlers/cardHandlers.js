@@ -24,6 +24,10 @@ const acceptCard = (game, family) => {
     return game.state.currentTurn.canPlayerContinue();
   }
 
+  if (family === 'charity') {
+    game.state.currentTurn.charity();
+  }
+
   return game.state.currentTurn.skip();
 };
 
@@ -49,11 +53,6 @@ const cardActionsHandler = (req, res) => {
   }
 
   if (action === 'ok') {
-    // let status = 200;
-    // if (!acceptCard(game, family)) {
-    //   status = 207;
-    // }
-    // res.sendStatus(status);
     acceptCard(game, family);
   }
 

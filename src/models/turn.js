@@ -59,6 +59,17 @@ class Turn {
     this.#turnCompleted = true;
   }
 
+  charity() {
+    const amount = 0.1 * this.#currentPlayer.details.profile.totalIncome;
+    const status = this.#currentPlayer.charity(amount);
+    this.transactionState = status;
+    if (!status) {
+      return;
+    }
+    this.#log.addLog(this.#playerInfo(), `donated $${amount} to charity`);
+    this.#turnCompleted = true;
+  }
+
   skip() {
     this.#log.addLog(this.#playerInfo(), `skipped ${this.#card.symbol}`);
     this.#turnCompleted = true;

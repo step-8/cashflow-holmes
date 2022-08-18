@@ -50,6 +50,10 @@ class Player {
     return this.#profile.addAsset(card);
   }
 
+  charity(amount) {
+    return this.#profile.donateCash(amount);
+  }
+
   move(steps) {
     this.#currentPosition = (this.#currentPosition + steps) % 24;
     if (this.#currentPosition === 0) {

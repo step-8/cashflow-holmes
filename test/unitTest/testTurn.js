@@ -56,7 +56,7 @@ describe('Turn', () => {
     it('Should deduct the players doodad cost', () => {
       const log = new Log();
       const player = {
-        details: { username: 'user', color: 'c', profile: { cashFlow: 100 } },
+        details: { username: 'user', color: 'c', profile: { cashFlow: 100, totalIncome: 100 } },
         doodad: successful,
         payday: identity,
         buyRealEstate: identity
@@ -139,6 +139,60 @@ describe('Turn', () => {
       assert.deepStrictEqual(
         turn.info.transaction,
         { family: 'deal', status: 0 }
+      );
+    });
+  });
+
+  describe('charity', () => {
+    const card = {
+      heading: 'New Card',
+      symbol: 'a',
+      family: 'charity'
+    };
+
+    it('Should set transaction as successful when donated to charity', () => {
+      const log = new Log();
+      const player = {
+        details: { username: 'user', color: 'c', profile: { cashFlow: 100, totalIncome: 100 } },
+        doodad: identity,
+        payday: identity,
+        buyRealEstate: identity,
+        charity: successful
+      };
+
+      const turn = new Turn(card, player, log);
+      turn.charity();
+
+      assert.ok(turn.info.state);
+      assert.deepStrictEqual(
+        log.getAllLogs(),
+        [{ username: 'user', color: 'c', message: 'donated $10 to charity' }]
+      );
+
+      assert.deepStrictEqual(
+        turn.info.transaction,
+        { family: 'charity', status: 1 }
+      );
+    });
+
+    it('Should set transaction as failure when charity failed', () => {
+      const log = new Log();
+      const player = {
+        details: { username: 'user', color: 'c', profile: { cashFlow: 100 } },
+        doodad: identity,
+        payday: identity,
+        buyRealEstate: identity,
+        charity: failure
+      };
+
+      const turn = new Turn(card, player, log);
+      turn.charity();
+
+      assert.ok(!turn.info.state);
+      assert.deepStrictEqual(log.getAllLogs(), []);
+      assert.deepStrictEqual(
+        turn.info.transaction,
+        { family: 'charity', status: 0 }
       );
     });
   });

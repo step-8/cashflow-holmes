@@ -78,12 +78,20 @@ class Profile {
     this.#transactions.push(transaction);
   }
 
+  donateCash(amount) {
+    if (this.#cash < amount) {
+      return 0;
+    }
+
+    this.updateCash(-amount, 'Charity');
+    return 1;
+  }
+
   updateCash(amount, details) {
     const currentCash = this.#cash;
     this.#cash += amount;
 
     const totalCash = this.#cash;
-    
     this.#recordToLedger(
       { currentCash, totalCash, amount, description: details }
     );

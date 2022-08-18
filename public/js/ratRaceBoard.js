@@ -323,6 +323,10 @@
     doodad: {
       0: 'Insufficient balance. Take loan to proceed',
       1: 'You are done with doodad'
+    },
+    charity: {
+      0: 'Insufficient balance. Take loan to proceed',
+      1: 'You donated to charity'
     }
   };
 
