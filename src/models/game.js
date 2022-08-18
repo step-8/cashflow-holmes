@@ -11,13 +11,7 @@ const getNextAttrib = (players, type, attribs) => {
   return attribs.find(attrib => !playersAttribs.includes(attrib));
 };
 
-const addLog = (log, username, color, card) => {
-  if (card.type !== 'deal') {
-    log({ username, color }, `landed on ${toWords(card.family)}`);
-    return;
-  }
-  log({ username, color }, `chose ${toWords(card.cardName)}`);
-};
+const randomDiceValue = () => Math.ceil(Math.random() * 6);
 
 const gameStatus = {
   started: 'started',
@@ -33,7 +27,7 @@ class Game {
   #players;
   #maxPlayers;
   #status;
-  #diceValue;
+  #diceValues;
   #currentPlayerIndex;
   #ratRace;
   #currentCard;
@@ -48,24 +42,35 @@ class Game {
     this.#players = [];
     this.#status = gameStatus.waiting;
     this.#currentPlayerIndex = null;
-    this.#diceValue = 1;
+    this.#diceValues = [1, 1];
     this.#ratRace = new RatRace(deck);
     this.#currentCard = null;
     this.#log = new Log();
     this.#currentTurn = new Turn(this.#currentCard, null, this.#log);
   }
 
-  rollDice() {
-    this.#diceValue = Math.ceil(Math.random() * 6);
+  rollDice(dice) {
+    this.#diceValues = [randomDiceValue(), randomDiceValue()];
     const currentPlayer = this.#players[this.#currentPlayerIndex];
+    const dualDiceCount = currentPlayer.details.dualDiceCount;
+
+    let totalCount = this.#diceValues[0];
+    if (+dice === 2) {
+      totalCount += this.#diceValues[1];
+    }
+
+    if (dualDiceCount > 0) {
+      currentPlayer.dualDiceCount = dualDiceCount - 1;
+    }
+
     currentPlayer.rolledDice = true;
-    this.#moveCurrentPlayer(this.#diceValue);
+    this.#moveCurrentPlayer(totalCount);
     this.#log.addLog(
       {
         username: currentPlayer.details.username,
         color: currentPlayer.details.color
       },
-      `rolled ${this.#diceValue}`);
+      `rolled ${totalCount}`);
   }
 
   resetDice() {
@@ -180,7 +185,7 @@ class Game {
       status: this.#status,
       gameID: this.#gameID,
       players: this.allPlayerDetails,
-      diceValue: this.#diceValue,
+      diceValues: this.#diceValues,
       currentCard: this.#currentCard,
       ratRace: this.#ratRace,
       currentTurn: this.#currentTurn,

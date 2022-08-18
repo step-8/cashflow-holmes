@@ -53,7 +53,8 @@ const getUserInfoHandler = (req, res) => {
 
 const rollDiceHandler = (req, res) => {
   const { game } = req;
-  game.rollDice();
+  const { die } = req.params;
+  game.rollDice(die);
   res.end();
 };
 

@@ -30,8 +30,24 @@
     return game;
   };
 
+  const getSelectedDice = () => {
+    const diceVals = {
+      'one': '1',
+      'two': '2',
+    };
+
+    const diceDiv = document.querySelector('.selected');
+    if (!diceDiv) {
+      return diceVals['one'];
+    }
+
+    const [dice, __] = diceDiv.id.split('-');
+    return diceVals[dice];
+  };
+
   const rollDice = () => {
-    API.rollDice()
+    const dice = getSelectedDice();
+    API.rollDice(dice)
       .then(res => res)
       .then(API.getGame()
         .then(res => res.json())
@@ -39,26 +55,86 @@
     return;
   };
 
+  const selectDiceOption = (event) => {
+    const die = event.target.id;
+
+    if (die === 'one-die') {
+      document.querySelector('#one-die').className = 'dice-option selected';
+      document.querySelector('#two-die').className = 'dice-option';
+      return;
+    }
+
+    document.querySelector('#two-die').className = 'dice-option selected';
+    document.querySelector('#one-die').className = 'dice-option';
+
+  };
+
+  const getDiceOptions = (id, diceValues) => {
+    const diceOptions = {
+      'one': {
+        className: 'dice-option',
+        onclick: (event) => {
+          drawOneDice(diceValues[0]);
+          selectDiceOption(event);
+        },
+        id: 'one-die'
+      },
+      'two': {
+        className: 'dice-option',
+        onclick: (event) => {
+          drawTwoDices(diceValues);
+          selectDiceOption(event);
+        },
+        id: 'two-die'
+      }
+    };
+    return diceOptions[id];
+  };
+
+
+  const createToggler = (game) => {
+    const { diceValues } = game;
+    return ['div', { className: 'choice-wrapper' },
+      ['div', getDiceOptions('one', diceValues), '1 Dice'],
+      ['div', getDiceOptions('two', diceValues), '2 Dice']
+    ];
+  };
+
+  const drawToggle = (game) => {
+    const { currentPlayer: { dualDiceCount } } = game;
+    const chooseDice = document.querySelector('#choose-dice');
+    if (dualDiceCount <= 0) {
+      return;
+    }
+
+    chooseDice.appendChild(html(createToggler(game)));
+  };
+
+  const resetToggler = () => {
+    document.querySelector('#choose-dice').innerHTML = '';
+  };
+
   const activateDice = (game) => {
     API.userInfo()
       .then(res => res.json())
       .then(userInfo => {
         const { username, isRolledDice } = game.currentPlayer;
-        const dice = document.querySelector('#dice-box');
+        const diceBox = document.querySelector('#dice-box');
 
         // need to use css classes instead. classlist add/remove.
         if (userInfo.username === username && !isRolledDice) {
-          dice.style.opacity = 1;
-          dice.style.border = '2px solid black';
-          dice.style.zIndex = 1;
-          dice.onclick = rollDice;
+          diceBox.style.opacity = 1;
+          diceBox.style.border = '2px solid black';
+          diceBox.style.zIndex = 1;
+          diceBox.onclick = rollDice;
+          drawForCurrentUser(drawToggle)(game);
         } else {
-          dice.style.opacity = 0.5;
-          dice.style.zIndex = -1;
-          dice.style.border = '2px dashed black';
-          dice.onclick = null;
+          diceBox.style.opacity = 0.5;
+          diceBox.style.zIndex = -1;
+          diceBox.style.border = '2px dashed black';
+          diceBox.onclick = null;
+          resetToggler();
         }
-
       });
     return game;
   };
@@ -273,10 +349,31 @@
       ['div', { className: 'dot six-6' }]],
   };
 
+  const createDice = (diceValue) => html(diceFaces[diceValue]);
+  const drawOneDice = (diceValue) => {
+    const dice = document.querySelector('#dice-box');
+    dice.innerHTML = '';
+    dice.appendChild(createDice(diceValue));
+  };
+
+  const drawTwoDices = (diceValues) => {
+    const dice = document.querySelector('#dice-box');
+    dice.innerHTML = '';
+    diceValues.forEach(diceValue => {
+      dice.appendChild(createDice(diceValue));
+    });
+
+  };
+
   const drawDice = (game) => {
-    const { diceValue } = game;
-    const dice = document.querySelector('.dice');
-    dice.replaceWith(html(diceFaces[diceValue]));
+    const { diceValues, currentPlayer: { dualDiceCount } } = game;
+
+    if (dualDiceCount > 0) {
+      drawTwoDices(diceValues);
+      return game;
+    }
+
+    drawOneDice(diceValues[0]);
     return game;
   };
 
@@ -349,7 +446,7 @@
       }
     };
 
-    showMessage(message)(game);
+    drawForCurrentUser(message)(game);
   };
 
   const createLog = (log) => {

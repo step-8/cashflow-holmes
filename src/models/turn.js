@@ -66,6 +66,8 @@ class Turn {
     if (!status) {
       return;
     }
+
+    this.#currentPlayer.dualDiceCount = 3;  
     this.#log.addLog(this.#playerInfo(), `donated $${amount} to charity`);
     this.#turnCompleted = true;
   }

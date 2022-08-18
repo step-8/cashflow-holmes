@@ -11,7 +11,7 @@ const API = {
   playerInfo: () => fetchReq('/api/player-info'),
   getGame: () => fetchReq('/api/game'),
   changeTurn: () => fetchReq('/change-turn'),
-  rollDice: () => fetchReq('/roll-dice'),
+  rollDice: (dice) => fetchReq(`/roll-dice/${dice}`),
   getProfession: () => fetchReq('/api/profession'),
   resetTransaction: () => fetchReq('/card/reset-transaction')
 };

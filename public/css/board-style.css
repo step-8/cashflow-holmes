@@ -118,6 +118,34 @@ a {
   color: gray;
 }
 
+#choose-dice {
+  width: 85%;
+  height: 4%;
+  align-self: center;
+}
+
+#choose-dice .choice-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: lightgray;
+}
+
+#choose-dice .dice-option {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.selected {
+  color: white;
+  background-color: black;
+}
+
 #dice-box {
   border: var(--def-border);
   border-style: dashed;
@@ -745,7 +773,8 @@ a {
   font-weight: 600;
 }
 
-.ledger-title, .ledger-entry {
+.ledger-title,
+.ledger-entry {
   display: flex;
   justify-content: space-between;
   padding: 0.5vmax;

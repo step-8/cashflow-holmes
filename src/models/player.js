@@ -7,6 +7,8 @@ class Player {
   #profile;
   #isRolledDice;
   #currentPosition;
+  #dualDiceCount;
+
   constructor(username, role) {
     this.#username = username;
     this.#role = role;
@@ -15,10 +17,15 @@ class Player {
     this.#profile = null;
     this.#isRolledDice = false;
     this.#currentPosition = 0;
+    this.#dualDiceCount = 0;
   }
 
   set rolledDice(status) {
     this.#isRolledDice = status;
+  }
+
+  set dualDiceCount(count) {
+    this.#dualDiceCount = count;
   }
 
   assignColor(color) {
@@ -69,7 +76,8 @@ class Player {
       profession: this.#profession,
       profile: this.#profile.details,
       isRolledDice: this.#isRolledDice,
-      currentPosition: this.#currentPosition
+      currentPosition: this.#currentPosition,
+      dualDiceCount: this.#dualDiceCount
     };
   }
 }

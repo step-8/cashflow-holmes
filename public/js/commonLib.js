@@ -48,7 +48,7 @@ const addDollar = (text) => {
   return `$ ${text}`;
 };
 
-const showMessage = (fn) => (game) => {
+const drawForCurrentUser = (fn) => (game) => {
   API.userInfo()
     .then(res => res.json())
     .then(({ username }) => {

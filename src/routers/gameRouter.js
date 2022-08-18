@@ -32,7 +32,7 @@ const createGameRouter = (router) => {
   router.get('/leave-lobby', leaveLobbyHandler);
   router.get('/cancel-game', cancelGameHandler);
   router.get('/get-user-info', getUserInfoHandler);
-  router.get('/roll-dice', rollDiceHandler);
+  router.get('/roll-dice/:die', rollDiceHandler);
   router.get('/change-turn', changeTurnHandler);
   router.get('/show-profession', showProfessionHandler);
   router.get('/game-board', gameBoardHandler);

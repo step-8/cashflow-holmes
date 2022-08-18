@@ -494,6 +494,7 @@ const RAT_RACE_BOARD = `<html>
         <div id="pay-loan">Pay loan</div>
       </div>
       <div id="logs"></div>
+      <div id="choose-dice"></div>
       <div id="dice-box">
       <div class="dice"></div>
       </div>
