@@ -2,14 +2,12 @@
   display: flex;
   flex-flow: column;
   gap: 1.5vmax;
-  height: 100%;
   padding: 1vmax;
 }
 
 .income-statement,
 .balance-sheet {
-  /* height: 44%; */
-  height: fit-content;
+  height: 30%;
 }
 
 .income-container,
@@ -31,7 +29,7 @@
 .expenses-wrapper,
 .assets-wrapper,
 .liabilities-wrapper {
-  height: 16vmax;
+  height: 14vmax;
   overflow-y: scroll;
   padding: 0.5vmax;
 }
@@ -43,7 +41,7 @@
   font-weight: 600;
 }
 
-header > h3 {
+header>h3 {
   font-size: var(--plain-font);
   font-weight: 600;
 }

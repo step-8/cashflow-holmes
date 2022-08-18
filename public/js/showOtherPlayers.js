@@ -8,14 +8,24 @@ const closeOtherPlayers = () => {
   otherPlayersEle.remove();
 };
 
+const createOtherPlayerProfile = (username) => {
+  API.getGame()
+    .then(res => res.json())
+    .then(game => generateProfile(game, username));
+};
+
 const createOtherPlayersContainer = (players) => {
-  const playersWrapper = ['div', { className: 'players-wrapper' }];
+  const playersWrapper = ['div', { className: 'other-players-wrapper' }];
 
   players.forEach(player => {
     const icon = ['div', { className: `icon ${player.color}` }];
     const name = ['div', { className: 'name' }, player.username];
     const profession = ['div', { className: 'profession' }, player.profile.profession];
-    const wrapper = ['div', { className: 'row' }, icon, name, profession];
+    const wrapper = [
+      'div',
+      { className: 'row', onclick: () => createOtherPlayerProfile(player.username) },
+      icon, name, profession
+    ];
     playersWrapper.push(wrapper);
   });
 

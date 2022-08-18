@@ -260,6 +260,7 @@ const RAT_RACE_BOARD = `<html>
   <title>Cashflow</title>
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/board-style.css">
+  <link rel="stylesheet" href="css/otherPlayers.css">
   <link rel="stylesheet" href="css/profile.css">
   <script src="js/api.js"></script>
   <script src="js/commonLib.js"></script>
