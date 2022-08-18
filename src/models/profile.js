@@ -75,7 +75,7 @@ class Profile {
   }
 
   #recordToLedger(transaction) {
-    this.#transactions.push(transaction);
+    this.#transactions.unshift(transaction);
   }
 
   donateCash(amount) {

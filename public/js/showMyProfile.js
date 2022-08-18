@@ -18,11 +18,13 @@ const createExpensesTable = (expenses) => {
 const blurBackground = () => {
   const boardEle = getElement('#board');
   boardEle.style.filter = 'blur(2px)';
+  boardEle.classList.add('inactive');
 };
 
 const removeBlurBackground = () => {
   const boardEle = getElement('#board');
   boardEle.style.filter = 'blur(0px)';
+  boardEle.classList.remove('inactive');
 };
 
 const createProfileHeader = ({ username, profession, color }) => {
@@ -274,11 +276,13 @@ const showMyProfile = () => {
 
 const closeMyProfile = (event) => {
   const expansionEle = getElement('.expansion-window-screen');
+
   expansionEle.classList.remove('expand-window');
   expansionEle.classList.remove('active');
   expansionEle.classList.add('close-window');
   expansionEle.classList.add('inactive');
   expansionEle.style.visibility = 'hidden';
+
   const profileEle = getElement('#profile');
   profileEle.remove();
   removeBlurBackground();

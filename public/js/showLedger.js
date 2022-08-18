@@ -5,10 +5,11 @@ const findPlayer = (players, playerName) => {
 };
 
 const transactionItem = ({currentCash, amount, description, totalCash}) => ['div', { className: 'ledger-entry' },
-  ['div', {}, currentCash],
-  ['div', {style: `color:${amount >= 0 ? 'green': 'red'}` }, amount],
+  ['div', {style: 'color:blue'}, currentCash],
+  ['div', { style: `color:${amount >= 0 ? 'green' : 'red'}` },
+    `$ ${amount >= 0 ? '+' : '-'}${Math.abs(amount)}`],
   ['div', {}, description],
-  ['div', {}, totalCash],
+  ['div', {style: 'color:blue'}, totalCash],
 ];
 
 const classNames = {
@@ -72,9 +73,6 @@ const showMyLedger = () => {
   placeHolder.classList.add('expand-window');
   placeHolder.classList.add('active');
   placeHolder.style.visibility = 'visible';
-  
-  const boardEle = getElement('#board');
-  boardEle.classList.add('inactive');
 
   blurBackground();
 };
@@ -87,9 +85,6 @@ const closeMyLedger = () => {
   placeHolder.classList.add('close-window');
   placeHolder.classList.add('inactive');
   placeHolder.style.visibility = 'hidden';
-
-  const boardEle = getElement('#board');
-  boardEle.classList.remove('inactive');
 
   removeBlurBackground();
 };
