@@ -31,7 +31,7 @@ const windowHeader = ({profession}, color, username) =>
       
 const ledgerHeader = () => [
   'div', { className: 'ledger-title' },
-  ...['Current Cash', 'Amount', 'Description', 'Total Cash'].map(
+  ...['Current cash', 'Transaction amount', 'Description', 'Total cash'].map(
     heading => ['div', {}, heading])
 ];
 
@@ -45,7 +45,7 @@ const ledgerWindow =
       ledgerHeader(),
       ledgerEntries(profile.transactions)
     ],
-    ['div', { onclick: closeMyLedger, className: 'close-btn' }, 'CLOSE']
+    ['div', { onclick: closeMyLedger, className: 'close-btn' }, 'Close']
   ];
 
 const createPlayerLedger = ({ profile, color, username, profession }) => {

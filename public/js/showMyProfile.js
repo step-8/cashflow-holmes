@@ -17,7 +17,7 @@ const createExpensesTable = (expenses) => {
 
 const blurBackground = () => {
   const boardEle = getElement('#board');
-  boardEle.style.filter = 'blur(2px)';
+  boardEle.style.filter = 'blur(1.5px)';
   boardEle.classList.add('inactive');
 };
 
@@ -251,7 +251,7 @@ const generateProfile = (game, userInfo) => {
         ['div', {
           className: 'close-btn',
           onclick: (event) => closeMyProfile(event)
-        }, 'close']
+        }, 'Close']
       ]
     ];
 

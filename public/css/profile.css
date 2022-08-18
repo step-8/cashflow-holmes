@@ -1,10 +1,15 @@
 .profile-wrapper {
+  display: flex;
+  flex-flow: column;
+  gap: 1.5vmax;
+  height: 100%;
   padding: 1vmax;
 }
 
 .income-statement,
 .balance-sheet {
-  height: 44%;
+  /* height: 44%; */
+  height: fit-content;
 }
 
 .income-container,
@@ -35,6 +40,11 @@
   display: flex;
   justify-content: space-between;
   padding: 0vmax 1vmax;
+  font-weight: 600;
+}
+
+header > h3 {
+  font-size: var(--plain-font);
   font-weight: 600;
 }
 
