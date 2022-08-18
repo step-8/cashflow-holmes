@@ -191,7 +191,7 @@ const createCloseButton = (closeFn) => {
     ['div', {
       className: 'close-btn',
       onclick: (event) => closeFn(event)
-    }, 'close']
+    }, 'Close']
   ];
 };
 

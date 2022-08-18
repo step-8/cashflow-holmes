@@ -15,7 +15,7 @@ const createOtherPlayerProfile = (username) => {
 };
 
 const createOtherPlayersContainer = (players) => {
-  const playersWrapper = ['div', { className: 'other-players-wrapper' }];
+  const playersWrapper = ['div', { className: 'players-wrapper' }];
 
   players.forEach(player => {
     const icon = ['div', { className: `icon ${player.color}` }];
@@ -23,7 +23,7 @@ const createOtherPlayersContainer = (players) => {
     const profession = ['div', { className: 'profession' }, player.profile.profession];
     const wrapper = [
       'div',
-      { className: 'row', onclick: () => createOtherPlayerProfile(player.username) },
+      { className: 'player-row', onclick: () => createOtherPlayerProfile(player.username) },
       icon, name, profession
     ];
     playersWrapper.push(wrapper);

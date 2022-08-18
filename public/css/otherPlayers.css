@@ -1,20 +1,21 @@
-.other-players-wrapper {
+#other-players {
   padding: 1vmax;
-  margin: 0 auto;
 }
 
 .players-wrapper {
+  padding: 1vmax;
   display: flex;
   flex-direction: column;
   gap: 2em;
-  margin: 5em auto;
 }
 
-.row {
+.player-row {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1em;
+  padding: 0.5vmax;
   text-align: center;
-  border: var(--def-border);
+  background-color: rgba(0, 0, 0, 0.055);
   cursor: pointer;
 }
