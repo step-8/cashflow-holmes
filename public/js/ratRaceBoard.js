@@ -45,6 +45,8 @@
       .then(userInfo => {
         const { username, isRolledDice } = game.currentPlayer;
         const dice = document.querySelector('#dice-box');
+
+        // need to use css classes instead. classlist add/remove.
         if (userInfo.username === username && !isRolledDice) {
           dice.style.opacity = 1;
           dice.style.border = '2px solid black';
@@ -370,6 +372,7 @@
     drawPlayerPosition(game);
     drawPlayersList(game);
     addLogs(game, logs);
+    createLedgerWindow(game);
   };
 
   const prevState = { game: '' };

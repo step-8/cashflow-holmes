@@ -5,6 +5,7 @@ class Profile {
   #assets;
   #liabilities;
   #cash;
+  #transactions;
 
   constructor({ profession, income, expenses, assets, liabilities }) {
     this.#profession = profession;
@@ -13,6 +14,7 @@ class Profile {
     this.#assets = assets;
     this.#liabilities = liabilities;
     this.#cash = 0;
+    this.#transactions = [];
   }
 
   setDefaults() {
@@ -48,7 +50,7 @@ class Profile {
   }
 
   addPay() {
-    this.updateCash(this.#calculateCashFlow());
+    this.updateCash(this.#calculateCashFlow(), 'Payday');
   }
 
   deductDoodad(cost) {
@@ -56,7 +58,7 @@ class Profile {
       return 0;
     }
 
-    this.updateCash(-cost);
+    this.updateCash(-cost, 'Doodad');
     return 1;
   }
 
@@ -68,12 +70,23 @@ class Profile {
     this.#assets.realEstates.push(card);
     this.#income.realEstates.push(card);
     this.#liabilities.realEstates.push(card);
-    this.updateCash(-card.downPayment);
+    this.updateCash(-card.downPayment, card.symbol);
     return 1;
   }
 
-  updateCash(amount) {
+  #recordToLedger(transaction) {
+    this.#transactions.push(transaction);
+  }
+
+  updateCash(amount, details) {
+    const currentCash = this.#cash;
     this.#cash += amount;
+
+    const totalCash = this.#cash;
+    
+    this.#recordToLedger(
+      { currentCash, totalCash, amount, description: details }
+    );
   }
 
   get details() {
@@ -87,6 +100,7 @@ class Profile {
       totalExpenses: this.#calculateTotalExpenses(),
       cashFlow: this.#calculateCashFlow(),
       passiveIncome: this.#calculatePassiveIncome(),
+      transactions: this.#transactions,
       cash: this.#cash
     };
   }

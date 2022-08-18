@@ -263,12 +263,15 @@ const RAT_RACE_BOARD = `<html>
   <link rel="stylesheet" href="css/profile.css">
   <script src="js/api.js"></script>
   <script src="js/commonLib.js"></script>
+  <script src="js/showLedger.js"></script>
   <script src="js/ratRaceBoard.js"></script>
   <script src="js/showMyProfile.js"></script>
 </head>
 
 <body>
   <div class="page-wrapper">
+  <div id="board-space">
+  <div class="expansion-window-screen"></div> 
     <div id="board">
       <div class="game-area">
         <div class="card-deck" id="market">
@@ -463,7 +466,8 @@ const RAT_RACE_BOARD = `<html>
         </div>
       </div>
     </div>
-    <div id="expansion-window"></div> 
+    </div>
+    <div id="expansion-window"></div>
     <div id="game-panel">
       <header>
         <h2><a href="/">Cashflow</a></h2>
@@ -480,7 +484,7 @@ const RAT_RACE_BOARD = `<html>
             <span class="expands-indicator">«</span>
             Other players
           </li>
-          <li id="ledger">
+          <li id="ledger" onclick="showMyLedger()">
             <span class="expands-indicator">«</span>
             Ledger
           </li>

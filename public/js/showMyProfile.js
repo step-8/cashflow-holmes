@@ -22,10 +22,6 @@ const removeBlurBackground = () => {
   boardEle.style.filter = 'blur(0px)';
 };
 
-const findPlayer = (players, { username }) => {
-  return players.find(player => player.username === username);
-};
-
 const createProfileHeader = ({ username, profession, color }) => {
   const professionName = profession.profession;
   return ['header', {},
@@ -170,9 +166,16 @@ const createLiabilitiesTable = ({ liabilities }) => {
   return wrapper;
 };
 
+const showWindow = (windowElements) => {
+  const expansionEle = getElement('#expansion-window');
+  expansionEle.style.zIndex = 2;
+  expansionEle.replaceChildren('');
+  expansionEle.appendChild(windowElements);
+};
+
 const generateProfile = (game, userInfo) => {
   const { players } = game;
-  const player = findPlayer(players, userInfo);
+  const player = findPlayer(players, userInfo.username);
   const { profile } = player;
   const myProfileTemplate =
     ['div', { id: 'profile', className: 'profile-wrapper' },
@@ -224,10 +227,7 @@ const generateProfile = (game, userInfo) => {
     ];
 
   const myProfile = html(myProfileTemplate);
-  const expansionEle = getElement('#expansion-window');
-  expansionEle.style.zIndex = 2;
-  expansionEle.replaceChildren('');
-  expansionEle.appendChild(myProfile);
+  showWindow(myProfile);
 };
 
 const createMyProfile = (game) => {

@@ -6,12 +6,20 @@
   width: 100vw;
 }
 
-#board {
+#board-space {
   width: 85vw;
   max-width: 85vw;
   max-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  /* background-color: white; */
+}
+
+#board {
   justify-content: stretch;
-  /* position: relative; */
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 #game-panel {
@@ -388,7 +396,7 @@ a {
 #players {
   grid-row: 3/7;
   grid-column: 1;
-  background-color: whitesmoke;
+  background-color: white;
   border-color: black;
   margin: 1vmax 0.5vmax;
   display: flex;
@@ -400,7 +408,7 @@ a {
 #game-stats {
   grid-row: 3/7;
   grid-column: 5;
-  background-color: whitesmoke;
+  background-color: white;
   border: 0.2vmax dashed black;
   margin: 1vmax 0.1vmax;
   display: flex;
@@ -647,4 +655,59 @@ a {
   to {
     transform: scale(1.18);
   }
+}
+
+.expansion-window-screen {
+  position: absolute;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background-color: silver;
+  z-index: -1;
+  visibility: hidden;
+}
+
+.expand-window {
+  animation-name: expand-window;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: initial;
+}
+
+@keyframes expand-window {
+  from {
+    visibility: hidden;
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+    visibility: visible;
+  }
+}
+
+.close-window {
+  animation-name: close-window;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes close-window {
+  from {
+    transform: translateX(0);
+    z-index: 1;
+    visibility: visible;
+  }
+  to {
+    transform: translateX(100%);
+    z-index: 1;
+    visibility: hidden;
+  }
+}
+
+.active {
+  z-index: 1;
+}
+
+.inactive {
+  z-index: -1;
 }
