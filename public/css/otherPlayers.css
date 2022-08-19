@@ -28,5 +28,5 @@
 }
 
 .player-row:hover {
-  background-color: var(--hover-bg);
+  background-color: var(--grey-p);
 }

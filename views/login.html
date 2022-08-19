@@ -7,20 +7,20 @@
 </head>
 
 <body>
-  <div class="page-wrapper">
+  <div class="page-wrapper flex-row">
     <div id="main-image">
       <img src="images/cashflow-image-big.png" alt="Cashflow" title="Cashflow">
     </div>
     <div class="interaction-box">
       <h2 class="heading">Login</h2>
-      <form action="/login" method="post">
+      <form action="/login" method="post" class="flex-column">
         <div>
           <input type="text" name="username" id="username-input" placeholder="Username" required>
         </div>
         <div>
           <input type="password" name="password" id="password-input" placeholder="Password" required>
         </div>
-        <div class="submit-button">
+        <div class="submit-button flex-row">
           <input id="login-button" type="submit" value="Login">
         </div>
         <div id="message">__MESSAGE__</div>
