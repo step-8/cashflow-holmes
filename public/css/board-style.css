@@ -634,12 +634,13 @@ a {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   align-items: center;
+  justify-items: center;
   margin: 0.5vmax 1vmax;
   gap: 0.1vmax;
 }
 
-.start {
-  font-weight: 900;
+.start>img {
+  width: 100%;
 }
 
 .tile-name {

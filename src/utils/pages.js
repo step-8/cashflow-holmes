@@ -294,7 +294,9 @@ const RAT_RACE_BOARD = `<html>
         </div>
         <div id="players"></div>
         <div id="rat-tile-0">
-        <div class="start">Start</div>
+        <div class="start">
+        <img src="/images/ratrace/start.png" alt="start">
+        </div>
         </div>
         <div id="game-stats">
           <div class="heading">Status</div>
