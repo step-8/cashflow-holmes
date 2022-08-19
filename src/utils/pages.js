@@ -119,7 +119,7 @@ const PROFESSION_CARD = `<html>
 </head>
 
 <body>
-  <div class="page-wrapper">
+  <div class="page-wrapper ">
     <div id="profession-card" class="profession-card">
       <header>
         <div id="profession-image" class="profession-image">
@@ -272,24 +272,24 @@ const RAT_RACE_BOARD = `<html>
 </head>
 
 <body>
-  <div class="page-wrapper">
+  <div class="page-wrapper flex-row">
   <div id="board-space">
   <div class="expansion-window-screen"></div> 
     <div id="board">
       <div class="game-area">
-        <div class="card-deck" id="market">
+        <div class="card-deck flex-column" id="market">
           <img src="images/ratrace/market.gif" alt="market">
           <div class="tile-name">Market</div>
         </div>
-        <div class="card-deck" id="small-deal">
+        <div class="card-deck flex-column" id="small-deal">
           <img src="images/ratrace/deals.png" alt="deals">
             <div class="tile-name">Deal</div>
         </div>
-        <div class="card-deck" id="big-deal">
+        <div class="card-deck flex-column" id="big-deal">
           <img src="images/ratrace/deals.png" alt="deals">
             <div class="tile-name">Deal</div>
         </div>
-        <div class="card-deck" id="doodad">
+        <div class="card-deck flex-column" id="doodad">
           <img src="images/ratrace/doodad.png" alt="doodad">
           <div class="tile-name">Doodad</div>
         </div>
@@ -326,154 +326,154 @@ const RAT_RACE_BOARD = `<html>
           <div id="message-space"></div>
         </div>
       </div>
-      <div class="ratrace-tile deal" id="rat-tile-1">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row deal" id="rat-tile-1">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/deals.png" alt="deals">
             <div class="tile-name">Deal</div>
         </div>
       </div>
-      <div class="ratrace-tile doodad" id="rat-tile-2">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row doodad" id="rat-tile-2">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/doodad.png" alt="doodad">
           <div class="tile-name">Doodad</div>
         </div>
       </div>
-      <div class="ratrace-tile deal" id="rat-tile-3">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row deal" id="rat-tile-3">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/deals.png" alt="deals">
             <div class="tile-name">Deal</div>
         </div>
       </div>
-      <div class="ratrace-tile purples" id="rat-tile-4">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row purples" id="rat-tile-4">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/charity.svg" alt="charity">
           <div class="tile-name">Charity</div>
         </div>
       </div>
-      <div class="ratrace-tile deal" id="rat-tile-5">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row deal" id="rat-tile-5">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/deals.png" alt="deals">
             <div class="tile-name">Deal</div>
         </div>
       </div>
-      <div class="ratrace-tile payday" id="rat-tile-6">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row payday" id="rat-tile-6">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/payday.png" alt="payday">
           <div class="tile-name">Pay Day</div>
         </div>
       </div>
-      <div class="ratrace-tile deal" id="rat-tile-7">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row deal" id="rat-tile-7">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/deals.png" alt="deals">
             <div class="tile-name">Deal</div>
         </div>
       </div>
-      <div class="ratrace-tile market" id="rat-tile-8">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row market" id="rat-tile-8">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/market.gif" alt="market">
           <div class="tile-name">Market</div>
         </div>
       </div>
-      <div class="ratrace-tile deal" id="rat-tile-9">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row deal" id="rat-tile-9">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/deals.png" alt="deals">
             <div class="tile-name">Deal</div>
         </div>
       </div>
-      <div class="ratrace-tile doodad" id="rat-tile-10">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row doodad" id="rat-tile-10">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/doodad.png" alt="doodad">
           <div class="tile-name">Doodad</div>
         </div>
       </div>
-      <div class="ratrace-tile deal" id="rat-tile-11">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row deal" id="rat-tile-11">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/deals.png" alt="deals">
             <div class="tile-name">Deal</div>
         </div>
       </div>
-      <div class="ratrace-tile purples" id="rat-tile-12">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row purples" id="rat-tile-12">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/downsized.png" alt="downsized">
           <div class="tile-name">Downsized</div>
         </div>
       </div>
-      <div class="ratrace-tile deal" id="rat-tile-13">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row deal" id="rat-tile-13">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/deals.png" alt="deals">
             <div class="tile-name">Deal</div>
         </div>
       </div>
-      <div class="ratrace-tile payday" id="rat-tile-14">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row payday" id="rat-tile-14">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/payday.png" alt="payday">
           <div class="tile-name">Pay Day</div>
         </div>
       </div>
-      <div class="ratrace-tile deal" id="rat-tile-15">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row deal" id="rat-tile-15">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/deals.png" alt="deals">
             <div class="tile-name">Deal</div>
         </div>
       </div>
-      <div class="ratrace-tile market" id="rat-tile-16">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row market" id="rat-tile-16">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/market.gif" alt="market">
           <div class="tile-name">Market</div>
         </div>
       </div>
-      <div class="ratrace-tile deal" id="rat-tile-17">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row deal" id="rat-tile-17">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/deals.png" alt="deals">
             <div class="tile-name">Deal</div>
         </div>
       </div>
-      <div class="ratrace-tile doodad" id="rat-tile-18">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row doodad" id="rat-tile-18">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/doodad.png" alt="doodad">
           <div class="tile-name">Doodad</div>
         </div>
       </div>
-      <div class="ratrace-tile deal" id="rat-tile-19">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row deal" id="rat-tile-19">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/deals.png" alt="deals">
             <div class="tile-name">Deal</div>
         </div>
       </div>
-      <div class="ratrace-tile purples" id="rat-tile-20">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row purples" id="rat-tile-20">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/child.png" alt="child">
           <div class="tile-name">Child</div>
         </div>
       </div>
-      <div class="ratrace-tile deal" id="rat-tile-21">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row deal" id="rat-tile-21">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/deals.png" alt="deals">
             <div class="tile-name">Deal</div>
         </div>
       </div>
-      <div class="ratrace-tile payday" id="rat-tile-22">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row payday" id="rat-tile-22">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/payday.png" alt="payday">
           <div class="tile-name">Pay Day</div>
         </div>
       </div>
-      <div class="ratrace-tile deal" id="rat-tile-23">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row deal" id="rat-tile-23">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/deals.png" alt="deals">
             <div class="tile-name">Deal</div>
         </div>
       </div>
-      <div class="ratrace-tile market" id="rat-tile-24">
-        <div class="tile-info">
+      <div class="ratrace-tile flex-row market" id="rat-tile-24">
+        <div class="tile-info flex-column">
           <img src="images/ratrace/market.gif" alt="market">
           <div class="tile-name">Market</div>
         </div>
       </div>
     </div>
     </div>
-    <div id="game-panel">
-      <header>
+    <div id="game-panel" class="flex-column">
+      <header class="flex-row">
         <h2><a href="/">Cashflow</a></h2>
       </header>
       <nav id="game-nav">
@@ -498,7 +498,7 @@ const RAT_RACE_BOARD = `<html>
       </div>
       <div id="logs"></div>
       <div id="choose-dice"></div>
-      <div id="dice-box">
+      <div id="dice-box" class="flex-row">
       <div class="dice"></div>
       </div>
       <div id="board-toggle">Fast Track</div>

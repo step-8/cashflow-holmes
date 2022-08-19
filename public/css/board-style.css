@@ -1,5 +1,4 @@
 .page-wrapper {
-  display: flex;
   padding: 0.5em;
   column-gap: 0.5em;
   height: 100vh;
@@ -12,10 +11,10 @@
   max-height: 100vh;
   position: relative;
   overflow: hidden;
-  /* background-color: white; */
 }
 
 #board {
+  display: grid;
   justify-content: stretch;
   position: relative;
   width: 100%;
@@ -26,14 +25,11 @@
   border: var(--def-border);
   width: 15vw;
   height: 100%;
-  display: flex;
-  flex-flow: column;
   gap: 1.5vmax;
   overflow: hidden;
 }
 
 #game-panel>header {
-  display: flex;
   justify-content: center;
 }
 
@@ -154,7 +150,6 @@ a {
   align-self: center;
   aspect-ratio: 2.2;
   opacity: 0.5;
-  display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
@@ -166,20 +161,18 @@ a {
   aspect-ratio: 3;
   border: var(--def-border);
   align-self: center;
-  display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 }
 
 #board-toggle:hover {
-  background-color: var(--hover-bg);
+  background-color: var(--grey-p);
   font-weight: 400;
 }
 
 .ratrace-tile {
   border: var(--def-border);
-  display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
@@ -188,10 +181,8 @@ a {
 }
 
 .tile-info {
-  display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   row-gap: 0.5vmax;
   position: absolute;
 }
@@ -206,32 +197,28 @@ a {
   aspect-ratio: auto;
 }
 
+.deal, .doodad, .payday, .market, .purples, .downsized, .baby, .charity {
+  border: var(--big-border);
+}
 .deal {
   background-color: var(--deal-bg);
-  border: 0.2vmax solid var(--deal-border);
+  border-color: var(--deal-border);
 }
-
 .doodad {
   background-color: var(--doodad-bg);
-  border: 0.2vmax solid var(--doodad-border);
+  border-color: var(--doodad-border);
 }
-
 .payday {
   background-color: var(--payday-bg);
-  border: 0.2vmax solid var(--payday-border);
+  border-color: var(--payday-border);
 }
-
 .market {
   background-color: var(--market-bg);
-  border: 0.2vmax solid var(--market-border);
+  border-color: var(--market-border);
 }
-
-.purples,
-.downsized,
-.baby,
-.charity {
+.purples, .downsized, .baby, .charity {
   background-color: var(--others-bg);
-  border: 0.2vmax solid var(--others-border);
+  border-color: var(--others-border);
 }
 
 #board {
@@ -242,124 +229,48 @@ a {
 }
 
 /* Grid element positions START*/
-#rat-tile-1 {
-  grid-row: 6;
-  grid-column: 3;
+#rat-tile-3, #rat-tile-4, #rat-tile-5, #rat-tile-6, #rat-tile-7, #rat-tile-8 {
+  grid-column: 1;
 }
-
-#rat-tile-2 {
-  grid-row: 6;
+#rat-tile-9, #rat-tile-2 {
   grid-column: 2;
 }
-
-#rat-tile-3 {
-  grid-row: 6;
-  grid-column: 1;
-}
-
-#rat-tile-4 {
-  grid-row: 5;
-  grid-column: 1;
-}
-
-#rat-tile-5 {
-  grid-row: 4;
-  grid-column: 1;
-}
-
-#rat-tile-6 {
-  grid-row: 3;
-  grid-column: 1;
-}
-
-#rat-tile-7 {
-  grid-row: 2;
-  grid-column: 1;
-}
-
-#rat-tile-8 {
-  grid-row: 1;
-  grid-column: 1;
-}
-
-#rat-tile-9 {
-  grid-row: 1;
-  grid-column: 2;
-}
-
-#rat-tile-10 {
-  grid-row: 1;
+#rat-tile-10, #rat-tile-1 {
   grid-column: 3;
 }
-
-#rat-tile-11 {
-  grid-row: 1;
+#rat-tile-11, #rat-tile-24 {
   grid-column: 4;
 }
-
-#rat-tile-12 {
-  grid-row: 1;
+#rat-tile-12, #rat-tile-23 {
   grid-column: 5;
 }
-
-#rat-tile-13 {
-  grid-row: 1;
+#rat-tile-13, #rat-tile-22 {
   grid-column: 6;
 }
-
-#rat-tile-14 {
-  grid-row: 1;
+#rat-tile-14, #rat-tile-21 {
   grid-column: 7;
 }
-
-#rat-tile-15 {
-  grid-row: 1;
+#rat-tile-15, #rat-tile-16, #rat-tile-17, #rat-tile-18, #rat-tile-19, #rat-tile-20 {
   grid-column: 8;
 }
 
-#rat-tile-16 {
+#rat-tile-8, #rat-tile-9, #rat-tile-10, #rat-tile-11, #rat-tile-12, #rat-tile-13, #rat-tile-14, #rat-tile-15 {
+  grid-row: 1;
+}
+#rat-tile-7, #rat-tile-16 {
   grid-row: 2;
-  grid-column: 8;
 }
-
-#rat-tile-17 {
+#rat-tile-6, #rat-tile-17 {
   grid-row: 3;
-  grid-column: 8;
 }
-
-#rat-tile-18 {
+#rat-tile-5, #rat-tile-18 {
   grid-row: 4;
-  grid-column: 8;
 }
-
-#rat-tile-19 {
+#rat-tile-4, #rat-tile-19 {
   grid-row: 5;
-  grid-column: 8;
 }
-
-#rat-tile-20 {
+#rat-tile-1, #rat-tile-2, #rat-tile-3, #rat-tile-20, #rat-tile-21, #rat-tile-22, #rat-tile-23, #rat-tile-24 {
   grid-row: 6;
-  grid-column: 8;
-}
-
-#rat-tile-21 {
-  grid-row: 6;
-  grid-column: 7;
-}
-
-#rat-tile-22 {
-  grid-row: 6;
-  grid-column: 6;
-}
-
-#rat-tile-23 {
-  grid-row: 6;
-  grid-column: 5;
-}
-
-#rat-tile-24 {
-  grid-row: 6;
-  grid-column: 4;
 }
 
 .game-area {
@@ -389,8 +300,6 @@ a {
 }
 
 .card-deck {
-  display: flex;
-  flex-direction: column;
   row-gap: 0.5vmax;
   justify-content: center;
   align-items: center;
@@ -446,7 +355,8 @@ a {
   grid-row: 3/7;
   grid-column: 5;
   background-color: white;
-  border: 0.2vmax dashed black;
+  border:var(--big-border);
+  border-style: dashed;
   margin: 1vmax 0.1vmax;
   display: flex;
   flex-direction: column;
@@ -801,7 +711,6 @@ a {
   width: 25%;
 }
 
-
 .ledger-entries {
   height: 100%;
   overflow-y: scroll;
@@ -812,7 +721,7 @@ a {
 }
 
 #game-nav li:hover {
-  background-color: var(--hover-bg);
+  background-color: var(--grey-p);
 }
 
 /* stocks styles */
