@@ -9,7 +9,7 @@
       "rule": "Use this yourself or sell to another player",
       "cost": 50000,
       "mortgage": 47000,
-      "downPayment": 3000,
+      "downPayment": 300,
       "cashFlow": 100
     },
     {
@@ -21,7 +21,7 @@
       "rule": "Use this yourself or sell to another player",
       "cost": 75000,
       "mortgage": 70000,
-      "downPayment": 5000,
+      "downPayment": 500,
       "cashFlow": 300
     },
     {
