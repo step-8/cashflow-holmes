@@ -175,21 +175,63 @@
 
   };
 
-  const performAction = (event, family, type) => {
-    const actionDiv = event.target;
-    let [, action] = actionDiv.id.split('-');
-    action = action === 'donate' ? 'ok' : action;
+  const buyStocks = (event) => {
+    const inputDiv = event.target.parentElement.firstChild;
+    const stockCount = inputDiv.firstChild.value;
+    if (!stockCount) {
+      return;
+    }
+
+    sendAction('buy', 'deal', 'stock', stockCount);
+  };
+
+  const drawBuyStocks = () => {
+    const actions = getElement('.actions');
+    const actionsChildren = [...actions.children];
+
+    const selectStockCount =
+      ['div', { className: 'selection-box' },
+        ['div', {},
+          ['input', { type: 'number', min: '0', placeholder: 'Enter no of stocks' }]],
+        ['div', {
+          className: 'fa-solid fa-check check',
+          onclick: buyStocks
+        }],
+        ['div', {
+          className: 'fa-solid fa-xmark close',
+          onclick: (event) => {
+            actions.replaceChildren(...actionsChildren);
+          }
+        }],
+      ];
+
+    actions.replaceChildren(html(selectStockCount));
+  };
+
+  const sendAction = (action, family, type, count) => {
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: `action=${action}&family=${family}&type=${type}`
+      body: `action=${action}&family=${family}&type=${type}&count=${count}`
     };
     API.cardAction(options);
     API.getGame()
       .then(res => res.json())
       .then(drawMessages);
+  };
+
+  const performAction = (event, family, type) => {
+    const actionDiv = event.target;
+    const [__, action] = actionDiv.id.split('-');
+
+    if (action === 'buy' && type === 'stock') {
+      drawBuyStocks();
+      return;
+    }
+
+    sendAction(action, family, type);
   };
 
   const actions = {
@@ -258,6 +300,10 @@
   const updateCurrentCardDetails = (card, player) => {
     if (card.family === 'payday') {
       card.description = `Received pay of ${player.profile.cashFlow}`;
+    }
+
+    if (card.type === 'stock') {
+      card.cost = card.price;
     }
     return;
   };

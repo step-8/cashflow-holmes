@@ -790,3 +790,43 @@ a {
 #game-nav li:hover {
   background-color: var(--hover-bg);
 }
+
+/* stocks styles */
+
+#interaction-screen {
+  width: 100%;
+  height: 100%;
+}
+
+.selection-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5vmax;
+  width: 100%;
+  height: 100%;
+}
+
+.close {
+  color: var(--doodad-border);
+  cursor: pointer;
+}
+
+.check {
+  color: var(--deal-border);
+  cursor: pointer;
+}
+
+.selection-box div:nth-child(1) {
+  border-bottom: var(--def-border);
+}
+
+.selection-box div:not(:nth-child(1)),
+.selection-box input[type='number'] {
+  background-color: var(--deal-bg);
+  border-style: none;
+  padding: 0.2vmax;
+  text-align: center;
+  font-size: 1vmax;
+  outline: none;
+}

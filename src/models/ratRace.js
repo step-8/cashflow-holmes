@@ -1,3 +1,7 @@
+const random = () => {
+  return [0, 2, 2][Math.floor(Math.random() * 2)];
+};
+
 const getFamily = (deals, type) => {
   if (deals.includes(type)) {
     type = 'deal';
@@ -29,6 +33,14 @@ class RatRace {
     }
   }
 
+  pickCard(type) {
+    if (type === 'smallDeal') {
+      return this.#deck[type][random()];
+    }
+
+    return this.#deck[type][0];
+  }
+
   getCard(type) {
     const deals = ['smallDeal', 'bigDeal'];
     const validTypes = [
@@ -50,7 +62,7 @@ class RatRace {
     }
 
     if (validTypes.includes(type)) {
-      return { ...this.#deck[type][0], family: getFamily(deals, type), cardName: type };
+      return { ...this.pickCard(type), family: getFamily(deals, type), cardName: type };
     }
     return;
   }

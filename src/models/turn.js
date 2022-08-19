@@ -59,6 +59,16 @@ class Turn {
     this.#turnCompleted = true;
   }
 
+  buyStocks(count) {
+    const status = this.#currentPlayer.buyStocks(this.#card, count);
+    this.transactionState = status;
+    if (!status) {
+      return;
+    }
+    this.#log.addLog(this.#playerInfo(), `bought ${count} ${this.#card.symbol} stocks`);
+    this.#turnCompleted = true;
+  }
+
   charity() {
     const amount = 0.1 * this.#currentPlayer.details.profile.totalIncome;
     const status = this.#currentPlayer.charity(amount);
@@ -67,7 +77,7 @@ class Turn {
       return;
     }
 
-    this.#currentPlayer.dualDiceCount = 3;  
+    this.#currentPlayer.dualDiceCount = 3;
     this.#log.addLog(this.#playerInfo(), `donated $${amount} to charity`);
     this.#turnCompleted = true;
   }

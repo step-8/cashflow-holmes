@@ -32,9 +32,14 @@ const acceptCard = (game, family) => {
   return game.state.currentTurn.skip();
 };
 
-const buyDeal = (game, type) => {
+const buyDeal = (game, type, count) => {
   if (type === 'realEstate') {
     game.state.currentTurn.buyRealEstate();
+    return;
+  }
+
+  if (type === 'stock') {
+    game.state.currentTurn.buyStocks(count);
     return;
   }
   game.state.currentTurn.skip();
@@ -46,7 +51,7 @@ const setCard = (game, action) => {
 };
 
 const cardActionsHandler = (req, res) => {
-  const { action, family, type } = req.body;
+  const { action, family, type, count } = req.body;
   const { game } = req;
   const deals = ['small', 'big'];
   if (deals.includes(action)) {
@@ -58,7 +63,7 @@ const cardActionsHandler = (req, res) => {
   }
 
   if (action === 'buy') {
-    buyDeal(game, type);
+    buyDeal(game, type, count);
   }
 
   if (action === 'skip') {

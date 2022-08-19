@@ -74,6 +74,17 @@ class Profile {
     return 1;
   }
 
+  addStocks(card, count) {
+    const totalCost = card.price * count;
+    if (this.#cash < totalCost) {
+      return 0;
+    }
+
+    this.#assets.stocks.push({ ...card, count });
+    this.updateCash(-totalCost, card.symbol);
+    return 1;
+  }
+
   #recordToLedger(transaction) {
     this.#transactions.unshift(transaction);
   }

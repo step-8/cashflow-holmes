@@ -268,6 +268,7 @@ const RAT_RACE_BOARD = `<html>
   <script src="js/ratRaceBoard.js"></script>
   <script src="js/showMyProfile.js"></script>
   <script src="js/showOtherPlayers.js"></script>
+  <script src="https://kit.fontawesome.com/74138aff63.js" crossorigin="anonymous"></script>
 </head>
 
 <body>

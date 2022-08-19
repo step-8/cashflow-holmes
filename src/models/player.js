@@ -57,6 +57,10 @@ class Player {
     return this.#profile.addAsset(card);
   }
 
+  buyStocks(card, count) {
+    return this.#profile.addStocks(card, count);
+  }
+
   charity(amount) {
     return this.#profile.donateCash(amount);
   }
