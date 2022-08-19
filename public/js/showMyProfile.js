@@ -157,7 +157,7 @@ const createStocksTable = ({ stocks }) => {
 
   const tbody = ['tbody', {}];
   stocks.forEach(({ symbol, count, price }) => {
-    const row = createThreeColumnRow(symbol, count, count * price);
+    const row = createThreeColumnRow(symbol, count, price);
     tbody.push(row);
   });
 

@@ -501,7 +501,7 @@ const RAT_RACE_BOARD = `<html>
       <div id="dice-box">
       <div class="dice"></div>
       </div>
-      <div id="board-toggle"></div>
+      <div id="board-toggle">Fast Track</div>
     </div>
   </div>
   </div>
