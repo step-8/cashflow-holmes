@@ -224,7 +224,8 @@
 
   const performAction = (event, family, type) => {
     const actionDiv = event.target;
-    const [__, action] = actionDiv.id.split('-');
+    let [, action] = actionDiv.id.split('-');
+    action = action === 'donate' ? 'ok' : action;
 
     if (action === 'buy' && type === 'stock') {
       drawBuyStocks();
