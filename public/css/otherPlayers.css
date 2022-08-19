@@ -25,7 +25,6 @@
 .profession {
   width: 25%;
   text-align: left;
-  overflow-x: scroll;
 }
 
 .player-row:hover {

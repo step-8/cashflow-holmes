@@ -2,12 +2,6 @@ const findOtherPayers = (players, username) => {
   return players.filter(player => player.username !== username);
 };
 
-const closeOtherPlayers = () => {
-  closeExpansion();
-  const otherPlayersEle = getElement('#other-players');
-  otherPlayersEle.remove();
-};
-
 const createOtherPlayerProfile = (username) => {
   API.getGame()
     .then(res => res.json())
@@ -41,7 +35,7 @@ const generateOtherPlayers = (game, username) => {
     ['div', { id: 'other-players' },
       createExpansionHeader(player),
       createOtherPlayersContainer(otherPlayers),
-      createCloseButton(closeOtherPlayers)
+      createCloseButton()
     ];
 
   const otherPlayersEle = html(otherPlayersTemplate);

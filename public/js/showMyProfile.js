@@ -40,6 +40,7 @@ const showWindow = (windowElements) => {
 
 const closeExpansion = () => {
   const expansionEle = getElement('.expansion-window-screen');
+  expansionEle.replaceChildren('');
 
   expansionEle.classList.remove('expand-window');
   expansionEle.classList.remove('active');
@@ -50,11 +51,11 @@ const closeExpansion = () => {
   removeBlurBackground();
 };
 
-const createCloseButton = (closeFn) => {
+const createCloseButton = () => {
   return ['div', { className: 'close' },
     ['div', {
       className: 'close-btn',
-      onclick: (event) => closeFn(event)
+      onclick: (event) => closeExpansion(event)
     }, 'Close']
   ];
 };
@@ -268,7 +269,7 @@ const generateProfile = (game, username) => {
           ]
         ]
       ],
-      createCloseButton(closeMyProfile)
+      createCloseButton()
     ];
 
   const myProfile = html(myProfileTemplate);
@@ -288,10 +289,4 @@ const showMyProfile = () => {
     .then(res => res.json())
     .then(createMyProfile)
     .then(blurBackground);
-};
-
-const closeMyProfile = () => {
-  closeExpansion();
-  const profileEle = getElement('#profile');
-  profileEle.remove();
 };
