@@ -197,6 +197,63 @@ describe('Turn', () => {
     });
   });
 
+  describe('stocks', () => {
+    const card = {
+      heading: 'New Card',
+      symbol: 'a',
+      family: 'deal',
+      type: 'stock'
+    };
+
+    it('Should set transaction as successful when bought the stocks', () => {
+      const log = new Log();
+      const player = {
+        details: { username: 'user', color: 'c', profile: { cashFlow: 100, totalIncome: 100 } },
+        doodad: identity,
+        payday: identity,
+        buyRealEstate: identity,
+        charity: identity,
+        buyStocks: successful
+      };
+
+      const turn = new Turn(card, player, log);
+      turn.buyStocks(1);
+
+      assert.ok(turn.info.state);
+      assert.deepStrictEqual(
+        log.getAllLogs(),
+        [{ username: 'user', color: 'c', message: 'bought 1 a stocks' }]
+      );
+
+      assert.deepStrictEqual(
+        turn.info.transaction,
+        { family: 'deal', status: 1 }
+      );
+    });
+
+    it('Should set transaction as failure when charity failed', () => {
+      const log = new Log();
+      const player = {
+        details: { username: 'user', color: 'c', profile: { cashFlow: 100, totalIncome: 100 } },
+        doodad: identity,
+        payday: identity,
+        buyRealEstate: identity,
+        charity: identity,
+        buyStocks: failure
+      };
+
+      const turn = new Turn(card, player, log);
+      turn.buyStocks(1);
+
+      assert.ok(!turn.info.state);
+      assert.deepStrictEqual(log.getAllLogs(), []);
+      assert.deepStrictEqual(
+        turn.info.transaction,
+        { family: 'deal', status: 0 }
+      );
+    });
+  });
+
   describe('skip', () => {
     it('Should invoke the players skip', () => {
       const log = new Log();
