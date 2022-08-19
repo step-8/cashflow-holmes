@@ -177,7 +177,8 @@
 
   const performAction = (event, family, type) => {
     const actionDiv = event.target;
-    const [__, action] = actionDiv.id.split('-');
+    let [, action] = actionDiv.id.split('-');
+    action = action === 'donate' ? 'ok' : action;
     const options = {
       method: 'POST',
       headers: {
@@ -212,7 +213,7 @@
       baby: ['OK']
     },
     charity: {
-      charity: ['OK', 'SKIP']
+      charity: ['DONATE', 'SKIP']
     },
     downsized: {
       downsized: ['OK']
@@ -402,7 +403,7 @@
   const createMessage = (message, className) => {
     const messageBox = getElement('#message-space');
     const messageEle = html(['div', { className }, message]);
-    messageBox.appendChild(messageEle);
+    messageBox.replaceChildren(messageEle);
     API.resetTransaction();
     API.changeTurn();
 
