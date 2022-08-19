@@ -26,6 +26,7 @@ const acceptCard = (game, family) => {
 
   if (family === 'charity') {
     game.state.currentTurn.charity();
+    return;
   }
 
   return game.state.currentTurn.skip();

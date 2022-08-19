@@ -80,7 +80,7 @@
         id: 'one-die'
       },
       'two': {
-        className: 'dice-option',
+        className: 'dice-option selected',
         onclick: (event) => {
           drawTwoDices(diceValues);
           selectDiceOption(event);
