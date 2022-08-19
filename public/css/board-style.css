@@ -546,8 +546,16 @@ a {
 /* Card design ends */
 
 #message-space {
+  display: flex;
   grid-row: 6;
   grid-column: 1/7;
+  font-weight: 600;
+  align-items: center;
+  justify-content: center;
+}
+
+#message-space>div {
+  font-size: 1.2vmax;
 }
 
 /* dice box positions  Start*/
