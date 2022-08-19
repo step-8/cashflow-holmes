@@ -25,6 +25,7 @@
   --violet-p: #7145f7;
   --orange-p: #fc880c;
   --grey-p: rgb(210 210 210);
+  --hover-bg: lightgray;
 }
 
 * {
@@ -160,11 +161,6 @@ a {
   border: var(--def-border);
   z-index: 1;
   transition: 500ms ease;
-}
-
-.name {
-  aspect-ratio: 8;
-  width: 30%;
 }
 
 .row {

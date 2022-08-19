@@ -1,20 +1,3 @@
-const createExpensesTable = (expenses) => {
-  const table = ['table', {}];
-  const wrapper = ['tbody', {}];
-
-  const expensesDetails = Object.entries(expenses);
-
-  expensesDetails.forEach(([key, val]) => {
-    const expenseHeader = ['th', {}, camelToCapitalize(key)];
-    const expenseValue = ['td', {}, val];
-    const row = ['tr', {}, expenseHeader, expenseValue];
-    wrapper.push(row);
-  });
-
-  table.push(wrapper);
-  return table;
-};
-
 const blurBackground = () => {
   const boardEle = getElement('#board');
   boardEle.style.filter = 'blur(1.5px)';
@@ -25,6 +8,55 @@ const removeBlurBackground = () => {
   const boardEle = getElement('#board');
   boardEle.style.filter = 'blur(0px)';
   boardEle.classList.remove('inactive');
+};
+
+const createTwoColumnRow = (value1, value2) => {
+  const element1 = ['td', {}, value1];
+  const element2 = ['td', {}, value2];
+  const row = ['tr', {}, element1, element2];
+  return row;
+};
+
+const createThreeColumnRow = (value1, value2, value3) => {
+  const element1 = ['td', {}, value1];
+  const element2 = ['td', {}, value2];
+  const element3 = ['td', {}, value3];
+  const row = ['tr', {}, element1, element2, element3];
+  return row;
+};
+
+const showWindow = (windowElements) => {
+  const expansionEle = getElement('.expansion-window-screen');
+
+  expansionEle.classList.remove('close-window');
+  expansionEle.classList.remove('inactive');
+  expansionEle.classList.add('expand-window');
+  expansionEle.classList.add('active');
+  expansionEle.replaceChildren('');
+  expansionEle.appendChild(windowElements);
+
+  expansionEle.style.visibility = 'visible';
+};
+
+const closeExpansion = () => {
+  const expansionEle = getElement('.expansion-window-screen');
+
+  expansionEle.classList.remove('expand-window');
+  expansionEle.classList.remove('active');
+  expansionEle.classList.add('close-window');
+  expansionEle.classList.add('inactive');
+  expansionEle.style.visibility = 'hidden';
+
+  removeBlurBackground();
+};
+
+const createCloseButton = (closeFn) => {
+  return ['div', { className: 'close' },
+    ['div', {
+      className: 'close-btn',
+      onclick: (event) => closeFn(event)
+    }, 'Close']
+  ];
 };
 
 const createExpansionHeader = ({ username, profession, color }) => {
@@ -41,19 +73,21 @@ const createExpansionHeader = ({ username, profession, color }) => {
   ];
 };
 
-const createTwoColumnRow = (value1, value2) => {
-  const element1 = ['td', {}, value1];
-  const element2 = ['td', {}, value2];
-  const row = ['tr', {}, element1, element2];
-  return row;
-};
+const createExpensesTable = (expenses) => {
+  const table = ['table', {}];
+  const wrapper = ['tbody', {}];
 
-const createThreeColumnRow = (value1, value2, value3) => {
-  const element1 = ['td', {}, value1];
-  const element2 = ['td', {}, value2];
-  const element3 = ['td', {}, value3];
-  const row = ['tr', {}, element1, element2, element3];
-  return row;
+  const expensesDetails = Object.entries(expenses);
+
+  expensesDetails.forEach(([key, val]) => {
+    const expenseHeader = ['th', {}, camelToCapitalize(key)];
+    const expenseValue = ['td', {}, val];
+    const row = ['tr', {}, expenseHeader, expenseValue];
+    wrapper.push(row);
+  });
+
+  table.push(wrapper);
+  return table;
 };
 
 const createRealEstateIncome = ({ realEstates }) => {
@@ -173,28 +207,6 @@ const createLiabilitiesTable = ({ liabilities }) => {
   return wrapper;
 };
 
-const showWindow = (windowElements) => {
-  const expansionEle = getElement('.expansion-window-screen');
-
-  expansionEle.classList.remove('close-window');
-  expansionEle.classList.remove('inactive');
-  expansionEle.classList.add('expand-window');
-  expansionEle.classList.add('active');
-  expansionEle.replaceChildren('');
-  expansionEle.appendChild(windowElements);
-
-  expansionEle.style.visibility = 'visible';
-};
-
-const createCloseButton = (closeFn) => {
-  return ['div', { className: 'close' },
-    ['div', {
-      className: 'close-btn',
-      onclick: (event) => closeFn(event)
-    }, 'Close']
-  ];
-};
-
 const generateProfile = (game, username) => {
   const { players } = game;
   const player = findPlayer(players, username);
@@ -278,19 +290,7 @@ const showMyProfile = () => {
     .then(blurBackground);
 };
 
-const closeExpansion = () => {
-  const expansionEle = getElement('.expansion-window-screen');
-
-  expansionEle.classList.remove('expand-window');
-  expansionEle.classList.remove('active');
-  expansionEle.classList.add('close-window');
-  expansionEle.classList.add('inactive');
-  expansionEle.style.visibility = 'hidden';
-
-  removeBlurBackground();
-};
-
-const closeMyProfile = (event) => {
+const closeMyProfile = () => {
   closeExpansion();
   const profileEle = getElement('#profile');
   profileEle.remove();

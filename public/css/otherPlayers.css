@@ -4,6 +4,9 @@
 
 .players-wrapper {
   padding: 1vmax;
+  height: 50%;
+  width: 80%;
+  margin: 2vmax auto;
   display: flex;
   flex-direction: column;
   gap: 2em;
@@ -12,10 +15,19 @@
 .player-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 1em;
+  justify-content: space-between;
   padding: 0.5vmax;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.055);
   cursor: pointer;
+}
+
+.name,
+.profession {
+  width: 25%;
+  text-align: left;
+  overflow-x: scroll;
+}
+
+.player-row:hover {
+  background-color: var(--hover-bg);
 }

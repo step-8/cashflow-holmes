@@ -789,3 +789,7 @@ a {
 .window-title {
   font-size: var(--plain-font);
 }
+
+#game-nav li:hover {
+  background-color: var(--hover-bg);
+}
