@@ -40,13 +40,17 @@
 .profile-color {
   width: 40%;
   aspect-ratio: 1;
-  background-color: azure;
+  background-color: whitesmoke;
   border-radius: 50%;
   margin-bottom: 0.4em;
   font-size: 1vmax;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.profile-color>img {
+  width: 70%;
 }
 
 .player-name {

@@ -14,10 +14,9 @@
     const errorMessageDiv = document.querySelector('#message');
     errorMessageDiv.innerText = 'Game has been cancelled by host';
     errorMessageDiv.style.color = 'red';
-    
-    API.cancelGame();
 
     setTimeout(() => {
+      API.cancelGame();
       reqPage('/');
     }, 2500);
 
@@ -51,7 +50,9 @@
   const drawPlaceHolder = (id) => {
     const template = [
       'div', { id: `player-${id}`, className: 'player' },
-      ['div', { className: 'profile-color grey' }, 'Waiting...'],
+      ['div', { className: 'profile-color' },
+        ['img', { src: '/images/spinner.svg', alt: '...' }, '']
+      ],
       ['div', { className: 'player-name' }, '']
     ];
 
