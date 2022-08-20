@@ -68,7 +68,7 @@ const loanActionOnEnter = (event, id) => {
 const loanActions = (id) => {
   const amount = +getElement('#loan-amount').value;
 
-  if (!amount) {
+  if (amount < 0) {
     return;
   }
 

@@ -161,7 +161,10 @@ a {
   cursor: pointer;
 }
 
-#board-toggle:hover {
+#board-toggle:hover,
+#pay-loan:hover,
+#take-loan:hover {
+  cursor: pointer;
   background-color: var(--grey-p);
   font-weight: 400;
 }
