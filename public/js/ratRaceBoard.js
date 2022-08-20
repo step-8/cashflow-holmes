@@ -585,6 +585,23 @@
   };
 
 
+  const decideLoanActions = (game) => {
+    API.userInfo()
+      .then(res => res.json())
+      .then(({ username }) => {
+        const player = findPlayer(game.players, username);
+        const loan = player.profile.liabilities.bankLoan;
+        const payLoanEle = getElement('#pay-loan');
+        if (!payLoanEle) {
+          return;
+        }
+        payLoanEle.onclick = (event) => event;
+        if (loan > 0) {
+          payLoanEle.onclick = (event) => drawLoan(event);
+        }
+      });
+  };
+
   const drawScreen = (game, logs) => {
     drawPlayerPosition(game);
     drawPlayersList(game);
@@ -597,6 +614,7 @@
   const draw = (logs) => {
     return res => {
       const newState = res.stateHash;
+      decideLoanActions(res);
       if (newState !== prevState.game) {
         drawScreen(res, logs);
         prevState.game = newState;
