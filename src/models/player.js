@@ -98,6 +98,11 @@ class Player {
     return true;
   }
 
+  payLoan(amount) {
+    this.#profile.deductLoan(amount);
+    return true;
+  }
+
   get details() {
     return {
       username: this.#username,

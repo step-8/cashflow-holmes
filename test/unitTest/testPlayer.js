@@ -69,4 +69,11 @@ describe('Player', () => {
     player.createProfile();
     assert.ok(player.takeLoan(100));
   });
+
+  it('Should deduct loan in players profile', () => {
+    const player = new Player('p3', 'guest');
+    player.assignProfession(professions[1]);
+    player.createProfile();
+    assert.ok(player.payLoan(100));
+  });
 });

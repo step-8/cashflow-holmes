@@ -106,4 +106,20 @@ describe('Profile', () => {
       assert.deepStrictEqual(actual.expenses.bankLoanPayment, expectedBankLoanPayment + 10);
     });
   });
+
+  describe('deductLoan', () => {
+    it('Should deduct amount from the cash', () => {
+      const profile = new Profile(professions[1]);
+      profile.setDefaults();
+      const expected = profile.details;
+      const expectedCash = profile.details.cash;
+      const expectedBankLoanPayment = profile.details.expenses.bankLoanPayment;
+      profile.deductLoan(100);
+      const actual = profile.details;
+
+      assert.deepStrictEqual(actual.totalExpenses, expected.totalExpenses - 10);
+      assert.deepStrictEqual(actual.cash, expectedCash - 100);
+      assert.deepStrictEqual(actual.expenses.bankLoanPayment, expectedBankLoanPayment - 10);
+    });
+  });
 });
