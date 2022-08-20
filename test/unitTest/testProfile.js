@@ -198,5 +198,12 @@ describe('Profile', () => {
       assert.deepStrictEqual(actual.cash, expectedCash - 100);
       assert.deepStrictEqual(actual.expenses.bankLoanPayment, expectedBankLoanPayment - 10);
     });
+
+    it('Should not deduct amount when cash is not sufficient', () => {
+      const profile = new Profile(professions[1]);
+      profile.setDefaults();
+      const actual = profile.deductLoan(1200);
+      assert.strictEqual(actual, false);
+    });
   });
 });

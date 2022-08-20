@@ -76,4 +76,11 @@ describe('Player', () => {
     player.createProfile();
     assert.ok(player.payLoan(100));
   });
+
+  it('Should not deduct cash when player doesnt have sufficient', () => {
+    const player = new Player('p3', 'guest');
+    player.assignProfession(professions[1]);
+    player.createProfile();
+    assert.ok(!player.payLoan(1200));
+  });
 });
