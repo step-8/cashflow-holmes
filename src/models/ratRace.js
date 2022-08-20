@@ -9,6 +9,36 @@ const getFamily = (deals, type) => {
   return type;
 };
 
+const isInRange = (number, pos1, pos2) => {
+  return (pos1 < number) && (pos2 >= number);
+};
+
+const getTileIfInRange = (tile, tilePositions, pos1, pos2) => {
+  const tileOccurrences = [];
+
+  tilePositions.forEach(tilePosition => {
+    if (isInRange(tilePosition, pos1, pos2)) {
+      tileOccurrences.push(tile);
+    }
+  });
+
+  return tileOccurrences;
+};
+
+const getAllNotificationTiles = (tiles, notifications, pos1, pos2) => {
+  const notificationTiles = [];
+
+  Object.keys(tiles).forEach(tile => {
+    if (notifications.includes(tile)) {
+      notificationTiles.push(
+        ...getTileIfInRange(tile, tiles[tile], pos1, pos2)
+      );
+    }
+  });
+
+  return notificationTiles;
+};
+
 class RatRace {
   #tiles;
   #deck;
@@ -47,15 +77,19 @@ class RatRace {
     return this.#deck[type][0];
   }
 
-  getNotifications(type) {
-    if (this.#notifications.includes(type)) {
-      return [this.#deck[type][0]];
-    }
+  getNotifications(currentPlayer) {
+    const { lastPosition, currentPosition } = currentPlayer;
 
-    return [];
+    const notificationsTiles = getAllNotificationTiles(
+      this.#tiles, this.#notifications, lastPosition, currentPosition
+    );
+
+    return notificationsTiles.map(tile => {
+      return { ...this.#deck[tile][0], family: tile };
+    });
   }
 
-  getCard(type) {
+  getCard(type, currentPlayer) {
     const deals = ['smallDeal', 'bigDeal'];
     const validTypes = [
       ...deals,
@@ -73,12 +107,14 @@ class RatRace {
         heading: 'Choose Big or Small Deal',
         family: 'deal',
         type: 'deal',
-        notifications: this.getNotifications(type)
+        notifications: this.getNotifications(currentPlayer)
       };
     }
 
     if (validTypes.includes(type)) {
-      return { ...this.pickCard(type), family: getFamily(deals, type), cardName: type, notifications: this.getNotifications(type) };
+      return {
+        ...this.pickCard(type), family: getFamily(deals, type), cardName: type, notifications: this.getNotifications(currentPlayer)
+      };
     }
     return;
   }

@@ -27,8 +27,8 @@ class Turn {
     this.#currentTransaction = null;
   }
 
-  set transactionState(status) {
-    this.#currentTransaction = { family: this.#card.family, status };
+  setTransactionState(family, status) {
+    this.#currentTransaction = { family, status };
   }
 
   #changeTurnIfNoCard() {
@@ -41,14 +41,14 @@ class Turn {
   payday() {
     this.#currentPlayer.payday();
     this.#log.addLog(this.#playerInfo(), `received pay of $${this.#cashflow()}`);
-    this.transactionState = 1;
+    this.setTransactionState('payday', 1);
     this.#changeTurnIfNoCard();
   }
 
   doodad() {
     const cost = this.#card.cost;
     const status = this.#currentPlayer.doodad(cost);
-    this.transactionState = status;
+    this.setTransactionState('doodad', status);
     if (!status) {
       return;
     }
@@ -59,7 +59,7 @@ class Turn {
 
   buyRealEstate() {
     const status = this.#currentPlayer.buyRealEstate(this.#card);
-    this.transactionState = status;
+    this.setTransactionState('deal', status);
     if (!status) {
       return;
     }
@@ -69,7 +69,7 @@ class Turn {
 
   buyStocks(count) {
     const status = this.#currentPlayer.buyStocks(this.#card, count);
-    this.transactionState = status;
+    this.setTransactionState('deal', status);
     if (!status) {
       return;
     }
@@ -80,7 +80,7 @@ class Turn {
   charity() {
     const amount = 0.1 * this.#currentPlayer.details.profile.totalIncome;
     const status = this.#currentPlayer.charity();
-    this.transactionState = status;
+    this.setTransactionState('charity', status);
     if (!status) {
       return;
     }
@@ -93,7 +93,7 @@ class Turn {
   downsized() {
     const amount = this.#currentPlayer.details.profile.totalExpenses;
     const status = this.#currentPlayer.downsized();
-    this.transactionState = status;
+    this.setTransactionState('downsized', status);
     if (!status) {
       return;
     }

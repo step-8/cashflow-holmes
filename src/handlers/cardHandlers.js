@@ -3,9 +3,15 @@ const serveCard = (req, res) => {
   const { currentPlayer, ratRace } = game.state;
   const { currentPosition } = currentPlayer;
   const type = ratRace.getCardType(currentPosition);
-  const card = game.state.ratRace.getCard(type);
+  const card = game.state.ratRace.getCard(type, currentPlayer);
   game.currentCard = card;
   res.json(card);
+};
+
+const removeNotifier = (req, res) => {
+  const { game } = req;
+  game.removeNotifier();
+  res.end();
 };
 
 const resetTransaction = (req, res) => {
@@ -46,7 +52,8 @@ const buyDeal = (game, type, count) => {
 };
 
 const setCard = (game, action) => {
-  const card = game.state.ratRace.getCard(`${action}Deal`);
+  const { currentPlayer } = game.state;
+  const card = game.state.ratRace.getCard(`${action}Deal`, currentPlayer);
   game.currentCard = card;
 };
 
@@ -77,4 +84,6 @@ const cardActionsHandler = (req, res) => {
 };
 
 
-module.exports = { serveCard, cardActionsHandler, resetTransaction };
+module.exports = {
+  serveCard, cardActionsHandler, resetTransaction, removeNotifier
+};

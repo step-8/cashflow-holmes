@@ -346,34 +346,33 @@
     });
   };
 
-  const removeNotification = (currentCard) => {
+  const removeNotification = (currentCard, card, game) => {
     removeCard();
-    currentCard.notifications.pop();
-  };
-
-  const proceedWithPendingNotificationActions = (currentCard, card, game) => {
-    if (currentCard.id) {
-      drawCard(game);
-      return;
-    }
-
-    const action = () => sendAction('ok', currentCard.family, card.type);
+    API.removeNotification();
+    const action = () => sendAction('ok', card.family, card.type);
     drawForCurrentUser(action)(game);
   };
 
+  // const proceedWithPendingNotificationActions = (currentCard, card, game) => {
+  //   if (currentCard.id || currentCard.notifications.length) {
+  //     drawCard(game);
+  //     return;
+  //   }
+  // };
+
   const drawNotifications = (cardEle, game) => {
-    const { currentCard, currentPlayer } = game;
-    const { family, notifications } = currentCard;
+    const { currentPlayer } = game;
+    const currentCard = game.currentCard;
+    const notifications = currentCard.notifications;
     const card = notifications[0];
 
-    const newCard = createCard({ ...card, family }, currentPlayer);
+    const newCard = createCard(card, currentPlayer);
     cardEle.replaceWith(newCard);
 
-
-    timeout(() => removeNotification(currentCard), 5000)
-      .then(() => timeout(() => proceedWithPendingNotificationActions(
-        currentCard, card, game
-      ), 500));
+    timeout(() => removeNotification(currentCard, card, game), 2000);
+    // .then(() => timeout(() => proceedWithPendingNotificationActions(
+    //   currentCard, card, game
+    // ), 500));
 
     return;
   };
@@ -560,6 +559,7 @@
         createMessage(actionMessage, classes[status]);
         return;
       }
+      API.changeTurn();
     };
 
     drawForCurrentUser(message)(game);

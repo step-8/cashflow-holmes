@@ -172,6 +172,13 @@ class Game {
     this.#log.addLog({ username, color }, `landed on ${toWords(card.family)}`);
   }
 
+  removeNotifier() {
+    if (!this.#currentCard.notifications) {
+      return;
+    }
+    this.#currentCard.notifications.shift();
+  }
+
   get currentPlayer() {
     if (this.#currentPlayerIndex === null) {
       return null;

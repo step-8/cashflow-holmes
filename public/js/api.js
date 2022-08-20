@@ -6,6 +6,7 @@ const API = {
   joinGame: (options) => fetchReq('/join', options),
   assignCard: () => fetchReq('/card/type'),
   cardAction: (options) => fetchReq('/card/card-action', options),
+  removeNotification: () => fetchReq('card/remove-notify'),
   cancelGame: () => fetchReq('/remove-gameid'),
   userInfo: () => fetchReq('/get-user-info'),
   playerInfo: () => fetchReq('/api/player-info'),

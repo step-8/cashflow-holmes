@@ -20,13 +20,15 @@ describe('RatRace', () => {
   describe('getCard', () => {
     it('Should give card on valid type', () => {
       const ratRace = new RatRace(deck);
-      const card = ratRace.getCard('market');
+      const player = { lastPosition: 0, currentPosition: 1 };
+      const card = ratRace.getCard('market', player);
       assert.ok(card);
     });
 
     it('Should not give card on invalid type', () => {
       const ratRace = new RatRace(deck);
-      const card = ratRace.getCard('deal');
+      const player = { lastPosition: 0, currentPosition: 1 };
+      const card = ratRace.getCard('deal', player);
       assert.ok(!card);
     });
   });
@@ -34,13 +36,15 @@ describe('RatRace', () => {
   describe('getNotifications', () => {
     it('Should give payday card on valid notification payday card', () => {
       const ratRace = new RatRace(deck);
-      const notifications = ratRace.getNotifications('payday');
+      const player = { lastPosition: 5, currentPosition: 7 };
+      const notifications = ratRace.getNotifications(player);
       assert.strictEqual(notifications[0].type, 'payday');
     });
 
     it('Should give no cards on invalid notification card', () => {
       const ratRace = new RatRace(deck);
-      const notifications = ratRace.getNotifications('');
+      const player = { lastPosition: 0, currentPosition: 1 };
+      const notifications = ratRace.getNotifications(player);
       assert.deepStrictEqual(notifications, []);
     });
   });
