@@ -621,12 +621,15 @@ a {
 
 .success {
   color: green;
+}
+
+.message {
   text-align: center;
+  font-size: 1vmax;
 }
 
 .warning {
   color: red;
-  text-align: center;
 }
 
 #expansion-window {

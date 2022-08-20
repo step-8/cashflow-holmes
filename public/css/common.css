@@ -132,14 +132,15 @@ a {
   border: 0.5vmax solid black;
   border-bottom: none;
   border-right: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   right: 0;
   height: 100%;
   width: 40%;
   border-top-left-radius: 200%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 3vmax;
   padding-left: 5vmax;
   padding-top: 5vmax;
@@ -216,4 +217,17 @@ a {
 
 .flex-row {
   display: flex;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.gap {
+  gap: 1vmax;
+}
+
+input {
+  padding: 0.5vmax;
 }

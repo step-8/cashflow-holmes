@@ -476,8 +476,8 @@
   };
 
   const classes = {
-    0: 'warning',
-    1: 'success'
+    0: 'warning message',
+    1: 'success message'
   };
 
   const drawMessages = (game) => {

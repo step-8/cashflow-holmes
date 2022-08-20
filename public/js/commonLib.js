@@ -63,3 +63,5 @@ const camelToCapitalize = (word) => {
   const [first, ...rest] = spacedWord;
   return first.toUpperCase().concat(rest.join(''));
 };
+
+const isEnter = (event) => event.key === 'Enter';
