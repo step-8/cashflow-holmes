@@ -29,7 +29,7 @@ describe('Change Turn', () => {
       request(app)
         .post('/loan/take')
         .set('Cookie', cookies.join(';'))
-        .send({ amount: 10 })
+        .send({ amount: 5 })
         .expect(200, done);
     });
 

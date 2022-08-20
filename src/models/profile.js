@@ -126,9 +126,14 @@ class Profile {
   }
 
   deductLoan(amount) {
+    if (amount > this.#liabilities.bankLoan) {
+      amount = this.#liabilities.bankLoan;
+    }
+
     if (this.#cash < amount) {
       return false;
     }
+
 
     this.#cash -= amount;
     this.#liabilities.bankLoan -= amount;

@@ -12,8 +12,8 @@ const payLoan = (req, res) => {
   const { amount } = req.body;
   const { username } = req.session;
   const player = game.getPlayer(username);
-  player.payLoan(amount * 1000);
-  res.sendStatus(200);
+  const status = player.payLoan(amount * 1000) ? 200 : 406;
+  res.sendStatus(status);
 };
 
 module.exports = { takeLoan, payLoan };

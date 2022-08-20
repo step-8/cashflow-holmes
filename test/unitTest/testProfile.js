@@ -199,11 +199,20 @@ describe('Profile', () => {
       assert.deepStrictEqual(actual.expenses.bankLoanPayment, expectedBankLoanPayment - 10);
     });
 
-    it('Should not deduct amount when cash is not sufficient', () => {
-      const profile = new Profile(professions[1]);
+    it('Should not deduct amount when there is no bank loan', () => {
+      const profile = new Profile(professions[2]);
       profile.setDefaults();
       const actual = profile.deductLoan(1200);
-      assert.strictEqual(actual, false);
+      assert.ok(actual);
+    });
+
+    it('Should not deduct amount when there is no bank loan', () => {
+      const profile = new Profile(professions[2]);
+      profile.setDefaults();
+      profile.deductDoodad(10000);
+      profile.addLoan(100);
+      const actual = profile.deductLoan(1200);
+      assert.ok(actual);
     });
   });
 });

@@ -52,6 +52,10 @@ const decideLoanResult = (res, method) => {
   if (res.status === 200 && method === 'payLoan') {
     drawLoanResult('Loan Paid Succesfully', 'success');
   }
+
+  if (res.status === 406 && method === 'payLoan') {
+    drawLoanResult('Insufficient Balance', 'warning');
+  }
 };
 
 const loanActionOnEnter = (event, id) => {

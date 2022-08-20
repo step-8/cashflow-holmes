@@ -81,6 +81,8 @@ describe('Player', () => {
     const player = new Player('p3', 'guest');
     player.assignProfession(professions[1]);
     player.createProfile();
+    player.takeLoan(1100);
+    player.doodad(2200);
     assert.ok(!player.payLoan(1200));
   });
 });
