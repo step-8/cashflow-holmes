@@ -41,7 +41,7 @@
     "handle-callback-err": "off",
     "id-length": "error",
     "key-spacing": "error",
-    "max-len": "off",
+    "max-len": "warn",
     "max-params": [
       "error",
       {
@@ -88,6 +88,7 @@
       ],
       "rules": {
         "no-magic-numbers": "off",
+        "max-len": "off",
         "max-statements": "off",
         "no-console": "off",
         "no-undef": "warn",
