@@ -72,6 +72,10 @@ class Player {
     }
   }
 
+  takeLoan(amount) {
+    this.#profile.addLoan(amount);
+  }
+
   get details() {
     return {
       username: this.#username,

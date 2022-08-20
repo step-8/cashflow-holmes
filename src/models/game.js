@@ -175,6 +175,10 @@ class Game {
     return this.#players.map(player => player.details);
   }
 
+  getPlayer(username) {
+    return this.#players.find(player => player.details.username === username);
+  }
+
   set turnCompleted(status) {
     this.#currentTurn.turnComplete = status;
   }

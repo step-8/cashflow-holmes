@@ -268,6 +268,7 @@ const RAT_RACE_BOARD = `<html>
   <script src="js/ratRaceBoard.js"></script>
   <script src="js/showMyProfile.js"></script>
   <script src="js/showOtherPlayers.js"></script>
+  <script src="js/loan.js"></script>
   <script src="https://kit.fontawesome.com/74138aff63.js" crossorigin="anonymous"></script>
 </head>
 
@@ -493,7 +494,7 @@ const RAT_RACE_BOARD = `<html>
         </ul>
       </nav>
       <div id="loan-options">
-        <div id="take-loan">Take loan</div>
+        <div id="take-loan" onclick="drawTakeLoan()">Take loan</div>
         <div id="pay-loan">Pay loan</div>
       </div>
       <div id="logs"></div>

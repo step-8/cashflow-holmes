@@ -108,6 +108,13 @@ class Profile {
     );
   }
 
+  addLoan(amount) {
+    console.log(amount);
+    this.#cash += amount;
+    this.#liabilities.bankLoan += amount;
+    this.#expenses.bankLoanPayment = this.#liabilities.bankLoan / 10;
+  }
+
   get details() {
     return {
       profession: this.#profession,

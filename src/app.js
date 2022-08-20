@@ -17,6 +17,7 @@ const createApp = (config, session) => {
   }
   app.use(cookieParser());
   app.use(express.urlencoded({ extended: true }));
+  app.use(express.json());
   app.use(express.static(config.PUBLIC));
 
   app.use(['/register', '/login'], authenticate);

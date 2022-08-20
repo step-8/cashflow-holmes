@@ -32,7 +32,7 @@ const joinGame = (event) => {
   event.preventDefault();
   const body = readFormData('#join-popup-form');
 
-  API.joinGame({ method: 'post', body: body })
+  API.joinGame({ method: 'post', body })
     .then(resolve => {
       if (resolve.ok) {
         redirectToLobby();

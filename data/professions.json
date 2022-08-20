@@ -57,6 +57,7 @@
       "schoolLoans": 0,
       "carLoans": 4000,
       "creditCardDebt": 3000,
+      "bankLoan": 0,
       "realEstates": []
     }
   },
@@ -87,6 +88,7 @@
       "schoolLoans": 0,
       "carLoans": 15000,
       "creditCardDebt": 22000,
+      "bankLoan": 0,
       "realEstates": []
     }
   },
@@ -117,6 +119,7 @@
       "schoolLoans": 12000,
       "carLoans": 7000,
       "creditCardDebt": 5000,
+      "bankLoan": 0,
       "realEstates": []
     }
   },
@@ -147,6 +150,7 @@
       "schoolLoans": 0,
       "carLoans": 4000,
       "creditCardDebt": 3000,
+      "bankLoan": 0,
       "realEstates": []
     }
   },
@@ -177,6 +181,7 @@
       "schoolLoans": 0,
       "carLoans": 4000,
       "creditCardDebt": 3000,
+      "bankLoan": 0,
       "realEstates": []
     }
   },
@@ -207,6 +212,7 @@
       "schoolLoans": 78000,
       "carLoans": 11000,
       "creditCardDebt": 7000,
+      "bankLoan": 0,
       "realEstates": []
     }
   },
@@ -237,6 +243,7 @@
       "schoolLoans": 12000,
       "carLoans": 6000,
       "creditCardDebt": 4000,
+      "bankLoan": 0,
       "realEstates": []
     }
   },
@@ -267,6 +274,7 @@
       "schoolLoans": 0,
       "carLoans": 5000,
       "creditCardDebt": 3000,
+      "bankLoan": 0,
       "realEstates": []
     }
   },
@@ -297,6 +305,7 @@
       "schoolLoans": 12000,
       "carLoans": 5000,
       "creditCardDebt": 4000,
+      "bankLoan": 0,
       "realEstates": []
     }
   },
@@ -327,6 +336,7 @@
       "schoolLoans": 6000,
       "carLoans": 5000,
       "creditCardDebt": 4000,
+      "bankLoan": 0,
       "realEstates": []
     }
   },
@@ -357,6 +367,7 @@
       "schoolLoans": 0,
       "carLoans": 3000,
       "creditCardDebt": 3000,
+      "bankLoan": 0,
       "realEstates": []
     }
   }
