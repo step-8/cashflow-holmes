@@ -29,20 +29,29 @@ const drawLoan = (event) => {
   loanOptions.replaceChildren(html(selectLoanAmount));
 };
 
-const drawLoanResult = (res) => {
+const drawLoanResult = (message, status) => {
   const classes = {
     success: 'success message',
     warning: 'warning message'
   };
 
   const loanOptions = getElement('#loan-options');
-  const message = 'Loan taken successfully';
 
-  loanOptions.replaceChildren(html(['div', { className: classes.success }, message]));
+  loanOptions.replaceChildren(html(['div', { className: classes[status] }, message]));
 
   setTimeout(() => {
     loanOptions.replaceChildren(...childrens.loanChildren);
   }, 2000);
+};
+
+const decideLoanResult = (res, method) => {
+  if (res.status === 200 && method === 'takeLoan') {
+    drawLoanResult('Loan Taken Succesfully', 'success');
+  }
+
+  if (res.status === 200 && method === 'payLoan') {
+    drawLoanResult('Loan Paid Succesfully', 'success');
+  }
 };
 
 const loanActionOnEnter = (event, id) => {
@@ -68,5 +77,5 @@ const loanActions = (id) => {
   const method = id === 'take-loan' ? 'takeLoan' : 'payLoan';
 
   API[method](options)
-    .then(drawLoanResult);
+    .then(res => decideLoanResult(res, method));
 };
