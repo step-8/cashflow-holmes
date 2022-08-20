@@ -54,7 +54,7 @@ class RatRace {
       'baby': [20]
     };
     this.#deck = deck;
-    this.#notifications = ['payday'];
+    this.#notifications = ['payday', 'downsized'];
   }
 
   getCardType(tilePosition) {
@@ -84,7 +84,12 @@ class RatRace {
       this.#tiles, this.#notifications, lastPosition, currentPosition
     );
 
-    return notificationsTiles.map(tile => {
+    const crossers = notificationsTiles.slice(0, -1);
+    const currentEvent = notificationsTiles.slice(-1);
+    const filteredCrossers = crossers.filter(crosser => crosser === 'payday');
+    const notifiers = [...filteredCrossers, ...currentEvent];
+
+    return notifiers.map(tile => {
       return { ...this.#deck[tile][0], family: tile };
     });
   }
