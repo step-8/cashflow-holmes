@@ -32,6 +32,15 @@ describe('Player', () => {
     assert.strictEqual(profile.cash, expectedCash);
   });
 
+  it('Should update current and last positions on movement', () => {
+    const player = new Player('p3', 'guest');
+    player.assignProfession(expectedProfession);
+    player.createProfile();
+    player.move(3);
+    assert.strictEqual(player.details.currentPosition, 3);
+    assert.strictEqual(player.details.lastPosition, 0);
+  });
+
   it('Should move to 24 if position is 0', () => {
     const player = new Player('p3', 'guest');
     player.assignProfession(expectedProfession);

@@ -7,6 +7,7 @@ class Player {
   #profile;
   #isRolledDice;
   #currentPosition;
+  #lastPosition;
   #dualDiceCount;
   #skippedTurns;
 
@@ -18,6 +19,7 @@ class Player {
     this.#profile = null;
     this.#isRolledDice = false;
     this.#currentPosition = 0;
+    this.#lastPosition = 0;
     this.#dualDiceCount = 0;
     this.#skippedTurns = 0;
   }
@@ -84,6 +86,7 @@ class Player {
   }
 
   move(steps) {
+    this.#lastPosition = this.#currentPosition;
     this.#currentPosition = (this.#currentPosition + steps) % 24;
     if (this.#currentPosition === 0) {
       this.#currentPosition = 24;
@@ -103,6 +106,7 @@ class Player {
       profession: this.#profession,
       profile: this.#profile.details,
       isRolledDice: this.#isRolledDice,
+      lastPosition: this.#lastPosition,
       currentPosition: this.#currentPosition,
       dualDiceCount: this.#dualDiceCount,
       skippedTurns: this.#skippedTurns
