@@ -71,7 +71,7 @@ class Turn {
 
   charity() {
     const amount = 0.1 * this.#currentPlayer.details.profile.totalIncome;
-    const status = this.#currentPlayer.charity(amount);
+    const status = this.#currentPlayer.charity();
     this.transactionState = status;
     if (!status) {
       return;
@@ -79,6 +79,20 @@ class Turn {
 
     this.#currentPlayer.dualDiceCount = 3;
     this.#log.addLog(this.#playerInfo(), `donated $${amount} to charity`);
+    this.#turnCompleted = true;
+  }
+
+  downsized() {
+    const amount = this.#currentPlayer.details.profile.totalExpenses;
+    const status = this.#currentPlayer.downsized();
+    this.transactionState = status;
+    if (!status) {
+      return;
+    }
+
+    this.#currentPlayer.skippedTurns = 2;
+    this.#log.addLog(this.#playerInfo(), 'is downsized');
+    this.#log.addLog(this.#playerInfo(), `paid expenses $${amount}`);
     this.#turnCompleted = true;
   }
 

@@ -267,5 +267,69 @@ describe('Turn', () => {
     });
   });
 
-});
+  describe('downsized', () => {
+    const card = {
+      heading: 'New Card',
+      symbol: 'a',
+      family: 'downsized',
+      type: 'downsized'
+    };
 
+    it('Should deduct expenses from player\'s cash', () => {
+      const log = new Log();
+      const player = {
+        details: { username: 'user', color: 'c', profile: { cashFlow: 100, totalIncome: 100, totalExpenses: 100 } },
+        doodad: identity,
+        payday: identity,
+        buyRealEstate: identity,
+        charity: identity,
+        downsized: successful
+      };
+
+      const turn = new Turn(card, player, log);
+      turn.downsized();
+
+      assert.ok(turn.info.state);
+      assert.deepStrictEqual(
+        log.getAllLogs(),
+        [
+          { username: 'user', color: 'c', message: 'is downsized' },
+          { username: 'user', color: 'c', message: 'paid expenses $100' }
+        ]
+      );
+
+      assert.deepStrictEqual(
+        turn.info.transaction,
+        { family: 'downsized', status: 1 }
+      );
+    });
+
+    it('Should not log the downsized messages', () => {
+      const log = new Log();
+      const player = {
+        details: {
+          username: 'user', color: 'c',
+          profile: { cashFlow: 100, totalIncome: 100, totalExpenses: 1000 }
+        },
+        doodad: identity,
+        payday: identity,
+        buyRealEstate: identity,
+        charity: identity,
+        downsized: failure
+      };
+
+      const turn = new Turn(card, player, log);
+      turn.downsized();
+
+      assert.ok(!turn.info.state);
+      assert.deepStrictEqual(
+        log.getAllLogs(), []
+      );
+
+      assert.deepStrictEqual(
+        turn.info.transaction,
+        { family: 'downsized', status: 0 }
+      );
+    });
+  });
+});

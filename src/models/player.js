@@ -8,6 +8,7 @@ class Player {
   #isRolledDice;
   #currentPosition;
   #dualDiceCount;
+  #skippedTurns;
 
   constructor(username, role) {
     this.#username = username;
@@ -18,6 +19,7 @@ class Player {
     this.#isRolledDice = false;
     this.#currentPosition = 0;
     this.#dualDiceCount = 0;
+    this.#skippedTurns = 0;
   }
 
   set rolledDice(status) {
@@ -26,6 +28,18 @@ class Player {
 
   set dualDiceCount(count) {
     this.#dualDiceCount = count;
+  }
+
+  get dualDiceCount() {
+    return this.#dualDiceCount;
+  }
+
+  set skippedTurns(count) {
+    this.#skippedTurns = count;
+  }
+
+  get skippedTurns() {
+    return this.#skippedTurns;
   }
 
   assignColor(color) {
@@ -61,8 +75,12 @@ class Player {
     return this.#profile.addStocks(card, count);
   }
 
-  charity(amount) {
-    return this.#profile.donateCash(amount);
+  charity() {
+    return this.#profile.donateCash();
+  }
+
+  downsized() {
+    return this.#profile.payExpenses();
   }
 
   move(steps) {
@@ -85,7 +103,8 @@ class Player {
       profile: this.#profile.details,
       isRolledDice: this.#isRolledDice,
       currentPosition: this.#currentPosition,
-      dualDiceCount: this.#dualDiceCount
+      dualDiceCount: this.#dualDiceCount,
+      skippedTurns: this.#skippedTurns
     };
   }
 }

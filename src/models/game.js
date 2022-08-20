@@ -52,7 +52,15 @@ class Game {
   rollDice(dice) {
     this.#diceValues = [randomDiceValue(), randomDiceValue()];
     const currentPlayer = this.#players[this.#currentPlayerIndex];
-    const dualDiceCount = currentPlayer.details.dualDiceCount;
+    const dualDiceCount = currentPlayer.dualDiceCount;
+    const skippedTurns = currentPlayer.skippedTurns;
+
+    if (skippedTurns > 0) {
+      // currentPlayer.skippedTurns = skippedTurns - 1;
+      currentPlayer.skippedTurns--;
+      this.changeTurn();
+      return;
+    }
 
     let totalCount = this.#diceValues[0];
     if (+dice === 2) {
@@ -181,6 +189,10 @@ class Game {
 
   set turnCompleted(status) {
     this.#currentTurn.turnComplete = status;
+  }
+
+  get currentTurn() {
+    return this.#currentTurn;
   }
 
   get state() {

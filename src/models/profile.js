@@ -89,12 +89,23 @@ class Profile {
     this.#transactions.unshift(transaction);
   }
 
-  donateCash(amount) {
+  donateCash() {
+    const amount = 0.1 * this.#calculateTotalIncome();
     if (this.#cash < amount) {
       return 0;
     }
 
     this.updateCash(-amount, 'Charity');
+    return 1;
+  }
+
+  payExpenses() {
+    const amount = this.#calculateTotalExpenses();
+    if (this.#cash < amount) {
+      return 0;
+    }
+
+    this.updateCash(-amount, 'Downsized');
     return 1;
   }
 

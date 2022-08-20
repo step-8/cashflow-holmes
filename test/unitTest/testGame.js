@@ -89,4 +89,26 @@ describe('Game', () => {
 
     assert.ok(game.state.currentPlayer.isRolledDice);
   });
+
+  it('Should change the turn to other player', () => {
+    const selectedProfessions = [professions[0], professions[1]];
+    const game = new Game(colors, selectedProfessions);
+    const card = {
+      heading: 'New Card',
+      symbol: 'a',
+      family: 'downsized',
+      type: 'downsized'
+    };
+
+    game.assignGameID(1234);
+    game.addPlayer('p1', 'host');
+    game.addPlayer('p2', 'guest');
+    game.start();
+    game.changeTurn();
+    game.currentCard = card;
+    game.currentTurn.payday();
+    game.currentTurn.downsized();
+    game.rollDice();
+    assert.ok(game.state.currentPlayer.username === 'p1');
+  });
 });
