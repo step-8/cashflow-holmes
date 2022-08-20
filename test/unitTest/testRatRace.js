@@ -36,15 +36,25 @@ describe('RatRace', () => {
   describe('getNotifications', () => {
     it('Should give payday card on valid notification payday card', () => {
       const ratRace = new RatRace(deck);
+      const deals = ['smallDeal', 'bigDeal'];
       const player = { lastPosition: 5, currentPosition: 7 };
-      const notifications = ratRace.getNotifications(player);
+      const notifications = ratRace.getNotifications('', deals, player);
       assert.strictEqual(notifications[0].type, 'payday');
     });
 
     it('Should give no cards on invalid notification card', () => {
       const ratRace = new RatRace(deck);
+      const deals = ['smallDeal', 'bigDeal'];
       const player = { lastPosition: 0, currentPosition: 1 };
-      const notifications = ratRace.getNotifications(player);
+      const notifications = ratRace.getNotifications('', deals, player);
+      assert.deepStrictEqual(notifications, []);
+    });
+
+    it('Should give no cards on current card is a deal', () => {
+      const ratRace = new RatRace(deck);
+      const deals = ['smallDeal', 'bigDeal'];
+      const player = { lastPosition: 0, currentPosition: 1 };
+      const notifications = ratRace.getNotifications('bigDeal', deals, player);
       assert.deepStrictEqual(notifications, []);
     });
   });

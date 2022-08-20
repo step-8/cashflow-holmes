@@ -348,17 +348,10 @@
 
   const removeNotification = (currentCard, card, game) => {
     removeCard();
-    API.removeNotification();
     const action = () => sendAction('ok', card.family, card.type);
     drawForCurrentUser(action)(game);
+    API.removeNotification();
   };
-
-  // const proceedWithPendingNotificationActions = (currentCard, card, game) => {
-  //   if (currentCard.id || currentCard.notifications.length) {
-  //     drawCard(game);
-  //     return;
-  //   }
-  // };
 
   const drawNotifications = (cardEle, game) => {
     const { currentPlayer } = game;
@@ -370,10 +363,6 @@
     cardEle.replaceWith(newCard);
 
     timeout(() => removeNotification(currentCard, card, game), 2000);
-    // .then(() => timeout(() => proceedWithPendingNotificationActions(
-    //   currentCard, card, game
-    // ), 500));
-
     return;
   };
 
@@ -381,7 +370,6 @@
     const { currentCard, currentPlayer } = game;
     const cardEle = getElement('#main-card');
 
-    console.log(currentCard);
     if (!currentCard) {
       removeCard();
       return;

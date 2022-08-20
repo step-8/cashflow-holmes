@@ -77,9 +77,12 @@ class RatRace {
     return this.#deck[type][0];
   }
 
-  getNotifications(currentPlayer) {
-    const { lastPosition, currentPosition } = currentPlayer;
+  getNotifications(type, deals, currentPlayer) {
+    if (deals.includes(type)) {
+      return [];
+    }
 
+    const { lastPosition, currentPosition } = currentPlayer;
     const notificationsTiles = getAllNotificationTiles(
       this.#tiles, this.#notifications, lastPosition, currentPosition
     );
@@ -114,13 +117,13 @@ class RatRace {
         heading: 'Choose Big or Small Deal',
         family: 'deal',
         type: 'deal',
-        notifications: this.getNotifications(currentPlayer)
+        notifications: this.getNotifications(type, deals, currentPlayer)
       };
     }
 
     if (validTypes.includes(type)) {
       return {
-        ...this.pickCard(type), family: getFamily(deals, type), cardName: type, notifications: this.getNotifications(currentPlayer)
+        ...this.pickCard(type), family: getFamily(deals, type), cardName: type, notifications: this.getNotifications(type, deals, currentPlayer)
       };
     }
     return;
