@@ -50,8 +50,7 @@ class Game {
   }
 
   rollDice(dice) {
-    // this.#diceValues = [randomDiceValue(), randomDiceValue()];
-    this.#diceValues = [1, randomDiceValue()];
+    this.#diceValues = [randomDiceValue(), randomDiceValue()];
     const currentPlayer = this.#players[this.#currentPlayerIndex];
     const dualDiceCount = currentPlayer.details.dualDiceCount;
 
