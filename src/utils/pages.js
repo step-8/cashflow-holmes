@@ -494,8 +494,8 @@ const RAT_RACE_BOARD = `<html>
         </ul>
       </nav>
       <div id="loan-options">
-        <div class="small-font" id="take-loan" onclick="drawTakeLoan()">Take loan</div>
-        <div class="small-font" id="pay-loan">Pay loan</div>
+        <div class="small-font" id="take-loan" onclick="drawLoan(event)">Take loan</div>
+        <div class="small-font" id="pay-loan" onclick="drawLoan(event)">Pay loan</div>
       </div>
       <div id="logs"></div>
       <div id="choose-dice"></div>

@@ -1,11 +1,13 @@
 const childrens = {};
 
-const drawTakeLoan = () => {
+const drawLoan = (event) => {
   const loanOptions = getElement('#loan-options');
+  const type = event.target.id;
 
   const loanChildren = [...loanOptions.children];
   childrens.loanChildren = loanChildren;
-  const fnTocall = (event) => takeLoanOnEnter(event);
+
+  const fnTocall = (event) => loanActionOnEnter(event, type);
 
   const selectLoanAmount =
     ['div', { className: 'flex-row flex-center gap' },
@@ -13,8 +15,9 @@ const drawTakeLoan = () => {
         ['input', { onkeyup: fnTocall, type: 'number', min: '0', placeholder: 'Enter amount in 1000s', id: 'loan-amount' }]],
       ['div', {
         className: 'fa-solid fa-check check',
-        onclick: takeLoan
-      }],
+        onclick: () => loanActions(type)
+      }
+      ],
       ['div', {
         className: 'fa-solid fa-xmark close',
         onclick: () => {
@@ -26,7 +29,7 @@ const drawTakeLoan = () => {
   loanOptions.replaceChildren(html(selectLoanAmount));
 };
 
-const drawTakeLoanSuccess = (res) => {
+const drawLoanResult = (res) => {
   const classes = {
     success: 'success message',
     warning: 'warning message'
@@ -40,17 +43,16 @@ const drawTakeLoanSuccess = (res) => {
   setTimeout(() => {
     loanOptions.replaceChildren(...childrens.loanChildren);
   }, 2000);
-
 };
 
-const takeLoanOnEnter = (event) => {
+const loanActionOnEnter = (event, id) => {
   if (!isEnter(event)) {
     return;
   }
-  takeLoan();
+  loanActions(id);
 };
 
-const takeLoan = (event) => {
+const loanActions = (id) => {
   const amount = +getElement('#loan-amount').value;
 
   if (!amount) {
@@ -63,6 +65,8 @@ const takeLoan = (event) => {
     body: JSON.stringify({ amount })
   };
 
-  API.takeLoan(options)
-    .then(drawTakeLoanSuccess);
+  const method = id === 'take-loan' ? 'takeLoan' : 'payLoan';
+
+  API[method](options)
+    .then(drawLoanResult);
 };

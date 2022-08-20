@@ -14,6 +14,7 @@ const API = {
   rollDice: (dice) => fetchReq(`/roll-dice/${dice}`),
   getProfession: () => fetchReq('/api/profession'),
   resetTransaction: () => fetchReq('/card/reset-transaction'),
-  takeLoan: (options) => fetchReq('/loan/take', options)
+  takeLoan: (options) => fetchReq('/loan/take', options),
+  payLoan: (options) => fetchReq('/loan/pay', options),
 };
 

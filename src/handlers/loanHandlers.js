@@ -13,7 +13,7 @@ const payLoan = (req, res) => {
   const { username } = req.session;
   const player = game.getPlayer(username);
   player.payLoan(amount * 1000);
-  res.end();
+  res.sendStatus(200);
 };
 
 module.exports = { takeLoan, payLoan };
