@@ -289,11 +289,11 @@
     }
 
     return ['div', {},
-      ['div', { className: 'card-heading' }, currentCard.heading.toUpperCase() || ''],
+      ['div', { className: 'card-heading normal-font' }, currentCard.heading.toUpperCase() || ''],
       ['div', { className: 'description' }, currentCard.description || ''],
       ['div', { className: 'rule' }, currentCard.rule || ''],
-      ['div', { className: 'cost' }, cost || ''],
-      ['div', { className: 'cost' }, downPayment || ''],
+      ['div', { className: 'cost small-font' }, cost || ''],
+      ['div', { className: 'cost small-font' }, downPayment || ''],
       ['div', { className: 'actions' }]
     ];
   };
@@ -449,7 +449,7 @@
 
   const createMessage = (message, className) => {
     const messageBox = getElement('#message-space');
-    const messageEle = html(['div', { className }, message]);
+    const messageEle = html(['div', { className: `${className} normal-font` }, message]);
     messageBox.replaceChildren(messageEle);
     API.resetTransaction();
     API.changeTurn();

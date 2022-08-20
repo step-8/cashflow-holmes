@@ -63,7 +63,7 @@ const createCloseButton = () => {
 const createExpansionHeader = ({ username, profession, color }) => {
   const professionName = profession.profession;
   return ['header', {},
-    ['h3', { className: 'board-name' }, 'Rat Race'],
+    ['h3', { className: 'board-name small-font' }, 'Rat Race'],
     ['div', { className: 'my-details', },
       ['div', {},
         ['div', { id: 'username' }, username],

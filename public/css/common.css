@@ -3,8 +3,10 @@
   --def-border: 0.5px solid black;
   --big-border: 0.1vmax solid black;
   --def-curve: 0.5vmax;
-  --page-header: 2.5vmax;
-  --plain-font: 1.2vmax;
+  --small-font: 1vmax;
+  --normal-font: 1.2vmax;
+  --big-font: 1.5vmax;
+  --large-font: 2vmax;
   --deal-border: #40b34e;
   --deal-bg: #d7edda;
   --doodad-border: #ec2135;
@@ -46,7 +48,6 @@ body {
   align-items: center;
   justify-content: space-between;
   right: 50px;
-  font-size: 1.7vmax;
 }
 
 .username {
@@ -105,19 +106,14 @@ a {
 .menu {
   width: 25%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .btn-wrapper {
-  display: flex;
-  flex-direction: column;
   gap: 1em;
   width: 60%;
   aspect-ratio: 2;
-  font-size: 2vmax;
 }
 
 .btn {
@@ -136,8 +132,6 @@ a {
   border: 0.5vmax solid black;
   border-bottom: none;
   border-right: none;
-  display: flex;
-  flex-direction: column;
   position: absolute;
   right: 0;
   height: 100%;
@@ -171,7 +165,8 @@ a {
   font-size: 4.5vmax;
 }
 
-.home-button {
+.home-button,
+.close {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -179,23 +174,14 @@ a {
 
 .home-button>a {
   padding: 0.3vmax;
-  font-size: 1.5vmax;
   cursor: pointer;
   border: var(--def-border);
   border-radius: var(--def-curve);
 }
 
 .not-found-wrapper {
-  display: flex;
-  flex-direction: column;
   align-items: center;
   row-gap: 2vmax;
-}
-
-.close {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .close-btn {
@@ -207,11 +193,27 @@ a {
   cursor: pointer;
 }
 
-.flex-column{
+.flex-column {
   display: flex;
   flex-direction: column;
 }
 
-.flex-row{
+.small-font {
+  font-size: var(--small-font);
+}
+
+.normal-font {
+  font-size: var(--normal-font);
+}
+
+.big-font {
+  font-size: var(--big-font);
+}
+
+.large-font {
+  font-size: var(--large-font);
+}
+
+.flex-row {
   display: flex;
 }

@@ -41,11 +41,6 @@
   border-style: none;
   border-bottom: var(--big-border);
   text-align: center;
-  font-size: 2vmax;
-}
-
-.font-size {
-  font-size: 1.2vmax;
 }
 
 .join-error {

@@ -33,10 +33,6 @@
   justify-content: center;
 }
 
-header>h2 {
-  font-size: var(--page-header);
-}
-
 a {
   text-decoration: none;
   color: inherit;
@@ -62,7 +58,7 @@ a {
   border-bottom-left-radius: 1em;
   display: flex;
   align-items: center;
-  font-size: var(--plain-font);
+  font-size: var(--normal-font);
   gap: 1.2vmax;
   padding: 0.5em 0.8em;
   cursor: pointer;
@@ -75,7 +71,6 @@ a {
 
 #loan-options>div {
   padding: 0.7vmax;
-  font-size: 1vmax;
   border: var(--def-border)
 }
 
@@ -197,26 +192,41 @@ a {
   aspect-ratio: auto;
 }
 
-.deal, .doodad, .payday, .market, .purples, .downsized, .baby, .charity {
+.deal,
+.doodad,
+.payday,
+.market,
+.purples,
+.downsized,
+.baby,
+.charity {
   border: var(--big-border);
 }
+
 .deal {
   background-color: var(--deal-bg);
   border-color: var(--deal-border);
 }
+
 .doodad {
   background-color: var(--doodad-bg);
   border-color: var(--doodad-border);
 }
+
 .payday {
   background-color: var(--payday-bg);
   border-color: var(--payday-border);
 }
+
 .market {
   background-color: var(--market-bg);
   border-color: var(--market-border);
 }
-.purples, .downsized, .baby, .charity {
+
+.purples,
+.downsized,
+.baby,
+.charity {
   background-color: var(--others-bg);
   border-color: var(--others-border);
 }
@@ -229,47 +239,93 @@ a {
 }
 
 /* Grid element positions START*/
-#rat-tile-3, #rat-tile-4, #rat-tile-5, #rat-tile-6, #rat-tile-7, #rat-tile-8 {
+#rat-tile-3,
+#rat-tile-4,
+#rat-tile-5,
+#rat-tile-6,
+#rat-tile-7,
+#rat-tile-8 {
   grid-column: 1;
 }
-#rat-tile-9, #rat-tile-2 {
+
+#rat-tile-9,
+#rat-tile-2 {
   grid-column: 2;
 }
-#rat-tile-10, #rat-tile-1 {
+
+#rat-tile-10,
+#rat-tile-1 {
   grid-column: 3;
 }
-#rat-tile-11, #rat-tile-24 {
+
+#rat-tile-11,
+#rat-tile-24 {
   grid-column: 4;
 }
-#rat-tile-12, #rat-tile-23 {
+
+#rat-tile-12,
+#rat-tile-23 {
   grid-column: 5;
 }
-#rat-tile-13, #rat-tile-22 {
+
+#rat-tile-13,
+#rat-tile-22 {
   grid-column: 6;
 }
-#rat-tile-14, #rat-tile-21 {
+
+#rat-tile-14,
+#rat-tile-21 {
   grid-column: 7;
 }
-#rat-tile-15, #rat-tile-16, #rat-tile-17, #rat-tile-18, #rat-tile-19, #rat-tile-20 {
+
+#rat-tile-15,
+#rat-tile-16,
+#rat-tile-17,
+#rat-tile-18,
+#rat-tile-19,
+#rat-tile-20 {
   grid-column: 8;
 }
 
-#rat-tile-8, #rat-tile-9, #rat-tile-10, #rat-tile-11, #rat-tile-12, #rat-tile-13, #rat-tile-14, #rat-tile-15 {
+#rat-tile-8,
+#rat-tile-9,
+#rat-tile-10,
+#rat-tile-11,
+#rat-tile-12,
+#rat-tile-13,
+#rat-tile-14,
+#rat-tile-15 {
   grid-row: 1;
 }
-#rat-tile-7, #rat-tile-16 {
+
+#rat-tile-7,
+#rat-tile-16 {
   grid-row: 2;
 }
-#rat-tile-6, #rat-tile-17 {
+
+#rat-tile-6,
+#rat-tile-17 {
   grid-row: 3;
 }
-#rat-tile-5, #rat-tile-18 {
+
+#rat-tile-5,
+#rat-tile-18 {
   grid-row: 4;
 }
-#rat-tile-4, #rat-tile-19 {
+
+#rat-tile-4,
+#rat-tile-19 {
   grid-row: 5;
 }
-#rat-tile-1, #rat-tile-2, #rat-tile-3, #rat-tile-20, #rat-tile-21, #rat-tile-22, #rat-tile-23, #rat-tile-24 {
+
+#rat-tile-1,
+#rat-tile-2,
+#rat-tile-3,
+#rat-tile-20,
+#rat-tile-21,
+#rat-tile-22,
+#rat-tile-23,
+#rat-tile-24 {
   grid-row: 6;
 }
 
@@ -355,7 +411,7 @@ a {
   grid-row: 3/7;
   grid-column: 5;
   background-color: white;
-  border:var(--big-border);
+  border: var(--big-border);
   border-style: dashed;
   margin: 1vmax 0.1vmax;
   display: flex;
@@ -365,7 +421,6 @@ a {
 #game-stats .heading {
   text-align: center;
   font-weight: 800;
-  font-size: 1.3vmax;
   margin: 0.5vmax;
   padding-bottom: 1vmax;
 }
@@ -418,7 +473,6 @@ a {
 }
 
 #main-card .card-heading {
-  font-size: 1.3vmax;
   font-weight: 500;
   width: 100%;
   text-align: center;
@@ -433,7 +487,6 @@ a {
 }
 
 #main-card .cost {
-  font-size: 1vmax;
   font-weight: 600;
   text-align: center;
 }
@@ -471,10 +524,6 @@ a {
   font-weight: 600;
   align-items: center;
   justify-content: center;
-}
-
-#message-space>div {
-  font-size: 1.2vmax;
 }
 
 /* dice box positions  Start*/
@@ -573,13 +622,11 @@ a {
 .success {
   color: green;
   text-align: center;
-  font-size: 1vmax;
 }
 
 .warning {
   color: red;
   text-align: center;
-  font-size: 1vmax;
 }
 
 #expansion-window {
@@ -717,7 +764,7 @@ a {
 }
 
 .window-title {
-  font-size: var(--plain-font);
+  font-size: var(--normal-font);
 }
 
 #game-nav li:hover {
@@ -760,6 +807,6 @@ a {
   border-style: none;
   padding: 0.2vmax;
   text-align: center;
-  font-size: 1vmax;
+  font-size: var(--small-font);
   outline: none;
 }

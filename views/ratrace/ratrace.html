@@ -1,176 +1,176 @@
 <html>
 
-  <head>
-    <title>Cashflow</title>
-    <link rel="stylesheet" href="../../public/css/common.css">
-    <link rel="stylesheet" href="../../public/css/board-style.css">
-    <script src="../../public/commonLib.js"></script>
-    <script src="../../public/ratRaceBoard.js"></script>
-  </head>
+<head>
+  <title>Cashflow</title>
+  <link rel="stylesheet" href="../../public/css/common.css">
+  <link rel="stylesheet" href="../../public/css/board-style.css">
+  <script src="../../public/commonLib.js"></script>
+  <script src="../../public/ratRaceBoard.js"></script>
+</head>
 
-  <body>
-    <div class="page-wrapper">
-      <div id="board">
-        <div class="game-area">
-          <div class="card-deck" id="market">
-            <img src="images/ratrace/market.gif" alt="market">
-          </div>
-          <div class="card-deck" id="small-deal">
-            <img src="images/ratrace/deals.png" alt="deals">
-          </div>
-          <div class="card-deck" id="big-deal">
-            <img src="images/ratrace/deals.png" alt="deals">
-          </div>
-          <div class="card-deck" id="doodad">
-            <img src="images/ratrace/doodad.png" alt="doodad">
-          </div>
-          <div id="players"></div>
-          <div id="game-stats">
-            <div class="heading">Status</div>
-            <table>
-              <tr>
-                <th>Cash flow :</th>
-                <td id="cashflow-amount"></td>
-              </tr>
-              <tr>
-                <th>Cash :</th>
-                <td id="total-cash"></td>
-              </tr>
-              <tr>
-                <th>Expenses :</th>
-                <td id="expenses"></td>
-              </tr>
-              <tr>
-                <th>Passive Income :</th>
-                <td id="passive-income">100k</td>
-              </tr>
-            </table>
-          </div>
-          <div class="interaction-space">
-            <div id="interaction-screen"></div>
-            <div id="main-card" class="market">
-              <div class="card-title">
-                Stock - ON2U Entertainment Co.
-              </div>
-              <div class="description">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reprehenderit ipsam, ab hic velit mollitia
-              </div>
-              <div class="rule">
-                Cardholder rolls 1 die. Die=1-3,Double. Die=4-6,Half the stocks.
-              </div>
-              <div class="actions">
-                <div id="action-ok" class="action-btn button">OK</div>
-                <div id="action-ok" class="action-btn button">SKIP</div>
-              </div>
+<body>
+  <div class="page-wrapper">
+    <div id="board">
+      <div class="game-area">
+        <div class="card-deck" id="market">
+          <img src="images/ratrace/market.gif" alt="market">
+        </div>
+        <div class="card-deck" id="small-deal">
+          <img src="images/ratrace/deals.png" alt="deals">
+        </div>
+        <div class="card-deck" id="big-deal">
+          <img src="images/ratrace/deals.png" alt="deals">
+        </div>
+        <div class="card-deck" id="doodad">
+          <img src="images/ratrace/doodad.png" alt="doodad">
+        </div>
+        <div id="players"></div>
+        <div id="game-stats">
+          <div class="heading">Status</div>
+          <table>
+            <tr>
+              <th>Cash flow :</th>
+              <td id="cashflow-amount"></td>
+            </tr>
+            <tr>
+              <th>Cash :</th>
+              <td id="total-cash"></td>
+            </tr>
+            <tr>
+              <th>Expenses :</th>
+              <td id="expenses"></td>
+            </tr>
+            <tr>
+              <th>Passive Income :</th>
+              <td id="passive-income">100k</td>
+            </tr>
+          </table>
+        </div>
+        <div class="interaction-space">
+          <div id="interaction-screen"></div>
+          <div id="main-card" class="market">
+            <div class="card-title">
+              Stock - ON2U Entertainment Co.
             </div>
-            <div id="message-space"></div>
+            <div class="description">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reprehenderit ipsam, ab hic velit mollitia
+            </div>
+            <div class="rule">
+              Cardholder rolls 1 die. Die=1-3,Double. Die=4-6,Half the stocks.
+            </div>
+            <div class="actions">
+              <div id="action-ok" class="action-btn button">OK</div>
+              <div id="action-ok" class="action-btn button">SKIP</div>
+            </div>
           </div>
-        </div>
-        <div class="ratrace-tile deal" id="rat-tile-1">
-          <img src="images/ratrace/deals.png" alt="deals">
-        </div>
-        <div class="ratrace-tile doodad" id="rat-tile-2">
-          <img src="images/ratrace/doodad.png" alt="doodad">
-        </div>
-        <div class="ratrace-tile deal" id="rat-tile-3">
-          <img src="images/ratrace/deals.png" alt="deals">
-        </div>
-        <div class="ratrace-tile purples" id="rat-tile-4">
-          <img src="images/ratrace/charity.svg" alt="charity">
-        </div>
-        <div class="ratrace-tile deal" id="rat-tile-5">
-          <img src="images/ratrace/deals.png" alt="deals">
-        </div>
-        <div class="ratrace-tile payday" id="rat-tile-6">
-          <img src="images/ratrace/payday.png" alt="payday">
-        </div>
-        <div class="ratrace-tile deal" id="rat-tile-7">
-          <img src="images/ratrace/deals.png" alt="deals">
-        </div>
-        <div class="ratrace-tile market" id="rat-tile-8">
-          <img src="images/ratrace/market.gif" alt="market">
-        </div>
-        <div class="ratrace-tile deal" id="rat-tile-9">
-          <img src="images/ratrace/deals.png" alt="deals">
-        </div>
-        <div class="ratrace-tile doodad" id="rat-tile-10">
-          <img src="images/ratrace/doodad.png" alt="doodad">
-        </div>
-        <div class="ratrace-tile deal" id="rat-tile-11">
-          <img src="images/ratrace/deals.png" alt="deals">
-        </div>
-        <div class="ratrace-tile purples" id="rat-tile-12">
-          <img src="images/ratrace/downsized.png" alt="downsized">
-        </div>
-        <div class="ratrace-tile deal" id="rat-tile-13">
-          <img src="images/ratrace/deals.png" alt="deals">
-        </div>
-        <div class="ratrace-tile payday" id="rat-tile-14">
-          <img src="images/ratrace/payday.png" alt="payday">
-        </div>
-        <div class="ratrace-tile deal" id="rat-tile-15">
-          <img src="images/ratrace/deals.png" alt="deals">
-        </div>
-        <div class="ratrace-tile market" id="rat-tile-16">
-          <img src="images/ratrace/market.gif" alt="market">
-        </div>
-        <div class="ratrace-tile deal" id="rat-tile-17">
-          <img src="images/ratrace/deals.png" alt="deals">
-        </div>
-        <div class="ratrace-tile doodad" id="rat-tile-18">
-          <img src="images/ratrace/doodad.png" alt="doodad">
-        </div>
-        <div class="ratrace-tile deal" id="rat-tile-19">
-          <img src="images/ratrace/deals.png" alt="deals">
-        </div>
-        <div class="ratrace-tile purples" id="rat-tile-20">
-          <img src="images/ratrace/child.png" alt="child">
-        </div>
-        <div class="ratrace-tile deal" id="rat-tile-21">
-          <img src="images/ratrace/deals.png" alt="deals">
-        </div>
-        <div class="ratrace-tile payday" id="rat-tile-22">
-          <img src="images/ratrace/payday.png" alt="payday">
-        </div>
-        <div class="ratrace-tile deal" id="rat-tile-23">
-          <img src="images/ratrace/deals.png" alt="deals">
-        </div>
-        <div class="ratrace-tile market" id="rat-tile-24">
-          <img src="images/ratrace/market.gif" alt="market">
+          <div id="message-space"></div>
         </div>
       </div>
-      <div id="game-panel">
-        <header>
-          <h2><a href="/">Cashflow</a></h2>
-        </header>
-        <nav id="game-nav">
-          <ul>
-            <li id="profile">
-              <span class="expands-indicator">«</span>
-              My profile
-            </li>
-            <li id="others-profile">
-              <span class="expands-indicator">«</span>
-              Other players
-            </li>
-            <li id="ledger">
-              <span class="expands-indicator">«</span>
-              Ledger
-            </li>
-          </ul>
-        </nav>
-        <div id="loan-options">
-          <div id="take-loan">Take loan</div>
-          <div id="pay-loan">Pay loan</div>
-        </div>
-        <div id="logs"></div>
-        <div id="dice-box">
-          <div class="dice"></div>
-        </div>
-        <div id="board-toggle"></div>
+      <div class="ratrace-tile deal" id="rat-tile-1">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile doodad" id="rat-tile-2">
+        <img src="images/ratrace/doodad.png" alt="doodad">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-3">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile purples" id="rat-tile-4">
+        <img src="images/ratrace/charity.svg" alt="charity">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-5">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile payday" id="rat-tile-6">
+        <img src="images/ratrace/payday.png" alt="payday">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-7">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile market" id="rat-tile-8">
+        <img src="images/ratrace/market.gif" alt="market">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-9">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile doodad" id="rat-tile-10">
+        <img src="images/ratrace/doodad.png" alt="doodad">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-11">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile purples" id="rat-tile-12">
+        <img src="images/ratrace/downsized.png" alt="downsized">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-13">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile payday" id="rat-tile-14">
+        <img src="images/ratrace/payday.png" alt="payday">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-15">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile market" id="rat-tile-16">
+        <img src="images/ratrace/market.gif" alt="market">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-17">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile doodad" id="rat-tile-18">
+        <img src="images/ratrace/doodad.png" alt="doodad">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-19">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile purples" id="rat-tile-20">
+        <img src="images/ratrace/child.png" alt="child">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-21">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile payday" id="rat-tile-22">
+        <img src="images/ratrace/payday.png" alt="payday">
+      </div>
+      <div class="ratrace-tile deal" id="rat-tile-23">
+        <img src="images/ratrace/deals.png" alt="deals">
+      </div>
+      <div class="ratrace-tile market" id="rat-tile-24">
+        <img src="images/ratrace/market.gif" alt="market">
       </div>
     </div>
+    <div id="game-panel">
+      <header>
+        <h2><a href="/">Cashflow</a></h2>
+      </header>
+      <nav id="game-nav">
+        <ul>
+          <li id="profile">
+            <span class="expands-indicator">«</span>
+            My profile
+          </li>
+          <li id="others-profile">
+            <span class="expands-indicator">«</span>
+            Other players
+          </li>
+          <li id="ledger">
+            <span class="expands-indicator">«</span>
+            Ledger
+          </li>
+        </ul>
+      </nav>
+      <div id="loan-options">
+        <div id="take-loan small-font">Take loan</div>
+        <div id="pay-loan small-font">Pay loan</div>
+      </div>
+      <div id="logs"></div>
+      <div id="dice-box">
+        <div class="dice"></div>
+      </div>
+      <div id="board-toggle"></div>
     </div>
-  </body>
+  </div>
+  </div>
+</body>
 
 </html>

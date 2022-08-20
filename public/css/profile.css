@@ -42,7 +42,6 @@
 }
 
 header>h3 {
-  font-size: var(--plain-font);
   font-weight: 600;
 }
 
@@ -60,7 +59,7 @@ header>h3 {
 }
 
 .profile-wrapper table {
-  font-size: 0.8vmax;
+  font-size: var(--small-font);
   padding-bottom: 0.5vmax;
   width: 15vmax;
 }

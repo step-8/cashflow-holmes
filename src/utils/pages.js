@@ -15,14 +15,14 @@ const MAIN_MENU_PAGE = `<html>
     <div id="main-image">
         <img src="images/cashflow-image-big.png" alt="Cashflow" title="Cashflow">
       </div>
-    <div class="menu interaction-box">
-    <div class="user-info-wrapper">
+    <div class="menu flex-column interaction-box">
+    <div class="user-info-wrapper large-font">
     <div class="username">__USERNAME__</div>
     <a href="/logout">
         <div class="logout fas fa-sign-out-alt"></div>
       </a>
       </div>
-      <div class="btn-wrapper">
+      <div class="btn-wrapper large-font flex-column">
         <a href="/host"><div class="btn" id="host-btn">Host</div></a>
         <div class="btn" id="join-btn" onclick="createJoinPopup()">Join</div>
         <a href="/help"><div class="btn" id="how-to-play-btn">How To Play</div></a>
@@ -57,11 +57,11 @@ const HOST_LOBBY = `<html>
       <div id="players" class="players">
       </div>
     </div>
-    <div class="menu  interaction-box">
-    <div class="user-info-wrapper">
+    <div class="menu flex-column interaction-box">
+    <div class="user-info-wrapper large-font">
     <div class="username">__USERNAME__</div>
       </div>
-      <div class="btn-wrapper">
+      <div class="btn-wrapper large-font flex-column">
         <div class="btn" id="start-btn" onclick="startGame(event)">Start</div>
         <a href="/cancel-game"><div class="btn" id="cancel-btn">Cancel</div></a>
       </div>
@@ -94,11 +94,11 @@ const GUEST_LOBBY = `<html>
       <div id="players" class="players">
       </div>
     </div>
-    <div class="menu  interaction-box">
-    <div class="user-info-wrapper">
+    <div class="menu flex-column interaction-box">
+    <div class="user-info-wrapper large-font">
     <div class="username">__USERNAME__</div>
       </div>
-      <div class="btn-wrapper">
+      <div class="btn-wrapper large-font flex-column">
         <div class="btn" id="leave-btn"><a href="/leave-lobby">Leave</a></div>
       </div>
     </div>
@@ -125,7 +125,7 @@ const PROFESSION_CARD = `<html>
         <div id="profession-image" class="profession-image">
           <img src="images/lawyer.png" alt="Lawyer">
         </div>
-        <div id="profession-details" class="profession-details">
+        <div id="profession-details normal-font" class="profession-details">
           <h3>Your Profession is</h3>
           <h1 id="profession" class="profession"></h1>
           <div>Goal : Build your <strong>Passive Income</strong> to be greater than your <strong>Total
@@ -244,7 +244,7 @@ const PROFESSION_CARD = `<html>
       
     </div>
     </main>
-    <div class="interaction-box other-players" id="other-players">
+    <div class="interaction-box flex-column other-players" id="other-players">
     <div class="close">
         <div class="close-btn"><a href="/game-board">Play</a></div>
       </div>
@@ -301,7 +301,7 @@ const RAT_RACE_BOARD = `<html>
         </div>
         </div>
         <div id="game-stats">
-          <div class="heading">Status</div>
+          <div class="heading normal-font">Status</div>
           <table>
             <tr>
               <th>Cash flow :</th>
@@ -475,7 +475,7 @@ const RAT_RACE_BOARD = `<html>
     </div>
     <div id="game-panel" class="flex-column">
       <header class="flex-row">
-        <h2><a href="/">Cashflow</a></h2>
+        <h2 class="large-font"><a href="/">Cashflow</a></h2>
       </header>
       <nav id="game-nav">
         <ul>
@@ -494,8 +494,8 @@ const RAT_RACE_BOARD = `<html>
         </ul>
       </nav>
       <div id="loan-options">
-        <div id="take-loan" onclick="drawTakeLoan()">Take loan</div>
-        <div id="pay-loan">Pay loan</div>
+        <div class="small-font" id="take-loan" onclick="drawTakeLoan()">Take loan</div>
+        <div class="small-font" id="pay-loan">Pay loan</div>
       </div>
       <div id="logs"></div>
       <div id="choose-dice"></div>
@@ -514,20 +514,20 @@ const NOT_FOUND = `<html>
 
 <head>
   <title>Not Found</title>
-  <link rel="stylesheet" href="css/common.css">
-  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/auth.css">
 </head>
 
 <body>
-  <div class="page-wrapper">
+  <div class="page-wrapper flex-row">
     <div id="main-image">
-      <img src="images/cashflow-image-big.png" alt="Cashflow" title="Cashflow">
+      <img src="/images/cashflow-image-big.png" alt="Cashflow" title="Cashflow">
     </div>
-    <div class="interaction-box">
-      <div class="not-found-wrapper">
+    <div class="interaction-box flex-column">
+      <div class="not-found-wrapper flex-column">
         <div class="heading">404</div>
         <div class="heading">Page not found</div>
-        <div class="home-button"><a href="/">Home</a></div>
+        <div class="home-button big-font"><a href="/">Home</a></div>
       </div>
     </div>
   </div>

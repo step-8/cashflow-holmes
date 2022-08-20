@@ -37,10 +37,6 @@
   margin: 0.3vmax 0.3vmax;
 }
 
-.profession-details>div {
-  font-size: 0.7vmax;
-}
-
 .profession-details>h3 {
   font-weight: 100;
 }
@@ -131,7 +127,7 @@
   width: 50%;
   border-collapse: collapse;
   padding: 1vmax;
-  font-size: 1.2em;
+  font-size: var(--normal-font);
   font-weight: 500;
 }
 

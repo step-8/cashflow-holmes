@@ -11,21 +11,21 @@
     <div id="main-image">
       <img src="images/cashflow-image-big.png" alt="Cashflow" title="Cashflow">
     </div>
-    <div class="interaction-box">
+    <div class="interaction-box flex-column">
       <h2 class="heading">Register</h2>
-      <form action="/register" method="post">
+      <form action="/register" method="post" class="flex-column">
         <div>
-          <input type="text" name="username" id="username-input" placeholder="Username" required>
+          <input class="large-font" type="text" name="username" id="username-input" placeholder="Username" required>
         </div>
         <div>
-          <input type="password" name="password" id="password-input" placeholder="Password" required>
+          <input class="large-font" type="password" name="password" id="password-input" placeholder="Password" required>
         </div>
-        <div class="submit-button">
-          <input id="register-button" type="submit" value="Register">
+        <div class="submit-button flex-row">
+          <input class="big-font" id="register-button" type="submit" value="Register">
         </div>
         <div id="message">__MESSAGE__</div>
       </form>
-      <div id="suggestion">Already a user ? <a href="/login">Login</a></div>
+      <div class="small-font" id="suggestion">Already a user ? <a href="/login">Login</a></div>
     </div>
   </div>
 </body>

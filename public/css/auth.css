@@ -10,7 +10,6 @@ form {
 
 input[type=text],
 input[type=password] {
-  font-size: 2vmax;
   text-align: center;
   border-style: none;
   outline: none;
@@ -24,7 +23,6 @@ input[type=password] {
 
 .submit-button>input {
   padding: 0.4vmax 1vmax;
-  font-size: 1.5vmax;
   cursor: pointer;
   border: var(--big-border);
   border-radius: 0.7vmax;
@@ -36,10 +34,6 @@ input[type=password] {
   color: red;
   height: 1vmax;
   text-align: center;
-}
-
-#suggestion {
-  font-size: 1vmax;
 }
 
 #suggestion a {
