@@ -318,13 +318,64 @@
     getElement('.actions').append(actions);
   };
 
-  const createCard = (currentCard, currentPlayer, family) => {
+  const createCard = (currentCard, currentPlayer) => {
     updateCurrentCardDetails(currentCard, currentPlayer);
     const cardTemplate = createCardTemplate(currentCard);
     const newCard = html(cardTemplate);
-    newCard.classList.add(family);
+    newCard.classList.add(currentCard.family);
     newCard.id = 'main-card';
     return newCard;
+  };
+
+  const removeCard = () => {
+    const cardEle = getElement('#main-card');
+    cardEle.innerHTML = '';
+    cardEle.classList = '';
+    return;
+  };
+
+  const timeout = (fn, time) => {
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        try {
+          res(fn());
+        } catch (err) {
+          rej(err);
+        }
+      }, time);
+    });
+  };
+
+  const removeNotification = (currentCard) => {
+    removeCard();
+    currentCard.notifications.pop();
+  };
+
+  const proceedWithPendingNotificationActions = (currentCard, card, game) => {
+    if (currentCard.id) {
+      drawCard(game);
+      return;
+    }
+
+    const action = () => sendAction('ok', currentCard.family, card.type);
+    drawForCurrentUser(action)(game);
+  };
+
+  const drawNotifications = (cardEle, game) => {
+    const { currentCard, currentPlayer } = game;
+    const { family, notifications } = currentCard;
+    const card = notifications[0];
+
+    const newCard = createCard({ ...card, family }, currentPlayer);
+    cardEle.replaceWith(newCard);
+
+
+    timeout(() => removeNotification(currentCard), 5000)
+      .then(() => timeout(() => proceedWithPendingNotificationActions(
+        currentCard, card, game
+      ), 500));
+
+    return;
   };
 
   const drawCard = (game) => {
@@ -332,13 +383,22 @@
     const cardEle = getElement('#main-card');
 
     if (!currentCard) {
-      cardEle.innerHTML = '';
-      cardEle.classList = '';
+      removeCard();
+      return;
+    }
+
+    if (currentCard.notifications.length) {
+      drawNotifications(cardEle, game);
+      return;
+    }
+
+    if (!currentCard.id) {
+      removeCard();
       return;
     }
 
     const { family } = currentCard;
-    const newCard = createCard(currentCard, currentPlayer, family);
+    const newCard = createCard(currentCard, currentPlayer);
     cardEle.replaceWith(newCard);
 
     API.userInfo()

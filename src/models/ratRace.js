@@ -12,6 +12,7 @@ const getFamily = (deals, type) => {
 class RatRace {
   #tiles;
   #deck;
+  #notifications;
   constructor(deck) {
     this.#tiles = {
       'deals': [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23],
@@ -23,6 +24,7 @@ class RatRace {
       'baby': [20]
     };
     this.#deck = deck;
+    this.#notifications = ['payday'];
   }
 
   getCardType(tilePosition) {
@@ -34,11 +36,23 @@ class RatRace {
   }
 
   pickCard(type) {
+    if (this.#notifications.includes(type)) {
+      return {};
+    }
+
     if (type === 'smallDeal') {
       return this.#deck[type][random()];
     }
 
     return this.#deck[type][0];
+  }
+
+  getNotifications(type) {
+    if (this.#notifications.includes(type)) {
+      return [this.#deck[type][0]];
+    }
+
+    return [];
   }
 
   getCard(type) {
@@ -62,7 +76,7 @@ class RatRace {
     }
 
     if (validTypes.includes(type)) {
-      return { ...this.pickCard(type), family: getFamily(deals, type), cardName: type };
+      return { ...this.pickCard(type), family: getFamily(deals, type), cardName: type, notifications: this.getNotifications(type) };
     }
     return;
   }
