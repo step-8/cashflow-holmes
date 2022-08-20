@@ -1,15 +1,17 @@
 class Profile {
   #profession;
   #income;
+  #babies;
   #expenses;
   #assets;
   #liabilities;
   #cash;
   #transactions;
 
-  constructor({ profession, income, expenses, assets, liabilities }) {
+  constructor({ profession, babies, income, expenses, assets, liabilities }) {
     this.#profession = profession;
     this.#income = income;
+    this.#babies = babies;
     this.#expenses = expenses;
     this.#assets = assets;
     this.#liabilities = liabilities;
@@ -42,7 +44,10 @@ class Profile {
   #calculateTotalExpenses() {
     let totalExpenses = 0;
 
-    Object.values(this.#expenses).forEach(val => {
+    Object.entries(this.#expenses).forEach(([key, val]) => {
+      if (key === 'perChildExpense') {
+        val = this.#babies * val;
+      }
       totalExpenses += val;
     });
 
@@ -134,10 +139,17 @@ class Profile {
       return false;
     }
 
-
     this.#cash -= amount;
     this.#liabilities.bankLoan -= amount;
     this.#expenses.bankLoanPayment = this.#liabilities.bankLoan / 10;
+    return true;
+  }
+
+  addBaby() {
+    if (this.#babies > 2) {
+      return false;
+    }
+    this.#babies++;
     return true;
   }
 
@@ -145,6 +157,7 @@ class Profile {
     return {
       profession: this.#profession,
       income: this.#income,
+      babies: this.#babies,
       expenses: this.#expenses,
       assets: this.#assets,
       liabilities: this.#liabilities,

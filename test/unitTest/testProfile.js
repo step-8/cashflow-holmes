@@ -14,7 +14,7 @@ describe('Profile', () => {
     const profession = professions[0];
     const profile = new Profile(profession);
     profile.setDefaults();
-    assert.strictEqual(profile.details.cash, 7700);
+    assert.strictEqual(profile.details.cash, 8400);
   });
 
   it('Should calculate the total income', () => {
@@ -27,14 +27,14 @@ describe('Profile', () => {
   it('Should calculate the total expenses', () => {
     const profession = professions[0];
     const profile = new Profile(profession);
-    const expectedTotalExpenses = 9000;
+    const expectedTotalExpenses = 8300;
     assert.strictEqual(profile.details.totalExpenses, expectedTotalExpenses);
   });
 
   it('Should calculate the cash flow', () => {
     const profession = professions[0];
     const profile = new Profile(profession);
-    const expectedCF = 4200;
+    const expectedCF = 4900;
     assert.strictEqual(profile.details.cashFlow, expectedCF);
   });
 
@@ -51,7 +51,7 @@ describe('Profile', () => {
       const profile = new Profile(profession);
       profile.setDefaults();
       profile.addPay();
-      assert.strictEqual(profile.details.cash, 11900);
+      assert.strictEqual(profile.details.cash, 13300);
     });
   });
 
@@ -60,8 +60,8 @@ describe('Profile', () => {
       const profession = professions[0];
       const profile = new Profile(profession);
       profile.setDefaults();
-      assert.ok(profile.payExpenses() === 0);
-      assert.strictEqual(profile.details.cash, 7700);
+      assert.ok(profile.payExpenses() !== 0);
+      assert.strictEqual(profile.details.cash, 100);
     });
 
     it('Should deduct amount from the cash', () => {
@@ -70,7 +70,7 @@ describe('Profile', () => {
       profile.setDefaults();
       profile.addPay();
       assert.ok(profile.payExpenses() === 1);
-      assert.strictEqual(profile.details.cash, 2900);
+      assert.strictEqual(profile.details.cash, 5000);
     });
   });
 
@@ -80,7 +80,7 @@ describe('Profile', () => {
       const profile = new Profile(profession);
       profile.setDefaults();
       profile.payExpenses();
-      assert.ok(!profile.donateCash());
+      assert.ok(profile.donateCash());
     });
 
     it('Should deduct amount from the cash', () => {
@@ -88,7 +88,7 @@ describe('Profile', () => {
       const profile = new Profile(profession);
       profile.setDefaults();
       assert.ok(profile.donateCash());
-      assert.strictEqual(profile.details.cash, 3310);
+      assert.strictEqual(profile.details.cash, 3710);
     });
   });
 
@@ -123,7 +123,7 @@ describe('Profile', () => {
       const profile = new Profile(profession);
       profile.setDefaults();
       profile.deductDoodad(100);
-      assert.strictEqual(profile.details.cash, 7600);
+      assert.strictEqual(profile.details.cash, 8300);
     });
   });
 

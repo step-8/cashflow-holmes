@@ -104,6 +104,12 @@ class Turn {
     this.#turnCompleted = true;
   }
 
+  baby() {
+    this.#currentPlayer.baby();
+    this.#log.addLog(this.#playerInfo(), 'got new baby');
+    this.#turnCompleted = true;
+  }
+
   skip() {
     this.#log.addLog(this.#playerInfo(), `skipped ${this.#card.symbol}`);
     this.#turnCompleted = true;

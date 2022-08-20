@@ -21,8 +21,7 @@ const resetTransaction = (req, res) => {
 
 const acceptCard = (game, family) => {
   if (family === 'payday') {
-    game.state.currentTurn.payday();
-    return;
+    return game.state.currentTurn.payday();
   }
 
   if (family === 'doodad') {
@@ -31,8 +30,11 @@ const acceptCard = (game, family) => {
   }
 
   if (family === 'charity') {
-    game.state.currentTurn.charity();
-    return;
+    return game.state.currentTurn.charity();
+  }
+
+  if (family === 'baby') {
+    return game.state.currentTurn.baby();
   }
 
   if (family === 'downsized') {
@@ -45,13 +47,11 @@ const acceptCard = (game, family) => {
 
 const buyDeal = (game, type, count) => {
   if (type === 'realEstate') {
-    game.state.currentTurn.buyRealEstate();
-    return;
+    return game.state.currentTurn.buyRealEstate();
   }
 
   if (type === 'stock') {
-    game.state.currentTurn.buyStocks(count);
-    return;
+    return game.state.currentTurn.buyStocks(count);
   }
   game.state.currentTurn.skip();
 };

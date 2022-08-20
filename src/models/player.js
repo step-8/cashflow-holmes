@@ -85,6 +85,10 @@ class Player {
     return this.#profile.payExpenses();
   }
 
+  baby() {
+    return this.#profile.addBaby();
+  }
+
   move(steps) {
     this.#lastPosition = this.#currentPosition;
     this.#currentPosition = (this.#currentPosition + steps) % 24;

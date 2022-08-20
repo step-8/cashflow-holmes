@@ -27,7 +27,7 @@ describe('Player', () => {
     player.assignProfession(expectedProfession);
     player.createProfile();
     const { profile } = player.details;
-    const expectedCash = 7700;
+    const expectedCash = 8400;
     assert.strictEqual(profile.profession, 'Doctor(MD)');
     assert.strictEqual(profile.cash, expectedCash);
   });

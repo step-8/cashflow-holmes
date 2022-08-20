@@ -5,6 +5,7 @@
       "salary": 13200,
       "realEstates": []
     },
+    "babies": 0,
     "expenses": {
       "taxes": 3200,
       "homeMortgagePayment": 1900,
@@ -36,6 +37,7 @@
       "salary": 1600,
       "realEstates": []
     },
+    "babies": 0,
     "expenses": {
       "taxes": 300,
       "homeMortgagePayment": 200,
@@ -67,6 +69,7 @@
       "salary": 9500,
       "realEstates": []
     },
+    "babies": 0,
     "expenses": {
       "taxes": 2000,
       "homeMortgagePayment": 1000,
@@ -98,6 +101,7 @@
       "salary": 4900,
       "realEstates": []
     },
+    "babies": 0,
     "expenses": {
       "taxes": 1000,
       "homeMortgagePayment": 700,
@@ -129,6 +133,7 @@
       "salary": 2500,
       "realEstates": []
     },
+    "babies": 0,
     "expenses": {
       "taxes": 500,
       "homeMortgagePayment": 400,
@@ -160,6 +165,7 @@
       "salary": 2500,
       "realEstates": []
     },
+    "babies": 0,
     "expenses": {
       "taxes": 500,
       "homeMortgagePayment": 400,
@@ -191,6 +197,7 @@
       "salary": 7500,
       "realEstates": []
     },
+    "babies": 0,
     "expenses": {
       "taxes": 1800,
       "homeMortgagePayment": 1100,
@@ -222,6 +229,7 @@
       "salary": 4600,
       "realEstates": []
     },
+    "babies": 0,
     "expenses": {
       "taxes": 900,
       "homeMortgagePayment": 700,
@@ -253,6 +261,7 @@
       "salary": 3000,
       "realEstates": []
     },
+    "babies": 0,
     "expenses": {
       "taxes": 600,
       "homeMortgagePayment": 400,
@@ -284,6 +293,7 @@
       "salary": 3300,
       "realEstates": []
     },
+    "babies": 0,
     "expenses": {
       "taxes": 500,
       "homeMortgagePayment": 500,
@@ -315,6 +325,7 @@
       "salary": 3100,
       "realEstates": []
     },
+    "babies": 0,
     "expenses": {
       "taxes": 600,
       "homeMortgagePayment": 400,
@@ -346,6 +357,7 @@
       "salary": 2000,
       "realEstates": []
     },
+    "babies": 0,
     "expenses": {
       "taxes": 400,
       "homeMortgagePayment": 300,
