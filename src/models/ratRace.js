@@ -69,9 +69,11 @@ class RatRace {
 
     if (type === 'deals') {
       return {
+        id: 'deal',
         heading: 'Choose Big or Small Deal',
         family: 'deal',
-        type: 'deal'
+        type: 'deal',
+        notifications: this.getNotifications(type)
       };
     }
 

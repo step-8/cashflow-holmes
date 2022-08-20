@@ -519,20 +519,27 @@
     }, 2000);
   };
 
+  const getMessage = (family, status, currentPlayer) => {
+    const cashFlow = currentPlayer.profile.cashFlow;
+    const messages = {
+      deal: {
+        0: 'Insufficient balance. Take loan to proceed',
+        1: 'Successfully purchased'
+      },
+      doodad: {
+        0: 'Insufficient balance. Take loan to proceed',
+        1: 'You are done with doodad'
+      },
+      charity: {
+        0: 'Insufficient balance. Take loan to proceed',
+        1: 'You donated to charity'
+      },
+      payday: {
+        1: `Received payday of ${cashFlow}.`
+      }
+    };
 
-  const messages = {
-    deal: {
-      0: 'Insufficient balance. Take loan to proceed',
-      1: 'Successfully purchased'
-    },
-    doodad: {
-      0: 'Insufficient balance. Take loan to proceed',
-      1: 'You are done with doodad'
-    },
-    charity: {
-      0: 'Insufficient balance. Take loan to proceed',
-      1: 'You donated to charity'
-    }
+    return messages[family][status];
   };
 
   const classes = {
@@ -546,10 +553,11 @@
       return;
     }
 
-    const { transaction: { family, status } } = game;
+    const { transaction: { family, status }, currentPlayer } = game;
     const message = () => {
       if (family === game.currentCard.family) {
-        createMessage(messages[family][status], classes[status]);
+        const actionMessage = getMessage(family, status, currentPlayer);
+        createMessage(actionMessage, classes[status]);
         return;
       }
     };

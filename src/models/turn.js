@@ -31,10 +31,18 @@ class Turn {
     this.#currentTransaction = { family: this.#card.family, status };
   }
 
+  #changeTurnIfNoCard() {
+    if (this.#card.id) {
+      return;
+    }
+    this.#turnCompleted = true;
+  }
+
   payday() {
     this.#currentPlayer.payday();
     this.#log.addLog(this.#playerInfo(), `received pay of $${this.#cashflow()}`);
-    this.#turnCompleted = true;
+    this.transactionState = 1;
+    this.#changeTurnIfNoCard();
   }
 
   doodad() {
