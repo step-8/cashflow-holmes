@@ -90,4 +90,20 @@ describe('Profile', () => {
       assert.deepStrictEqual(profile.details.income.realEstates[0], card);
     });
   });
+
+  describe('addLoan', () => {
+    it('Should add amount to the cash', () => {
+      const profile = new Profile(professions[1]);
+      profile.setDefaults();
+      const expected = profile.details;
+      const expectedCash = profile.details.cash;
+      const expectedBankLoanPayment = profile.details.expenses.bankLoanPayment;
+      profile.addLoan(100);
+      const actual = profile.details;
+
+      assert.deepStrictEqual(actual.totalExpenses, expected.totalExpenses + 10);
+      assert.deepStrictEqual(actual.cash, expectedCash + 100);
+      assert.deepStrictEqual(actual.expenses.bankLoanPayment, expectedBankLoanPayment + 10);
+    });
+  });
 });

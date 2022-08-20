@@ -92,6 +92,7 @@ class Player {
 
   takeLoan(amount) {
     this.#profile.addLoan(amount);
+    return true;
   }
 
   get details() {

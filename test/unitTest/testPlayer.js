@@ -53,4 +53,11 @@ describe('Player', () => {
     player.createProfile();
     assert.ok(!player.doodad(30000));
   });
+
+  it('Should add loan in players profile', () => {
+    const player = new Player('p3', 'guest');
+    player.assignProfession(professions[1]);
+    player.createProfile();
+    assert.ok(player.takeLoan(100));
+  });
 });

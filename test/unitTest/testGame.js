@@ -111,4 +111,14 @@ describe('Game', () => {
     game.rollDice();
     assert.ok(game.state.currentPlayer.username === 'p1');
   });
+
+  it('Should return the player matching with user name', () => {
+    const game = new Game(colors, professions);
+    game.assignGameID(1234);
+    game.addPlayer('p1', 'host');
+    game.addPlayer('p2', 'guest');
+
+    const actualPlayer = game.getPlayer('p2');
+    assert.strictEqual(actualPlayer.details.username, 'p2');
+  });
 });
