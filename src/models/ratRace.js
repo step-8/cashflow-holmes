@@ -84,12 +84,14 @@ class RatRace {
       this.#tiles, this.#notifications, lastPosition, currentPosition
     );
 
-    const crossers = notificationsTiles.slice(0, -1);
-    const currentEvent = notificationsTiles.slice(-1);
-    const filteredCrossers = crossers.filter(crosser => crosser === 'payday');
-    const notifiers = [...filteredCrossers, ...currentEvent];
+    const crossers = notificationsTiles.filter(crosser => crosser === 'payday');
+    const nonCrossers = ['downsized'];
+    const currentCardType = this.getCardType(currentPosition);
+    if (nonCrossers.includes(currentCardType)) {
+      crossers.push(currentCardType);
+    }
 
-    return notifiers.map(tile => {
+    return crossers.map(tile => {
       return { ...this.#deck[tile][0], family: tile };
     });
   }

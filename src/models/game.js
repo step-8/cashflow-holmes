@@ -173,10 +173,12 @@ class Game {
   }
 
   removeNotifier() {
-    if (!this.#currentCard.notifications) {
+    console.log(this.#currentCard);
+    if (!this.#currentCard || !this.#currentCard.notifications) {
       return;
     }
     this.#currentCard.notifications.shift();
+    console.log(this.#currentCard);
   }
 
   get currentPlayer() {

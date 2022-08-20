@@ -381,6 +381,7 @@
     const { currentCard, currentPlayer } = game;
     const cardEle = getElement('#main-card');
 
+    console.log(currentCard);
     if (!currentCard) {
       removeCard();
       return;
