@@ -48,7 +48,6 @@
   const rollDice = () => {
     const dice = getSelectedDice();
     API.rollDice(dice)
-      .then(res => res)
       .then(API.getGame()
         .then(res => res.json())
         .then(decideCard));
@@ -118,11 +117,11 @@
     API.userInfo()
       .then(res => res.json())
       .then(userInfo => {
-        const { username, isRolledDice } = game.currentPlayer;
+        const { username, isRolledDice, skippedTurns } = game.currentPlayer;
         const diceBox = document.querySelector('#dice-box');
 
         // need to use css classes instead. classlist add/remove.
-        if (userInfo.username === username && !isRolledDice) {
+        if (userInfo.username === username && !isRolledDice && skippedTurns === 0) {
           diceBox.style.opacity = 1;
           diceBox.style.border = '2px solid black';
           diceBox.style.zIndex = 1;
@@ -484,13 +483,20 @@
       if (!playerIcon) {
         playerIcon = createIconEle(player);
       }
-      boardTile.appendChild(playerIcon);
 
       if (currentPlayer.username === username) {
         playerIcon.classList.add('pulsate');
       } else {
         playerIcon.classList.remove('pulsate');
       }
+
+      if (player.skippedTurns > 0) {
+        const downsizedPosition = document.querySelector(`#downsized-${player.skippedTurns}`);
+        downsizedPosition.append(playerIcon);
+        return;
+      }
+
+      boardTile.appendChild(playerIcon);
     });
     return game;
   };
@@ -524,6 +530,9 @@
       },
       payday: {
         1: `Received payday of ${cashFlow}.`
+      },
+      downsized: {
+        1: 'You\'re downsized'
       }
     };
 

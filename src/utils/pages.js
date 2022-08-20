@@ -321,6 +321,10 @@ const RAT_RACE_BOARD = `<html>
             </tr>
           </table>
         </div>
+        <div id="downsized-positions" class="flex-row">
+          <div id="downsized-2"></div>
+          <div id="downsized-1"></div>
+        </div>
         <div class="interaction-space">
           <div id="interaction-screen"></div>
           <div id="main-card"></div>

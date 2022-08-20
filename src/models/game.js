@@ -49,14 +49,17 @@ class Game {
     this.#currentTurn = new Turn(this.#currentCard, null, this.#log);
   }
 
+  get currentPlayer() {
+    return this.#players[this.#currentPlayerIndex];
+  }
+
   rollDice(dice) {
     this.#diceValues = [randomDiceValue(), randomDiceValue()];
-    const currentPlayer = this.#players[this.#currentPlayerIndex];
+    const currentPlayer = this.currentPlayer;
     const dualDiceCount = currentPlayer.dualDiceCount;
-    const skippedTurns = currentPlayer.skippedTurns;
+    const skippedTurns = currentPlayer.skippedTurns; // Remove this afterwards
 
     if (skippedTurns > 0) {
-      // currentPlayer.skippedTurns = skippedTurns - 1;
       currentPlayer.skippedTurns--;
       this.changeTurn();
       return;
@@ -82,14 +85,14 @@ class Game {
   }
 
   resetDice() {
-    const currentPlayer = this.#players[this.#currentPlayerIndex];
+    const currentPlayer = this.currentPlayer;
     currentPlayer.rolledDice = false;
   }
 
   start() {
     this.#status = gameStatus.started;
     this.#currentPlayerIndex = 0;
-    const currentPlayer = this.#players[this.#currentPlayerIndex];
+    const currentPlayer = this.currentPlayer;
     this.#currentTurn.updatePlayer(currentPlayer);
   }
 
@@ -137,7 +140,7 @@ class Game {
   changeTurn() {
     ++this.#currentPlayerIndex;
     this.#currentPlayerIndex = this.#currentPlayerIndex % this.#players.length;
-    const currentPlayer = this.#players[this.#currentPlayerIndex];
+    const currentPlayer = this.currentPlayer;
     this.#currentTurn.updatePlayer(currentPlayer);
     this.resetDice();
     this.turnCompleted = false;
@@ -145,7 +148,7 @@ class Game {
   }
 
   #moveCurrentPlayer(steps) {
-    this.#players[this.#currentPlayerIndex].move(steps);
+    this.currentPlayer.move(steps);
   }
 
   isValidGameID(gameID) {
@@ -158,7 +161,7 @@ class Game {
 
   set currentCard(card) {
     this.#currentCard = card;
-    const currentPlayer = this.#players[this.#currentPlayerIndex];
+    const currentPlayer = this.currentPlayer;
     this.#currentTurn.updateCard(card);
 
     const username = currentPlayer.details.username;
@@ -179,11 +182,11 @@ class Game {
     this.#currentCard.notifications.shift();
   }
 
-  get currentPlayer() {
+  get currentPlayerDetails() {
     if (this.#currentPlayerIndex === null) {
       return null;
     }
-    return this.#players[this.#currentPlayerIndex].details;
+    return this.currentPlayer.details;
   }
 
   get allPlayerDetails() {
@@ -204,7 +207,7 @@ class Game {
 
   get state() {
     return {
-      currentPlayer: this.currentPlayer,
+      currentPlayer: this.currentPlayerDetails,
       status: this.#status,
       gameID: this.#gameID,
       players: this.allPlayerDetails,

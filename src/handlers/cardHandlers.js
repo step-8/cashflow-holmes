@@ -35,6 +35,11 @@ const acceptCard = (game, family) => {
     return;
   }
 
+  if (family === 'downsized') {
+    game.state.currentTurn.downsized();
+    return;
+  }
+
   return game.state.currentTurn.skip();
 };
 
