@@ -460,6 +460,8 @@ a {
 #interaction-screen {
   grid-row: 1;
   grid-column: 1/7;
+  display: flex;
+  justify-content: center;
 }
 
 /* Card design starts */
@@ -837,7 +839,7 @@ a {
 
 /* Notifications styles */
 .notify-wrapper {
-  width: 100%;
+  width: 65%;
   height: 40%;
   padding: 0.2em;
   display: flex;
