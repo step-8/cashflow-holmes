@@ -6,7 +6,8 @@ describe('accept card', () => {
     payday: () => assert.isOk(1),
     downsized: () => assert.isOk(1),
     baby: () => assert.isOk(1),
-    notifications: ['a', 'b']
+    notifications: ['a', 'b'],
+    removeTopNotification: () => game.notifications.shift()
   };
 
   it('Should invoke payday in game and remove notification', () => {
