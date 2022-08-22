@@ -11,11 +11,10 @@ const hostLobbyHandler = (req, res) => {
     return;
   }
 
-  req.games.newGame();
+  req.games.newGame(username);
   const { latestGameID } = req.games;
   req.session.gameID = latestGameID;
   const game = req.games.getGame(latestGameID);
-  game.addPlayer(username, 'host');
 
   hostHtml = hostHtml.replace('__GAME_ID__', latestGameID);
   res.send(hostHtml);

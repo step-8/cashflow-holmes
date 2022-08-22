@@ -46,8 +46,8 @@
   };
 
   const rollDice = () => {
-    const dice = getSelectedDice();
-    API.rollDice(dice)
+    const diceCount = getSelectedDice();
+    API.rollDice(diceCount)
       .then(API.getGame()
         .then(res => res.json())
         .then(decideCard));

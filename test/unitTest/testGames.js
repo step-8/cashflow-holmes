@@ -38,13 +38,4 @@ describe('Games', () => {
     });
   });
 
-  describe('isValidGameKey', () => {
-    const games = new Games(colors, professions);
-    it('Should validate the given gameID', () => {
-      games.newGame();
-      const gameID = games.latestGameID;
-      assert.ok(games.isValidGameKey(gameID));
-    });
-  });
-
 });

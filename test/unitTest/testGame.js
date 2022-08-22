@@ -14,22 +14,22 @@ describe('Game', () => {
   });
 
   it('Should add a player if not joined the game', () => {
-    game.addPlayer('newPlayer');
+    game.addGuest('newPlayer');
     const allPlayers = game.allPlayerDetails;
     assert.strictEqual(allPlayers.length, 1);
   });
 
   it('Should not add a player if joined the game', () => {
     const game = new Game(colors, professions);
-    game.addPlayer('newPlayer');
-    game.addPlayer('newPlayer');
+    game.addGuest('newPlayer');
+    game.addGuest('newPlayer');
     const allPlayers = game.allPlayerDetails;
     assert.strictEqual(allPlayers.length, 1);
   });
 
   it('Should remove a player if already exists', () => {
     const game = new Game(colors, professions);
-    game.addPlayer('newPlayer');
+    game.addGuest('newPlayer');
     game.removePlayer('newPlayer');
     const allPlayers = game.allPlayerDetails;
     assert.strictEqual(allPlayers.length, 0);
@@ -44,27 +44,27 @@ describe('Game', () => {
   it('Should give true if the lobby is full ', () => {
     const game = new Game(colors, professions);
     game.assignGameID(1234);
-    game.addPlayer('p1');
-    game.addPlayer('p2');
-    game.addPlayer('p3');
-    game.addPlayer('p4');
-    game.addPlayer('p5');
-    game.addPlayer('p6');
+    game.addGuest('p1');
+    game.addGuest('p2');
+    game.addGuest('p3');
+    game.addGuest('p4');
+    game.addGuest('p5');
+    game.addGuest('p6');
     assert.ok(game.isLobbyFull());
   });
 
   it('Should give false if the lobby is not full ', () => {
     const game = new Game(colors, professions);
     game.assignGameID(1234);
-    game.addPlayer('p1');
+    game.addGuest('p1');
     assert.ok(!game.isLobbyFull());
   });
 
   it('Should give the current player', () => {
     const game = new Game(colors, professions);
     game.assignGameID(1234);
-    game.addPlayer('p1');
-    game.addPlayer('p2');
+    game.addGuest('p1');
+    game.addGuest('p2');
     game.start();
     assert.ok(game.state.currentPlayer.username === 'p1');
   });
@@ -72,8 +72,8 @@ describe('Game', () => {
   it('Should change the turn to other player', () => {
     const game = new Game(colors, professions);
     game.assignGameID(1234);
-    game.addPlayer('p1', 'host');
-    game.addPlayer('p2', 'guest');
+    game.assignHost('p1');
+    game.addGuest('p2');
     game.start();
     game.changeTurn();
     assert.ok(game.state.currentPlayer.username === 'p2');
@@ -82,8 +82,8 @@ describe('Game', () => {
   it('Should change the rolled dice of current player to true', () => {
     const game = new Game(colors, professions);
     game.assignGameID(1234);
-    game.addPlayer('p1', 'host');
-    game.addPlayer('p2', 'guest');
+    game.assignHost('p1');
+    game.addGuest('p2');
     game.start();
     game.rollDice();
 
@@ -101,8 +101,8 @@ describe('Game', () => {
     };
 
     game.assignGameID(1234);
-    game.addPlayer('p1', 'host');
-    game.addPlayer('p2', 'guest');
+    game.assignHost('p1');
+    game.addGuest('p2');
     game.start();
     game.changeTurn();
     game.currentCard = card;
@@ -115,8 +115,8 @@ describe('Game', () => {
   it('Should return the player matching with user name', () => {
     const game = new Game(colors, professions);
     game.assignGameID(1234);
-    game.addPlayer('p1', 'host');
-    game.addPlayer('p2', 'guest');
+    game.assignHost('p1');
+    game.addGuest('p2');
 
     const actualPlayer = game.getPlayer('p2');
     assert.strictEqual(actualPlayer.details.username, 'p2');
@@ -133,8 +133,8 @@ describe('Game', () => {
     };
 
     game.assignGameID(1234);
-    game.addPlayer('p1', 'host');
-    game.addPlayer('p2', 'guest');
+    game.assignHost('p1');
+    game.addGuest('p2');
     game.start();
     game.changeTurn();
     game.currentCard = card;
@@ -154,8 +154,8 @@ describe('Game', () => {
     };
 
     game.assignGameID(1234);
-    game.addPlayer('p1', 'host');
-    game.addPlayer('p2', 'guest');
+    game.assignHost('p1');
+    game.addGuest('p2');
     game.start();
     game.changeTurn();
     game.currentCard = card;
@@ -180,5 +180,19 @@ describe('Game', () => {
 
     game.notifications = ['a'];
     assert.ok(game.state.notifications.length);
+  });
+
+  it('Should add log', () => {
+    const player = {
+      username: 'p1',
+      color: 'red'
+    };
+    const game = new Game(colors, professions);
+
+    game.addLog(player, 'is red');
+    assert.deepStrictEqual(
+      game.state.logs,
+      [{ username: 'p1', color: 'red', message: 'is red' }]
+    );
   });
 });

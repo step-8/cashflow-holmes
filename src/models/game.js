@@ -1,4 +1,3 @@
-const { shuffle } = require('../utils/shuffle.js');
 const { Player } = require('./player.js');
 const deck = require('../../data/cards.json');
 const { RatRace } = require('./ratRace.js');
@@ -37,8 +36,8 @@ class Game {
 
   constructor(colors, professions) {
     this.#gameID = null;
-    this.#colors = shuffle(colors);
-    this.#professions = shuffle(professions);
+    this.#colors = colors;
+    this.#professions = professions;
     this.#maxPlayers = 6;
     this.#players = [];
     this.#status = gameStatus.waiting;
@@ -55,15 +54,52 @@ class Game {
     return this.#players[this.#currentPlayerIndex];
   }
 
-  rollDice(dice) {
+  #isUserAlreadyJoined(username) {
+    const playerStatus = this.#getPlayerIndex(username);
+    return playerStatus > -1;
+  }
+
+  #addPlayer(username, role) {
+    if (this.#isUserAlreadyJoined(username)) {
+      return;
+    }
+
+    const player = new Player(username, role);
+    player.assignColor(
+      getNextAttrib(this.#players, 'color', this.#colors)
+    );
+    player.assignProfession(
+      getNextAttrib(this.#players, 'profession', this.#professions)
+    );
+    player.createProfile();
+    this.#players.push(player);
+  }
+
+  assignHost(username) {
+    this.#addPlayer(username, 'host');
+  }
+
+  addGuest(username) {
+    this.#addPlayer(username, 'guest');
+  }
+
+  #calculateTotalSteps(diceCount) {
+    let totalCount = this.#diceValues[0];
+    if (diceCount === 2) {
+      totalCount += this.#diceValues[1];
+    }
+    return totalCount;
+  }
+
+  addLog(player, message) {
+    this.#log.addLog(player, message);
+  }
+
+  rollDice(diceCount) {
     this.#diceValues = [randomDiceValue(), randomDiceValue()];
     const currentPlayer = this.currentPlayer;
     const dualDiceCount = currentPlayer.dualDiceCount;
-
-    let totalCount = this.#diceValues[0];
-    if (+dice === 2) {
-      totalCount += this.#diceValues[1];
-    }
+    const totalCount = this.#calculateTotalSteps(diceCount);
 
     if (dualDiceCount > 0) {
       currentPlayer.dualDiceCount = dualDiceCount - 1;
@@ -71,12 +107,7 @@ class Game {
 
     currentPlayer.rolledDice = true;
     this.#moveCurrentPlayer(totalCount);
-    this.#log.addLog(
-      {
-        username: currentPlayer.details.username,
-        color: currentPlayer.details.color
-      },
-      `rolled ${totalCount}`);
+    this.addLog(currentPlayer, `rolled ${totalCount}`);
   }
 
   resetDice() {
@@ -101,27 +132,6 @@ class Game {
 
   #getPlayerIndex(username) {
     return this.#players.findIndex(player => player.details.username === username);
-  }
-
-  #isUserAlreadyJoined(username) {
-    const playerStatus = this.#getPlayerIndex(username);
-    return playerStatus > -1;
-  }
-
-  addPlayer(username, role) {
-    if (this.#isUserAlreadyJoined(username)) {
-      return;
-    }
-
-    const player = new Player(username, role);
-    player.assignColor(
-      getNextAttrib(this.#players, 'color', this.#colors)
-    );
-    player.assignProfession(
-      getNextAttrib(this.#players, 'profession', this.#professions)
-    );
-    player.createProfile();
-    this.#players.push(player);
   }
 
   removePlayer(username) {
@@ -156,10 +166,6 @@ class Game {
     return this.#gameID === gameID;
   }
 
-  addLog(player, message) {
-    this.#log.addLog(player.details, message);
-  }
-
   isLobbyFull() {
     return this.#maxPlayers === this.#players.length;
   }
@@ -174,10 +180,10 @@ class Game {
 
     const cards = ['smallDeal', 'bigDeal'];
     if (cards.includes(card.cardName)) {
-      this.#log.addLog({ username, color }, `chose ${toWords(card.cardName)}`);
+      this.addLog(this.currentPlayer, `chose ${toWords(card.cardName)}`);
       return;
     }
-    this.#log.addLog({ username, color }, `landed on ${toWords(card.family)}`);
+    this.addLog(this.currentPlayer, `landed on ${toWords(card.family)}`);
   }
 
   set notifications(notifications) {

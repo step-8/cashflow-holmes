@@ -44,6 +44,14 @@ class Player {
     return this.#skippedTurns;
   }
 
+  get username() {
+    return this.#username;
+  }
+
+  get color() {
+    return this.#color;
+  }
+
   assignColor(color) {
     this.#color = color;
   }
@@ -62,7 +70,7 @@ class Player {
   }
 
   canContinue() {
-    return this.#profile.details.cash > 0;
+    return this.#profile.hasEnoughCash();
   }
 
   doodad(cost) {
@@ -98,8 +106,7 @@ class Player {
   }
 
   takeLoan(amount) {
-    this.#profile.addLoan(amount);
-    return true;
+    return this.#profile.addLoan(amount);
   }
 
   payLoan(amount) {

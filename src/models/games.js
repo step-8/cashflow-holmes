@@ -1,3 +1,4 @@
+const { shuffle } = require('../utils/shuffle.js');
 const { Game } = require('./game.js');
 
 class Games {
@@ -16,9 +17,10 @@ class Games {
     return this.#latestGameID;
   }
 
-  newGame() {
+  newGame(host) {
     this.#latestGameID++;
-    const game = new Game(this.#colors, this.#professions);
+    const game = new Game(shuffle(this.#colors), shuffle(this.#professions));
+    game.assignHost(host);
     game.assignGameID(this.#latestGameID);
     this.#games[this.#latestGameID] = game;
   }
@@ -29,13 +31,6 @@ class Games {
 
   getGame(gameID) {
     return this.#games[gameID];
-  }
-
-  isValidGameKey(gameID) {
-    if (this.#games[gameID]) {
-      return true;
-    }
-    return false;
   }
 }
 

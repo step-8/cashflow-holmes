@@ -5,7 +5,9 @@ class Log {
     this.#logs = [];
   }
 
-  addLog({ username, color }, message) {
+  addLog(player, message) {
+    const username = player.username;
+    const color = player.color;
     this.#logs.push({ username, color, message });
   }
 

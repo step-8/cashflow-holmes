@@ -128,6 +128,7 @@ class Profile {
     this.updateCash(amount, 'Took loan');
     this.#liabilities.bankLoan += amount;
     this.#expenses.bankLoanPayment = this.#liabilities.bankLoan / 10;
+    return true;
   }
 
   deductLoan(amount) {
@@ -151,6 +152,10 @@ class Profile {
     }
     this.#babies++;
     return true;
+  }
+
+  hasEnoughCash() {
+    return this.#cash > 0;
   }
 
   get details() {

@@ -27,7 +27,7 @@ const guestLobbyHandler = (req, res) => {
   const { game } = req;
   const { username, gameID } = req.session;
 
-  game.addPlayer(username, 'guest');
+  game.addGuest(username);
   const guestHtml = GUEST_LOBBY
     .replace('__GAME_ID__', gameID)
     .replace('__USERNAME__', username);
@@ -53,8 +53,8 @@ const getUserInfoHandler = (req, res) => {
 
 const rollDiceHandler = (req, res) => {
   const { game } = req;
-  const { die } = req.params;
-  game.rollDice(die);
+  const { diceCount } = req.params;
+  game.rollDice(+diceCount);
   res.end();
 };
 
