@@ -36,6 +36,18 @@ class Player {
     return this.#dualDiceCount;
   }
 
+  get isRolledDice() {
+    return this.#isRolledDice;
+  }
+
+  get username() {
+    return this.#username;
+  }
+
+  get currentPosition() {
+    return this.#currentPosition;
+  }
+
   set skippedTurns(count) {
     this.#skippedTurns = count;
   }

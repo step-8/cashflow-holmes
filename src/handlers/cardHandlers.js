@@ -1,14 +1,7 @@
 const serveCard = (req, res) => {
   const { game } = req;
-  const { currentPlayer, ratRace } = game.state;
-  const { currentPosition } = currentPlayer;
-  const type = ratRace.getCardType(currentPosition);
-  const card = game.state.ratRace.getCard(type);
-  const notifications = game.state.ratRace.getNotifications(
-    type, currentPlayer
-  );
-  game.currentCard = card;
-  game.notifications = notifications;
+  const card = game.getCard();
+  game.setNotifications();
   res.json(card);
 };
 
@@ -18,7 +11,7 @@ const resetTransaction = (req, res) => {
 };
 
 const removeNotification = (game) => {
-  const notifications = game.state.notifications;
+  const notifications = game.notifications;
   game.notifications = notifications.slice(1);
 };
 

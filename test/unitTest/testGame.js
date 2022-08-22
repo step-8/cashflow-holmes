@@ -4,14 +4,7 @@ const professions = require('../../data/professions.json');
 
 describe('Game', () => {
   const colors = ['a', 'b', 'c', 'd', 'e', 'f'];
-  const game = new Game(colors, professions);
-
-  it('Should assign a game id', () => {
-    const id = 12345;
-    game.assignGameID(id);
-    const gameState = game.state;
-    assert.strictEqual(gameState.gameID, id);
-  });
+  const game = new Game(1234, colors, professions);
 
   it('Should add a player if not joined the game', () => {
     game.addGuest('newPlayer');
@@ -20,7 +13,7 @@ describe('Game', () => {
   });
 
   it('Should not add a player if joined the game', () => {
-    const game = new Game(colors, professions);
+    const game = new Game(1234, colors, professions);
     game.addGuest('newPlayer');
     game.addGuest('newPlayer');
     const allPlayers = game.allPlayerDetails;
@@ -28,7 +21,7 @@ describe('Game', () => {
   });
 
   it('Should remove a player if already exists', () => {
-    const game = new Game(colors, professions);
+    const game = new Game(1234, colors, professions);
     game.addGuest('newPlayer');
     game.removePlayer('newPlayer');
     const allPlayers = game.allPlayerDetails;
@@ -36,14 +29,12 @@ describe('Game', () => {
   });
 
   it('Should validate the given gameID', () => {
-    const game = new Game(colors, professions);
-    game.assignGameID(1234);
+    const game = new Game(1234, colors, professions);
     assert.ok(game.isValidGameID(1234));
   });
 
   it('Should give true if the lobby is full ', () => {
-    const game = new Game(colors, professions);
-    game.assignGameID(1234);
+    const game = new Game(1234, colors, professions);
     game.addGuest('p1');
     game.addGuest('p2');
     game.addGuest('p3');
@@ -54,45 +45,41 @@ describe('Game', () => {
   });
 
   it('Should give false if the lobby is not full ', () => {
-    const game = new Game(colors, professions);
-    game.assignGameID(1234);
+    const game = new Game(1234, colors, professions);
     game.addGuest('p1');
     assert.ok(!game.isLobbyFull());
   });
 
   it('Should give the current player', () => {
-    const game = new Game(colors, professions);
-    game.assignGameID(1234);
+    const game = new Game(1234, colors, professions);
     game.addGuest('p1');
     game.addGuest('p2');
     game.start();
-    assert.ok(game.state.currentPlayer.username === 'p1');
+    assert.ok(game.currentPlayer.username === 'p1');
   });
 
   it('Should change the turn to other player', () => {
-    const game = new Game(colors, professions);
-    game.assignGameID(1234);
+    const game = new Game(1234, colors, professions);
     game.assignHost('p1');
     game.addGuest('p2');
     game.start();
     game.changeTurn();
-    assert.ok(game.state.currentPlayer.username === 'p2');
+    assert.ok(game.currentPlayer.username === 'p2');
   });
 
   it('Should change the rolled dice of current player to true', () => {
-    const game = new Game(colors, professions);
-    game.assignGameID(1234);
+    const game = new Game(1234, colors, professions);
     game.assignHost('p1');
     game.addGuest('p2');
     game.start();
     game.rollDice();
 
-    assert.ok(game.state.currentPlayer.isRolledDice);
+    assert.ok(game.isRolledDice);
   });
 
   it('Should change the turn to other player in downsized', () => {
     const selectedProfessions = [professions[0], professions[1]];
-    const game = new Game(colors, selectedProfessions);
+    const game = new Game(1234, colors, selectedProfessions);
     const card = {
       heading: 'New Card',
       symbol: 'a',
@@ -100,31 +87,32 @@ describe('Game', () => {
       type: 'downsized'
     };
 
-    game.assignGameID(1234);
     game.assignHost('p1');
     game.addGuest('p2');
     game.start();
+
     game.changeTurn();
     game.currentCard = card;
     game.currentTurn.payday();
     game.currentTurn.downsized();
     game.changeTurn();
-    assert.ok(game.state.currentPlayer.username === 'p1');
+
+    assert.ok(game.currentPlayerName === 'p1');
   });
 
   it('Should return the player matching with user name', () => {
-    const game = new Game(colors, professions);
-    game.assignGameID(1234);
+
+    const game = new Game(1234, colors, professions);
     game.assignHost('p1');
     game.addGuest('p2');
 
     const actualPlayer = game.getPlayer('p2');
-    assert.strictEqual(actualPlayer.details.username, 'p2');
+    assert.strictEqual(actualPlayer.username, 'p2');
   });
 
   it('Should initialize the player skip turns value to 2', () => {
     const selectedProfessions = [professions[0], professions[1]];
-    const game = new Game(colors, selectedProfessions);
+    const game = new Game(1234, colors, selectedProfessions);
     const card = {
       heading: 'New Card',
       symbol: 'a',
@@ -132,20 +120,21 @@ describe('Game', () => {
       type: 'downsized'
     };
 
-    game.assignGameID(1234);
     game.assignHost('p1');
     game.addGuest('p2');
     game.start();
+
     game.changeTurn();
     game.currentCard = card;
     game.currentTurn.payday();
     game.currentTurn.downsized();
-    assert.ok(game.state.currentPlayer.skippedTurns === 2);
+
+    assert.ok(game.currentPlayer.skippedTurns === 2);
   });
 
   it('Should allow player to play after skipping 2 of their chances', () => {
     const selectedProfessions = [professions[0], professions[1]];
-    const game = new Game(colors, selectedProfessions);
+    const game = new Game(1234, colors, selectedProfessions);
     const card = {
       heading: 'New Card',
       symbol: 'a',
@@ -153,24 +142,26 @@ describe('Game', () => {
       type: 'downsized'
     };
 
-    game.assignGameID(1234);
     game.assignHost('p1');
     game.addGuest('p2');
     game.start();
+
     game.changeTurn();
     game.currentCard = card;
     game.currentTurn.payday();
     game.currentTurn.downsized();
     game.changeTurn();
+
     game.rollDice();
     game.changeTurn();
+
     game.rollDice();
-    assert.strictEqual(game.state.currentPlayer.skippedTurns, 0);
+    assert.strictEqual(game.currentPlayer.skippedTurns, 0);
   });
 
   it('Should set the notifications to given notifiers', () => {
     const selectedProfessions = [professions[0], professions[1]];
-    const game = new Game(colors, selectedProfessions);
+    const game = new Game(1234, colors, selectedProfessions);
     const card = {
       heading: 'New Card',
       symbol: 'a',

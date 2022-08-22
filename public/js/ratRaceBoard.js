@@ -263,7 +263,6 @@
   };
 
   const createActions = (family, type) => {
-    console.log(family, type);
     const actionTexts = actions[family][type];
     return html(['div', { className: 'actions-wrapper' }, ...actionTexts.map(action => {
       return ['div',

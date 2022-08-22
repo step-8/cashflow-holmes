@@ -19,9 +19,8 @@ class Games {
 
   newGame(host) {
     this.#latestGameID++;
-    const game = new Game(shuffle(this.#colors), shuffle(this.#professions));
+    const game = new Game(this.#latestGameID, shuffle(this.#colors), shuffle(this.#professions));
     game.assignHost(host);
-    game.assignGameID(this.#latestGameID);
     this.#games[this.#latestGameID] = game;
   }
 

@@ -34,8 +34,8 @@ class Game {
   #notifications;
   #log;
 
-  constructor(colors, professions) {
-    this.#gameID = null;
+  constructor(gameID, colors, professions) {
+    this.#gameID = gameID;
     this.#colors = colors;
     this.#professions = professions;
     this.#maxPlayers = 6;
@@ -57,6 +57,30 @@ class Game {
   #isUserAlreadyJoined(username) {
     const playerStatus = this.#getPlayerIndex(username);
     return playerStatus > -1;
+  }
+  get currentPlayerName() {
+    return this.currentPlayer.username;
+  }
+
+  get isRolledDice() {
+    return this.currentPlayer.isRolledDice;
+  }
+
+  #getCardType() {
+    const currentPosition = this.currentPlayer.currentPosition;
+    const type = this.#ratRace.getCardType(currentPosition);
+    return type;
+  }
+
+  getCard() {
+    const type = this.#getCardType();
+    this.currentCard = this.#ratRace.getCard(type);
+    return this.#currentCard;
+  }
+
+  setNotifications() {
+    const type = this.#getCardType();
+    this.notifications = this.#ratRace.getNotifications(type, this.currentPlayer.details);
   }
 
   #addPlayer(username, role) {
@@ -126,10 +150,6 @@ class Game {
     this.#status = gameStatus.cancelled;
   }
 
-  assignGameID(gameID) {
-    this.#gameID = gameID;
-  }
-
   #getPlayerIndex(username) {
     return this.#players.findIndex(player => player.details.username === username);
   }
@@ -175,8 +195,7 @@ class Game {
     const currentPlayer = this.currentPlayer;
     this.#currentTurn.updateCard(card);
 
-    const username = currentPlayer.details.username;
-    const color = currentPlayer.details.color;
+    const { username, color } = currentPlayer.details;
 
     const cards = ['smallDeal', 'bigDeal'];
     if (cards.includes(card.cardName)) {
@@ -184,6 +203,10 @@ class Game {
       return;
     }
     this.addLog(this.currentPlayer, `landed on ${toWords(card.family)}`);
+  }
+
+  get notifications() {
+    return this.#notifications;
   }
 
   set notifications(notifications) {
