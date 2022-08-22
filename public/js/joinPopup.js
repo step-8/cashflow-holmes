@@ -34,7 +34,7 @@ const joinGame = (event) => {
 
   API.joinGame({ method: 'post', body })
     .then(resolve => {
-      if (resolve.ok) {
+      if (resolve.isOk) {
         redirectToLobby();
         return;
       }

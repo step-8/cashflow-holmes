@@ -1,6 +1,6 @@
 const { RatRace } = require('../../src/models/ratRace');
 const deck = require('../../data/cards.json');
-const assert = require('assert');
+const { assert } = require('chai');
 
 describe('RatRace', () => {
   describe('getCardType', () => {
@@ -13,7 +13,7 @@ describe('RatRace', () => {
     it('Should not give card type on invalid tile position', () => {
       const ratRace = new RatRace(deck);
       const cardType = ratRace.getCardType(30);
-      assert.ok(!cardType);
+      assert.isOk(!cardType);
     });
   });
 
@@ -22,14 +22,14 @@ describe('RatRace', () => {
       const ratRace = new RatRace(deck);
       const player = { lastPosition: 0, currentPosition: 1 };
       const card = ratRace.getCard('market', player);
-      assert.ok(card);
+      assert.isOk(card);
     });
 
     it('Should not give card on invalid type', () => {
       const ratRace = new RatRace(deck);
       const player = { lastPosition: 0, currentPosition: 1 };
       const card = ratRace.getCard('deal', player);
-      assert.ok(!card);
+      assert.isOk(!card);
     });
   });
 

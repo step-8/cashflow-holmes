@@ -1,8 +1,6 @@
-const { Profile } = require('./profile.js');
 class Player {
   #username;
   #color;
-  #profession;
   #role;
   #profile;
   #isRolledDice;
@@ -11,12 +9,11 @@ class Player {
   #dualDiceCount;
   #skippedTurns;
 
-  constructor(username, role) {
+  constructor(username, role, color, profile) {
     this.#username = username;
     this.#role = role;
-    this.#color = null;
-    this.#profession = null;
-    this.#profile = null;
+    this.#color = color;
+    this.#profile = profile;
     this.#isRolledDice = false;
     this.#currentPosition = 0;
     this.#lastPosition = 0;
@@ -58,19 +55,6 @@ class Player {
 
   get color() {
     return this.#color;
-  }
-
-  assignColor(color) {
-    this.#color = color;
-  }
-
-  assignProfession(profession) {
-    this.#profession = profession;
-  }
-
-  createProfile() {
-    this.#profile = new Profile(this.#profession);
-    this.#profile.setDefaults();
   }
 
   payday() {
@@ -126,7 +110,6 @@ class Player {
       username: this.#username,
       role: this.#role,
       color: this.#color,
-      profession: this.#profession,
       profile: this.#profile.details,
       isRolledDice: this.#isRolledDice,
       lastPosition: this.#lastPosition,

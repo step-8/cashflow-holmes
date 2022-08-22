@@ -1,15 +1,14 @@
 const { Turn } = require('../../src/models/turn.js');
 const { Log } = require('../../src/models/log.js');
-const { Player } = require('../../src/models/player.js');
-const assert = require('assert');
+const { assert } = require('chai');
 
 describe('Turn', () => {
-  const identity = (__) => assert.ok(true);
+  const identity = (__) => assert.isOk(true);
   const successful = () => 1;
   const failure = () => 0;
   const log = new Log();
   const player = {
-    details: { username: 'user', color: 'c', profile: { cashFlow: 100 } },
+    username: 'user', color: 'c', profile: { cashFlow: 100 },
     doodad: identity,
     payday: identity,
     buyRealEstate: successful
@@ -36,9 +35,19 @@ describe('Turn', () => {
   describe('payday', () => {
     it('Should invoke the players payday', () => {
       const log = new Log();
+      const player = {
+        username: 'user',
+        color: 'c',
+        details: {
+          profile: { cashFlow: 100, totalIncome: 100 }
+        },
+        doodad: identity,
+        payday: successful,
+        buyRealEstate: identity
+      };
       const turn = new Turn(card, player, log);
       turn.payday();
-      assert.ok(turn.info.state);
+      assert.isOk(turn.info.state);
       assert.deepStrictEqual(
         log.getAllLogs(),
         [{ username: 'user', color: 'c', message: 'received pay of $100' }]
@@ -57,7 +66,9 @@ describe('Turn', () => {
     it('Should deduct the players doodad cost', () => {
       const log = new Log();
       const player = {
-        details: { username: 'user', color: 'c', profile: { cashFlow: 100, totalIncome: 100 } },
+        username: 'user',
+        color: 'c',
+        profile: { cashFlow: 100, totalIncome: 100 },
         doodad: successful,
         payday: identity,
         buyRealEstate: identity
@@ -66,10 +77,16 @@ describe('Turn', () => {
       const turn = new Turn(card, player, log);
       turn.doodad();
 
-      assert.ok(turn.info.state);
+      assert.isOk(turn.info.state);
       assert.deepStrictEqual(
         log.getAllLogs(),
-        [{ username: 'user', color: 'c', message: `payed $${card.cost} on ${card.heading}` }]
+        [
+          {
+            username: 'user',
+            color: 'c',
+            message: `payed $${card.cost} on ${card.heading}`
+          }
+        ]
       );
       assert.deepStrictEqual(
         turn.info.transaction,
@@ -80,7 +97,9 @@ describe('Turn', () => {
     it('Should not be able to afford the doodad', () => {
       const log = new Log();
       const player = {
-        details: { username: 'user', color: 'c', profile: { cashFlow: 100 } },
+        username: 'user',
+        color: 'c',
+        profile: { cashFlow: 100 },
         doodad: failure,
         payday: identity,
         buyRealEstate: identity
@@ -89,7 +108,7 @@ describe('Turn', () => {
       const turn = new Turn(card, player, log);
       turn.doodad();
 
-      assert.ok(!turn.info.state);
+      assert.isOk(!turn.info.state);
       assert.deepStrictEqual(log.getAllLogs(), []);
       assert.deepStrictEqual(
         turn.info.transaction,
@@ -102,7 +121,9 @@ describe('Turn', () => {
     it('Should buy buyRealEstate set transaction as successful', () => {
       const log = new Log();
       const player = {
-        details: { username: 'user', color: 'c', profile: { cashFlow: 100 } },
+        username: 'user',
+        color: 'c',
+        profile: { cashFlow: 100 },
         doodad: identity,
         payday: identity,
         buyRealEstate: successful
@@ -111,7 +132,7 @@ describe('Turn', () => {
       const turn = new Turn(card, player, log);
       turn.buyRealEstate();
 
-      assert.ok(turn.info.state);
+      assert.isOk(turn.info.state);
       assert.deepStrictEqual(
         log.getAllLogs(),
         [{ username: 'user', color: 'c', message: `bought ${card.symbol}` }]
@@ -126,7 +147,9 @@ describe('Turn', () => {
     it('Should not buy buyRealEstate set transaction as failure', () => {
       const log = new Log();
       const player = {
-        details: { username: 'user', color: 'c', profile: { cashFlow: 100 } },
+        username: 'user',
+        color: 'c',
+        profile: { cashFlow: 100 },
         doodad: identity,
         payday: identity,
         buyRealEstate: failure
@@ -135,7 +158,7 @@ describe('Turn', () => {
       const turn = new Turn(card, player, log);
       turn.buyRealEstate();
 
-      assert.ok(!turn.info.state);
+      assert.isOk(!turn.info.state);
       assert.deepStrictEqual(log.getAllLogs(), []);
       assert.deepStrictEqual(
         turn.info.transaction,
@@ -154,7 +177,11 @@ describe('Turn', () => {
     it('Should set transaction as successful when donated to charity', () => {
       const log = new Log();
       const player = {
-        details: { username: 'user', color: 'c', profile: { cashFlow: 100, totalIncome: 100 } },
+        username: 'user',
+        color: 'c',
+        details: {
+          profile: { cashFlow: 100, totalIncome: 100 }
+        },
         doodad: identity,
         payday: identity,
         buyRealEstate: identity,
@@ -164,10 +191,12 @@ describe('Turn', () => {
       const turn = new Turn(card, player, log);
       turn.charity();
 
-      assert.ok(turn.info.state);
+      assert.isOk(turn.info.state);
       assert.deepStrictEqual(
         log.getAllLogs(),
-        [{ username: 'user', color: 'c', message: 'donated $10 to charity' }]
+        [
+          { username: 'user', color: 'c', message: 'donated $10 to charity' }
+        ]
       );
 
       assert.deepStrictEqual(
@@ -179,7 +208,11 @@ describe('Turn', () => {
     it('Should set transaction as failure when charity failed', () => {
       const log = new Log();
       const player = {
-        details: { username: 'user', color: 'c', profile: { cashFlow: 100 } },
+        username: 'user',
+        color: 'c',
+        details: {
+          profile: { cashFlow: 100, totalIncome: 100 }
+        },
         doodad: identity,
         payday: identity,
         buyRealEstate: identity,
@@ -189,7 +222,7 @@ describe('Turn', () => {
       const turn = new Turn(card, player, log);
       turn.charity();
 
-      assert.ok(!turn.info.state);
+      assert.isOk(!turn.info.state);
       assert.deepStrictEqual(log.getAllLogs(), []);
       assert.deepStrictEqual(
         turn.info.transaction,
@@ -209,7 +242,9 @@ describe('Turn', () => {
     it('Should set transaction as successful when bought the stocks', () => {
       const log = new Log();
       const player = {
-        details: { username: 'user', color: 'c', profile: { cashFlow: 100, totalIncome: 100 } },
+        username: 'user',
+        color: 'c',
+        profile: { cashFlow: 100, totalIncome: 100 },
         doodad: identity,
         payday: identity,
         buyRealEstate: identity,
@@ -220,7 +255,7 @@ describe('Turn', () => {
       const turn = new Turn(card, player, log);
       turn.buyStocks(1);
 
-      assert.ok(turn.info.state);
+      assert.isOk(turn.info.state);
       assert.deepStrictEqual(
         log.getAllLogs(),
         [{ username: 'user', color: 'c', message: 'bought 1 a stocks' }]
@@ -235,7 +270,9 @@ describe('Turn', () => {
     it('Should set transaction as failure when charity failed', () => {
       const log = new Log();
       const player = {
-        details: { username: 'user', color: 'c', profile: { cashFlow: 100, totalIncome: 100 } },
+        username: 'user',
+        color: 'c',
+        profile: { cashFlow: 100, totalIncome: 100 },
         doodad: identity,
         payday: identity,
         buyRealEstate: identity,
@@ -246,7 +283,7 @@ describe('Turn', () => {
       const turn = new Turn(card, player, log);
       turn.buyStocks(1);
 
-      assert.ok(!turn.info.state);
+      assert.isOk(!turn.info.state);
       assert.deepStrictEqual(log.getAllLogs(), []);
       assert.deepStrictEqual(
         turn.info.transaction,
@@ -266,14 +303,16 @@ describe('Turn', () => {
     it('Should add baby to the player', () => {
       const log = new Log();
       const player = {
-        details: { username: 'user', color: 'c', profile: { cashFlow: 100, totalIncome: 100, totalExpenses: 100 } },
+        username: 'user',
+        color: 'c',
+        profile: { cashFlow: 100, totalIncome: 100, totalExpenses: 100 },
         baby: successful
       };
 
       const turn = new Turn(card, player, log);
       turn.baby();
 
-      assert.ok(turn.info.state);
+      assert.isOk(turn.info.state);
       assert.deepStrictEqual(
         log.getAllLogs(),
         [
@@ -285,14 +324,16 @@ describe('Turn', () => {
     it('Should not add baby when there are 3 babies', () => {
       const log = new Log();
       const player = {
-        details: { username: 'user', color: 'c', profile: { cashFlow: 100, totalIncome: 100, totalExpenses: 100 } },
+        username: 'user',
+        color: 'c',
+        profile: { cashFlow: 100, totalIncome: 100, totalExpenses: 100 },
         baby: failure
       };
 
       const turn = new Turn(card, player, log);
       turn.baby();
 
-      assert.ok(turn.info.state);
+      assert.isOk(turn.info.state);
       assert.deepStrictEqual(log.getAllLogs(), [
         { username: 'user', color: 'c', message: 'already have 3 babies' }
       ]);
@@ -304,7 +345,7 @@ describe('Turn', () => {
       const log = new Log();
       const turn = new Turn(card, player, log);
       turn.skip();
-      assert.ok(turn.info.state);
+      assert.isOk(turn.info.state);
       assert.deepStrictEqual(
         log.getAllLogs(),
         [{ username: 'user', color: 'c', message: `skipped ${card.symbol}` }]
@@ -323,7 +364,11 @@ describe('Turn', () => {
     it('Should deduct expenses from player\'s cash', () => {
       const log = new Log();
       const player = {
-        details: { username: 'user', color: 'c', profile: { cashFlow: 100, totalIncome: 100, totalExpenses: 100 } },
+        username: 'user',
+        color: 'c',
+        details: {
+          profile: { cashFlow: 100, totalIncome: 100, totalExpenses: 100 }
+        },
         doodad: identity,
         payday: identity,
         buyRealEstate: identity,
@@ -334,7 +379,7 @@ describe('Turn', () => {
       const turn = new Turn(card, player, log);
       turn.downsized();
 
-      assert.ok(turn.info.state);
+      assert.isOk(turn.info.state);
       assert.deepStrictEqual(
         log.getAllLogs(),
         [
@@ -352,8 +397,8 @@ describe('Turn', () => {
     it('Should not log the downsized messages', () => {
       const log = new Log();
       const player = {
+        username: 'user', color: 'c',
         details: {
-          username: 'user', color: 'c',
           profile: { cashFlow: 100, totalIncome: 100, totalExpenses: 1000 }
         },
         doodad: identity,
@@ -366,7 +411,7 @@ describe('Turn', () => {
       const turn = new Turn(card, player, log);
       turn.downsized();
 
-      assert.ok(!turn.info.state);
+      assert.isNotOk(turn.info.state);
       assert.deepStrictEqual(
         log.getAllLogs(), []
       );

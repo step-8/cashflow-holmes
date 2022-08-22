@@ -1,4 +1,4 @@
-const assert = require('assert');
+const { assert } = require('chai');
 const { toWords } = require('../../src/utils/camelCaseToWords.js');
 
 describe('camelCaseToWords', () => {

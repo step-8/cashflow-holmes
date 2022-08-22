@@ -1,105 +1,70 @@
 const { Player } = require('../../src/models/player');
 const professions = require('../../data/professions.json');
-const assert = require('assert');
+const { assert } = require('chai');
+const { Profile } = require('../../src/models/profile');
 
 describe('Player', () => {
-  const expectedProfession = professions[0];
-
-  it('Should assign profession to player', () => {
-    const player = new Player('p1', 'host');
-    player.assignProfession(expectedProfession);
-    player.createProfile();
-    const { profession } = player.details;
-    assert.deepStrictEqual(profession, expectedProfession);
-  });
-
-  it('Should assign color to player', () => {
-    const player = new Player('p2', 'guest');
-    player.assignProfession(expectedProfession);
-    player.createProfile();
-    player.assignColor('red');
-    const { color } = player.details;
-    assert.strictEqual(color, 'red');
-  });
-
-  it('Should create profile for a player', () => {
-    const player = new Player('p3', 'guest');
-    player.assignProfession(expectedProfession);
-    player.createProfile();
-    const { profile } = player.details;
-    const expectedCash = 8400;
-    assert.strictEqual(profile.profession, 'Doctor(MD)');
-    assert.strictEqual(profile.cash, expectedCash);
-  });
+  const profession = JSON.stringify(professions[0]);
 
   it('Should update current and last positions on movement', () => {
-    const player = new Player('p3', 'guest');
-    player.assignProfession(expectedProfession);
-    player.createProfile();
+    const profile = new Profile(JSON.parse(profession));
+    const player = new Player('p3', 'guest', 'red', profile);
     player.move(3);
     assert.strictEqual(player.details.currentPosition, 3);
     assert.strictEqual(player.details.lastPosition, 0);
   });
 
   it('Should move to 24 if position is 0', () => {
-    const player = new Player('p3', 'guest');
-    player.assignProfession(expectedProfession);
-    player.createProfile();
+    const profile = new Profile(JSON.parse(profession));
+    const player = new Player('p3', 'guest', 'red', profile);
     player.move(24);
     assert.strictEqual(player.details.currentPosition, 24);
   });
 
   it('Should return true when cash is above 0', () => {
-    const player = new Player('p3', 'guest');
-    player.assignProfession(expectedProfession);
-    player.createProfile();
-    assert.ok(player.doodad());
+    const profile = new Profile(JSON.parse(profession));
+    const player = new Player('p3', 'guest', 'red', profile);
+    assert.isOk(player.doodad());
   });
 
   it('Should return false when cash is less than 0', () => {
-    const player = new Player('p3', 'guest');
-    player.assignProfession(expectedProfession);
-    player.createProfile();
-    assert.ok(!player.doodad(30000));
+    const profile = new Profile(JSON.parse(profession));
+    const player = new Player('p3', 'guest', 'red', profile);
+    assert.isNotOk(player.doodad(30000));
   });
 
   it('Should add loan in players profile', () => {
-    const player = new Player('p3', 'guest');
-    player.assignProfession(professions[1]);
-    player.createProfile();
-    assert.ok(player.takeLoan(100));
+    const profile = new Profile(JSON.parse(profession));
+    const player = new Player('p3', 'guest', 'red', profile);
+    assert.isOk(player.takeLoan(100));
   });
 
   it('Should deduct loan in players profile', () => {
-    const player = new Player('p3', 'guest');
-    player.assignProfession(professions[1]);
-    player.createProfile();
-    assert.ok(player.payLoan(100));
+    const profile = new Profile(JSON.parse(profession));
+    const player = new Player('p3', 'guest', 'red', profile);
+    assert.isOk(player.payLoan(100));
   });
 
-  it('Should not deduct cash when player doesnt have sufficient', () => {
-    const player = new Player('p3', 'guest');
-    player.assignProfession(professions[1]);
-    player.createProfile();
+  it('Should not deduct cash when player doesn\'t have sufficient cash', () => {
+    const profile = new Profile(JSON.parse(profession));
+    const player = new Player('p3', 'guest', 'red', profile);
     player.takeLoan(1100);
-    player.doodad(2200);
-    assert.ok(!player.payLoan(1200));
+    player.doodad(1100);
+    assert.isNotOk(player.payLoan(1500));
   });
 
   it('should add baby to the player', () => {
-    const player = new Player('p3', 'guest');
-    player.assignProfession(professions[1]);
-    player.createProfile();
-    assert.ok(player.baby());
+    const profile = new Profile(JSON.parse(profession));
+    const player = new Player('p3', 'guest', 'red', profile);
+    assert.isOk(player.baby());
   });
 
   it('should not add baby when there are 3 babies', () => {
-    const player = new Player('p3', 'guest');
-    player.assignProfession(professions[1]);
-    player.createProfile();
+    const profile = new Profile(JSON.parse(profession));
+    const player = new Player('p3', 'guest', 'red', profile);
     player.baby();
     player.baby();
     player.baby();
-    assert.ok(!player.baby());
+    assert.isNotOk(player.baby());
   });
 });

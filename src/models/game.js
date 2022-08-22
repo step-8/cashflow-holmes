@@ -4,6 +4,7 @@ const { RatRace } = require('./ratRace.js');
 const { Turn } = require('./turn.js');
 const { Log } = require('./log.js');
 const { toWords } = require('../utils/camelCaseToWords.js');
+const { Profile } = require('./profile.js');
 
 const getNextAttrib = (players, type, attribs) => {
   const playersAttribs = players.map(player => player.details[type]);
@@ -87,14 +88,10 @@ class Game {
       return;
     }
 
-    const player = new Player(username, role);
-    player.assignColor(
-      getNextAttrib(this.#players, 'color', this.#colors)
-    );
-    player.assignProfession(
-      getNextAttrib(this.#players, 'profession', this.#professions)
-    );
-    player.createProfile();
+    const color = getNextAttrib(this.#players, 'color', this.#colors);
+    const profession = getNextAttrib(this.#players, 'profession', this.#professions);
+    const profile = new Profile(profession);
+    const player = new Player(username, role, color, profile);
     this.#players.push(player);
   }
 

@@ -13,8 +13,8 @@ class Turn {
   }
 
   #playerInfo() {
-    const username = this.#currentPlayer.details.username;
-    const color = this.#currentPlayer.details.color;
+    const username = this.#currentPlayer.username;
+    const color = this.#currentPlayer.color;
     return { username, color };
   }
 

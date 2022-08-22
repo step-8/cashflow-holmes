@@ -1,54 +1,49 @@
 const { Profile } = require('../../src/models/profile');
 const professions = require('../../data/professions.json');
-const assert = require('assert');
+const { assert } = require('chai');
 
 describe('Profile', () => {
+  const profession = JSON.stringify(professions[0]);
+
   it('Should get details of profile', () => {
-    const profession = professions[0];
-    const profile = new Profile(profession);
+    const profile = new Profile(JSON.parse(profession));
     const expectedProfession = 'Doctor(MD)';
     assert.strictEqual(profile.details.profession, expectedProfession);
   });
 
   it('Should set defaults for the profile', () => {
-    const profession = professions[0];
-    const profile = new Profile(profession);
+    const profile = new Profile(JSON.parse(profession));
     profile.setDefaults();
     assert.strictEqual(profile.details.cash, 8400);
   });
 
   it('Should calculate the total income', () => {
-    const profession = professions[0];
-    const profile = new Profile(profession);
+    const profile = new Profile(JSON.parse(profession));
     const expectedTotalIncome = 13200;
     assert.strictEqual(profile.details.totalIncome, expectedTotalIncome);
   });
 
   it('Should calculate the total expenses', () => {
-    const profession = professions[0];
-    const profile = new Profile(profession);
+    const profile = new Profile(JSON.parse(profession));
     const expectedTotalExpenses = 8300;
     assert.strictEqual(profile.details.totalExpenses, expectedTotalExpenses);
   });
 
   it('Should calculate the cash flow', () => {
-    const profession = professions[0];
-    const profile = new Profile(profession);
+    const profile = new Profile(JSON.parse(profession));
     const expectedCF = 4900;
     assert.strictEqual(profile.details.cashFlow, expectedCF);
   });
 
   it('Should calculate the passive income', () => {
-    const profession = professions[0];
-    const profile = new Profile(profession);
+    const profile = new Profile(JSON.parse(profession));
     const expectedPassiveIncome = 0;
     assert.strictEqual(profile.details.passiveIncome, expectedPassiveIncome);
   });
 
   describe('addPay', () => {
     it('Should add cashflow amount to the cash', () => {
-      const profession = professions[0];
-      const profile = new Profile(profession);
+      const profile = new Profile(JSON.parse(profession));
       profile.setDefaults();
       profile.addPay();
       assert.strictEqual(profile.details.cash, 13300);
@@ -57,38 +52,35 @@ describe('Profile', () => {
 
   describe('payExpenses', () => {
     it('Should not deduct amount from the cash', () => {
-      const profession = professions[0];
-      const profile = new Profile(profession);
+      const profile = new Profile(JSON.parse(profession));
       profile.setDefaults();
-      assert.ok(profile.payExpenses() !== 0);
+      assert.isOk(profile.payExpenses() !== 0);
       assert.strictEqual(profile.details.cash, 100);
     });
 
     it('Should deduct amount from the cash', () => {
-      const profession = professions[0];
-      const profile = new Profile(profession);
+      const profile = new Profile(JSON.parse(profession));
       profile.setDefaults();
       profile.addPay();
-      assert.ok(profile.payExpenses() === 1);
+      assert.isOk(profile.payExpenses() === 1);
       assert.strictEqual(profile.details.cash, 5000);
     });
   });
 
   describe('donateCash', () => {
     it('Should not deduct amount from the cash', () => {
-      const profession = professions[3];
-      const profile = new Profile(profession);
+      const profile = new Profile(JSON.parse(profession));
       profile.setDefaults();
       profile.payExpenses();
-      assert.ok(profile.donateCash());
+      profile.payExpenses();
+      assert.isNotOk(profile.donateCash());
     });
 
     it('Should deduct amount from the cash', () => {
-      const profession = professions[3];
-      const profile = new Profile(profession);
+      const profile = new Profile(JSON.parse(profession));
       profile.setDefaults();
-      assert.ok(profile.donateCash());
-      assert.strictEqual(profile.details.cash, 3710);
+      assert.isOk(profile.donateCash());
+      assert.strictEqual(profile.details.cash, 7080);
     });
   });
 
@@ -102,25 +94,22 @@ describe('Profile', () => {
     };
 
     it('Should not add stocks to the player', () => {
-      const profession = professions[1];
-      const profile = new Profile(profession);
+      const profile = new Profile(JSON.parse(profession));
       profile.setDefaults();
-      assert.ok(profile.addStocks(card, 10000) === 0);
+      assert.isOk(profile.addStocks(card, 10000) === 0);
     });
 
     it('Should add stocks to the player', () => {
-      const profession = professions[1];
-      const profile = new Profile(profession);
+      const profile = new Profile(JSON.parse(profession));
       profile.setDefaults();
-      assert.ok(profile.addStocks(card, 100) === 1);
+      assert.isOk(profile.addStocks(card, 100) === 1);
       assert.deepStrictEqual(profile.details.assets.stocks[0].count, 100);
     });
   });
 
   describe('deductDoodad', () => {
     it('Should deduct doodad amount from the cash', () => {
-      const profession = professions[0];
-      const profile = new Profile(profession);
+      const profile = new Profile(JSON.parse(profession));
       profile.setDefaults();
       profile.deductDoodad(100);
       assert.strictEqual(profile.details.cash, 8300);
@@ -129,17 +118,15 @@ describe('Profile', () => {
 
   describe('addAsset', () => {
     it('Should not add asset if player has insufficient cash', () => {
-      const profession = professions[0];
-      const profile = new Profile(profession);
+      const profile = new Profile(JSON.parse(profession));
       profile.setDefaults();
       profile.deductDoodad(100);
       const status = profile.addAsset({ downPayment: 300000 });
-      assert.ok(!status);
+      assert.isOk(!status);
     });
 
     it('Should add card to assets', () => {
-      const profession = professions[0];
-      const profile = new Profile(profession);
+      const profile = new Profile(JSON.parse(profession));
       const card = { downPayment: 300 };
       profile.setDefaults();
       profile.deductDoodad(100);
@@ -148,8 +135,7 @@ describe('Profile', () => {
     });
 
     it('Should add card to liabilities', () => {
-      const profession = professions[0];
-      const profile = new Profile(profession);
+      const profile = new Profile(JSON.parse(profession));
       const card = { downPayment: 300 };
       profile.setDefaults();
       profile.deductDoodad(100);
@@ -158,8 +144,7 @@ describe('Profile', () => {
     });
 
     it('Should add card to income', () => {
-      const profession = professions[0];
-      const profile = new Profile(profession);
+      const profile = new Profile(JSON.parse(profession));
       const card = { downPayment: 300 };
       profile.setDefaults();
       profile.deductDoodad(100);
@@ -170,7 +155,7 @@ describe('Profile', () => {
 
   describe('addLoan', () => {
     it('Should add amount to the cash', () => {
-      const profile = new Profile(professions[1]);
+      const profile = new Profile(JSON.parse(profession));
       profile.setDefaults();
       const expected = profile.details;
       const expectedCash = profile.details.cash;
@@ -186,8 +171,9 @@ describe('Profile', () => {
 
   describe('deductLoan', () => {
     it('Should deduct amount from the cash', () => {
-      const profile = new Profile(professions[1]);
+      const profile = new Profile(JSON.parse(profession));
       profile.setDefaults();
+      profile.addLoan(100);
       const expected = profile.details;
       const expectedCash = profile.details.cash;
       const expectedBankLoanPayment = profile.details.expenses.bankLoanPayment;
@@ -200,36 +186,36 @@ describe('Profile', () => {
     });
 
     it('Should not deduct amount when there is no bank loan', () => {
-      const profile = new Profile(professions[2]);
+      const profile = new Profile(JSON.parse(profession));
       profile.setDefaults();
       const actual = profile.deductLoan(1200);
-      assert.ok(actual);
+      assert.isOk(actual);
     });
 
     it('Should not deduct amount when there is no bank loan', () => {
-      const profile = new Profile(professions[2]);
+      const profile = new Profile(JSON.parse(profession));
       profile.setDefaults();
       profile.deductDoodad(10000);
       profile.addLoan(100);
       const actual = profile.deductLoan(1200);
-      assert.ok(actual);
+      assert.isOk(actual);
     });
   });
 
   describe('addBaby', () => {
     it('Should add baby to player profile', () => {
-      const profile = new Profile(professions[2]);
+      const profile = new Profile(JSON.parse(profession));
       profile.setDefaults();
-      assert.ok(profile.addBaby());
+      assert.isOk(profile.addBaby());
     });
 
     it('Should not add baby when player have 3 babies', () => {
-      const profile = new Profile(professions[2]);
+      const profile = new Profile(JSON.parse(profession));
       profile.setDefaults();
       profile.addBaby();
       profile.addBaby();
       profile.addBaby();
-      assert.ok(!profile.addBaby());
+      assert.isOk(!profile.addBaby());
     });
   });
 });

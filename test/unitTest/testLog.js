@@ -1,5 +1,5 @@
 const { Log } = require('../../src/models/log.js');
-const assert = require('assert');
+const { assert } = require('chai');
 
 describe('Log', () => {
   it('Should add a log', () => {

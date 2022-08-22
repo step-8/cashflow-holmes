@@ -1,4 +1,4 @@
-const assert = require('assert');
+const { assert } = require('chai');
 const { Games } = require('../../src/models/games');
 const professions = require('../../data/professions.json');
 
@@ -10,7 +10,7 @@ describe('Games', () => {
     it('Should start a newGame', () => {
       games.newGame();
       const gameID = games.latestGameID;
-      assert.ok(games.getGame(gameID));
+      assert.isOk(games.getGame(gameID));
       assert.strictEqual(games.latestGameID, 1);
     });
   });
@@ -21,7 +21,7 @@ describe('Games', () => {
       games.newGame();
       const gameID = games.latestGameID;
       games.endGame(games.latestGameID);
-      assert.ok(!games.getGame(gameID));
+      assert.isOk(!games.getGame(gameID));
     });
   });
 
@@ -30,11 +30,11 @@ describe('Games', () => {
     it('Should get game of given valid gameID', () => {
       games.newGame();
       const gameID = games.latestGameID;
-      assert.ok(games.getGame(gameID));
+      assert.isOk(games.getGame(gameID));
     });
 
     it('Should not give game if id is not valid', () => {
-      assert.ok(!games.getGame('abc'));
+      assert.isOk(!games.getGame('abc'));
     });
   });
 

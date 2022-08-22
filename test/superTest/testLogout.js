@@ -1,6 +1,6 @@
 const { createApp } = require('../../src/app.js');
 const request = require('supertest');
-const assert = require('assert');
+const { assert } = require('chai');
 const { testDeps: { config, session } } = require('../testDependencies');
 
 describe('Logout', () => {
