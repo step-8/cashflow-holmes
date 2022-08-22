@@ -25,19 +25,6 @@
       "cashFlow": 300
     },
     {
-      "id": "smallDealStock01",
-      "type": "stock",
-      "symbol": "OK4U",
-      "heading": "Stock - OK4U Drug Co.",
-      "description": "Interest rates cripple share price of this long time maker of medicines.",
-      "rule": "Only you may buy as many shares as you want at this price.Everyone may sell at this price.",
-      "price": 5,
-      "range": [
-        5,
-        30
-      ]
-    },
-    {
       "id": "lottery01",
       "type": "lottery",
       "symbol": "lottery",
@@ -57,6 +44,19 @@
           6
         ]
       }
+    },
+    {
+      "id": "smallDealStock01",
+      "type": "stock",
+      "symbol": "OK4U",
+      "heading": "Stock - OK4U Drug Co.",
+      "description": "Interest rates cripple share price of this long time maker of medicines.",
+      "rule": "Only you may buy as many shares as you want at this price.Everyone may sell at this price.",
+      "price": 5,
+      "range": [
+        5,
+        30
+      ]
     },
     {
       "id": "smallDealMLM01",

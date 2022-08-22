@@ -239,6 +239,7 @@
       deal: ['SMALL', 'BIG'],
       realEstate: ['BUY', 'SKIP'],
       stock: ['BUY', 'SELL', 'SKIP'],
+      lottery: ['BUY', 'SKIP'],
       MLM: ['ROLL', 'SKIP'],
     },
     market: {

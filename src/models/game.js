@@ -80,7 +80,7 @@ class Game {
 
   setNotifications() {
     const type = this.#getCardType();
-    this.notifications = this.#ratRace.getNotifications(type, this.currentPlayer.details);
+    this.#notifications = this.#ratRace.getNotifications(type, this.currentPlayer.details);
   }
 
   #addPlayer(username, role) {
