@@ -9,6 +9,7 @@ class Player {
   #lastPosition;
   #dualDiceCount;
   #skippedTurns;
+  #boughtLottery;
 
   constructor(username, role, color, profession, profile) {
     this.#username = username;
@@ -83,6 +84,14 @@ class Player {
     return this.#profile.addAsset(card);
   }
 
+  buyLottery(cost) {
+    const status = this.#profile.lottery(cost);
+    if (status) {
+      this.#boughtLottery = true;
+    }
+    return status;
+  }
+
   buyStocks(card, count) {
     return this.#profile.addStocks(card, count);
   }
@@ -130,7 +139,8 @@ class Player {
       lastPosition: this.#lastPosition,
       currentPosition: this.#currentPosition,
       dualDiceCount: this.#dualDiceCount,
-      skippedTurns: this.#skippedTurns
+      skippedTurns: this.#skippedTurns,
+      boughtLottery: this.#boughtLottery
     };
   }
 }

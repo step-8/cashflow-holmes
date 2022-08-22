@@ -132,6 +132,15 @@ class Profile {
     return 1;
   }
 
+  lottery(cost) {
+    if (this.#cash < cost) {
+      return 0;
+    }
+
+    this.updateCash(-cost, 'Lottery');
+    return 1;
+  }
+
   updateCash(amount, details) {
     const currentCash = this.#cash;
     this.#cash += amount;

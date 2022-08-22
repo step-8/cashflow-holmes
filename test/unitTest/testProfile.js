@@ -116,6 +116,24 @@ describe('Profile', () => {
     });
   });
 
+  describe('lottery', () => {
+    it('Should deduct lottery amount from the cash on successful purchase', () => {
+      const profile = new Profile(JSON.parse(profession));
+      profile.setDefaults();
+      profile.lottery(100);
+      assert.strictEqual(profile.details.cash, 8300);
+    });
+  });
+
+  describe('lottery', () => {
+    it('Should not deduct lottery amount from the cash on unsuccessful purchase', () => {
+      const profile = new Profile(JSON.parse(profession));
+      profile.setDefaults();
+      profile.lottery(100000);
+      assert.strictEqual(profile.details.cash, 8400);
+    });
+  });
+
   describe('addAsset', () => {
     it('Should not add asset if player has insufficient cash', () => {
       const profile = new Profile(JSON.parse(profession));

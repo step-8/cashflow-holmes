@@ -101,6 +101,14 @@ describe('Player', () => {
     assert.strictEqual(player.dualDiceCount, 2);
   });
 
+  it('should bought lottery be false if not enough money', () => {
+    const profession = JSON.parse(professionStr);
+    const profile = new Profile(profession);
+    const player = new Player('p3', 'guest', 'red', profession, profile);
+    player.buyLottery(20);
+    assert.isNotOk(player.details.boughtLottery);
+  });
+
   it('should not add baby when there are 3 babies', () => {
     const profession = JSON.parse(professionStr);
     const profile = new Profile(profession);

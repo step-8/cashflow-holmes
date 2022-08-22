@@ -56,6 +56,17 @@ class Turn {
     this.#turnCompleted = true;
   }
 
+  buyLottery() {
+    const { cost, type } = this.#card;
+    const status = this.#currentPlayer.buyLottery(cost);
+    this.setTransactionState('deal', status);
+    if (!status) {
+      return;
+    }
+
+    this.#log.addLog(this.#playerInfo(), `bought ${type} for ${cost}`);
+  }
+
   buyRealEstate() {
     const status = this.#currentPlayer.buyRealEstate(this.#card);
     this.setTransactionState('deal', status);

@@ -248,6 +248,10 @@ class Game {
     this.#currentTurn.buyStocks(count);
   }
 
+  buyLottery() {
+    this.#currentTurn.buyLottery();
+  }
+
   sellStocks(username, count) {
     const player = this.getPlayer(username);
     this.#currentTurn.sellStocks(this.allPlayerDetails, count);

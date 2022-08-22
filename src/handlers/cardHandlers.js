@@ -32,6 +32,10 @@ const buyDeal = (game, type, count) => {
     return game.buyStocks(count);
   }
 
+  if (type === 'lottery') {
+    return game.buyLottery();
+  }
+
   game.skip();
 };
 

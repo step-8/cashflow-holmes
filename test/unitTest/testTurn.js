@@ -117,6 +117,71 @@ describe('Turn', () => {
     });
   });
 
+  describe('buyLottery', () => {
+    const card = {
+      heading: 'New Card',
+      symbol: 'a',
+      cost: 100,
+      family: 'deal',
+      type: 'lottery'
+    };
+
+    it('Should deduct the lottery cost', () => {
+      const log = new Log();
+      const player = {
+        username: 'user',
+        color: 'c',
+        profile: { cashFlow: 100, totalIncome: 100 },
+        doodad: identity,
+        payday: identity,
+        buyRealEstate: identity,
+        buyLottery: successful
+      };
+
+      const turn = new Turn(card, player, log);
+      turn.buyLottery();
+
+      assert.isNotOk(turn.info.state);
+      assert.deepStrictEqual(
+        log.getAllLogs(),
+        [
+          {
+            username: 'user',
+            color: 'c',
+            message: `bought ${card.type} for ${card.cost}`
+          }
+        ]
+      );
+      assert.deepStrictEqual(
+        turn.info.transaction,
+        { family: 'deal', status: 1 }
+      );
+    });
+
+    it('Should not be able to afford the lottery', () => {
+      const log = new Log();
+      const player = {
+        username: 'user',
+        color: 'c',
+        profile: { cashFlow: 100 },
+        doodad: identity,
+        payday: identity,
+        buyRealEstate: identity,
+        buyLottery: failure,
+      };
+
+      const turn = new Turn(card, player, log);
+      turn.buyLottery();
+
+      assert.isNotOk(turn.info.state);
+      assert.deepStrictEqual(log.getAllLogs(), []);
+      assert.deepStrictEqual(
+        turn.info.transaction,
+        { family: 'deal', status: 0 }
+      );
+    });
+  });
+
   describe('buyRealEstate', () => {
     it('Should buy buyRealEstate set transaction as successful', () => {
       const log = new Log();
