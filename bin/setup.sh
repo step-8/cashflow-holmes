@@ -7,17 +7,15 @@ SECRET='CASH-FLOW'
 ENV='dev'
 " > .env
 
-$hook='#! /bin/bash
+# hooks
+echo '#! /bin/bash
 
 npm run test
 
 if [[ $? != 0 ]]; then
   echo "Some of the tests are failing."
   exit 1
-fi'
-
-# hooks
-echo $hook >.git/hooks/pre-commit
+fi' > .git/hooks/pre-commit
 
 chmod +x .git/hooks/pre-commit
 
