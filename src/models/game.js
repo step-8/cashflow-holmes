@@ -72,8 +72,13 @@ class Game {
     return type;
   }
 
-  getCard() {
-    const type = this.#getCardType();
+  getCard(action) {
+    let type = this.#getCardType();
+
+    if (action) {
+      type = action + 'Deal';
+    }
+
     this.currentCard = this.#ratRace.getCard(type);
     return this.#currentCard;
   }
@@ -243,8 +248,10 @@ class Game {
     this.#currentTurn.buyStocks(count);
   }
 
-  sellStocks(count) {
-    this.#currentTurn.sellStocks(count);
+  sellStocks(username, count) {
+    const player = this.getPlayer(username);
+    this.#currentTurn.sellStocks(this.allPlayerDetails, count);
+    player.sellStocks(this.#currentCard, count);
   }
 
   skip() {

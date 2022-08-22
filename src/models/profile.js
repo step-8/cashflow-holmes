@@ -90,6 +90,24 @@ class Profile {
     return 1;
   }
 
+  #findStock(card) {
+    const stock = this.#assets.stocks.find(stock => stock.symbol === card.symbol);
+    return stock;
+  }
+
+  deductStocks(card, count) {
+    const stock = this.#findStock(card);
+    const totalCost = card.price * count;
+
+    if (this.#cash < totalCost) {
+      return 0;
+    }
+
+    stock.count -= count;
+    this.updateCash(totalCost, card.symbol);
+    return 1;
+  }
+
   #recordToLedger(transaction) {
     this.#transactions.unshift(transaction);
   }

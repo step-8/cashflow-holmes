@@ -35,26 +35,12 @@ const buyDeal = (game, type, count) => {
   game.skip();
 };
 
-const sellStocks = (game, type, count) => {
-  if (type === 'stock') {
-    return game.sellStocks(count);
-  }
-
-  game.skip();
-};
-
-const setCard = (game, action) => {
-  const { currentPlayer } = game.state;
-  const card = game.state.ratRace.getCard(`${action}Deal`, currentPlayer);
-  game.currentCard = card;
-};
-
 const cardActionsHandler = (req, res) => {
   const { action, family, type, count } = req.body;
   const { game } = req;
   const deals = ['small', 'big'];
   if (deals.includes(action)) {
-    setCard(game, action);
+    game.getCard(action);
   }
 
   if (action === 'ok') {
@@ -70,7 +56,8 @@ const cardActionsHandler = (req, res) => {
   }
 
   if (action === 'sell') {
-    sellStocks(game, type, count);
+    const { username } = req.session;
+    game.sellStocks(username, count);
   }
   res.end();
 };

@@ -134,8 +134,10 @@ class Turn {
     return this.#currentPlayer.canContinue();
   }
 
-  sellStocks(count) {
-    return;
+  sellStocks(players, count) {
+    this.setTransactionState('deals', 2);
+    this.#log.addLog(this.#playerInfo(), `bought ${count} ${this.#card.symbol} stocks`);
+    this.#turnCompleted = true;
   }
 
   get info() {

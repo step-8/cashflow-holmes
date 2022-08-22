@@ -115,6 +115,10 @@ class Player {
     return this.#profile.deductLoan(amount);
   }
 
+  sellStocks(stock, count) {
+    return this.#profile.deductStocks(stock, count);
+  }
+
   get details() {
     return {
       username: this.#username,

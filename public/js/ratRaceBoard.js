@@ -174,17 +174,17 @@
 
   };
 
-  const buyStocks = (event) => {
+  const buyStocks = (event, action) => {
     const inputDiv = event.target.parentElement.firstChild;
     const stockCount = inputDiv.firstChild.value;
     if (!stockCount) {
       return;
     }
 
-    sendAction('buy', 'deal', 'stock', stockCount);
+    sendAction(action, 'deal', 'stock', stockCount);
   };
 
-  const drawBuyStocks = () => {
+  const drawBuyStocks = (action) => {
     const actions = getElement('.actions');
     const actionsChildren = [...actions.children];
 
@@ -194,7 +194,7 @@
           ['input', { type: 'number', min: '0', placeholder: 'Enter no of stocks' }]],
         ['div', {
           className: 'fa-solid fa-check check',
-          onclick: buyStocks
+          onclick: (event) => buyStocks(event, action)
         }],
         ['div', {
           className: 'fa-solid fa-xmark close',
@@ -215,10 +215,12 @@
       },
       body: `action=${action}&family=${family}&type=${type}&count=${count}`
     };
+    const drawFn = action === 'sell' ? drawSellMessages : drawMessages;
+
     API.cardAction(options);
     API.getGame()
       .then(res => res.json())
-      .then(drawMessages);
+      .then(drawFn);
   };
 
   const performAction = (event, family, type) => {
@@ -226,8 +228,8 @@
     let [, action] = actionDiv.id.split('-');
     action = action === 'donate' ? 'ok' : action;
 
-    if (action === 'buy' && type === 'stock') {
-      drawBuyStocks();
+    if ((action === 'buy' || action === 'sell') && type === 'stock') {
+      drawBuyStocks(action);
       return;
     }
 
@@ -522,7 +524,8 @@
     const messages = {
       deal: {
         0: 'Insufficient balance. Take loan to proceed',
-        1: 'Successfully purchased'
+        1: 'Successfully purchased',
+        2: 'Successfully sold'
       },
       doodad: {
         0: 'Insufficient balance. Take loan to proceed',
@@ -541,7 +544,7 @@
       },
       baby: {
         1: 'You got a new baby'
-      }
+      },
     };
 
     return messages[family][status];
@@ -559,6 +562,7 @@
     }
 
     const { transaction: { family, status }, currentPlayer } = game;
+
     const message = () => {
       if (family === game.currentCard.family) {
         const actionMessage = getMessage(family, status, currentPlayer);
@@ -568,6 +572,13 @@
       API.changeTurn();
     };
 
+    drawForCurrentUser(message)(game);
+  };
+
+  const drawSellMessages = (game) => {
+    const message = () => {
+      createMessage('Successfully sold', classes[1]);
+    };
     drawForCurrentUser(message)(game);
   };
 
