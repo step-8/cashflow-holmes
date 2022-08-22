@@ -11,8 +11,7 @@ const resetTransaction = (req, res) => {
 };
 
 const removeNotification = (game) => {
-  const notifications = game.notifications;
-  game.notifications = notifications.slice(1);
+  game.removeTopNotification();
 };
 
 const acceptCard = (game, family) => {

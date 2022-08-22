@@ -7,7 +7,7 @@ const joinHandler = (req, res, next) => {
     res.sendStatus(400);
     return;
   }
-  
+
   if (game.isLobbyFull()) {
     res.sendStatus(423);
     return;

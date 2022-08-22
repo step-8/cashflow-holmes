@@ -91,7 +91,8 @@ class Game {
     const color = getNextAttrib(this.#players, 'color', this.#colors);
     const profession = getNextAttrib(this.#players, 'profession', this.#professions);
     const profile = new Profile(profession);
-    const player = new Player(username, role, color, profile);
+    profile.setDefaults();
+    const player = new Player(username, role, color, profession, profile);
     this.#players.push(player);
   }
 
@@ -122,17 +123,17 @@ class Game {
     const totalCount = this.#calculateTotalSteps(diceCount);
 
     if (dualDiceCount > 0) {
-      currentPlayer.dualDiceCount = dualDiceCount - 1;
+      currentPlayer.decrementDualDiceCount();
     }
 
-    currentPlayer.rolledDice = true;
+    currentPlayer.changeDiceStatus(true);
     this.#moveCurrentPlayer(totalCount);
     this.addLog(currentPlayer, `rolled ${totalCount}`);
   }
 
   resetDice() {
     const currentPlayer = this.currentPlayer;
-    currentPlayer.rolledDice = false;
+    currentPlayer.changeDiceStatus(false);
   }
 
   start() {
@@ -163,12 +164,12 @@ class Game {
     this.#currentPlayerIndex = this.#currentPlayerIndex % this.#players.length;
     this.#currentTurn.updatePlayer(this.currentPlayer);
     this.resetDice();
-    this.turnCompleted = false;
+    this.#currentTurn.setTurnCompleted(false);
     this.#currentCard = null;
     this.#notifications = [];
 
     if (this.currentPlayer.skippedTurns > 0) {
-      this.currentPlayer.skippedTurns--;
+      this.currentPlayer.decrementSkippedTurns();
       this.addLog(this.currentPlayer, 'skipped turn');
       this.changeTurn();
     }
@@ -198,12 +199,12 @@ class Game {
     this.addLog(this.currentPlayer, `landed on ${toWords(card.family)}`);
   }
 
-  get notifications() {
-    return this.#notifications;
+  addNotification(notification) {
+    this.#notifications.push(notification);
   }
 
-  set notifications(notifications) {
-    this.#notifications = notifications;
+  removeTopNotification() {
+    this.#notifications = this.#notifications.slice(1);
   }
 
   removeNotifier() {
@@ -263,10 +264,6 @@ class Game {
 
   getPlayer(username) {
     return this.#players.find(player => player.details.username === username);
-  }
-
-  set turnCompleted(status) {
-    this.#currentTurn.turnComplete = status;
   }
 
   get currentTurn() {

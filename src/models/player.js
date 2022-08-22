@@ -3,16 +3,18 @@ class Player {
   #color;
   #role;
   #profile;
+  #profession;
   #isRolledDice;
   #currentPosition;
   #lastPosition;
   #dualDiceCount;
   #skippedTurns;
 
-  constructor(username, role, color, profile) {
+  constructor(username, role, color, profession, profile) {
     this.#username = username;
     this.#role = role;
     this.#color = color;
+    this.#profession = profession;
     this.#profile = profile;
     this.#isRolledDice = false;
     this.#currentPosition = 0;
@@ -21,12 +23,16 @@ class Player {
     this.#skippedTurns = 0;
   }
 
-  set rolledDice(status) {
+  changeDiceStatus(status) {
     this.#isRolledDice = status;
   }
 
-  set dualDiceCount(count) {
-    this.#dualDiceCount = count;
+  initializeDualDiceCount() {
+    this.#dualDiceCount = 3;
+  }
+
+  decrementDualDiceCount() {
+    this.#dualDiceCount--;
   }
 
   get dualDiceCount() {
@@ -45,8 +51,12 @@ class Player {
     return this.#currentPosition;
   }
 
-  set skippedTurns(count) {
-    this.#skippedTurns = count;
+  initializeSkippedTurns() {
+    this.#skippedTurns = 2;
+  }
+
+  decrementSkippedTurns() {
+    this.#skippedTurns--;
   }
 
   get skippedTurns() {
@@ -111,6 +121,7 @@ class Player {
       role: this.#role,
       color: this.#color,
       profile: this.#profile.details,
+      profession: this.#profession,
       isRolledDice: this.#isRolledDice,
       lastPosition: this.#lastPosition,
       currentPosition: this.#currentPosition,

@@ -84,7 +84,7 @@ class Turn {
       return;
     }
 
-    this.#currentPlayer.dualDiceCount = 3;
+    this.#currentPlayer.initializeDualDiceCount();
     this.#log.addLog(this.#playerInfo(), `donated $${amount} to charity`);
     this.#turnCompleted = true;
   }
@@ -98,7 +98,7 @@ class Turn {
       return;
     }
 
-    this.#currentPlayer.skippedTurns = 2;
+    this.#currentPlayer.initializeSkippedTurns();
     this.#log.addLog(this.#playerInfo(), 'is downsized');
     this.#log.addLog(this.#playerInfo(), `paid expenses $${amount}`);
     this.#turnCompleted = true;
@@ -118,7 +118,7 @@ class Turn {
     this.#turnCompleted = true;
   }
 
-  set turnComplete(state) {
+  setTurnCompleted(state) {
     this.#turnCompleted = state;
   }
 

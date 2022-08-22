@@ -31,7 +31,7 @@ describe('Game', () => {
 
   it('Should validate the given gameID', () => {
     const game = new Game(1234, 1234, colors, JSON.parse(expectedProfessions));
-    assert.ok(game.isValidGameID(1234));
+    assert.isOk(game.isValidGameID(1234));
   });
 
   it('Should give true if the lobby is full ', () => {
@@ -48,7 +48,7 @@ describe('Game', () => {
   it('Should give false if the lobby is not full ', () => {
     const game = new Game(1234, colors, JSON.parse(expectedProfessions));
     game.addGuest('p1');
-    assert.isOk(!game.isLobbyFull());
+    assert.isNotOk(game.isLobbyFull());
   });
 
   it('Should give the current player', () => {
@@ -56,7 +56,7 @@ describe('Game', () => {
     game.addGuest('p1');
     game.addGuest('p2');
     game.start();
-    assert.ok(game.currentPlayer.username === 'p1');
+    assert.isOk(game.currentPlayer.username === 'p1');
   });
 
   it('Should change the turn to other player', () => {
@@ -73,7 +73,7 @@ describe('Game', () => {
     game.addGuest('p2');
     game.start();
     game.changeTurn();
-    assert.ok(game.currentPlayer.username === 'p2');
+    assert.isOk(game.currentPlayer.username === 'p2');
   });
 
   it('Should change the rolled dice of current player to true', () => {
@@ -83,7 +83,7 @@ describe('Game', () => {
     game.start();
     game.rollDice();
 
-    assert.ok(game.isRolledDice);
+    assert.isOk(game.isRolledDice);
   });
 
   it('Should change the turn to other player in downsized', () => {
@@ -106,7 +106,7 @@ describe('Game', () => {
     game.currentTurn.downsized();
     game.changeTurn();
 
-    assert.ok(game.currentPlayerName === 'p1');
+    assert.isOk(game.currentPlayerName === 'p1');
   });
 
   it('Should return the player matching with user name', () => {
@@ -155,7 +155,7 @@ describe('Game', () => {
       type: 'downsized'
     };
 
-    game.notifications = ['a'];
+    game.addNotification('a');
     assert.isOk(game.state.notifications.length);
   });
 

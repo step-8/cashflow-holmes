@@ -179,6 +179,10 @@ describe('Turn', () => {
       const player = {
         username: 'user',
         color: 'c',
+        dualDiceCount: 0,
+        initializeDualDiceCount: () => {
+          player.dualDiceCount = 3;
+        },
         details: {
           profile: { cashFlow: 100, totalIncome: 100 }
         },
@@ -364,6 +368,10 @@ describe('Turn', () => {
     it('Should deduct expenses from player\'s cash', () => {
       const log = new Log();
       const player = {
+        skippedTurns: 0,
+        initializeSkippedTurns: () => {
+          player.skippedTurns = 2;
+        },
         username: 'user',
         color: 'c',
         details: {
