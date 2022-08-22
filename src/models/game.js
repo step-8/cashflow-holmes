@@ -191,6 +191,43 @@ class Game {
     this.#currentCard.notifications.shift();
   }
 
+  payday() {
+    this.#currentTurn.payday();
+  }
+
+  doodad() {
+    this.#currentTurn.doodad();
+    return this.#currentTurn.canPlayerContinue();
+  }
+
+  charity() {
+    this.#currentTurn.charity();
+  }
+
+  baby() {
+    this.#currentTurn.baby();
+  }
+
+  downsized() {
+    this.#currentTurn.downsized();
+  }
+
+  buyRealEstate() {
+    this.#currentTurn.buyRealEstate();
+  }
+
+  buyStocks(count) {
+    this.#currentTurn.buyStocks(count);
+  }
+
+  sellStocks(count) {
+    this.#currentTurn.sellStocks(count);
+  }
+
+  skip() {
+    this.#currentTurn.skip();
+  }
+
   get currentPlayerDetails() {
     if (this.#currentPlayerIndex === null) {
       return null;

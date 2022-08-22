@@ -24,41 +24,31 @@ const removeNotification = (game) => {
 
 const acceptCard = (game, family) => {
   if (family === 'payday') {
-    game.state.currentTurn.payday();
-    removeNotification(game);
-    return;
+    game.payday();
+    return removeNotification(game);
   }
 
-  if (family === 'doodad') {
-    game.state.currentTurn.doodad();
-    return game.state.currentTurn.canPlayerContinue();
-  }
-
-  if (family === 'charity') {
-    return game.state.currentTurn.charity();
-  }
-
-  if (family === 'baby') {
-    return game.state.currentTurn.baby();
-  }
-
-  if (family === 'downsized') {
-    game.state.currentTurn.downsized();
-    return;
-  }
-
-  return game.state.currentTurn.skip();
+  return game[family]();
 };
 
 const buyDeal = (game, type, count) => {
   if (type === 'realEstate') {
-    return game.state.currentTurn.buyRealEstate();
+    return game.buyRealEstate();
   }
 
   if (type === 'stock') {
-    return game.state.currentTurn.buyStocks(count);
+    return game.buyStocks(count);
   }
-  game.state.currentTurn.skip();
+
+  game.skip();
+};
+
+const sellStocks = (game, type, count) => {
+  if (type === 'stock') {
+    return game.sellStocks(count);
+  }
+
+  game.skip();
 };
 
 const setCard = (game, action) => {
@@ -84,11 +74,11 @@ const cardActionsHandler = (req, res) => {
   }
 
   if (action === 'skip') {
-    game.state.currentTurn.skip();
+    game.skip();
   }
 
   if (action === 'sell') {
-    game.state.currentTurn.skip();
+    sellStocks(game, type, count);
   }
   res.end();
 };

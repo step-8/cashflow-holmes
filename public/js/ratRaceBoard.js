@@ -238,7 +238,7 @@
     deal: {
       deal: ['SMALL', 'BIG'],
       realEstate: ['BUY', 'SKIP'],
-      stock: ['BUY', 'SKIP'],
+      stock: ['BUY', 'SELL', 'SKIP'],
       MLM: ['ROLL', 'SKIP'],
     },
     market: {

@@ -135,6 +135,10 @@ class Turn {
     return this.#currentPlayer.canContinue();
   }
 
+  sellStocks(count) {
+    return;
+  }
+
   get info() {
     return {
       player: this.#currentPlayer,
