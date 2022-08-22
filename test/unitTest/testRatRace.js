@@ -38,7 +38,7 @@ describe('RatRace', () => {
       const ratRace = new RatRace(deck);
       const deals = ['smallDeal', 'bigDeal'];
       const player = { lastPosition: 5, currentPosition: 7 };
-      const notifications = ratRace.getNotifications('', deals, player);
+      const notifications = ratRace.getNotifications('payday', player);
       assert.strictEqual(notifications[0].type, 'payday');
     });
 
@@ -46,7 +46,7 @@ describe('RatRace', () => {
       const ratRace = new RatRace(deck);
       const deals = ['smallDeal', 'bigDeal'];
       const player = { lastPosition: 0, currentPosition: 1 };
-      const notifications = ratRace.getNotifications('', deals, player);
+      const notifications = ratRace.getNotifications('', player);
       assert.deepStrictEqual(notifications, []);
     });
 

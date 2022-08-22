@@ -834,3 +834,25 @@ a {
   align-items: center;
   flex-wrap: wrap;
 }
+
+/* Notifications styles */
+.notify-wrapper {
+  width: 100%;
+  height: 40%;
+  padding: 0.2em;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8vmax;
+}
+
+.notify-msg {
+  width: 90%;
+  height: max-content;
+  text-align: center;
+}
+
+.notify-wrapper .close {
+  width: 10%;
+  height: max-content;
+  text-align: center;
+}

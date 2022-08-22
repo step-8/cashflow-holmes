@@ -6,7 +6,7 @@ const { leaveLobbyHandler } = require('../handlers/leaveLobbyHandler.js');
 const { logoutHandler } = require('../handlers/logout.js');
 const { NOT_FOUND } = require('../utils/pages.js');
 const { takeLoan, payLoan } = require('../handlers/loanHandlers.js');
-const { serveCard, cardActionsHandler, resetTransaction, removeNotifier } = require('../handlers/cardHandlers.js');
+const { serveCard, cardActionsHandler, resetTransaction } = require('../handlers/cardHandlers.js');
 
 const {
   gameBoardHandler,
@@ -42,7 +42,6 @@ const createGameRouter = (router) => {
   router.use('/logout', logoutHandler);
   router.post('/card/card-action', cardActionsHandler);
   router.get('/card/type', serveCard);
-  router.get('/card/remove-notify', removeNotifier);
   router.get('/card/reset-transaction', resetTransaction);
   router.post('/loan/take', takeLoan);
   router.post('/loan/pay', payLoan);

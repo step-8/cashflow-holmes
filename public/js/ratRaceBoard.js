@@ -345,41 +345,56 @@
     });
   };
 
-  const removeNotification = (currentCard, card, game) => {
-    removeCard();
-    const action = () => sendAction('ok', card.family, card.type);
+  const createNotification = (game, family, currentPlayer) => {
+    const message = getMessage(family, 1, currentPlayer);
+    const notificationsScreen = document.querySelector('#interaction-screen');
+
+    let notification = null;
+    const notifyId = setTimeout(() => {
+      notification.remove();
+    }, 5000);
+
+    notification = html(
+      ['div', { className: `notify-wrapper ${family}` },
+        ['div', { className: 'notify-msg' }, message],
+        ['div', {
+          className: 'fa-solid fa-xmark close',
+          onclick: (event) => {
+            notification.remove();
+            clearInterval(notifyId);
+          }
+        }],
+      ]
+    );
+
+
+    const action = () => sendAction('ok', family, family);
     drawForCurrentUser(action)(game);
-    API.removeNotification();
+    notificationsScreen.appendChild(notification);
+
   };
 
-  const drawNotifications = (cardEle, game) => {
-    const { currentPlayer } = game;
-    const currentCard = game.currentCard;
-    const notifications = currentCard.notifications;
-    const card = notifications[0];
+  const drawNotifications = (game) => {
+    const { notifications, currentPlayer } = game;
+    if (!notifications.length) {
+      return game;
+    }
 
-    const newCard = createCard(card, currentPlayer);
-    cardEle.replaceWith(newCard);
+    const createNotifications = () => {
+      notifications.forEach(notification => {
+        createNotification(game, notification.family, currentPlayer);
+      });
+    };
 
-    timeout(() => removeNotification(currentCard, card, game), 2000);
-    return;
+    drawForCurrentUser(createNotifications)(game);
+    return game;
   };
 
   const drawCard = (game) => {
     const { currentCard, currentPlayer } = game;
     const cardEle = getElement('#main-card');
 
-    if (!currentCard) {
-      removeCard();
-      return;
-    }
-
-    if (currentCard.notifications.length) {
-      drawNotifications(cardEle, game);
-      return;
-    }
-
-    if (!currentCard.id) {
+    if (!currentCard || !currentCard.id) {
       removeCard();
       return;
     }
@@ -411,6 +426,7 @@
       }).then(__ => highlightCurrentPlayer(game))
       .then(activateDice)
       .then(drawDice)
+      .then(drawNotifications)
       .then(drawCard);
     return game;
   };
@@ -533,6 +549,9 @@
       },
       downsized: {
         1: 'You\'re downsized'
+      },
+      baby: {
+        1: 'You got a new baby'
       }
     };
 
@@ -545,7 +564,7 @@
   };
 
   const drawMessages = (game) => {
-    if (!game.transaction || !game.currentCard) {
+    if (!game.transaction || !game.currentCard.id) {
       API.changeTurn();
       return;
     }

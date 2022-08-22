@@ -3,15 +3,13 @@ const serveCard = (req, res) => {
   const { currentPlayer, ratRace } = game.state;
   const { currentPosition } = currentPlayer;
   const type = ratRace.getCardType(currentPosition);
-  const card = game.state.ratRace.getCard(type, currentPlayer);
+  const card = game.state.ratRace.getCard(type);
+  const notifications = game.state.ratRace.getNotifications(
+    type, currentPlayer
+  );
   game.currentCard = card;
+  game.notifications = notifications;
   res.json(card);
-};
-
-const removeNotifier = (req, res) => {
-  const { game } = req;
-  game.removeNotifier();
-  res.end();
 };
 
 const resetTransaction = (req, res) => {
@@ -19,9 +17,16 @@ const resetTransaction = (req, res) => {
   res.end();
 };
 
+const removeNotification = (game) => {
+  const notifications = game.state.notifications;
+  game.notifications = notifications.slice(1);
+};
+
 const acceptCard = (game, family) => {
   if (family === 'payday') {
-    return game.state.currentTurn.payday();
+    game.state.currentTurn.payday();
+    removeNotification(game);
+    return;
   }
 
   if (family === 'doodad') {
@@ -90,5 +95,5 @@ const cardActionsHandler = (req, res) => {
 
 
 module.exports = {
-  serveCard, cardActionsHandler, resetTransaction, removeNotifier
+  serveCard, cardActionsHandler, resetTransaction
 };

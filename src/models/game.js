@@ -32,6 +32,7 @@ class Game {
   #ratRace;
   #currentCard;
   #currentTurn;
+  #notifications;
   #log;
 
   constructor(colors, professions) {
@@ -46,6 +47,7 @@ class Game {
     this.#ratRace = new RatRace(deck);
     this.#currentCard = null;
     this.#log = new Log();
+    this.#notifications = [];
     this.#currentTurn = new Turn(this.#currentCard, null, this.#log);
   }
 
@@ -145,6 +147,7 @@ class Game {
     this.resetDice();
     this.turnCompleted = false;
     this.#currentCard = null;
+    this.#notifications = [];
   }
 
   #moveCurrentPlayer(steps) {
@@ -173,6 +176,10 @@ class Game {
       return;
     }
     this.#log.addLog({ username, color }, `landed on ${toWords(card.family)}`);
+  }
+
+  set notifications(notifications) {
+    this.#notifications = notifications;
   }
 
   removeNotifier() {
@@ -217,6 +224,7 @@ class Game {
       currentTurn: this.#currentTurn,
       transaction: this.#currentTurn.info.transaction,
       isTurnEnded: this.#currentTurn.info.state,
+      notifications: this.#notifications,
       logs: this.#log.getAllLogs()
     };
   }

@@ -194,4 +194,18 @@ describe('Game', () => {
     game.rollDice();
     assert.ok(game.state.currentPlayer.username === 'p2');
   });
+
+  it('Should set the notifications to given notifiers', () => {
+    const selectedProfessions = [professions[0], professions[1]];
+    const game = new Game(colors, selectedProfessions);
+    const card = {
+      heading: 'New Card',
+      symbol: 'a',
+      family: 'downsized',
+      type: 'downsized'
+    };
+
+    game.notifications = ['a'];
+    assert.ok(game.state.notifications.length);
+  });
 });

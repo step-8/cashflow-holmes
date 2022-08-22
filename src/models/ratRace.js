@@ -77,7 +77,8 @@ class RatRace {
     return this.#deck[type][0];
   }
 
-  getNotifications(type, deals, currentPlayer) {
+  getNotifications(type, currentPlayer) {
+    const deals = ['smallDeal', 'bigDeal'];
     if (deals.includes(type)) {
       return [];
     }
@@ -99,7 +100,7 @@ class RatRace {
     });
   }
 
-  getCard(type, currentPlayer) {
+  getCard(type) {
     const deals = ['smallDeal', 'bigDeal'];
     const validTypes = [
       ...deals,
@@ -116,14 +117,13 @@ class RatRace {
         id: 'deal',
         heading: 'Choose Big or Small Deal',
         family: 'deal',
-        type: 'deal',
-        notifications: this.getNotifications(type, deals, currentPlayer)
+        type: 'deal'
       };
     }
 
     if (validTypes.includes(type)) {
       return {
-        ...this.pickCard(type), family: getFamily(deals, type), cardName: type, notifications: this.getNotifications(type, deals, currentPlayer)
+        ...this.pickCard(type), family: getFamily(deals, type), cardName: type
       };
     }
     return;
