@@ -59,13 +59,6 @@ class Game {
     this.#diceValues = [randomDiceValue(), randomDiceValue()];
     const currentPlayer = this.currentPlayer;
     const dualDiceCount = currentPlayer.dualDiceCount;
-    const skippedTurns = currentPlayer.skippedTurns; // Remove this afterwards
-
-    if (skippedTurns > 0) {
-      currentPlayer.skippedTurns--;
-      this.changeTurn();
-      return;
-    }
 
     let totalCount = this.#diceValues[0];
     if (+dice === 2) {
@@ -142,12 +135,16 @@ class Game {
   changeTurn() {
     ++this.#currentPlayerIndex;
     this.#currentPlayerIndex = this.#currentPlayerIndex % this.#players.length;
-    const currentPlayer = this.currentPlayer;
-    this.#currentTurn.updatePlayer(currentPlayer);
+    this.#currentTurn.updatePlayer(this.currentPlayer);
     this.resetDice();
     this.turnCompleted = false;
     this.#currentCard = null;
     this.#notifications = [];
+
+    if (this.currentPlayer.skippedTurns > 0) {
+      this.currentPlayer.skippedTurns--;
+      this.changeTurn();
+    }
   }
 
   #moveCurrentPlayer(steps) {

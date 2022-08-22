@@ -94,6 +94,7 @@ class Turn {
     const amount = this.#currentPlayer.details.profile.totalExpenses;
     const status = this.#currentPlayer.downsized();
     this.setTransactionState('downsized', status);
+
     if (!status) {
       return;
     }

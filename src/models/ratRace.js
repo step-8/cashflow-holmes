@@ -54,7 +54,7 @@ class RatRace {
       'baby': [20]
     };
     this.#deck = deck;
-    this.#notifications = ['payday', 'downsized', 'baby'];
+    this.#notifications = ['payday', 'baby'];
   }
 
   getCardType(tilePosition) {
@@ -89,7 +89,7 @@ class RatRace {
     );
 
     const crossers = notificationsTiles.filter(crosser => crosser === 'payday');
-    const nonCrossers = ['downsized', 'baby'];
+    const nonCrossers = ['baby'];
     const currentCardType = this.getCardType(currentPosition);
     if (nonCrossers.includes(currentCardType)) {
       crossers.push(currentCardType);

@@ -263,6 +263,7 @@
   };
 
   const createActions = (family, type) => {
+    console.log(family, type);
     const actionTexts = actions[family][type];
     return html(['div', { className: 'actions-wrapper' }, ...actionTexts.map(action => {
       return ['div',
@@ -507,7 +508,7 @@
       }
 
       if (player.skippedTurns > 0) {
-        const downsizedPosition = document.querySelector(`#downsized-${player.skippedTurns}`);
+        const downsizedPosition = document.querySelector(`#rat-tile-12-${player.skippedTurns}`);
         downsizedPosition.append(playerIcon);
         return;
       }
@@ -548,6 +549,7 @@
         1: `Received payday of ${cashFlow}.`
       },
       downsized: {
+        0: 'Insufficient balance. Take loan to proceed',
         1: 'You\'re downsized'
       },
       baby: {

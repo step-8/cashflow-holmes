@@ -90,7 +90,7 @@ describe('Game', () => {
     assert.ok(game.state.currentPlayer.isRolledDice);
   });
 
-  it('Should change the turn to other player', () => {
+  it('Should change the turn to other player in downsized', () => {
     const selectedProfessions = [professions[0], professions[1]];
     const game = new Game(colors, selectedProfessions);
     const card = {
@@ -108,7 +108,7 @@ describe('Game', () => {
     game.currentCard = card;
     game.currentTurn.payday();
     game.currentTurn.downsized();
-    game.rollDice();
+    game.changeTurn();
     assert.ok(game.state.currentPlayer.username === 'p1');
   });
 
@@ -143,7 +143,7 @@ describe('Game', () => {
     assert.ok(game.state.currentPlayer.skippedTurns === 2);
   });
 
-  it('Should decrement the player skip turns value', () => {
+  it('Should allow player to play after skipping 2 of their chances', () => {
     const selectedProfessions = [professions[0], professions[1]];
     const game = new Game(colors, selectedProfessions);
     const card = {
@@ -161,38 +161,11 @@ describe('Game', () => {
     game.currentCard = card;
     game.currentTurn.payday();
     game.currentTurn.downsized();
-    game.rollDice();
-    game.rollDice();
     game.changeTurn();
-    assert.ok(game.state.currentPlayer.skippedTurns === 1);
-  });
-
-  it('Should allow player to continue the game after missing 2 chances', () => {
-    const selectedProfessions = [professions[0], professions[1]];
-    const game = new Game(colors, selectedProfessions);
-    const card = {
-      heading: 'New Card',
-      symbol: 'a',
-      family: 'downsized',
-      type: 'downsized'
-    };
-
-    game.assignGameID(1234);
-    game.addPlayer('p1', 'host');
-    game.addPlayer('p2', 'guest');
-    game.start();
-    game.changeTurn();
-    game.currentCard = card;
-    game.currentTurn.payday();
-    game.currentTurn.downsized();
-    game.rollDice();
     game.rollDice();
     game.changeTurn();
     game.rollDice();
-    game.rollDice();
-    game.changeTurn();
-    game.rollDice();
-    assert.ok(game.state.currentPlayer.username === 'p2');
+    assert.strictEqual(game.state.currentPlayer.skippedTurns, 0);
   });
 
   it('Should set the notifications to given notifiers', () => {
