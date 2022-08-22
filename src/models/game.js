@@ -44,7 +44,6 @@ class Game {
     this.#currentPlayerIndex = null;
     this.#diceValues = [1, 1];
     this.#ratRace = new RatRace(deck);
-    this.#currentCard = null;
     this.#log = new Log();
     this.#notifications = [];
     this.#currentTurn = new Turn(this.#currentCard, null, this.#log);
@@ -192,10 +191,7 @@ class Game {
 
   set currentCard(card) {
     this.#currentCard = card;
-    const currentPlayer = this.currentPlayer;
     this.#currentTurn.updateCard(card);
-
-    const { username, color } = currentPlayer.details;
 
     const cards = ['smallDeal', 'bigDeal'];
     if (cards.includes(card.cardName)) {

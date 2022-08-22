@@ -10,7 +10,6 @@ class Turn {
     this.#currentPlayer = currentPlayer;
     this.#turnCompleted = false;
     this.#log = log;
-    this.#currentTransaction = null;
   }
 
   #playerInfo() {

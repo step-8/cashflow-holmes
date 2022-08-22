@@ -56,10 +56,6 @@ class Player {
     return this.#skippedTurns;
   }
 
-  get username() {
-    return this.#username;
-  }
-
   get color() {
     return this.#color;
   }
