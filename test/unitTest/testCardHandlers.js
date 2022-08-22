@@ -1,5 +1,5 @@
 const { assert } = require('chai');
-const { acceptCard, buyDeal, sellStocks } = require('../../src/handlers/cardHandlers.js');
+const { acceptCard, buyDeal } = require('../../src/handlers/cardHandlers.js');
 
 describe('accept card', () => {
   const game = {
@@ -42,21 +42,5 @@ describe('buy deal', () => {
 
   it('Should invoke skip event in game if no event matched', () => {
     buyDeal(game, '', count);
-  });
-});
-
-describe('sell stocks', () => {
-  const game = {
-    sellStocks: (count) => count,
-    skip: () => assert.isOk(1),
-  };
-  const count = 0;
-
-  it('Should invoke sellStocks in game with count ', () => {
-    assert.strictEqual(sellStocks(game, 'stock', count), 0);
-  });
-
-  it('Should invoke skip event in game if no event matched', () => {
-    sellStocks(game, '', count);
   });
 });

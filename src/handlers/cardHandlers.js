@@ -64,5 +64,5 @@ const cardActionsHandler = (req, res) => {
 
 
 module.exports = {
-  serveCard, cardActionsHandler, resetTransaction, acceptCard, buyDeal, sellStocks
+  serveCard, cardActionsHandler, resetTransaction, acceptCard, buyDeal
 };
