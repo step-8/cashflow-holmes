@@ -332,6 +332,14 @@ a {
   grid-row: 6;
 }
 
+#rat-tile-12-1 {
+  background-image: url('/images/ratrace/one.png');
+}
+
+#rat-tile-12-2 {
+  background-image: url('/images/ratrace/two.png');
+}
+
 .game-area {
   grid-row: 2/6;
   grid-column: 2/8;
@@ -835,6 +843,10 @@ a {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  background-color: var(--others-bg);
+  background-size: 30%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* Notifications styles */

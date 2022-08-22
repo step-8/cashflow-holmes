@@ -143,6 +143,7 @@ class Game {
 
     if (this.currentPlayer.skippedTurns > 0) {
       this.currentPlayer.skippedTurns--;
+      this.addLog(this.currentPlayer, 'skipped turn');
       this.changeTurn();
     }
   }
