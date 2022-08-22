@@ -105,7 +105,7 @@ class Turn {
   }
 
   baby() {
-    let message = 'you already have 3 babies';
+    let message = 'already have 3 babies';
     if (this.#currentPlayer.baby()) {
       message = 'got new baby';
     }

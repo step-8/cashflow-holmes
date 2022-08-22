@@ -125,7 +125,7 @@ class Profile {
   }
 
   addLoan(amount) {
-    this.#cash += amount;
+    this.updateCash(amount, 'Took loan');
     this.#liabilities.bankLoan += amount;
     this.#expenses.bankLoanPayment = this.#liabilities.bankLoan / 10;
   }
@@ -139,7 +139,7 @@ class Profile {
       return false;
     }
 
-    this.#cash -= amount;
+    this.updateCash(-amount, 'Paid loan');
     this.#liabilities.bankLoan -= amount;
     this.#expenses.bankLoanPayment = this.#liabilities.bankLoan / 10;
     return true;

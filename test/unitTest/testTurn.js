@@ -294,7 +294,7 @@ describe('Turn', () => {
 
       assert.ok(turn.info.state);
       assert.deepStrictEqual(log.getAllLogs(), [
-        { username: 'user', color: 'c', message: 'you already have 3 babies' }
+        { username: 'user', color: 'c', message: 'already have 3 babies' }
       ]);
     });
   });

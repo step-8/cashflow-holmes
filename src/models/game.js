@@ -158,6 +158,10 @@ class Game {
     return this.#gameID === gameID;
   }
 
+  addLog(player, message) {
+    this.#log.addLog(player.details, message);
+  }
+
   isLobbyFull() {
     return this.#maxPlayers === this.#players.length;
   }

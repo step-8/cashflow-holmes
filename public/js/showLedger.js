@@ -11,11 +11,11 @@ const findPlayer = (players, playerName) => {
 
 const transactionItem = ({ currentCash, amount, description, totalCash }) => {
   return ['div', { className: 'ledger-entry' },
-    ['div', { style: 'color:blue' }, addDollar(currentCash)],
+    ['div', {}, addDollar(currentCash)],
     ['div', { style: `color:${amount >= 0 ? 'green' : 'red'}` },
       addDollar(Math.abs(amount))],
     ['div', {}, description],
-    ['div', { style: 'color:blue' }, addDollar(totalCash)],
+    ['div', {}, addDollar(totalCash)],
   ];
 };
 
