@@ -333,18 +333,6 @@
     return;
   };
 
-  const timeout = (fn, time) => {
-    return new Promise((res, rej) => {
-      setTimeout(() => {
-        try {
-          res(fn());
-        } catch (err) {
-          rej(err);
-        }
-      }, time);
-    });
-  };
-
   const createNotification = (game, family, currentPlayer) => {
     const message = getMessage(family, 1, currentPlayer);
     const notificationsScreen = document.querySelector('#interaction-screen');

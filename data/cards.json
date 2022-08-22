@@ -38,6 +38,27 @@
       ]
     },
     {
+      "id": "lottery01",
+      "type": "lottery",
+      "symbol": "lottery",
+      "heading": "Sister-In-Law borrows Money",
+      "description": "Sister-in-law is downsized.Needs $5000 to make house payment. She promises to pay you back $10000 after she finds a new job.If you choose to help, pay $5000 and roll die again",
+      "rule": "Die = 1-3, She never pays you back and you lost $5000 \n Die = 4-6, She pays you back $10000, but family get-togethers are still awkward",
+      "cost": 5000,
+      "outcome": {
+        "failure": [
+          1,
+          2,
+          3
+        ],
+        "success": [
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
       "id": "smallDealMLM01",
       "type": "MLM",
       "heading": "Multi-Level Marketing Buy-in",
