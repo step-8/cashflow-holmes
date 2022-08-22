@@ -371,7 +371,7 @@
 
     const action = () => sendAction('ok', family, family);
     drawForCurrentUser(action)(game);
-    notificationsScreen.appendChild(notification);
+    notificationsScreen.append(notification);
 
   };
 
