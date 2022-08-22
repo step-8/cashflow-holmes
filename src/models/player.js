@@ -87,6 +87,7 @@ class Player {
   buyLottery(cost) {
     const status = this.#profile.lottery(cost);
     if (status) {
+      this.changeDiceStatus(false);
       this.#boughtLottery = true;
     }
     return status;
