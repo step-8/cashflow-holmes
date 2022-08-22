@@ -215,4 +215,21 @@ describe('Profile', () => {
       assert.ok(actual);
     });
   });
+
+  describe('addBaby', () => {
+    it('Should add baby to player profile', () => {
+      const profile = new Profile(professions[2]);
+      profile.setDefaults();
+      assert.ok(profile.addBaby());
+    });
+
+    it('Should not add baby when player have 3 babies', () => {
+      const profile = new Profile(professions[2]);
+      profile.setDefaults();
+      profile.addBaby();
+      profile.addBaby();
+      profile.addBaby();
+      assert.ok(!profile.addBaby());
+    });
+  });
 });

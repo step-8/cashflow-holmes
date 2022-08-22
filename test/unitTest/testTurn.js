@@ -1,5 +1,6 @@
 const { Turn } = require('../../src/models/turn.js');
 const { Log } = require('../../src/models/log.js');
+const { Player } = require('../../src/models/player.js');
 const assert = require('assert');
 
 describe('Turn', () => {
@@ -251,6 +252,50 @@ describe('Turn', () => {
         turn.info.transaction,
         { family: 'deal', status: 0 }
       );
+    });
+  });
+
+  describe('baby', () => {
+    const card = {
+      heading: 'New Card',
+      symbol: 'a',
+      family: 'baby',
+      type: 'baby'
+    };
+
+    it('Should add baby to the player', () => {
+      const log = new Log();
+      const player = {
+        details: { username: 'user', color: 'c', profile: { cashFlow: 100, totalIncome: 100, totalExpenses: 100 } },
+        baby: successful
+      };
+
+      const turn = new Turn(card, player, log);
+      turn.baby();
+
+      assert.ok(turn.info.state);
+      assert.deepStrictEqual(
+        log.getAllLogs(),
+        [
+          { username: 'user', color: 'c', message: 'got new baby' }
+        ]
+      );
+    });
+
+    it('Should not add baby when there are 3 babies', () => {
+      const log = new Log();
+      const player = {
+        details: { username: 'user', color: 'c', profile: { cashFlow: 100, totalIncome: 100, totalExpenses: 100 } },
+        baby: failure
+      };
+
+      const turn = new Turn(card, player, log);
+      turn.baby();
+
+      assert.ok(turn.info.state);
+      assert.deepStrictEqual(log.getAllLogs(), [
+        { username: 'user', color: 'c', message: 'you already have 3 babies' }
+      ]);
     });
   });
 

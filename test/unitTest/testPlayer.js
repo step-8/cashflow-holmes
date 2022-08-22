@@ -85,4 +85,21 @@ describe('Player', () => {
     player.doodad(2200);
     assert.ok(!player.payLoan(1200));
   });
+
+  it('should add baby to the player', () => {
+    const player = new Player('p3', 'guest');
+    player.assignProfession(professions[1]);
+    player.createProfile();
+    assert.ok(player.baby());
+  });
+
+  it('should not add baby when there are 3 babies', () => {
+    const player = new Player('p3', 'guest');
+    player.assignProfession(professions[1]);
+    player.createProfile();
+    player.baby();
+    player.baby();
+    player.baby();
+    assert.ok(!player.baby());
+  });
 });

@@ -105,8 +105,11 @@ class Turn {
   }
 
   baby() {
-    this.#currentPlayer.baby();
-    this.#log.addLog(this.#playerInfo(), 'got new baby');
+    let message = 'you already have 3 babies';
+    if (this.#currentPlayer.baby()) {
+      message = 'got new baby';
+    }
+    this.#log.addLog(this.#playerInfo(), message);
     this.#turnCompleted = true;
   }
 
