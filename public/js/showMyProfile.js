@@ -74,13 +74,17 @@ const createExpansionHeader = ({ username, profession, color }) => {
   ];
 };
 
-const createExpensesTable = (expenses) => {
+const createExpensesTable = (expenses, babies) => {
   const table = ['table', {}];
   const wrapper = ['tbody', {}];
 
   const expensesDetails = Object.entries(expenses);
 
   expensesDetails.forEach(([key, val]) => {
+    if (key === 'perChildExpense') {
+      key = `${key}: ${val} X (# of Children): ${babies}`;
+      val = babies * val;
+    }
     const expenseHeader = ['th', {}, camelToCapitalize(key)];
     const expenseValue = ['td', {}, val];
     const row = ['tr', {}, expenseHeader, expenseValue];
@@ -236,7 +240,7 @@ const generateProfile = (game, username) => {
             ['div', { className: 'expenses' },
               ['h3', {}, 'Expenses'],
               ['div', { className: 'expenses-wrapper' },
-                createExpensesTable(profile.expenses)
+                createExpensesTable(profile.expenses, profile.babies)
               ],
               ['div', { className: 'total-expenses-wrapper' },
                 ['div', {}, 'Total Expenses'],

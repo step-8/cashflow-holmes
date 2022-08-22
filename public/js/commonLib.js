@@ -44,9 +44,7 @@ const getElement = (selector) => {
   return document.querySelector(selector);
 };
 
-const addDollar = (text) => {
-  return `$ ${text}`;
-};
+const addDollar = (text) => `$${text}`;
 
 const drawForCurrentUser = (fn) => (game) => {
   API.userInfo()
