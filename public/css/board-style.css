@@ -872,3 +872,33 @@ a {
   height: max-content;
   text-align: center;
 }
+
+.fade-payday {
+  background-image: linear-gradient(to right, var(--payday-bg), gold);
+}
+
+.fade-baby {
+  background-image: linear-gradient(to right, var(--others-bg), #8461dd);
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  animation-delay: 2s;
+  background-size: 200% 200%;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 100%;
+  }
+
+  50% {
+    opacity: 50%;
+  }
+
+  100% {
+    opacity: 0%;
+  }
+}

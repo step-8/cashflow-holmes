@@ -356,7 +356,7 @@
     }, 5000);
 
     notification = html(
-      ['div', { className: `notify-wrapper ${family}` },
+      ['div', { className: `notify-wrapper ${family} fade-${family} fade` },
         ['div', { className: 'notify-msg' }, message],
         ['div', {
           className: 'fa-solid fa-xmark close',
@@ -367,7 +367,6 @@
         }],
       ]
     );
-
 
     const action = () => sendAction('ok', family, family);
     drawForCurrentUser(action)(game);
