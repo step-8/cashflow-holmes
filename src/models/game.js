@@ -122,7 +122,8 @@ class Game {
   }
 
   #getDiceValues() {
-    return [randomDiceValue(), randomDiceValue()];
+    // return [randomDiceValue(), randomDiceValue()];
+    return [1, randomDiceValue()];
   }
 
   reRollDice() {

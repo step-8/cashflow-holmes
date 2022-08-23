@@ -649,7 +649,6 @@
     const rollDiceMsg = html(['div', { className: 'warning' }, 'Roll the dice.']);
     actions.replaceChildren('');
     actions.append(rollDiceMsg);
-    console.log(actions);
   };
 
   const drawScreen = (game, logs) => {
