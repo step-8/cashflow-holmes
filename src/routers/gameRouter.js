@@ -20,6 +20,7 @@ const {
   getUserInfoHandler,
   rollDiceHandler,
   changeTurnHandler,
+  reRollHandler,
 } = require('../handlers/gameHandlers.js');
 
 const createGameRouter = (router) => {
@@ -35,6 +36,7 @@ const createGameRouter = (router) => {
   router.get('/cancel-game', cancelGameHandler);
   router.get('/get-user-info', getUserInfoHandler);
   router.get('/roll-dice/:die', rollDiceHandler);
+  router.get('/reroll', reRollHandler);
   router.get('/change-turn', changeTurnHandler);
   router.get('/show-profession', showProfessionHandler);
   router.get('/game-board', gameBoardHandler);

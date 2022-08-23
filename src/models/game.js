@@ -121,8 +121,22 @@ class Game {
     this.#log.addLog(player, message);
   }
 
+  #getDiceValues() {
+    return [randomDiceValue(), randomDiceValue()];
+  }
+
+  reRollDice() {
+    this.#diceValues = this.#getDiceValues();
+    const diceValue = this.#diceValues[0];
+    const currentPlayer = this.currentPlayer;
+
+    this.addLog(currentPlayer, `rolled ${diceValue}`);
+    this.#currentTurn.lottery(diceValue, this.#currentCard);
+    currentPlayer.changeDiceStatus(true);
+  }
+
   rollDice(diceCount) {
-    this.#diceValues = [randomDiceValue(), randomDiceValue()];
+    this.#diceValues = this.#getDiceValues();
     const currentPlayer = this.currentPlayer;
     const dualDiceCount = currentPlayer.dualDiceCount;
     const totalCount = this.#calculateTotalSteps(diceCount);

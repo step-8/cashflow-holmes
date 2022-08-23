@@ -45,7 +45,14 @@
     return diceVals[dice];
   };
 
-  const rollDice = () => {
+  const rollDice = (game) => {
+    const { currentPlayer: { canReRoll } } = game;
+    if (canReRoll) {
+      API.reRollDice(1);
+      API.changeTurn();
+      return;
+    }
+
     const diceCount = getSelectedDice();
     API.rollDice(diceCount)
       .then(API.getGame()
@@ -125,7 +132,7 @@
           diceBox.style.opacity = 1;
           diceBox.style.border = '2px solid black';
           diceBox.style.zIndex = 1;
-          diceBox.onclick = rollDice;
+          diceBox.onclick = () => rollDice(game);
           drawForCurrentUser(drawToggle)(game);
         } else {
           diceBox.style.opacity = 0.5;
@@ -560,6 +567,10 @@
       },
       baby: {
         1: 'You got a new baby'
+      },
+      'money-lottery': {
+        0: 'You lost the lottery',
+        1: 'You won the lottery'
       },
     };
 

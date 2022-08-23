@@ -120,7 +120,7 @@ describe('Profile', () => {
     it('Should deduct lottery amount from the cash on successful purchase', () => {
       const profile = new Profile(JSON.parse(profession));
       profile.setDefaults();
-      profile.lottery(100);
+      profile.buyLottery(100);
       assert.strictEqual(profile.details.cash, 8300);
     });
   });
@@ -129,7 +129,7 @@ describe('Profile', () => {
     it('Should not deduct lottery amount from the cash on unsuccessful purchase', () => {
       const profile = new Profile(JSON.parse(profession));
       profile.setDefaults();
-      profile.lottery(100000);
+      profile.buyLottery(100000);
       assert.strictEqual(profile.details.cash, 8400);
     });
   });

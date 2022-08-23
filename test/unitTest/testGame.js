@@ -145,6 +145,33 @@ describe('Game', () => {
     assert.strictEqual(game.currentPlayer.skippedTurns, 0);
   });
 
+  it('Should allow player to roll again after buying lottery', () => {
+    const selectedProfessions = JSON.parse(expectedProfessions);
+    const game = new Game(1234, colors, selectedProfessions);
+    const card = {
+      heading: 'New Card',
+      symbol: 'lottery',
+      family: 'deal',
+      type: 'lottery',
+      lottery: 'money',
+      success: [4, 5, 6],
+      outcome: {
+        success: 10000,
+        failure: -5000,
+      }
+    };
+
+    game.assignHost('p1');
+    game.addGuest('p2');
+    game.start();
+
+    game.changeTurn();
+    game.currentCard = card;
+    game.reRollDice();
+
+    assert.isOk(game.currentTurn.info.state);
+  });
+
   it('Should set the notifications to given notifiers', () => {
     const selectedProfessions = JSON.parse(expectedProfessions);
     const game = new Game(1234, colors, selectedProfessions);

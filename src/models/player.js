@@ -85,7 +85,7 @@ class Player {
   }
 
   buyLottery(cost) {
-    const status = this.#profile.lottery(cost);
+    const status = this.#profile.buyLottery(cost);
     if (status) {
       this.changeDiceStatus(false);
       this.#canReRoll = true;
@@ -127,6 +127,10 @@ class Player {
 
   sellStocks(stock, count) {
     return this.#profile.deductStocks(stock, count);
+  }
+
+  moneyLottery(amount) {
+    return this.#profile.updateCash(amount, 'lottery');
   }
 
   get details() {

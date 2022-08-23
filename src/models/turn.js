@@ -124,6 +124,43 @@ class Turn {
     this.#turnCompleted = true;
   }
 
+  #moneyLottery(amount, status) {
+    const messages = {
+      0: `Player lost ${amount}`,
+      1: `Player won ${amount}`
+    };
+    this.#currentPlayer.moneyLottery(amount);
+    this.#log.addLog(this.#playerInfo(), messages[status]);
+    this.setTransactionState('money-lottery', status);
+    this.#turnCompleted = true;
+  }
+
+  #decideMoneyLottery(diceValue) {
+    const { success, outcome } = this.#card;
+    if (success.includes(diceValue)) {
+      const amount = outcome['success'];
+      this.#moneyLottery(amount, 1);
+      return;
+    }
+
+    const amount = outcome['failure'];
+    this.#moneyLottery(amount, 0);
+  }
+
+  #decideLottery(diceValue) {
+    const { lottery } = this.#card;
+
+    if (lottery === 'money') {
+      this.#decideMoneyLottery(diceValue);
+    }
+
+    return;
+  }
+
+  lottery(diceValue) {
+    this.#decideLottery(diceValue);
+  }
+
   skip() {
     this.#log.addLog(this.#playerInfo(), `skipped ${this.#card.symbol}`);
     this.#turnCompleted = true;

@@ -1,5 +1,10 @@
 const { RAT_RACE_BOARD, GUEST_LOBBY, MAIN_MENU_PAGE, PROFESSION_CARD } = require('../utils/pages.js');
 
+const reRollHandler = (req, res) => {
+  req.game.reRollDice();
+  res.end();
+};
+
 const serveMainMenu = (req, res) => {
   const { username } = req.session;
   const htmlPage = MAIN_MENU_PAGE.replace('__USERNAME__', username);
@@ -77,5 +82,6 @@ module.exports = {
   removeGameIdHandler,
   getUserInfoHandler,
   rollDiceHandler,
-  changeTurnHandler
+  changeTurnHandler,
+  reRollHandler
 };

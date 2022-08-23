@@ -144,7 +144,7 @@ class Profile {
     return 1;
   }
 
-  lottery(cost) {
+  buyLottery(cost) {
     if (this.#cash < cost) {
       return 0;
     }

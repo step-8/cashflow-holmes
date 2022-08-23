@@ -13,6 +13,7 @@ const API = {
   getGame: () => fetchReq('/api/game'),
   changeTurn: () => fetchReq('/change-turn'),
   rollDice: (diceCount) => fetchReq(`/roll-dice/${diceCount}`),
+  reRollDice: (diceCount) => fetchReq('/reroll'),
   getProfession: () => fetchReq('/api/profession'),
   resetTransaction: () => fetchReq('/card/reset-transaction'),
   takeLoan: (options) => fetchReq('/loan/take', options),
