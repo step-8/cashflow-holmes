@@ -662,7 +662,7 @@
     drawPlayerPosition(game);
     drawPlayersList(game);
     addLogs(game, logs);
-    createLedgerWindow(game);
+    createExpansionWindows(game);
     drawLottery(game);
   };
 

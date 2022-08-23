@@ -3,9 +3,7 @@ const findOtherPayers = (players, username) => {
 };
 
 const createOtherPlayerProfile = (username) => {
-  API.getGame()
-    .then(res => res.json())
-    .then(game => generateProfile(game, username));
+  showWindow('otherPlayerProfiles', username);
 };
 
 const createOtherPlayersContainer = (players) => {
@@ -26,8 +24,7 @@ const createOtherPlayersContainer = (players) => {
   return playersWrapper;
 };
 
-const generateOtherPlayers = (game, username) => {
-  const { players } = game;
+const generateOtherPlayers = (players, username) => {
   const player = findPlayer(players, username);
   const otherPlayers = findOtherPayers(players, username);
 
@@ -38,21 +35,5 @@ const generateOtherPlayers = (game, username) => {
       createCloseButton()
     ];
 
-  const otherPlayersEle = html(otherPlayersTemplate);
-  showWindow(otherPlayersEle);
-};
-
-const createOtherPlayers = (game) => {
-  API.userInfo()
-    .then(res => res.json())
-    .then(userInfo => generateOtherPlayers(game, userInfo.username));
-
-  return game;
-};
-
-const showOtherPlayers = () => {
-  API.getGame()
-    .then(res => res.json())
-    .then(createOtherPlayers)
-    .then(blurBackground);
+  return html(otherPlayersTemplate);
 };

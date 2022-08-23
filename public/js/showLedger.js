@@ -54,31 +54,31 @@ const ledgerWindow = (profile, color, username, profession) => {
   ];
 };
 
-const createPlayerLedger = ({ profile, color, username, profession }) => {
+const createExpansionScreens = ({ players }, username) => {
+  const player = findPlayer(players, username);
+  const { profile, color, profession } = player;
+
   expansionWindowScreens.ledger = html(
     ledgerWindow(profile, color, username, profession)
   );
+
+  expansionWindowScreens.myProfile = generateProfile(player);
+
+  expansionWindowScreens.otherPlayersList =
+    generateOtherPlayers(players, username);
+  expansionWindowScreens.otherPlayerProfiles = {};
+
+  players.forEach(player => {
+    const { username } = player;
+    expansionWindowScreens.otherPlayerProfiles[username] =
+      generateProfile(player);
+  });
 };
 
-const createLedgerWindow = (game) => {
+const createExpansionWindows = (game) => {
   API.userInfo()
     .then(res => res.json())
     .then(({ username }) => {
-      const player = findPlayer(game.players, username);
-      createPlayerLedger(player);
+      createExpansionScreens(game, username);
     });
-};
-
-const showMyLedger = () => {
-  const placeHolder = getElement('.expansion-window-screen');
-  placeHolder.replaceChildren('');
-  placeHolder.appendChild(expansionWindowScreens.ledger);
-
-  placeHolder.classList.remove('close-window');
-  placeHolder.classList.remove('inactive');
-  placeHolder.classList.add('expand-window');
-  placeHolder.classList.add('active');
-  placeHolder.style.visibility = 'visible';
-
-  blurBackground();
 };

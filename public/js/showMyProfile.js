@@ -25,17 +25,21 @@ const createThreeColumnRow = (value1, value2, value3) => {
   return row;
 };
 
-const showWindow = (windowElements) => {
+const showWindow = (screenName, sub) => {
   const expansionEle = getElement('.expansion-window-screen');
+
+  const screen = expansionWindowScreens[screenName];
+  const windowScreen = sub ? screen[sub] : screen;
 
   expansionEle.classList.remove('close-window');
   expansionEle.classList.remove('inactive');
   expansionEle.classList.add('expand-window');
   expansionEle.classList.add('active');
   expansionEle.replaceChildren('');
-  expansionEle.appendChild(windowElements);
+  expansionEle.appendChild(windowScreen);
 
   expansionEle.style.visibility = 'visible';
+  blurBackground();
 };
 
 const closeExpansion = () => {
@@ -212,9 +216,7 @@ const createLiabilitiesTable = ({ liabilities }) => {
   return wrapper;
 };
 
-const generateProfile = (game, username) => {
-  const { players } = game;
-  const player = findPlayer(players, username);
+const generateProfile = (player) => {
   const { profile } = player;
   const myProfileTemplate =
     ['div', { id: 'profile', className: 'profile-wrapper' },
@@ -276,21 +278,5 @@ const generateProfile = (game, username) => {
       createCloseButton()
     ];
 
-  const myProfile = html(myProfileTemplate);
-  showWindow(myProfile);
-};
-
-const createMyProfile = (game) => {
-  API.userInfo()
-    .then(res => res.json())
-    .then(userInfo => generateProfile(game, userInfo.username));
-
-  return game;
-};
-
-const showMyProfile = () => {
-  API.getGame()
-    .then(res => res.json())
-    .then(createMyProfile)
-    .then(blurBackground);
+  return html(myProfileTemplate);
 };
