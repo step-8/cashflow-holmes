@@ -147,7 +147,7 @@ class Turn {
 
   sellStocks(players, count) {
     this.setTransactionState('deals', 2);
-    this.#log.addLog(this.#playerInfo(), `bought ${count} ${this.#card.symbol} stocks`);
+    this.#log.addLog(this.#playerInfo(), `sold ${count} ${this.#card.symbol} stocks`);
     this.#turnCompleted = true;
   }
 

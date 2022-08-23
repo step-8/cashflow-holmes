@@ -99,7 +99,7 @@ class Profile {
     const stock = this.#findStock(card);
     const totalCost = card.price * count;
 
-    if (this.#cash < totalCost) {
+    if (stock.count < count) {
       return 0;
     }
 

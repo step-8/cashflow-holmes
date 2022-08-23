@@ -254,8 +254,14 @@ class Game {
 
   sellStocks(username, count) {
     const player = this.getPlayer(username);
-    this.#currentTurn.sellStocks(this.allPlayerDetails, count);
-    player.sellStocks(this.#currentCard, count);
+    let status = 2;
+    if (player.sellStocks(this.#currentCard, count)) {
+      status = 3;
+      this.#log.addLog(player, `sold ${count} ${this.#currentCard.symbol} stocks`);
+      return this.#currentTurn.setTransactionState('deal', status);
+    }
+    this.#currentTurn.setTransactionState('deal', status);
+
   }
 
   skip() {

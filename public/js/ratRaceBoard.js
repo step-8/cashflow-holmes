@@ -215,12 +215,11 @@
       },
       body: `action=${action}&family=${family}&type=${type}&count=${count}`
     };
-    const drawFn = action === 'sell' ? drawSellMessages : drawMessages;
 
     API.cardAction(options);
     API.getGame()
       .then(res => res.json())
-      .then(drawFn);
+      .then(drawMessages);
   };
 
   const performAction = (event, family, type) => {
@@ -265,9 +264,12 @@
     }
   };
 
-  const createActions = (family, type) => {
+  const createActions = (family, type, stock) => {
     const actionTexts = actions[family][type];
     return html(['div', { className: 'actions-wrapper' }, ...actionTexts.map(action => {
+      if (action === 'SELL' && !stock) {
+        return ['span', { style: 'position:absolute' }];
+      }
       return ['div',
         {
           className: 'button action-btn',
@@ -311,11 +313,18 @@
     return;
   };
 
+  const findStock = (card, assets) => {
+    const stock = assets.stocks.find(stock => stock.symbol === card.symbol);
+    return stock;
+  };
+
   const drawActions = (userInfo, family, currentCard, currentPlayer) => {
     const { username } = userInfo;
     let actions = '';
+    const { assets } = currentPlayer.profile;
+    const stock = findStock(currentCard, assets);
     if (currentPlayer.username === username) {
-      actions = createActions(family, currentCard.type);
+      actions = createActions(family, currentCard.type, stock);
     }
     getElement('.actions').append(actions);
   };
@@ -531,7 +540,8 @@
       deal: {
         0: 'Insufficient balance. Take loan to proceed',
         1: 'Successfully purchased',
-        2: 'Successfully sold'
+        2: 'Not enough resources',
+        3: 'Successfully sold'
       },
       doodad: {
         0: 'Insufficient balance. Take loan to proceed',
@@ -572,19 +582,12 @@
     const message = () => {
       if (family === game.currentCard.family) {
         const actionMessage = getMessage(family, status, currentPlayer);
-        createMessage(actionMessage, classes[status]);
+        createMessage(actionMessage, classes[status % 2]);
         return;
       }
       API.changeTurn();
     };
 
-    drawForCurrentUser(message)(game);
-  };
-
-  const drawSellMessages = (game) => {
-    const message = () => {
-      createMessage('Successfully sold', classes[1]);
-    };
     drawForCurrentUser(message)(game);
   };
 
