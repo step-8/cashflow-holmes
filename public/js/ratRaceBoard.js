@@ -382,6 +382,7 @@
 
   const drawCard = (game) => {
     const { currentCard, currentPlayer } = game;
+    const { canReRoll } = currentPlayer;
     const cardEle = getElement('#main-card');
 
     if (!currentCard || !currentCard.id) {
@@ -392,6 +393,11 @@
     const { family } = currentCard;
     const newCard = createCard(currentCard, currentPlayer);
     cardEle.replaceWith(newCard);
+
+    if (canReRoll) {
+      drawLottery(game);
+      return;
+    }
 
     API.userInfo()
       .then(res => res.json())
@@ -619,11 +625,25 @@
       });
   };
 
+  const drawLottery = (game) => {
+    const { currentCard, currentPlayer: { canReRoll } } = game;
+    const actions = document.querySelector('.actions');
+    if (!canReRoll || !actions) {
+      return;
+    }
+
+    const rollDiceMsg = html(['div', { className: 'warning' }, 'Roll the dice.']);
+    actions.replaceChildren('');
+    actions.append(rollDiceMsg);
+    console.log(actions);
+  };
+
   const drawScreen = (game, logs) => {
     drawPlayerPosition(game);
     drawPlayersList(game);
     addLogs(game, logs);
     createLedgerWindow(game);
+    drawLottery(game);
   };
 
   const prevState = { game: '' };

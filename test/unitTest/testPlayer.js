@@ -106,7 +106,7 @@ describe('Player', () => {
     const profile = new Profile(profession);
     const player = new Player('p3', 'guest', 'red', profession, profile);
     player.buyLottery(20);
-    assert.isNotOk(player.details.boughtLottery);
+    assert.isNotOk(player.details.canReRoll);
   });
 
   it('should not add baby when there are 3 babies', () => {

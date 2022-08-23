@@ -9,7 +9,7 @@ class Player {
   #lastPosition;
   #dualDiceCount;
   #skippedTurns;
-  #boughtLottery;
+  #canReRoll;
 
   constructor(username, role, color, profession, profile) {
     this.#username = username;
@@ -88,7 +88,7 @@ class Player {
     const status = this.#profile.lottery(cost);
     if (status) {
       this.changeDiceStatus(false);
-      this.#boughtLottery = true;
+      this.#canReRoll = true;
     }
     return status;
   }
@@ -141,7 +141,7 @@ class Player {
       currentPosition: this.#currentPosition,
       dualDiceCount: this.#dualDiceCount,
       skippedTurns: this.#skippedTurns,
-      boughtLottery: this.#boughtLottery
+      canReRoll: this.#canReRoll
     };
   }
 }
