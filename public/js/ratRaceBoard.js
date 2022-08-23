@@ -47,7 +47,6 @@
 
   const rollDice = (game) => {
     const { currentPlayer: { canReRoll }, currentCard } = game;
-    console.log(canReRoll, currentCard);
     if (canReRoll && currentCard) {
       API.reRollDice();
       API.changeTurn();

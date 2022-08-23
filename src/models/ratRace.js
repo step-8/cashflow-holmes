@@ -71,7 +71,7 @@ class RatRace {
     }
 
     if (type === 'smallDeal') {
-      return this.#deck[type][2];
+      return this.#deck[type][random()];
     }
 
     return this.#deck[type][0];
