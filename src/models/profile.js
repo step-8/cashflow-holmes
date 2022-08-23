@@ -91,8 +91,16 @@ class Profile {
   }
 
   #findStock(card) {
-    const stock = this.#assets.stocks.find(stock => stock.symbol === card.symbol);
-    return stock;
+    return this.#assets.stocks.find(stock => stock.symbol === card.symbol);
+  }
+
+  #findStockIndex(card) {
+    return this.#assets.stocks.findIndex(stock => stock.symbol === card.symbol);
+  }
+
+  #removeStock(stock) {
+    const stockIndex = this.#findStockIndex(stock);
+    this.#assets.stocks.splice(stockIndex, 1);
   }
 
   deductStocks(card, count) {
@@ -100,12 +108,16 @@ class Profile {
     const totalCost = card.price * count;
 
     if (stock.count < count) {
-      return 0;
+      return false;
     }
 
     stock.count -= count;
     this.updateCash(totalCost, card.symbol);
-    return 1;
+
+    if (stock.count <= 0) {
+      this.#removeStock(stock);
+    }
+    return true;
   }
 
   #recordToLedger(transaction) {
