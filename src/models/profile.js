@@ -86,6 +86,16 @@ class Profile {
       return 0;
     }
 
+    const stock = this.#findStock(card);
+    if (stock) {
+      const existingTotalCost = stock.count * stock.price;
+      const totalCount = count + stock.count;
+      stock.price = (existingTotalCost + totalCost) / totalCount;
+      stock.count = totalCount;
+      this.updateCash(-totalCost, card.symbol);
+      return 1;
+    }
+
     this.#assets.stocks.push({ ...card, count });
     this.updateCash(-totalCost, card.symbol);
     return 1;
@@ -197,6 +207,20 @@ class Profile {
 
   hasEnoughCash() {
     return this.#cash > 0;
+  }
+
+  hasStock(card) {
+    return this.#findStock(card);
+  }
+
+  splitStocks(card) {
+    const stock = this.#findStock(card);
+    stock.count *= 2;
+  }
+
+  reverseSplitStocks(card) {
+    const stock = this.#findStock(card);
+    stock.count = Math.ceil(stock.count / 2);
   }
 
   get details() {

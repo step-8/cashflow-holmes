@@ -52,16 +52,20 @@ const cardActionsHandler = (req, res) => {
   }
 
   if (action === 'buy') {
-    buyDeal(game, type, count);
+    buyDeal(game, type, +count);
   }
 
   if (action === 'skip') {
     game.skip();
   }
 
+  if (action === 'roll') {
+    game.activateReroll();
+  }
+
   if (action === 'sell') {
     const { username } = req.session;
-    game.sellStocks(username, count);
+    game.sellStocks(username, +count);
   }
   res.end();
 };

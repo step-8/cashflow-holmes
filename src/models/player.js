@@ -22,6 +22,7 @@ class Player {
     this.#lastPosition = 0;
     this.#dualDiceCount = 0;
     this.#skippedTurns = 0;
+    this.#canReRoll = false;
   }
 
   changeDiceStatus(status) {
@@ -34,6 +35,11 @@ class Player {
 
   decrementDualDiceCount() {
     this.#dualDiceCount--;
+  }
+
+  allowReroll() {
+    this.changeDiceStatus(false);
+    this.#canReRoll = true;
   }
 
   get dualDiceCount() {
@@ -87,8 +93,7 @@ class Player {
   buyLottery(cost) {
     const status = this.#profile.buyLottery(cost);
     if (status) {
-      this.changeDiceStatus(false);
-      this.#canReRoll = true;
+      this.allowReroll();
     }
     return status;
   }
@@ -132,6 +137,18 @@ class Player {
   moneyLottery(amount) {
     this.#canReRoll = false;
     return this.#profile.updateCash(amount, 'lottery');
+  }
+
+  hasStock(card) {
+    return this.#profile.hasStock(card);
+  }
+
+  splitStocks(card) {
+    this.#profile.splitStocks(card);
+  }
+
+  reverseSplitStocks(card) {
+    this.#profile.reverseSplitStocks(card);
   }
 
   get details() {

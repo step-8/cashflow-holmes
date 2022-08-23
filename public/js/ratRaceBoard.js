@@ -337,8 +337,10 @@
     if (currentPlayer.username === username) {
       actions = createActions(family, currentCard.type, stock);
     }
-    getElement('.actions').replaceChildren('');
-    getElement('.actions').append(actions);
+
+    const actionsDiv = getElement('.actions');
+    actionsDiv.replaceChildren('');
+    actionsDiv.append(actions);
   };
 
   const createCard = (currentCard, currentPlayer) => {

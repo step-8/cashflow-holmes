@@ -126,13 +126,17 @@ class Game {
     return [1, randomDiceValue()];
   }
 
+  activateReroll() {
+    this.#currentTurn.activateReroll();
+  }
+
   reRollDice() {
     this.#diceValues = this.#getDiceValues();
     const diceValue = this.#diceValues[0];
     const currentPlayer = this.currentPlayer;
 
     this.addLog(currentPlayer, `rolled ${diceValue}`);
-    this.#currentTurn.lottery(diceValue, this.#currentCard);
+    this.#currentTurn.lottery(this.#players, diceValue);
     currentPlayer.changeDiceStatus(true);
   }
 

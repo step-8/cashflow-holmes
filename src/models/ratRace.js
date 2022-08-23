@@ -1,5 +1,5 @@
-const random = () => {
-  return 3;
+const random = (number) => {
+  return Math.floor(Math.random() * number);
 };
 
 const getFamily = (deals, type) => {
@@ -71,7 +71,7 @@ class RatRace {
     }
 
     if (type === 'smallDeal') {
-      return this.#deck[type][random()];
+      return this.#deck[type][random(Object.keys(this.#deck[type]).length - 1)];
     }
 
     return this.#deck[type][0];

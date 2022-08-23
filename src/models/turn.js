@@ -22,6 +22,10 @@ class Turn {
     return this.#currentPlayer.details.profile.cashFlow;
   }
 
+  activateReroll() {
+    this.#currentPlayer.allowReroll();
+  }
+
   resetTransaction() {
     this.#currentTransaction = null;
   }
@@ -148,18 +152,46 @@ class Turn {
     this.#moneyLottery(amount, 0);
   }
 
-  #decideLottery(diceValue) {
+  #hasGivenStock(player) {
+    return player.hasStock(this.#card);
+  }
+
+  #splitStocks(player) {
+    player.splitStocks(this.#card);
+  }
+
+  #reverseSplitStocks(player) {
+    player.reverseSplitStocks(this.#card);
+  }
+
+  #decideSplitOrReverse(players, diceValue) {
+    const { success } = this.#card;
+    const playersHavingStock = players.filter((player) => this.#hasGivenStock(player));
+    if (success.includes(diceValue)) {
+      playersHavingStock.forEach((player) => this.#splitStocks(player));
+      this.#turnCompleted = true;
+      return;
+    }
+    playersHavingStock.forEach((player) => this.#reverseSplitStocks(player));
+    this.#turnCompleted = true;
+  }
+
+  #decideLottery(players, diceValue) {
     const { lottery } = this.#card;
 
     if (lottery === 'money') {
       this.#decideMoneyLottery(diceValue);
     }
 
+    if (lottery === 'stock') {
+      this.#decideSplitOrReverse(players, diceValue);
+    }
+
     return;
   }
 
-  lottery(diceValue) {
-    this.#decideLottery(diceValue);
+  lottery(players, diceValue) {
+    this.#decideLottery(players, diceValue);
   }
 
   skip() {
