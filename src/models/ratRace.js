@@ -1,5 +1,5 @@
 const random = () => {
-  return [2, 2, 2, 2, 2, 2][Math.floor(Math.random() * 5)];
+  return 3;
 };
 
 const getFamily = (deals, type) => {
