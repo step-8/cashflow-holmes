@@ -127,8 +127,8 @@ class Turn {
 
   #moneyLottery(amount, status) {
     const messages = {
-      0: `Player lost ${amount}`,
-      1: `Player won ${amount}`
+      0: `Player lost $${Math.abs(amount)}`,
+      1: `Player won $${amount}`
     };
     this.#currentPlayer.moneyLottery(amount);
     this.#log.addLog(this.#playerInfo(), messages[status]);

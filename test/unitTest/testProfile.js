@@ -123,9 +123,7 @@ describe('Profile', () => {
       profile.buyLottery(100);
       assert.strictEqual(profile.details.cash, 8300);
     });
-  });
 
-  describe('lottery', () => {
     it('Should not deduct lottery amount from the cash on unsuccessful purchase', () => {
       const profile = new Profile(JSON.parse(profession));
       profile.setDefaults();

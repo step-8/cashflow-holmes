@@ -130,6 +130,7 @@ class Player {
   }
 
   moneyLottery(amount) {
+    this.#canReRoll = false;
     return this.#profile.updateCash(amount, 'lottery');
   }
 

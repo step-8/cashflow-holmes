@@ -46,9 +46,10 @@
   };
 
   const rollDice = (game) => {
-    const { currentPlayer: { canReRoll } } = game;
-    if (canReRoll) {
-      API.reRollDice(1);
+    const { currentPlayer: { canReRoll }, currentCard } = game;
+    console.log(canReRoll, currentCard);
+    if (canReRoll && currentCard) {
+      API.reRollDice();
       API.changeTurn();
       return;
     }
@@ -132,7 +133,11 @@
           diceBox.style.opacity = 1;
           diceBox.style.border = '2px solid black';
           diceBox.style.zIndex = 1;
-          diceBox.onclick = () => rollDice(game);
+          diceBox.onclick = () => {
+            API.getGame()
+              .then(res => res.json())
+              .then(rollDice);
+          };
           drawForCurrentUser(drawToggle)(game);
         } else {
           diceBox.style.opacity = 0.5;
@@ -641,7 +646,7 @@
   };
 
   const drawLottery = (game) => {
-    const { currentCard, currentPlayer: { canReRoll } } = game;
+    const { currentPlayer: { canReRoll } } = game;
     const actions = document.querySelector('.actions');
     if (!canReRoll || !actions) {
       return;
