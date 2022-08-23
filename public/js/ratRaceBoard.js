@@ -333,6 +333,7 @@
     if (currentPlayer.username === username) {
       actions = createActions(family, currentCard.type, stock);
     }
+    getElement('.actions').replaceChildren('');
     getElement('.actions').append(actions);
   };
 
