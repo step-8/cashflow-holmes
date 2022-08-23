@@ -56,6 +56,7 @@ class Profile {
 
   addPay() {
     this.updateCash(this.#calculateCashFlow(), 'Payday');
+    return true;
   }
 
   deductDoodad(cost) {
@@ -161,6 +162,7 @@ class Profile {
     this.#recordToLedger(
       { currentCash, totalCash, amount, description: details }
     );
+    return true;
   }
 
   addLoan(amount) {

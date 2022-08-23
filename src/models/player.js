@@ -69,7 +69,7 @@ class Player {
   }
 
   payday() {
-    this.#profile.addPay();
+    return this.#profile.addPay();
   }
 
   canContinue() {

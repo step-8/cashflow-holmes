@@ -42,6 +42,7 @@ class Turn {
     this.#log.addLog(this.#playerInfo(), `received pay of $${this.#cashflow()}`);
     this.setTransactionState('payday', 1);
     this.#changeTurnIfNoCard();
+    return true;
   }
 
   doodad() {

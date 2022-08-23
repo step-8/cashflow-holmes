@@ -102,8 +102,8 @@ describe('Game', () => {
 
     game.changeTurn();
     game.currentCard = card;
-    game.currentTurn.payday();
-    game.currentTurn.downsized();
+    game.payday();
+    game.downsized();
     game.changeTurn();
 
     assert.isOk(game.currentPlayerName === 'p1');
@@ -134,8 +134,8 @@ describe('Game', () => {
 
     game.changeTurn();
     game.currentCard = card;
-    game.currentTurn.payday();
-    game.currentTurn.downsized();
+    game.payday();
+    game.downsized();
     game.changeTurn();
 
     game.rollDice();
@@ -198,5 +198,60 @@ describe('Game', () => {
       game.state.logs,
       [{ username: 'p1', color: 'red', message: 'is red' }]
     );
+  });
+
+  it('Should get a deal card', () => {
+    const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+
+    game.assignHost('p1');
+    game.addGuest('p2');
+    game.start();
+
+    game.rollDice();
+    const card = game.getCard('small');
+    assert.isOk(card);
+  });
+
+  it('Should get other than deal card', () => {
+    const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+
+    game.assignHost('p1');
+    game.addGuest('p2');
+    game.start();
+
+    game.rollDice();
+    const card = game.getCard();
+    assert.isOk(card);
+  });
+
+  it('Should set notification', () => {
+    const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+
+    game.assignHost('p1');
+    game.addGuest('p2');
+    game.start();
+
+    game.rollDice();
+    game.setNotifications();
+    assert.isOk(game.notifications);
+  });
+
+  describe('actions', () => {
+    it('Should add payday amount', () => {
+      const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+      const card = {
+        heading: 'New Card',
+        symbol: 'a',
+        family: 'payday',
+        type: 'payday'
+      };
+
+      game.assignHost('p1');
+      game.addGuest('p2');
+      game.start();
+      game.currentCard = card;
+
+      assert.isOk(game.payday());
+    });
   });
 });

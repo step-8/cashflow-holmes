@@ -234,7 +234,7 @@ class Game {
   }
 
   payday() {
-    this.#currentTurn.payday();
+    return this.#currentTurn.payday();
   }
 
   doodad() {
@@ -243,27 +243,27 @@ class Game {
   }
 
   charity() {
-    this.#currentTurn.charity();
+    return this.#currentTurn.charity();
   }
 
   baby() {
-    this.#currentTurn.baby();
+    return this.#currentTurn.baby();
   }
 
   downsized() {
-    this.#currentTurn.downsized();
+    return this.#currentTurn.downsized();
   }
 
   buyRealEstate() {
-    this.#currentTurn.buyRealEstate();
+    return this.#currentTurn.buyRealEstate();
   }
 
   buyStocks(count) {
-    this.#currentTurn.buyStocks(count);
+    return this.#currentTurn.buyStocks(count);
   }
 
   buyLottery() {
-    this.#currentTurn.buyLottery();
+    return this.#currentTurn.buyLottery();
   }
 
   sellStocks(username, count) {
@@ -291,6 +291,10 @@ class Game {
 
   get allPlayerDetails() {
     return this.#players.map(player => player.details);
+  }
+
+  get notifications() {
+    return this.#notifications;
   }
 
   getPlayer(username) {
