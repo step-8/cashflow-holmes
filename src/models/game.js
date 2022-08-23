@@ -3,7 +3,7 @@ const deck = require('../../data/cards.json');
 const { RatRace } = require('./ratRace.js');
 const { Turn } = require('./turn.js');
 const { Log } = require('./log.js');
-const { toWords } = require('../utils/camelCaseToWords.js');
+const { toWords } = require('../utils/commonLib.js');
 const { Profile } = require('./profile.js');
 
 const getNextAttrib = (players, type, attribs) => {
