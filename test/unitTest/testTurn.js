@@ -533,7 +533,8 @@ describe('Turn', () => {
             }
           }
         },
-        hasStock: identity
+        hasStock: identity,
+        deactivateReroll: identity
       };
 
       const turn = new Turn(card, player, log);
