@@ -25,6 +25,35 @@ const createThreeColumnRow = (value1, value2, value3) => {
   return row;
 };
 
+const flipIndicator = (parentElement, state) => {
+  const indicators = {
+    'open': '«',
+    'close': '»'
+  };
+  const indicator = parentElement.children[0];
+  indicator.innerText = indicators[state];
+};
+
+const expandWindow = (event) => {
+  const clickedExpansion = event.srcElement.closest('li');
+  const screens = {
+    'my-profile': 'myProfile',
+    'others-profile': 'otherPlayersList',
+    'ledger': 'ledger',
+  };
+  
+  for (const screen in screens) {
+    const button = getElement(`#${screen}`);
+    button.onclick = expandWindow;
+    flipIndicator(button, 'open');
+  }
+  
+  flipIndicator(clickedExpansion, 'close');
+  clickedExpansion.onclick = collapseWindow;
+  const screenName = screens[clickedExpansion.id];
+  showWindow(screenName);
+};
+
 const showWindow = (screenName, sub) => {
   const expansionEle = getElement('.expansion-window-screen');
 
@@ -40,6 +69,14 @@ const showWindow = (screenName, sub) => {
 
   expansionEle.style.visibility = 'visible';
   blurBackground();
+};
+
+const collapseWindow = (event) => {
+  const clickedExpansion = event.srcElement.closest('li');
+  flipIndicator(clickedExpansion, 'open');
+  clickedExpansion.onclick = expandWindow;
+
+  closeExpansion();
 };
 
 const closeExpansion = () => {

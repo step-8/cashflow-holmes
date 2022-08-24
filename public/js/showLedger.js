@@ -58,16 +58,13 @@ const createExpansionScreens = ({ players }, username) => {
   const player = findPlayer(players, username);
   const { profile, color, profession } = player;
 
-  expansionWindowScreens.ledger = html(
-    ledgerWindow(profile, color, username, profession)
-  );
-
+  expansionWindowScreens.ledger =
+    html(ledgerWindow(profile, color, username, profession));
   expansionWindowScreens.myProfile = generateProfile(player);
-
+  expansionWindowScreens.otherPlayerProfiles = {};
   expansionWindowScreens.otherPlayersList =
     generateOtherPlayers(players, username);
-  expansionWindowScreens.otherPlayerProfiles = {};
-
+  
   players.forEach(player => {
     const { username } = player;
     expansionWindowScreens.otherPlayerProfiles[username] =

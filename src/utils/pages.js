@@ -258,23 +258,23 @@ const RAT_RACE_BOARD = `<html>
       </header>
       <nav id="game-nav">
         <ul>
-          <li id="my-profile" onclick="showWindow('myProfile')">
+          <li id="my-profile" onclick="expandWindow(event)">
               <span class="expands-indicator">«</span>
-              My profile
+              My Profile
           </li>
-          <li id="others-profile" onclick="showWindow('otherPlayersList')">
+          <li id="others-profile" onclick="expandWindow(event)">
             <span class="expands-indicator">«</span>
-            Other players
+            Other Players
           </li>
-          <li id="ledger" onclick="showWindow('ledger')">
+          <li id="ledger" onclick="expandWindow(event)">
             <span class="expands-indicator">«</span>
             Ledger
           </li>
         </ul>
       </nav>
       <div id="loan-options">
-        <div class="small-font" id="take-loan" onclick="drawLoan(event)">Take loan</div>
-        <div class="small-font" id="pay-loan">Pay loan</div>
+        <div class="small-font" id="take-loan" onclick="drawLoan(event)">Take Loan</div>
+        <div class="small-font" id="pay-loan">Pay Loan</div>
       </div>
       <div id="logs"></div>
       <div id="choose-dice"></div>
