@@ -44,7 +44,7 @@
         6
       ],
       "outcome": {
-        "failure": -5000,
+        "failure": 0,
         "success": 10000
       }
     },

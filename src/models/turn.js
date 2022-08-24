@@ -69,7 +69,7 @@ class Turn {
       return;
     }
 
-    this.#log.addLog(this.#playerInfo(), `bought ${type} for ${cost}`);
+    this.#log.addLog(this.#playerInfo(), `bought ${type} for $${cost}`);
   }
 
   buyRealEstate() {
@@ -132,8 +132,9 @@ class Turn {
   #moneyLottery(amount, status) {
     const messages = {
       4: `Player won $${amount}`,
-      5: `Player lost $${Math.abs(amount)}`
+      5: 'Player lost the lottery'
     };
+
     this.#currentPlayer.moneyLottery(amount);
     this.#log.addLog(this.#playerInfo(), messages[status]);
     this.setTransactionState('deal', status);
