@@ -56,7 +56,6 @@
     if (canReRoll && currentCard) {
       API.reRollDice()
         .then(drawLotteryMessage);
-      // API.changeTurn();
       return;
     }
 
@@ -367,8 +366,8 @@
     return;
   };
 
-  const createNotification = (game, family, currentPlayer) => {
-    const message = getMessage(family, 1, currentPlayer);
+  const createNotification = (game, family, currentPlayer, status = 1) => {
+    const message = getMessage(family, status, currentPlayer);
     const notificationsScreen = document.querySelector('#message-space');
 
     let notification = null;
@@ -389,10 +388,7 @@
       ]
     );
 
-    const action = () => sendAction('ok', family, family);
-    drawForCurrentUser(action)(game);
-    notificationsScreen.append(notification);
-
+    notificationsScreen.appendChild(notification);
   };
 
   const drawNotifications = (game) => {
@@ -403,11 +399,15 @@
 
     const createNotifications = () => {
       notifications.forEach(notification => {
-        createNotification(game, notification.family, currentPlayer);
+        const { family } = notification;
+        createNotification(game, family, currentPlayer);
+        const action = () => sendAction('ok', family, family);
+        drawForCurrentUser(action)(game);
       });
     };
 
     drawForCurrentUser(createNotifications)(game);
+    API.changeTurn();
     return game;
   };
 
@@ -544,18 +544,6 @@
     return game;
   };
 
-  const createMessage = (message, className) => {
-    const messageBox = getElement('#message-space');
-    const messageEle = html(['div', { className: `${className} normal-font` }, message]);
-    messageBox.replaceChildren(messageEle);
-    API.resetTransaction();
-    API.changeTurn();
-
-    setTimeout(() => {
-      messageEle.remove();
-    }, 2000);
-  };
-
   const getMessage = (family, status, currentPlayer) => {
     const cashFlow = currentPlayer.profile.cashFlow;
     const messages = {
@@ -608,10 +596,10 @@
     const { transaction: { family, status }, currentPlayer } = game;
     const message = () => {
       if (family === game.currentCard.family) {
-        const actionMessage = getMessage(family, status, currentPlayer);
-        createMessage(actionMessage, classes[status % 2]);
-        return;
+        createNotification(game, family, currentPlayer, status);
+        API.resetTransaction();
       }
+
       API.changeTurn();
     };
 
@@ -658,7 +646,6 @@
   const drawLottery = (game) => {
     const { currentPlayer: { canReRoll } } = game;
     const actions = document.querySelector('.actions');
-    console.log(canReRoll);
     if (!canReRoll || !actions) {
       return;
     }
