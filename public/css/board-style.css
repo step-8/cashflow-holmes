@@ -147,6 +147,7 @@ a {
   visibility: hidden;
 }
 
+
 #pay-loan:hover,
 #take-loan:hover {
   cursor: pointer;
@@ -646,6 +647,10 @@ a {
   height: 98vh;
   max-width: 85vw;
   max-height: 100vh;
+}
+
+.selected-window {
+  background-color: var(--grey-p);
 }
 
 .pulsate {

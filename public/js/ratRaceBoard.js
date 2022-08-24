@@ -683,7 +683,7 @@
       API.getGame()
         .then(res => res.json())
         .then(draw(logs));
-    }, 500);
+    }, 1000);
   };
 
   window.onload = main;

@@ -34,24 +34,30 @@ const flipIndicator = (parentElement, state) => {
   indicator.innerText = indicators[state];
 };
 
+const initializeExpansions = (screens) => {
+  for (const screen in screens) {
+    const button = getElement(`#${screen}`);
+    button.onclick = expandWindow;
+    flipIndicator(button, 'open');
+    button.classList.remove('selected-window');
+  }
+};
+
 const expandWindow = (event) => {
-  const clickedExpansion = event.srcElement.closest('li');
   const screens = {
     'my-profile': 'myProfile',
     'others-profile': 'otherPlayersList',
     'ledger': 'ledger',
   };
-  
-  for (const screen in screens) {
-    const button = getElement(`#${screen}`);
-    button.onclick = expandWindow;
-    flipIndicator(button, 'open');
-  }
-  
-  flipIndicator(clickedExpansion, 'close');
-  clickedExpansion.onclick = collapseWindow;
+
+  const clickedExpansion = event.srcElement.closest('li');
   const screenName = screens[clickedExpansion.id];
+
+  initializeExpansions(screens);
+  flipIndicator(clickedExpansion, 'close');
+  clickedExpansion.classList.add('selected-window');
   showWindow(screenName);
+  clickedExpansion.onclick = collapseWindow;
 };
 
 const showWindow = (screenName, sub) => {
@@ -75,6 +81,7 @@ const collapseWindow = (event) => {
   const clickedExpansion = event.srcElement.closest('li');
   flipIndicator(clickedExpansion, 'open');
   clickedExpansion.onclick = expandWindow;
+  clickedExpansion.classList.remove('selected-window');
 
   closeExpansion();
 };

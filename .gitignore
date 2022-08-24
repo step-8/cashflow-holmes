@@ -4,3 +4,4 @@ private/
 todo/
 coverage/
 countLinesAndFiles.sh
+counter.sh
