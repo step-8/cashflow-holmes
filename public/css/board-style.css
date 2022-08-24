@@ -894,3 +894,23 @@ a {
     opacity: 0%;
   }
 }
+
+.escape-popup {
+  height: 10vmax;
+  width: 20vmax;
+  padding: 1vmax;
+  position: absolute;
+  top: 22vmax;
+  left: 33vmax;
+  background-color: aliceblue;
+}
+
+.escape-popup .username {
+  text-align: center;
+  font-size: var(--normal-font);
+}
+
+.escape-popup .button {
+  width: 20%;
+  text-align: center;
+}

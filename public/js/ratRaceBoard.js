@@ -650,12 +650,35 @@
     actions.append(rollDiceMsg);
   };
 
+  const drawRatRaceCompletion = (game) => {
+    const player = game.players.find(player => player.isInFastTrack);
+    if (!player) {
+      return;
+    }
+
+    const popupTemplate =
+      [
+        'div', { className: 'escape-popup active flex-column flex-center gap' },
+        ['div', { className: 'username' }, `${player.username} has escaped from Rat Race`],
+        ['div', { className: 'button' },
+          [
+            'a', { href: '/cancel-game' }, 'OK'
+          ]
+        ]
+      ];
+
+    const pageWrapperEle = getElement('.page-wrapper');
+    pageWrapperEle.appendChild(html(popupTemplate));
+    blurBackground();
+  };
+
   const drawScreen = (game, logs) => {
     drawPlayerPosition(game);
     drawPlayersList(game);
     addLogs(game, logs);
     createExpansionWindows(game);
     drawLottery(game);
+    drawRatRaceCompletion(game);
   };
 
   const prevState = { game: '' };

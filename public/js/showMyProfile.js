@@ -1,7 +1,7 @@
 const blurBackground = () => {
   const boardEle = getElement('#board');
   boardEle.style.filter = 'blur(1.5px)';
-  boardEle.classList.add('inactive');
+  addClasses(boardEle, 'inactive');
 };
 
 const removeBlurBackground = () => {
@@ -30,6 +30,7 @@ const flipIndicator = (parentElement, state) => {
     'open': '«',
     'close': '»'
   };
+
   const indicator = parentElement.children[0];
   indicator.innerText = indicators[state];
 };
@@ -60,16 +61,22 @@ const expandWindow = (event) => {
   clickedExpansion.onclick = collapseWindow;
 };
 
+const removeClasses = (element, ...classes) => {
+  element.classList.remove(...classes);
+};
+
+const addClasses = (element, ...classes) => {
+  element.classList.add(...classes);
+};
+
 const showWindow = (screenName, sub) => {
   const expansionEle = getElement('.expansion-window-screen');
 
   const screen = expansionWindowScreens[screenName];
   const windowScreen = sub ? screen[sub] : screen;
 
-  expansionEle.classList.remove('close-window');
-  expansionEle.classList.remove('inactive');
-  expansionEle.classList.add('expand-window');
-  expansionEle.classList.add('active');
+  removeClasses(expansionEle, 'close-window', 'inactive');
+  addClasses(expansionEle, 'expand-window', 'active');
   expansionEle.replaceChildren('');
   expansionEle.appendChild(windowScreen);
 
