@@ -1,4 +1,5 @@
 const { shuffle } = require('../utils/shuffle.js');
+const { Dice } = require('./die.js');
 const { Game } = require('./game.js');
 
 class Games {
@@ -17,9 +18,10 @@ class Games {
     return this.#latestGameID;
   }
 
-  newGame(host) {
+  newGame(host, dice) {
     this.#latestGameID++;
-    const game = new Game(this.#latestGameID, shuffle(this.#colors), shuffle(this.#professions));
+    const game = new Game(this.#latestGameID,
+      shuffle(this.#colors), shuffle(this.#professions), dice);
     game.assignHost(host);
     this.#games[this.#latestGameID] = game;
   }

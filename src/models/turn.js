@@ -189,8 +189,6 @@ class Turn {
     if (lottery === 'stock') {
       this.#decideSplitOrReverse(players, diceValue);
     }
-
-    return;
   }
 
   lottery(players, diceValue) {

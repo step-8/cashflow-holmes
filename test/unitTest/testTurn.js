@@ -1,5 +1,6 @@
 const { Turn } = require('../../src/models/turn.js');
 const { Log } = require('../../src/models/log.js');
+const { Player } = require('../../src/models/player.js');
 const { assert } = require('chai');
 
 describe('Turn', () => {
@@ -493,6 +494,51 @@ describe('Turn', () => {
         turn.info.transaction,
         { family: 'downsized', status: 0 }
       );
+    });
+  });
+  describe('lottery', () => {
+    const card = {
+      heading: 'New Card',
+      symbol: 'a',
+      family: 'market',
+      type: 'lottery',
+      lottery: 'stock',
+      success: [
+        1,
+        2,
+        3
+      ]
+    };
+
+    it('Should not log the downsized messages', () => {
+      const log = new Log();
+      const player = {
+        skippedTurns: 0,
+        initializeSkippedTurns: () => {
+          player.skippedTurns = 2;
+        },
+        username: 'user',
+        color: 'c',
+        details: {
+          profile: {
+            assets: {
+              stocks: [{
+                heading: 'New Card',
+                symbol: 'a',
+                family: 'deal',
+                type: 'stock',
+                price: 5,
+                count: 10
+              }]
+            }
+          }
+        },
+        hasStock: identity
+      };
+
+      const turn = new Turn(card, player, log);
+      turn.lottery([player], 1);
+
     });
   });
 });

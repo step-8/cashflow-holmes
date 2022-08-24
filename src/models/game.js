@@ -5,13 +5,12 @@ const { Turn } = require('./turn.js');
 const { Log } = require('./log.js');
 const { toWords } = require('../utils/commonLib.js');
 const { Profile } = require('./profile.js');
+const { Dice } = require('./die.js');
 
 const getNextAttrib = (players, type, attribs) => {
   const playersAttribs = players.map(player => player.details[type]);
   return attribs.find(attrib => !playersAttribs.includes(attrib));
 };
-
-const randomDiceValue = () => Math.ceil(Math.random() * 6);
 
 const gameStatus = {
   started: 'started',
@@ -34,8 +33,9 @@ class Game {
   #currentTurn;
   #notifications;
   #log;
+  #dice;
 
-  constructor(gameID, colors, professions) {
+  constructor(gameID, colors, professions, dice) {
     this.#gameID = gameID;
     this.#colors = colors;
     this.#professions = professions;
@@ -43,7 +43,8 @@ class Game {
     this.#players = [];
     this.#status = gameStatus.waiting;
     this.#currentPlayerIndex = null;
-    this.#diceValues = [1, 1];
+    this.#dice = dice;
+    this.#diceValues = this.#dice.face();
     this.#ratRace = new RatRace(deck);
     this.#log = new Log();
     this.#notifications = [];
@@ -121,16 +122,12 @@ class Game {
     this.#log.addLog(player, message);
   }
 
-  #getDiceValues() {
-    return [randomDiceValue(), randomDiceValue()];
-  }
-
   activateReroll() {
     this.#currentTurn.activateReroll();
   }
 
   reRollDice() {
-    this.#diceValues = this.#getDiceValues();
+    this.#diceValues = this.#dice.roll(1);
     const diceValue = this.#diceValues[0];
     const currentPlayer = this.currentPlayer;
 
@@ -140,7 +137,7 @@ class Game {
   }
 
   rollDice(diceCount) {
-    this.#diceValues = this.#getDiceValues();
+    this.#diceValues = this.#dice.roll(diceCount);
     const currentPlayer = this.currentPlayer;
     const dualDiceCount = currentPlayer.dualDiceCount;
     const totalCount = this.#calculateTotalSteps(diceCount);
@@ -156,7 +153,7 @@ class Game {
 
   resetDice() {
     const currentPlayer = this.currentPlayer;
-    currentPlayer.changeDiceStatus(false);
+    this.currentPlayer.changeDiceStatus(false);
   }
 
   start() {

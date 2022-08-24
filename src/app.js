@@ -23,7 +23,7 @@ const createApp = (config, session) => {
   app.use(['/register', '/login'], authenticate);
   app.use('/register', registerRouter(express.Router(), config));
   app.use('/login', loginRouter(express.Router(), config));
-  app.use(protectedRoutes(createGameRouter(express.Router())));
+  app.use(protectedRoutes(createGameRouter(express.Router(), config)));
 
   return app;
 };

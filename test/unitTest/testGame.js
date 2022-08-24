@@ -1,20 +1,21 @@
 const { Game } = require('../../src/models/game');
 const { assert } = require('chai');
 const professions = require('../../data/professions.json');
+const { Dice } = require('../../src/models/die');
 
 describe('Game', () => {
   const expectedProfessions = JSON.stringify(professions);
   const colors = ['a', 'b', 'c', 'd', 'e', 'f'];
 
   it('Should add a player if not joined the game', () => {
-    const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+    const game = new Game(1234, colors, JSON.parse(expectedProfessions), new Dice(2, 6));
     game.addGuest('newPlayer');
     const allPlayers = game.allPlayerDetails;
     assert.strictEqual(allPlayers.length, 1);
   });
 
   it('Should not add a player if joined the game', () => {
-    const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+    const game = new Game(1234, colors, JSON.parse(expectedProfessions), new Dice(2, 6));
     game.addGuest('newPlayer');
     game.addGuest('newPlayer');
     const allPlayers = game.allPlayerDetails;
@@ -22,7 +23,7 @@ describe('Game', () => {
   });
 
   it('Should remove a player if already exists', () => {
-    const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+    const game = new Game(1234, colors, JSON.parse(expectedProfessions), new Dice(2, 6));
     game.addGuest('newPlayer');
     game.removePlayer('newPlayer');
     const allPlayers = game.allPlayerDetails;
@@ -30,12 +31,12 @@ describe('Game', () => {
   });
 
   it('Should validate the given gameID', () => {
-    const game = new Game(1234, 1234, colors, JSON.parse(expectedProfessions));
+    const game = new Game(1234, colors, JSON.parse(expectedProfessions), new Dice(2, 6));
     assert.isOk(game.isValidGameID(1234));
   });
 
   it('Should give true if the lobby is full ', () => {
-    const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+    const game = new Game(1234, colors, JSON.parse(expectedProfessions), new Dice(2, 6));
     game.addGuest('p1');
     game.addGuest('p2');
     game.addGuest('p3');
@@ -46,13 +47,13 @@ describe('Game', () => {
   });
 
   it('Should give false if the lobby is not full ', () => {
-    const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+    const game = new Game(1234, colors, JSON.parse(expectedProfessions), new Dice(2, 6));
     game.addGuest('p1');
     assert.isNotOk(game.isLobbyFull());
   });
 
   it('Should give the current player', () => {
-    const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+    const game = new Game(1234, colors, JSON.parse(expectedProfessions), new Dice(2, 6));
     game.addGuest('p1');
     game.addGuest('p2');
     game.start();
@@ -60,7 +61,7 @@ describe('Game', () => {
   });
 
   it('Should change the turn to other player', () => {
-    const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+    const game = new Game(1234, colors, JSON.parse(expectedProfessions), new Dice(2, 6));
     game.addGuest('p1');
     game.addGuest('p2');
     game.start();
@@ -68,7 +69,7 @@ describe('Game', () => {
   });
 
   it('Should change the turn to other player', () => {
-    const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+    const game = new Game(1234, colors, JSON.parse(expectedProfessions), new Dice(2, 6));
     game.assignHost('p1');
     game.addGuest('p2');
     game.start();
@@ -77,7 +78,7 @@ describe('Game', () => {
   });
 
   it('Should change the rolled dice of current player to true', () => {
-    const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+    const game = new Game(1234, colors, JSON.parse(expectedProfessions), new Dice(2, 6));
     game.assignHost('p1');
     game.addGuest('p2');
     game.start();
@@ -88,7 +89,7 @@ describe('Game', () => {
 
   it('Should change the turn to other player in downsized', () => {
     const selectedProfessions = JSON.parse(expectedProfessions);
-    const game = new Game(1234, colors, selectedProfessions);
+    const game = new Game(1234, colors, selectedProfessions, new Dice(2, 6));
     const card = {
       heading: 'New Card',
       symbol: 'a',
@@ -110,7 +111,7 @@ describe('Game', () => {
   });
 
   it('Should return the player matching with user name', () => {
-    const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+    const game = new Game(1234, colors, JSON.parse(expectedProfessions), new Dice(2, 6));
     game.assignHost('p1');
     game.addGuest('p2');
 
@@ -120,7 +121,7 @@ describe('Game', () => {
 
   it('Should allow player to play after skipping 2 of their chances', () => {
     const selectedProfessions = JSON.parse(expectedProfessions);
-    const game = new Game(1234, colors, selectedProfessions);
+    const game = new Game(1234, colors, selectedProfessions, new Dice(2, 6));
     const card = {
       heading: 'New Card',
       symbol: 'a',
@@ -147,7 +148,7 @@ describe('Game', () => {
 
   it('Should allow player to roll again after buying lottery', () => {
     const selectedProfessions = JSON.parse(expectedProfessions);
-    const game = new Game(1234, colors, selectedProfessions);
+    const game = new Game(1234, colors, selectedProfessions, new Dice(2, 6));
     const card = {
       heading: 'New Card',
       symbol: 'lottery',
@@ -174,7 +175,7 @@ describe('Game', () => {
 
   it('Should set the notifications to given notifiers', () => {
     const selectedProfessions = JSON.parse(expectedProfessions);
-    const game = new Game(1234, colors, selectedProfessions);
+    const game = new Game(1234, colors, selectedProfessions, new Dice(2, 6));
     const card = {
       heading: 'New Card',
       symbol: 'a',
@@ -191,7 +192,7 @@ describe('Game', () => {
       username: 'p1',
       color: 'red'
     };
-    const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+    const game = new Game(1234, colors, JSON.parse(expectedProfessions), new Dice(2, 6));
 
     game.addLog(player, 'is red');
     assert.deepStrictEqual(
@@ -201,7 +202,7 @@ describe('Game', () => {
   });
 
   it('Should get a deal card', () => {
-    const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+    const game = new Game(1234, colors, JSON.parse(expectedProfessions), new Dice(2, 6));
 
     game.assignHost('p1');
     game.addGuest('p2');
@@ -213,7 +214,7 @@ describe('Game', () => {
   });
 
   it('Should get other than deal card', () => {
-    const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+    const game = new Game(1234, colors, JSON.parse(expectedProfessions), new Dice(2, 6));
 
     game.assignHost('p1');
     game.addGuest('p2');
@@ -225,7 +226,7 @@ describe('Game', () => {
   });
 
   it('Should set notification', () => {
-    const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+    const game = new Game(1234, colors, JSON.parse(expectedProfessions), new Dice(2, 6));
 
     game.assignHost('p1');
     game.addGuest('p2');
@@ -238,7 +239,7 @@ describe('Game', () => {
 
   describe('actions', () => {
     it('Should add payday amount', () => {
-      const game = new Game(1234, colors, JSON.parse(expectedProfessions));
+      const game = new Game(1234, colors, JSON.parse(expectedProfessions), new Dice(2, 6));
       const card = {
         heading: 'New Card',
         symbol: 'a',
