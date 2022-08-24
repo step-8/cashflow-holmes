@@ -304,10 +304,11 @@
   const createCardTemplate = (currentCard) => {
     let { cost, downPayment } = currentCard;
     if (cost) {
-      cost = `cost: ${currentCard.cost}`;
+      cost = `cost: $${currentCard.cost}`;
     }
+
     if (downPayment) {
-      downPayment = `down payment: ${currentCard.downPayment}`;
+      downPayment = `down payment: $${currentCard.downPayment}`;
     }
 
     return ['div', {},

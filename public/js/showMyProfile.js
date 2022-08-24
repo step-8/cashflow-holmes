@@ -90,7 +90,7 @@ const createExpensesTable = (expenses, babies) => {
       val = babies * val;
     }
     const expenseHeader = ['th', {}, camelToCapitalize(key)];
-    const expenseValue = ['td', {}, val];
+    const expenseValue = ['td', {}, `$${val}`];
     const row = ['tr', {}, expenseHeader, expenseValue];
     wrapper.push(row);
   });
@@ -109,7 +109,7 @@ const createRealEstateIncome = ({ realEstates }) => {
 
   const tbody = ['tbody', {}];
   realEstates.forEach(({ symbol, cashFlow }) => {
-    const row = createTwoColumnRow(symbol, cashFlow);
+    const row = createTwoColumnRow(symbol, `$${cashFlow}`);
     tbody.push(row);
   });
 
@@ -127,7 +127,7 @@ const createRealEstateLiabilities = ({ realEstates }) => {
 
   const tbody = ['tbody', {}];
   realEstates.forEach(({ symbol, mortgage }) => {
-    const row = createTwoColumnRow(symbol, mortgage);
+    const row = createTwoColumnRow(symbol, `$${mortgage}`);
     tbody.push(row);
   });
 
@@ -146,7 +146,7 @@ const createRealEstateAssets = ({ realEstates }) => {
 
   const tbody = ['tbody', {}];
   realEstates.forEach(({ symbol, downPayment, cost }) => {
-    const row = createThreeColumnRow(symbol, downPayment, cost);
+    const row = createThreeColumnRow(symbol, `$${downPayment}`, `$${cost}`);
     tbody.push(row);
   });
 
@@ -165,7 +165,7 @@ const createStocksTable = ({ stocks }) => {
 
   const tbody = ['tbody', {}];
   stocks.forEach(({ symbol, count, price }) => {
-    const row = createThreeColumnRow(symbol, count, price);
+    const row = createThreeColumnRow(symbol, count, `$${price}`);
     tbody.push(row);
   });
 
@@ -183,7 +183,7 @@ const createPreciousMetals = ({ preciousMetals }) => {
 
   const tbody = ['tbody', {}];
   preciousMetals.forEach(({ name, cost }) => {
-    const row = createTwoColumnRow(name, cost);
+    const row = createTwoColumnRow(name, `$${cost}`);
     tbody.push(row);
   });
 
@@ -203,7 +203,7 @@ const createLiabilitiesTable = ({ liabilities }) => {
       return;
     }
     const liabilityHeader = ['th', {}, camelToCapitalize(key)];
-    const liabilityValue = ['td', {}, val];
+    const liabilityValue = ['td', {}, `$${val}`];
     const row = ['tr', {}, liabilityHeader, liabilityValue];
     liabilityWrapper.push(row);
   });
@@ -230,7 +230,7 @@ const generateProfile = (player) => {
               ['div', { className: 'income-wrapper' },
                 ['div', { className: 'salary-wrapper' },
                   ['h4', {}, 'Salary :'],
-                  ['p', {}, profile.income.salary]
+                  ['p', {}, `$${profile.income.salary}`]
                 ],
                 createRealEstateIncome(profile.income),
               ],
@@ -246,7 +246,7 @@ const generateProfile = (player) => {
               ],
               ['div', { className: 'total-expenses-wrapper' },
                 ['div', {}, 'Total Expenses'],
-                ['div', {}, profile.totalExpenses]
+                ['div', {}, `$${profile.totalExpenses}`]
               ]
             ]
           ],
@@ -259,7 +259,7 @@ const generateProfile = (player) => {
               ['div', { className: 'assets-wrapper' },
                 ['div', { className: 'savings-wrapper' },
                   ['h4', {}, 'Savings :'],
-                  ['p', {}, profile.assets.savings]
+                  ['p', {}, `$${profile.assets.savings}`]
                 ],
                 createPreciousMetals(profile.assets),
                 createStocksTable(profile.assets),
