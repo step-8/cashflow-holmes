@@ -148,7 +148,7 @@ describe('Turn', () => {
           {
             username: 'user',
             color: 'c',
-            message: `bought ${card.type} for ${card.cost}`
+            message: `bought ${card.type} for $${card.cost}`
           }
         ]
       );
