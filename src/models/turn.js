@@ -170,10 +170,12 @@ class Turn {
     const playersHavingStock = players.filter((player) => this.#hasGivenStock(player));
     if (success.includes(diceValue)) {
       playersHavingStock.forEach((player) => this.#splitStocks(player));
+      this.#currentPlayer.deactivateReroll();
       this.#turnCompleted = true;
       return;
     }
     playersHavingStock.forEach((player) => this.#reverseSplitStocks(player));
+    this.#currentPlayer.deactivateReroll();
     this.#turnCompleted = true;
   }
 

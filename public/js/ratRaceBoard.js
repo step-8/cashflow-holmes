@@ -369,7 +369,7 @@
 
   const createNotification = (game, family, currentPlayer) => {
     const message = getMessage(family, 1, currentPlayer);
-    const notificationsScreen = document.querySelector('#interaction-screen');
+    const notificationsScreen = document.querySelector('#message-space');
 
     let notification = null;
     const notifyId = setTimeout(() => {
@@ -606,7 +606,6 @@
     }
 
     const { transaction: { family, status }, currentPlayer } = game;
-    console.log(game.transaction);
     const message = () => {
       if (family === game.currentCard.family) {
         const actionMessage = getMessage(family, status, currentPlayer);
@@ -659,6 +658,7 @@
   const drawLottery = (game) => {
     const { currentPlayer: { canReRoll } } = game;
     const actions = document.querySelector('.actions');
+    console.log(canReRoll);
     if (!canReRoll || !actions) {
       return;
     }

@@ -123,7 +123,7 @@ class Game {
 
   #getDiceValues() {
     // return [randomDiceValue(), randomDiceValue()];
-    return [1, randomDiceValue()];
+    return [4, randomDiceValue()];
   }
 
   activateReroll() {
