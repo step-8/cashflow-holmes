@@ -538,11 +538,13 @@ a {
 
 #message-space {
   display: flex;
+  flex-direction: column;
   grid-row: 6;
   grid-column: 1/7;
   font-weight: 600;
   align-items: center;
   justify-content: center;
+  overflow: auto;
 }
 
 /* dice box positions  Start*/
