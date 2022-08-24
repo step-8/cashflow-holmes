@@ -141,7 +141,7 @@ class Player {
 
   updateLotteryAmount(amount) {
     this.deactivateReroll();
-    return this.#profile.updateCash(amount, 'lottery');
+    return this.#profile.updateCash(amount, 'Lottery');
   }
 
   hasStock(card) {

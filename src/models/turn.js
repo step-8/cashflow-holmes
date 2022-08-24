@@ -131,8 +131,8 @@ class Turn {
 
   #updateLotteryAmount(amount, status) {
     const messages = {
-      4: `Player won $${amount}`,
-      5: 'Player lost the lottery'
+      4: `won $${amount}`,
+      5: 'lost the lottery'
     };
 
     this.#currentPlayer.updateLotteryAmount(amount);
@@ -145,12 +145,12 @@ class Turn {
     const { success, outcome } = this.#card;
     if (success.includes(diceValue)) {
       const amount = outcome['success'];
-      this.#updateLotteryAmount(amount, 1);
+      this.#updateLotteryAmount(amount, 4);
       return;
     }
 
     const amount = outcome['failure'];
-    this.#updateLotteryAmount(amount, 0);
+    this.#updateLotteryAmount(amount, 5);
   }
 
   #hasGivenStock(player) {
