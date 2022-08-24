@@ -149,7 +149,8 @@ a {
 .icon {
   border-radius: 50%;
   aspect-ratio: 1;
-  width: 2em;
+  width: 1.8vmax;
+  align-self: center;
   border: var(--def-border);
   z-index: 1;
   transition: 500ms ease;
