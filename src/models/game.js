@@ -137,7 +137,8 @@ class Game {
   }
 
   rollDice(diceCount) {
-    this.#diceValues = this.#dice.roll(diceCount);
+    // this.#diceValues = this.#dice.roll(diceCount);
+    this.#diceValues = [3, 1];
     const currentPlayer = this.currentPlayer;
     const dualDiceCount = currentPlayer.dualDiceCount;
     const totalCount = this.#calculateTotalSteps(diceCount);
@@ -152,7 +153,6 @@ class Game {
   }
 
   resetDice() {
-    const currentPlayer = this.currentPlayer;
     this.currentPlayer.changeDiceStatus(false);
   }
 

@@ -234,4 +234,20 @@ describe('Profile', () => {
       assert.isOk(!profile.addBaby());
     });
   });
+
+  describe('isIncomeStable', () => {
+    it('Should return false when income is unstable', () => {
+      const profile = new Profile(JSON.parse(profession));
+      profile.setDefaults();
+      assert.isNotOk(profile.isIncomeStable());
+    });
+
+    it('Should return true when income is stable', () => {
+      const card = { cashFlow: 100000, downPayment: 5 };
+      const profile = new Profile(JSON.parse(profession));
+      profile.setDefaults();
+      profile.addAsset(card);
+      assert.isOk(profile.isIncomeStable());
+    });
+  });
 });

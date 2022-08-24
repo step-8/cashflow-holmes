@@ -490,13 +490,13 @@
   const createDice = (diceValue) => html(diceFaces[diceValue]);
   const drawOneDice = (diceValue) => {
     const dice = document.querySelector('#dice-box');
-    dice.innerHTML = '';
+    dice.replaceChildren('');
     dice.appendChild(createDice(diceValue));
   };
 
   const drawTwoDices = (diceValues) => {
     const dice = document.querySelector('#dice-box');
-    dice.innerHTML = '';
+    dice.replaceChildren('');
     diceValues.forEach(diceValue => {
       dice.appendChild(createDice(diceValue));
     });
@@ -580,11 +580,6 @@
     };
 
     return messages[family][status];
-  };
-
-  const classes = {
-    0: 'warning message',
-    1: 'success message'
   };
 
   const drawMessages = (game) => {

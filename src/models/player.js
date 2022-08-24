@@ -10,6 +10,7 @@ class Player {
   #dualDiceCount;
   #skippedTurns;
   #canReRoll;
+  #isInFastTrack;
 
   constructor(username, role, color, profession, profile) {
     this.#username = username;
@@ -23,6 +24,7 @@ class Player {
     this.#dualDiceCount = 0;
     this.#skippedTurns = 0;
     this.#canReRoll = false;
+    this.#isInFastTrack = false;
   }
 
   changeDiceStatus(status) {
@@ -91,8 +93,18 @@ class Player {
     return this.#profile.deductDoodad(cost);
   }
 
+  #setFastTrack() {
+    if (this.#profile.isIncomeStable()) {
+      this.#isInFastTrack = true;
+      return;
+    }
+    this.#isInFastTrack = false;
+  }
+
   buyRealEstate(card) {
-    return this.#profile.addAsset(card);
+    const status = this.#profile.addAsset(card);
+    this.#setFastTrack();
+    return status;
   }
 
   buyLottery(cost) {
@@ -132,7 +144,9 @@ class Player {
   }
 
   payLoan(amount) {
-    return this.#profile.deductLoan(amount);
+    const status = this.#profile.deductLoan(amount);
+    this.#setFastTrack();
+    return status;
   }
 
   sellStocks(stock, count) {
@@ -170,7 +184,8 @@ class Player {
       currentPosition: this.#currentPosition,
       dualDiceCount: this.#dualDiceCount,
       skippedTurns: this.#skippedTurns,
-      canReRoll: this.#canReRoll
+      canReRoll: this.#canReRoll,
+      isInFastTrack: this.#isInFastTrack
     };
   }
 }

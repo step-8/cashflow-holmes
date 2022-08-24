@@ -182,6 +182,10 @@ class Profile {
     return true;
   }
 
+  isIncomeStable() {
+    return this.#calculatePassiveIncome() > this.#calculateTotalExpenses();
+  }
+
   deductLoan(amount) {
     if (amount > this.#liabilities.bankLoan) {
       amount = this.#liabilities.bankLoan;

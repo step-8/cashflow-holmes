@@ -11,10 +11,7 @@ const API = {
   userInfo: () => fetchReq('/get-user-info'),
   playerInfo: () => fetchReq('/api/player-info'),
   getGame: () => fetchReq('/api/game'),
-  changeTurn: () => {
-    console.log('changed turn');
-    return fetchReq('/change-turn');
-  },
+  changeTurn: () => fetchReq('/change-turn'),
   rollDice: (diceCount) => fetchReq(`/roll-dice/${diceCount}`),
   reRollDice: () => fetchReq('/reroll'),
   getProfession: () => fetchReq('/api/profession'),
