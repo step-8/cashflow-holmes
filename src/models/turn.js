@@ -131,12 +131,12 @@ class Turn {
 
   #moneyLottery(amount, status) {
     const messages = {
-      0: `Player lost $${Math.abs(amount)}`,
-      1: `Player won $${amount}`
+      4: `Player won $${amount}`,
+      5: `Player lost $${Math.abs(amount)}`
     };
     this.#currentPlayer.moneyLottery(amount);
     this.#log.addLog(this.#playerInfo(), messages[status]);
-    this.setTransactionState('money-lottery', status);
+    this.setTransactionState('deal', status);
     this.#turnCompleted = true;
   }
 
@@ -144,12 +144,12 @@ class Turn {
     const { success, outcome } = this.#card;
     if (success.includes(diceValue)) {
       const amount = outcome['success'];
-      this.#moneyLottery(amount, 1);
+      this.#moneyLottery(amount, 4);
       return;
     }
 
     const amount = outcome['failure'];
-    this.#moneyLottery(amount, 0);
+    this.#moneyLottery(amount, 5);
   }
 
   #hasGivenStock(player) {

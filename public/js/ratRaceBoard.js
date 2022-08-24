@@ -45,11 +45,18 @@
     return diceVals[dice];
   };
 
+  const drawLotteryMessage = () => {
+    API.getGame()
+      .then(res => res.json())
+      .then(drawMessages);
+  };
+
   const rollDice = (game) => {
     const { currentPlayer: { canReRoll }, currentCard } = game;
     if (canReRoll && currentCard) {
-      API.reRollDice();
-      API.changeTurn();
+      API.reRollDice()
+        .then(drawLotteryMessage);
+      // API.changeTurn();
       return;
     }
 
@@ -555,7 +562,9 @@
         0: 'Insufficient balance. Take loan to proceed',
         1: 'Successfully purchased',
         2: 'Not enough resources',
-        3: 'Successfully sold'
+        3: 'Successfully sold',
+        4: 'You won lottery',
+        5: 'You lost lottery'
       },
       doodad: {
         0: 'Insufficient balance. Take loan to proceed',
@@ -596,7 +605,7 @@
     }
 
     const { transaction: { family, status }, currentPlayer } = game;
-
+    console.log(game.transaction);
     const message = () => {
       if (family === game.currentCard.family) {
         const actionMessage = getMessage(family, status, currentPlayer);
