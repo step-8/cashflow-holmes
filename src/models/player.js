@@ -42,6 +42,11 @@ class Player {
     this.#canReRoll = true;
   }
 
+  deactivateReroll() {
+    this.changeDiceStatus(true);
+    this.#canReRoll = false;
+  }
+
   get dualDiceCount() {
     return this.#dualDiceCount;
   }
@@ -134,8 +139,8 @@ class Player {
     return this.#profile.deductStocks(stock, count);
   }
 
-  moneyLottery(amount) {
-    this.#canReRoll = false;
+  updateLotteryAmount(amount) {
+    this.deactivateReroll();
     return this.#profile.updateCash(amount, 'lottery');
   }
 
@@ -145,10 +150,12 @@ class Player {
 
   splitStocks(card) {
     this.#profile.splitStocks(card);
+    this.deactivateReroll();
   }
 
   reverseSplitStocks(card) {
     this.#profile.reverseSplitStocks(card);
+    this.deactivateReroll();
   }
 
   get details() {
