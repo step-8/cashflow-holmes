@@ -3,6 +3,7 @@
   column-gap: 0.5em;
   height: 100vh;
   width: 100vw;
+  background-color: #edf0e2;
 }
 
 #board-space {
@@ -72,6 +73,7 @@ a {
   height: 35%;
   align-self: center;
   overflow: scroll;
+  background-color: white;
 }
 
 #logs::-webkit-scrollbar {
@@ -191,34 +193,30 @@ a {
 .baby,
 .charity {
   border: var(--big-border);
+  border-color: black;
 }
 
 .deal {
-  background-color: var(--deal-bg);
-  border-color: var(--deal-border);
+  background: radial-gradient(var(--deal-bg), var(--deal-border));
 }
 
 .doodad {
-  background-color: var(--doodad-bg);
-  border-color: var(--doodad-border);
+  background: radial-gradient(var(--doodad-bg), var(--doodad-border));
 }
 
 .payday {
-  background-color: var(--payday-bg);
-  border-color: var(--payday-border);
+  background: radial-gradient(var(--payday-bg), var(--payday-border));
 }
 
 .market {
-  background-color: var(--market-bg);
-  border-color: var(--market-border);
+  background: radial-gradient(var(--market-bg), var(--market-border));
 }
 
 .purples,
 .downsized,
 .baby,
 .charity {
-  background-color: var(--others-bg);
-  border-color: var(--others-border);
+  background: radial-gradient(var(--others-bg), var(--others-border));
 }
 
 #board {
@@ -230,8 +228,6 @@ a {
   width: 100%;
   height: 100%;
 }
-
-
 
 /* Grid element positions START*/
 #rat-tile-3,
@@ -340,7 +336,6 @@ a {
 /* grid element positions end */
 
 .game-area {
-  /* background-color: lightgray; */
   margin: 0.5vmax;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -354,7 +349,7 @@ a {
 #players,
 #game-stats,
 #logs {
-  border: 0.2vmax solid;
+  border: 0.1vmax solid;
   border-radius: 0.5vmax;
 }
 
@@ -368,21 +363,18 @@ a {
   grid-row: 1/3;
   grid-column: 1;
   background-color: var(--market-bg);
-  border-color: var(--market-border);
 }
 
 #small-deal {
   grid-row: 7/9;
   grid-column: 1;
   background-color: var(--deal-bg);
-  border-color: var(--deal-border);
 }
 
 #big-deal {
   grid-row: 1/3;
   grid-column: 5;
   background-color: var(--deal-bg);
-  border-color: var(--deal-border);
 }
 
 #big-deal img {
@@ -393,7 +385,6 @@ a {
   grid-row: 7/9;
   grid-column: 5;
   background-color: var(--doodad-bg);
-  border-color: var(--doodad-border);
 }
 
 /* game area element positions  end*/
