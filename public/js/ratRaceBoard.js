@@ -547,6 +547,7 @@
       notifications.forEach(notification => {
         const { family } = notification;
         createNotification(game, family, currentPlayer);
+        console.log('inside create notifications');
         const action = () => sendAction('ok', family, family);
         drawForCurrentUser(action)(game);
       });
@@ -825,18 +826,14 @@
     const popupTemplate =
       [
         'div', { className: 'escape-popup active flex-column flex-center gap' },
-        ['div', { className: 'username' }, `${currentPlayer.username} has escaped from Rat Race`]
+        ['div', { className: 'username' }, `${currentPlayer.username} has escaped from Rat Race`],
+        ['div', { className: 'button', onclick: removePopUp }, 'OK']
       ];
 
-    const pageWrapperEle = getElement('.page-wrapper');
+    const pageWrapperEle = getElement('#escape-rat-race');
+    pageWrapperEle.replaceChildren('');
     pageWrapperEle.appendChild(html(popupTemplate));
 
-    const drawOkButton = () => {
-      const ok = ['div', { className: 'button', onclick: removePopUp }, 'OK'];
-      getElement('.escape-popup').appendChild(html(ok));
-    };
-
-    drawForCurrentUser(drawOkButton)(game);
     blurBackground();
   };
 
@@ -845,6 +842,7 @@
     drawPlayersList(game);
     addLogs(game, logs);
     createExpansionWindows(game);
+    drawRatRaceCompletion(game);
     drawLottery(game);
   };
 

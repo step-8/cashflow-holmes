@@ -286,6 +286,7 @@ const RAT_RACE_BOARD = `<html>
       <div class="dice"></div>
       </div>
       <div id="board-toggle">Fast Track</div>
+      <div id="escape-rat-race"></div>
     </div>
   </div>
   </div>
