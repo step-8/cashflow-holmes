@@ -423,4 +423,19 @@ describe('Player', () => {
       assert.deepStrictEqual(player.profile().assets.stocks[0].count, 50);
     });
   });
+
+  describe('addGoldCoins', () => {
+    const card = {
+      heading: 'gold',
+      symbol: 'goldCoins',
+      cost: 5,
+    };
+
+    it('Should add card to precious metals', () => {
+      const profession = JSON.parse(professionStr);
+      const player = new Player('p3', 'guest', 'red', profession);
+      player.setDefaults();
+      assert.isOk(player.addGoldCoins(card));
+    });
+  });
 });

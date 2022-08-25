@@ -41,6 +41,10 @@ const buyDeal = (game, type, count) => {
     return game.buyLottery();
   }
 
+  if (type === 'goldCoins') {
+    return game.buyGoldCoins();
+  }
+
   game.skip();
 };
 

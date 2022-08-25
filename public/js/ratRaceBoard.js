@@ -259,6 +259,7 @@
       stock: ['BUY', 'SELL', 'SKIP'],
       lottery: ['BUY', 'SKIP'],
       MLM: ['ROLL', 'SKIP'],
+      goldCoins: ['BUY', 'SKIP']
     },
     market: {
       realEstate: ['SELL', 'SKIP'],
@@ -437,7 +438,7 @@
       realEstate: realEstateCard,
       stock: stocksCard,
       lottery: lotteryCard,
-      gold: goldDealCard
+      goldCoins: goldDealCard,
     },
     doodad: {
       doodad: doodadCard

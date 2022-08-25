@@ -166,6 +166,10 @@ class Game {
     return this.#currentTurn.buyStocks(count);
   }
 
+  buyGoldCoins() {
+    return this.#currentTurn.buyGoldCoins();
+  }
+
   buyLottery() {
     return this.#currentTurn.buyLottery();
   }

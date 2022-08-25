@@ -224,8 +224,8 @@ const createPreciousMetals = ({ preciousMetals }) => {
   ];
 
   const tbody = ['tbody', {}];
-  preciousMetals.forEach(({ name, cost }) => {
-    const row = createTwoColumnRow(name, `$${cost}`);
+  preciousMetals.forEach(({ symbol, cost }) => {
+    const row = createTwoColumnRow(symbol, `$${cost}`);
     tbody.push(row);
   });
 

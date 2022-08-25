@@ -317,6 +317,12 @@ class Player {
     return 1;
   }
 
+  addGoldCoins(card) {
+    this.#assets.preciousMetals.push(card);
+    this.updateCash(-card.cost, 'Gold Coins');
+    return 1;
+  }
+
   profile() {
     return {
       profession: this.#profession,

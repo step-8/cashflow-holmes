@@ -92,6 +92,13 @@ class Turn {
     this.#turnCompleted = true;
   }
 
+  buyGoldCoins() {
+    const status = this.#currentPlayer.addGoldCoins(this.#card);
+    this.setTransactionState('deals', status);
+    this.#log.addLog(this.#playerInfo(), `bought ${this.#card.count} gold coins`);
+    this.#turnCompleted = true;
+  }
+
   charity() {
     const amount = 0.1 * this.#currentPlayer.details.profile.totalIncome;
     const status = this.#currentPlayer.charity();
