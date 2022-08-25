@@ -4,12 +4,18 @@ class Turn {
   #turnCompleted;
   #log;
   #currentTransaction;
+  #response;
 
-  constructor(card, currentPlayer, log) {
+  constructor(card, currentPlayer, log, response) {
     this.#card = card;
     this.#currentPlayer = currentPlayer;
-    this.#turnCompleted = false;
+    this.#response = response;
     this.#log = log;
+  }
+
+  respond() {
+    const username = this.#currentPlayer.username;
+    this.#response.responded = username;
   }
 
   #playerInfo() {
@@ -34,18 +40,20 @@ class Turn {
     this.#currentTransaction = { family, status };
   }
 
-  #changeTurnIfNoCard() {
+  #changeTurnIfNoCard(username) {
     if (this.#card.id) {
       return;
     }
-    this.#turnCompleted = true;
+    this.respond();
   }
 
   payday() {
+    const username = this.#currentPlayer.username;
     this.#currentPlayer.payday();
     this.#log.addLog(this.#playerInfo(), `received pay of $${this.#cashflow()}`);
+
     this.setTransactionState('payday', 1);
-    this.#changeTurnIfNoCard();
+    this.#changeTurnIfNoCard(username);
     return true;
   }
 
@@ -58,7 +66,7 @@ class Turn {
     }
 
     this.#log.addLog(this.#playerInfo(), `payed $${cost} on ${this.#card.heading}`);
-    this.#turnCompleted = true;
+    this.respond();
   }
 
   buyLottery() {
@@ -79,7 +87,7 @@ class Turn {
       return;
     }
     this.#log.addLog(this.#playerInfo(), `bought ${this.#card.symbol}`);
-    this.#turnCompleted = true;
+    this.respond();
   }
 
   buyStocks(count) {
@@ -89,7 +97,7 @@ class Turn {
       return;
     }
     this.#log.addLog(this.#playerInfo(), `bought ${count} ${this.#card.symbol} stocks`);
-    this.#turnCompleted = true;
+    this.respond();
   }
 
   buyGoldCoins() {
@@ -109,7 +117,7 @@ class Turn {
 
     this.#currentPlayer.initializeDualDiceCount();
     this.#log.addLog(this.#playerInfo(), `donated $${amount} to charity`);
-    this.#turnCompleted = true;
+    this.respond();
   }
 
   downsized() {
@@ -124,7 +132,8 @@ class Turn {
     this.#currentPlayer.initializeSkippedTurns();
     this.#log.addLog(this.#playerInfo(), 'is downsized');
     this.#log.addLog(this.#playerInfo(), `paid expenses $${amount}`);
-    this.#turnCompleted = true;
+
+    this.respond();
   }
 
   baby() {
@@ -133,7 +142,8 @@ class Turn {
       message = 'got new baby';
     }
     this.#log.addLog(this.#playerInfo(), message);
-    this.#turnCompleted = true;
+
+    this.respond();
   }
 
   #updateLotteryAmount(amount, status) {
@@ -145,7 +155,7 @@ class Turn {
     this.#currentPlayer.updateLotteryAmount(amount);
     this.#log.addLog(this.#playerInfo(), messages[status]);
     this.setTransactionState('deal', status);
-    this.#turnCompleted = true;
+    this.respond();
   }
 
   #decideMoneyLottery(diceValue) {
@@ -175,15 +185,16 @@ class Turn {
   #decideSplitOrReverse(players, diceValue) {
     const { success } = this.#card;
     const playersHavingStock = players.filter((player) => this.#hasGivenStock(player));
+
     if (success.includes(diceValue)) {
       playersHavingStock.forEach((player) => this.#splitStocks(player));
       this.#currentPlayer.deactivateReroll();
-      this.#turnCompleted = true;
+      this.respond();
       return;
     }
     playersHavingStock.forEach((player) => this.#reverseSplitStocks(player));
     this.#currentPlayer.deactivateReroll();
-    this.#turnCompleted = true;
+    this.respond();
   }
 
   #decideLottery(players, diceValue) {
@@ -204,7 +215,8 @@ class Turn {
 
   skip() {
     this.#log.addLog(this.#playerInfo(), `skipped ${this.#card.symbol}`);
-    this.#turnCompleted = true;
+
+    this.respond();
   }
 
   setTurnCompleted(state) {
@@ -226,7 +238,8 @@ class Turn {
   sellStocks(players, count) {
     this.setTransactionState('deals', 2);
     this.#log.addLog(this.#playerInfo(), `sold ${count} ${this.#card.symbol} stocks`);
-    this.#turnCompleted = true;
+
+    this.respond();
   }
 
   propertyDamage() {
@@ -238,14 +251,16 @@ class Turn {
     }
 
     this.#log.addLog(this.#playerInfo(), message);
-    this.#turnCompleted = true;
+
+    this.respond();
   }
 
   get info() {
     return {
       player: this.#currentPlayer,
       card: this.#card, //No need of card
-      state: this.#turnCompleted,
+      state: this.#response.isReceived(this.#currentPlayer.username),
+      // state: this.#turnCompleted,
       transaction: this.#currentTransaction
     };
   }

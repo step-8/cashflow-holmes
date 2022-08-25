@@ -53,13 +53,10 @@ const addDollar = (number) => {
 };
 
 const drawForCurrentUser = (fn) => (game) => {
-  API.userInfo()
-    .then(res => res.json())
-    .then(({ username }) => {
-      if (game.currentPlayer.username === username) {
-        fn(game);
-      }
-    });
+  const { username } = game;
+  if (game.currentPlayer.username === username) {
+    fn(game);
+  }
 };
 
 const camelToCapitalize = (word) => {

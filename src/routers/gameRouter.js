@@ -17,7 +17,6 @@ const {
   cancelGameHandler,
   hostHandler,
   removeGameIdHandler,
-  getUserInfoHandler,
   rollDiceHandler,
   changeTurnHandler,
   reRollHandler,
@@ -34,7 +33,6 @@ const createGameRouter = (router, config) => {
   router.get('/guest-lobby', guestLobbyHandler);
   router.get('/leave-lobby', leaveLobbyHandler);
   router.get('/cancel-game', cancelGameHandler);
-  router.get('/get-user-info', getUserInfoHandler);
   router.get('/roll-dice/:diceCount', rollDiceHandler);
   router.get('/reroll', reRollHandler);
   router.get('/change-turn', changeTurnHandler);

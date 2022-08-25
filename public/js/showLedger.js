@@ -53,7 +53,7 @@ const ledgerWindow = (profile, color, username) => {
   ];
 };
 
-const createExpansionScreens = ({ players }, username) => {
+const createExpansionWindows = ({ players, username }) => {
   const player = findPlayer(players, username);
   const { profile, color } = player;
 
@@ -71,12 +71,4 @@ const createExpansionScreens = ({ players }, username) => {
     expansionWindowScreens.otherPlayerProfiles[username] =
       generateProfile(player);
   });
-};
-
-const createExpansionWindows = (game) => {
-  API.userInfo()
-    .then(res => res.json())
-    .then(({ username }) => {
-      createExpansionScreens(game, username);
-    });
 };

@@ -3,6 +3,7 @@ const { RatRace } = require('./ratRace.js');
 const { Turn } = require('./turn.js');
 const { Log } = require('./log.js');
 const { toWords } = require('../utils/commonLib.js');
+const { Response, createResponses } = require('./response.js');
 
 class Game {
   #gameID;
@@ -26,10 +27,12 @@ class Game {
     this.#currentPlayer = players[0];
     this.#dice = dice;
     this.#diceValues = this.#dice.face();
-    this.#ratRace = new RatRace(deck);
     this.#log = new Log();
+    this.#currentTurn = new Turn(
+      this.#currentCard, this.#currentPlayer, this.#log,
+      new Response(createResponses(players)));
+    this.#ratRace = new RatRace(deck);
     this.#notifications = [];
-    this.#currentTurn = new Turn(this.#currentCard, this.#currentPlayer, this.#log);
   }
 
   #getCardType() {
@@ -97,12 +100,16 @@ class Game {
     this.currentPlayer.changeDiceStatus(false);
   }
 
-  changeTurn() {
+  nextPlayer() {
     ++this.#currentPlayerIndex;
     this.#currentPlayerIndex = this.#currentPlayerIndex % this.#players.length;
-    this.#currentTurn.updatePlayer(this.currentPlayer);
+    return this.currentPlayer;
+  }
+
+  changeTurn() {
+    const responses = new Response(createResponses(this.#players));
+    this.#currentTurn = new Turn(null, this.nextPlayer(), this.#log, responses);
     this.resetDice();
-    this.#currentTurn.setTurnCompleted(false);
     this.#currentCard = null;
     this.#notifications = [];
 

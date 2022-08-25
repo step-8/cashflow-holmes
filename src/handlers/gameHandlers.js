@@ -53,10 +53,6 @@ const removeGameIdHandler = (req, res) => {
   res.end();
 };
 
-const getUserInfoHandler = (req, res) => {
-  res.json({ username: req.session.username });
-};
-
 const rollDiceHandler = (req, res) => {
   const { game } = req;
   const { diceCount } = req.params;
@@ -81,7 +77,6 @@ module.exports = {
   showProfessionHandler,
   gameBoardHandler,
   removeGameIdHandler,
-  getUserInfoHandler,
   rollDiceHandler,
   changeTurnHandler,
   reRollHandler

@@ -127,31 +127,28 @@
   };
 
   const activateDice = (game) => {
-    API.userInfo()
-      .then(res => res.json())
-      .then(userInfo => {
-        const { username, isRolledDice, skippedTurns } = game.currentPlayer;
-        const diceBox = document.querySelector('#dice-box');
+    const username = game.username;
+    const { username: currentPlayerName, isRolledDice, skippedTurns } = game.currentPlayer;
+    const diceBox = document.querySelector('#dice-box');
 
-        // need to use css classes instead. classlist add/remove.
-        if (userInfo.username === username && !isRolledDice && skippedTurns === 0) {
-          diceBox.style.opacity = 1;
-          diceBox.style.border = '2px solid black';
-          diceBox.style.zIndex = 1;
-          diceBox.onclick = () => {
-            API.getGame()
-              .then(res => res.json())
-              .then(rollDice);
-          };
-          drawForCurrentUser(drawToggle)(game);
-        } else {
-          diceBox.style.opacity = 0.5;
-          diceBox.style.zIndex = -1;
-          diceBox.style.border = '2px dashed black';
-          diceBox.onclick = null;
-          resetToggler();
-        }
-      });
+    if (username === currentPlayerName && !isRolledDice && skippedTurns === 0) {
+      diceBox.style.opacity = 1;
+      diceBox.style.border = '2px solid black';
+      diceBox.style.zIndex = 1;
+      diceBox.onclick = () => {
+        API.getGame()
+          .then(res => res.json())
+          .then(rollDice);
+      };
+      drawForCurrentUser(drawToggle)(game);
+
+    } else {
+      diceBox.style.opacity = 0.5;
+      diceBox.style.zIndex = -1;
+      diceBox.style.border = '2px dashed black';
+      diceBox.onclick = null;
+      resetToggler();
+    }
     return game;
   };
 
@@ -483,8 +480,7 @@
     return stock;
   };
 
-  const drawActions = (userInfo, family, currentCard, currentPlayer) => {
-    const { username } = userInfo;
+  const drawActions = (username, family, currentCard, currentPlayer) => {
     let actions = '';
     const { assets } = currentPlayer.profile;
     const stock = findStock(currentCard, assets);
@@ -565,7 +561,7 @@
   };
 
   const drawCard = (game) => {
-    const { currentCard, currentPlayer } = game;
+    const { currentCard, currentPlayer, username } = game;
     const { canReRoll } = currentPlayer;
     const cardEle = getElement('#main-card');
 
@@ -583,11 +579,7 @@
       return;
     }
 
-    API.userInfo()
-      .then(res => res.json())
-      .then(userInfo => {
-        drawActions(userInfo, family, currentCard, currentPlayer);
-      });
+    drawActions(username, family, currentCard, currentPlayer);
   };
 
   const drawPlayersList = (game) => {
@@ -784,20 +776,17 @@
 
 
   const decideLoanActions = (game) => {
-    API.userInfo()
-      .then(res => res.json())
-      .then(({ username }) => {
-        const player = findPlayer(game.players, username);
-        const loan = player.profile.liabilities.bankLoan;
-        const payLoanEle = getElement('#pay-loan');
-        if (!payLoanEle) {
-          return;
-        }
-        payLoanEle.onclick = (event) => event;
-        if (loan > 0) {
-          payLoanEle.onclick = (event) => drawLoan(event);
-        }
-      });
+    const username = game.username;
+    const player = findPlayer(game.players, username);
+    const loan = player.profile.liabilities.bankLoan;
+    const payLoanEle = getElement('#pay-loan');
+    if (!payLoanEle) {
+      return;
+    }
+    payLoanEle.onclick = (event) => event;
+    if (loan > 0) {
+      payLoanEle.onclick = (event) => drawLoan(event);
+    }
   };
 
   const drawLottery = (game) => {

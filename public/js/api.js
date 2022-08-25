@@ -13,7 +13,6 @@ const API = {
   cardAction: (options) => fetchReq('/card/card-action', options),
   removeNotification: () => fetchReq('card/remove-notify'),
   cancelGame: () => fetchReq('/remove-game'),
-  userInfo: () => fetchReq('/get-user-info'),
   playerInfo: () => fetchReq('/api/player-info'),
   getGame: () => fetchReq('/api/game'),
   changeTurn: () => fetchReq('/change-turn'),

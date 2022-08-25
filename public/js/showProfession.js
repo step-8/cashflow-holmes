@@ -60,7 +60,7 @@
     drawLiabilites(profile);
   };
 
-  const createPlayers = ({ players }, { username }) => {
+  const drawPlayers = ({ players, username }) => {
     const table = document.createElement('table');
     const heading = ['tr', {},
       ['th', {}, 'Player'],
@@ -79,14 +79,6 @@
       table.appendChild(html(playerTemplate));
     });
     getElement('#other-players').prepend(table);
-  };
-
-  const drawPlayers = (game) => {
-    API.userInfo()
-      .then(res => res.json())
-      .then(userInfo => {
-        createPlayers(game, userInfo);
-      });
   };
 
   const showProfession = () => {
