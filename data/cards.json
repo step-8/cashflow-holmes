@@ -1,10 +1,118 @@
 {
   "smallDeal": [
     {
-      "id": "smallDealRealEstate01",
+      "id": "realEstateS1",
       "type": "realEstate",
-      "symbol": "2BR/1BA",
-      "heading": "House for Sale - 2BR/1BA",
+      "symbol": "2Br/1Ba",
+      "heading": "You Find a Great Deal!",
+      "description": "Older 2/1 house, repossessed by government agency. Ready to go with government financing and a tenant. Take out a loan if you must, but BUY THIS!",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 35000,
+      "mortgage": 33000,
+      "downPayment": 2000,
+      "cashFlow": 220
+    },
+    {
+      "id": "realEstateS12",
+      "type": "realEstate",
+      "symbol": "2Br/1Ba",
+      "heading": "You Find a Great Deal!",
+      "description": "Company bought transferred-manager's 2/1 house. No current tenant, it has been on market six months and it has just been reduced. Take out a loan if you must, but BUY THIS!",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 45000,
+      "mortgage": 43000,
+      "downPayment": 2000,
+      "cashFlow": 250
+    },
+    {
+      "id": "realEstateS6",
+      "type": "realEstate",
+      "symbol": "2Br/1Ba",
+      "heading": "Condo for Sale - 2BR/1BA",
+      "description": "Bank foreclosure! 2/1 condo in a desirable neighborhood close to jobs and stores. Make offer, favorable financing by bank.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 40000,
+      "mortgage": 35000,
+      "downPayment": 5000,
+      "cashFlow": 220
+    },
+    {
+      "id": "realEstateS4",
+      "type": "realEstate",
+      "symbol": "2Br/1Ba",
+      "heading": "Condo for Sale - 2BR/1BA",
+      "description": "Older 2/1 condo offered by young couple who want to move up to a 3/2 house due to growing family. Available soon.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 55000,
+      "mortgage": 50000,
+      "downPayment": 5000,
+      "cashFlow": 160
+    },
+    {
+      "id": "realEstateS3",
+      "type": "realEstate",
+      "symbol": "2Br/1Ba",
+      "heading": "Condo for Sale - 2BR/1BA",
+      "description": "Parents selling 2/1 condo used by their child in college town. Lots of demand for rentals in this area.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 40000,
+      "mortgage": 36000,
+      "downPayment": 4000,
+      "cashFlow": 140
+    },
+    {
+      "id": "realEstateS5",
+      "type": "realEstate",
+      "symbol": "2Br/1Ba",
+      "heading": "Condo for Sale - 2BR/1BA",
+      "description": "Excellent 2/1 condo with many extras. Owner wants to relocate for dream job FAST! She's moving up- you can too! No Cash Flow, but a possible capital gains opportunity",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 40000,
+      "mortgage": 39000,
+      "downPayment": 1000,
+      "cashFlow": 0
+    },
+    {
+      "id": "realEstateS11",
+      "type": "realEstate",
+      "symbol": "2Br/1Ba",
+      "heading": "House For Sale - 2BR/1BA",
+      "description": "Nice 2/1 house available in a depressed market due to layoffs. Would make a good investment property for the right buyer.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 50000,
+      "mortgage": 46000,
+      "downPayment": 4000,
+      "cashFlow": 200
+    },
+    {
+      "id": "realEstateS7",
+      "type": "realEstate",
+      "symbol": "2Br/1Ba",
+      "heading": "House For Sale - 2BR/1BA",
+      "description": "Not lived in six months, this bank-foreclosed house just reduced. Loan includes estimated repair costs.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 50000,
+      "mortgage": 48000,
+      "downPayment": 2000,
+      "cashFlow": 200
+    },
+    {
+      "id": "realEstateS10",
+      "type": "realEstate",
+      "symbol": "2Br/1Ba",
+      "heading": "House For Sale - 2BR/1BA",
+      "description": "Nice 2/1 rental house suddenly available due to estate closing. Well-maintained older property with existing tenant.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 65000,
+      "mortgage": 60000,
+      "downPayment": 5000,
+      "cashFlow": 160
+    },
+    {
+      "id": "realEstateS8",
+      "type": "realEstate",
+      "symbol": "2Br/1Ba",
+      "heading": "House For Sale - 2BR/1BA",
       "description": "Low down payment to pick up this 2/1 house. Owner/seller unexpectedly moving out of town. Right person will do well.",
       "rule": "Use this yourself or sell to another player",
       "cost": 50000,
@@ -13,16 +121,294 @@
       "cashFlow": 100
     },
     {
-      "id": "smallDealRealEstate02",
+      "id": "realEstateS9",
       "type": "realEstate",
-      "symbol": "3BR/1BA",
-      "heading": "House for Sale - 3BR/1BA",
-      "description": "Low down payment to pick up this 3/1 house. Owner/seller unexpectedly moving out of town. Right person will do well.",
+      "symbol": "2Br/1Ba",
+      "heading": "House For Sale - 2BR/1BA",
+      "description": "2/1 house in an older area offered by the Highway Department. The market has crashed and the city MUST sell. No Cash Flow but a possible capital gains opportunity.",
       "rule": "Use this yourself or sell to another player",
-      "cost": 75000,
-      "mortgage": 70000,
-      "downPayment": 5000,
-      "cashFlow": 300
+      "cost": 30000,
+      "mortgage": 29000,
+      "downPayment": 1000,
+      "cashFlow": 0
+    },
+    {
+      "id": "gro4us40",
+      "type": "stock",
+      "symbol": "GRO4US",
+      "heading": "Mutual Fund - GRO4US Fund",
+      "description": "Powerhouse market drives fund's price up to record high",
+      "rule": "Only you may buy as many units as you want at this price. Everyone may sell at this price",
+      "price": 40,
+      "range": [
+        20,
+        30
+      ]
+    },
+    {
+      "id": "gro4us30",
+      "type": "stock",
+      "symbol": "GRO4US",
+      "heading": "Mutual Fund - GRO4US Fund",
+      "description": "Brilliant young fund manager. Everyone believes he has the Midas touch",
+      "rule": "Only you may buy as many units as you want at this price. Everyone may sell at this price",
+      "price": 30,
+      "range": [
+        20,
+        30
+      ]
+    },
+    {
+      "id": "gro4us20",
+      "type": "stock",
+      "symbol": "GRO4US",
+      "heading": "Mutual Fund - GRO4US Fund",
+      "description": "Lower interest rates drive market and fund to strong showing.",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price",
+      "price": 20,
+      "range": [
+        20,
+        30
+      ]
+    },
+    {
+      "id": "gro4us10",
+      "type": "stock",
+      "symbol": "GRO4US",
+      "heading": "Mutual Fund - GRO4US Fund",
+      "description": "Weak showing in job growth causes lack of consumer confidence. Shares fall with public opinion.",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price",
+      "price": 10,
+      "range": [
+        20,
+        30
+      ]
+    },
+    {
+      "id": "gro4us05",
+      "type": "stock",
+      "symbol": "GRO4US",
+      "heading": "Mutual Fund - GRO4US Fund",
+      "description": "Weak earnings report leads to weak price of mutual fund.",
+      "rule": "Only you may buy as many units as you want at this price. Everyone may sell at this price",
+      "price": 5,
+      "range": [
+        20,
+        30
+      ]
+    },
+    {
+      "id": "myt4u40",
+      "type": "stock",
+      "symbol": "MYT4U",
+      "heading": "Stock - MYT4U Electronics Co.",
+      "description": "Booming market leads to record share price of this electronics seller!",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
+      "price": 40,
+      "range": [
+        10,
+        30
+      ]
+    },
+    {
+      "id": "myt4u30",
+      "type": "stock",
+      "symbol": "MYT4U",
+      "heading": "MYT4U Electronics Co.",
+      "description": "Low interest rates lead to favorable share price for this electronics seller.",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
+      "price": 30,
+      "range": [
+        10,
+        30
+      ]
+    },
+    {
+      "id": "myt4u20",
+      "type": "stock",
+      "symbol": "MYT4U",
+      "heading": "Stock - MYT4U Electronics Co.",
+      "description": "Weak market leads to sagging share price for this electronics seller.",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
+      "price": 10,
+      "range": [
+        10,
+        30
+      ]
+    },
+    {
+      "id": "myt4u10",
+      "type": "stock",
+      "symbol": "MYT4U",
+      "heading": "Stock - MYT4U Electronics Co.",
+      "description": "New product flops and tough losses are reported! Share price drops.",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
+      "price": 10,
+      "range": [
+        10,
+        30
+      ]
+    },
+    {
+      "id": "myt4u05",
+      "type": "stock",
+      "symbol": "MYT4U",
+      "heading": "Stock - MYT4U Electronics Co.",
+      "description": "Record interest rates lead to substandard share price for this electronics seller",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
+      "price": 5,
+      "range": [
+        10,
+        30
+      ]
+    },
+    {
+      "id": "ok4u40",
+      "type": "stock",
+      "symbol": "OK4U",
+      "heading": "Stock - OK4U Drug Co.",
+      "description": "Booming market raises share price of this longtime pharmaceutical company.",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
+      "price": 40,
+      "range": [
+        5,
+        30
+      ]
+    },
+    {
+      "id": "ok4u30",
+      "type": "stock",
+      "symbol": "OK4U",
+      "heading": "Stock - OK4U Drug Co.",
+      "description": "Low inflation leads to high share price for this long time pharmaceutical company.",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
+      "price": 30,
+      "range": [
+        5,
+        30
+      ]
+    },
+    {
+      "id": "ok4u20",
+      "type": "stock",
+      "symbol": "OK4U",
+      "heading": "Stock - OK4U Drug Co.",
+      "description": "Inflation worries cause poor share price for this longtime pharmaceutical company.",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
+      "price": 20,
+      "range": [
+        5,
+        30
+      ]
+    },
+    {
+      "id": "ok4u10",
+      "type": "stock",
+      "symbol": "OK4U",
+      "heading": "Stock - OK4U Drug Co.",
+      "description": "Research and development delays cause low share price for this longtime pharmaceutical company",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
+      "price": 10,
+      "range": [
+        5,
+        40
+      ]
+    },
+    {
+      "id": "ok4u05",
+      "type": "stock",
+      "symbol": "OK4U",
+      "heading": "Stock - OK4U Drug Co.",
+      "description": "Interest rates cripple share price of this longtime pharmaceutical company.",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
+      "price": 5,
+      "range": [
+        5,
+        30
+      ]
+    },
+    {
+      "id": "on2u40",
+      "type": "stock",
+      "symbol": "ON2U",
+      "heading": "Stock - ON2U Entertainment Co.",
+      "description": "Box office hit by children's division causes record share price.",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
+      "price": 40,
+      "range": [
+        10,
+        30
+      ]
+    },
+    {
+      "id": "on2u30",
+      "type": "stock",
+      "symbol": "ON2U",
+      "heading": "Stock - ON2U Entertainment Co.",
+      "description": "Strong demand for company's library of old movies leads to good share price.",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
+      "price": 30,
+      "range": [
+        10,
+        30
+      ]
+    },
+    {
+      "id": "on2u20",
+      "type": "stock",
+      "symbol": "ON2U",
+      "heading": "Stock - ON2U Entertainment Co.",
+      "description": "New director of movie acquisitions brings revived prospects for share price.",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
+      "price": 20,
+      "range": [
+        10,
+        30
+      ]
+    },
+    {
+      "id": "on2u10",
+      "type": "stock",
+      "symbol": "ON2U",
+      "heading": "Stock - ON2U Entertainment Co.",
+      "description": "Movie buyer fired after third mega-flop! Shares sink. Chairman's bonus canceled.",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
+      "price": 10,
+      "range": [
+        10,
+        30
+      ]
+    },
+    {
+      "id": "on2u05",
+      "type": "stock",
+      "symbol": "ON2U",
+      "heading": "Stock - ON2U Entertainment Co.",
+      "description": "Newest theme park is a huge flop, reports record losses. Share price hits all-time low.",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
+      "price": 5,
+      "range": [
+        10,
+        30
+      ]
+    },
+    {
+      "id": "gold1",
+      "type": "goldCoins",
+      "symbol": "GOLD",
+      "heading": "Coin Collector Liquidates",
+      "description": "A coin collector needs cash quick to shore up a tax issue.Will sell you five(5) gold coins, well below going rate.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 1000
+    },
+    {
+      "id": "gold2",
+      "type": "goldCoins",
+      "symbol": "GOLD",
+      "heading": "Friend Needs Cash Quick",
+      "description": "A friend has urgent need for money.Will sell you ten(10) gold coins, well below going rate.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 3000
     },
     {
       "id": "lottery01",
@@ -30,11 +416,11 @@
       "symbol": "lottery",
       "heading": "Sister-In-Law borrows Money",
       "lottery": "money",
-      "description": "Sister-in-law is downsized.Needs $5000 to make house payment. She promises to pay you back $10000 after she finds a new job.",
-      "rule": "If you choose to help. Pay cost and roll a die",
+      "description": "Sister-in-law is downsized.Needs $5,000 to make house payment. She promises to pay you back $10,000 after she finds a new job.",
+      "rule": "If you choose to help. Pay $5,000 and roll 1 die:",
       "subRule": [
-        "Die = 1-3, She never pays you back and you lost $5000",
-        "Die = 4-6, She pays you back $10000, but family get-togethers are still awkward"
+        "Die = 1-3, She never pays you back and you're out $5,000",
+        "Die = 4-6, She pays you back $10,000, but family get-togethers are still awkward"
       ],
       "cost": 5000,
       "failure": [
@@ -51,57 +437,829 @@
         "failure": 0,
         "success": 10000
       }
-    },
-    {
-      "id": "smallDealStock01",
-      "type": "stock",
-      "symbol": "OK4U",
-      "heading": "Stock - OK4U Drug Co.",
-      "description": "Interest rates cripple share price of this long time maker of medicines.",
-      "rule": "Only you may buy as many shares as you want at this price.Everyone may sell at this price.",
-      "price": 5,
-      "range": [
-        5,
-        30
-      ]
-    },
-    {
-      "id": "smallDealMLM01",
-      "type": "MLM",
-      "heading": "Multi-Level Marketing Buy-in",
-      "description": "You have a chance to invest in Multi-Level-Marketing opportunity. Company is looking to spread the reach of the newest venture.",
-      "rule": "If you choose to buy pay cost. Every payday roll 1 die",
-      "subRule": [
-        "Die = 1-3, No returns this month, Keep trying",
-        "Die = 4-6, Your sweat equity paid off!"
-      ],
-      "cost": 500
     }
   ],
   "bigDeal": [
     {
-      "id": "bigDealRealEstate01",
+      "id": "realEstateB1",
       "type": "realEstate",
-      "symbol": "4-Plex",
-      "heading": "4-Plex for sale",
-      "description": "Nice, well-maintained 4-Plex in good neighbourhood. Stable tenants, positive cash flow, minor repairs.",
+      "symbol": "8PLEX",
+      "heading": "8-plex for Sale",
+      "description": "Reinvesting owner offers 8-plex for sale at reasonable price. Financing already in place. All it needs is your down payment.",
       "rule": "Use this yourself or sell to another player",
-      "cost": 225000,
-      "mortgage": 210000,
-      "downPayment": 15000,
-      "cashFlow": 700
+      "cost": 220000,
+      "mortgage": 180000,
+      "downPayment": 40000,
+      "cashFlow": 1700
     },
     {
-      "id": "bigDealRealEstate02",
+      "id": "realEstateB2",
       "type": "realEstate",
-      "symbol": "4-Plex",
-      "heading": "4-Plex for sale",
-      "description": "Nice, well-maintained 4-Plex in good neighbourhood. Stable tenants, positive cash flow, minor repairs.",
+      "symbol": "3Br/2ba",
+      "heading": "House for Sale - 3 Br/2 Ba",
       "rule": "Use this yourself or sell to another player",
-      "cost": 225000,
-      "mortgage": 210000,
+      "cost": 70000,
+      "mortgage": 50000,
+      "downPayment": 20000,
+      "cashFlow": 500
+    },
+    {
+      "id": "realEstateB3",
+      "type": "realEstate",
+      "symbol": "3Br/2Ba",
+      "heading": "House for Sale - 3 Br/2 Ba",
+      "description": "Good investment potential in this 3/2 house if you can be patient. Positive cash flow even though rents are weak.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 65000,
+      "mortgage": 57000,
+      "downPayment": 8000,
+      "cashFlow": 300
+    },
+    {
+      "id": "realEstateB4",
+      "type": "realEstate",
+      "symbol": "4PLEX",
+      "heading": "4-plex for Sale",
+      "description": "4-plex available - forced sale. Out-of-state, financially distressed owner years behind on taxes. Some records available.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 80000,
+      "mortgage": 64000,
+      "downPayment": 16000,
+      "cashFlow": 750
+    },
+    {
+      "id": "realEstateB5",
+      "type": "realEstate",
+      "symbol": "8PLEX",
+      "heading": "8-plex for Sale",
+      "description": "Professional person urgently needs cash to save partnership. 8-plex sale to raise capital, good opportunity for right person.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 16000,
+      "mortgage": 128000,
+      "downPayment": 32000,
+      "cashFlow": 1700
+    },
+    {
+      "id": "realEstateB7",
+      "type": "realEstate",
+      "symbol": "20Acres",
+      "heading": "20 Acres for Sale",
+      "description": " 20 acres of vacant land, currently zoned residential. Possibly of good appreciation if rezoned commercial.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 20000,
+      "mortgage": 0,
+      "downPayment": 20000,
+      "cashFlow": 0
+    },
+    {
+      "id": "realEstateB8",
+      "type": "realEstate",
+      "symbol": "8PLEX",
+      "heading": "8-plex for Sale",
+      "description": "Retiring investor/owner offers his 8-plex at current appraisal value. Professional lawn service and management. Full records.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 240000,
+      "mortgage": 200000,
+      "downPayment": 40000,
+      "cashFlow": 950
+    },
+    {
+      "id": "realEstateB9",
+      "type": "realEstate",
+      "symbol": "4PLEX",
+      "heading": "4-plex for Sale",
+      "description": "\"Project\" 4-plex for sale in rehabilitating neighborhood. Owner being forced out by income tax liens.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 80000,
+      "mortgage": 60000,
+      "downPayment": 20000,
+      "cashFlow": 400
+    },
+    {
+      "id": "realEstateB10",
+      "type": "realEstate",
+      "symbol": "4PLEX",
+      "heading": "4-plex for Sale",
+      "description": "Older 4-plex next to new highway for sale. Owner/occupant moving to wuieter area. Priced for quick sale.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 90000,
+      "mortgage": 75000,
       "downPayment": 15000,
-      "cashFlow": 700
+      "cashFlow": 500
+    },
+    {
+      "id": "realEstateB11",
+      "type": "realEstate",
+      "symbol": "PIZZA",
+      "heading": "Pizza Franchise for Sale",
+      "description": "Healthy-pizza company franchise. Trend in nutritious fast-food booming. Next to college. High Traffic",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 500000,
+      "mortgage": 400000,
+      "downPayment": 100000,
+      "cashFlow": 5000
+    },
+    {
+      "id": "realEstateB12",
+      "type": "realEstate",
+      "symbol": "DUPLEX",
+      "heading": "Duplex for Sale",
+      "description": "Duplex owner must sell to pay hospital bills. Two tenants in place, all records, good investment oppurtunity.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 60000,
+      "mortgage": 48000,
+      "downPayment": 12000,
+      "cashFlow": 400
+    },
+    {
+      "id": "realEstateB13",
+      "type": "realEstate",
+      "symbol": "Bed&Br",
+      "heading": "Bed & Breakfast for Sale",
+      "description": "Owner retiring, wants out NOW. Great clientele in resort community. 5Br/3Ba.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 150000,
+      "mortgage": 120000,
+      "downPayment": 30000,
+      "cashFlow": 1000
+    },
+    {
+      "id": "realEstateB14",
+      "type": "realEstate",
+      "symbol": "3Br/2Ba",
+      "heading": "House for Sale - 3 Br/2 Ba",
+      "description": "3/2 house on golf course offers potential capital gain plus current cash flow. Good rentals and nice financing.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 75000,
+      "mortgage": 68000,
+      "downPayment": 32000,
+      "cashFlow": 2000
+    },
+    {
+      "id": "realEstateB15",
+      "type": "realEstate",
+      "symbol": "DUPLEX",
+      "heading": "Duplex for Sale",
+      "description": "Tenants in place at this investment duplex! Owner has income tax problems, needs to sell quickly.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 45000,
+      "mortgage": 37000,
+      "downPayment": 8000,
+      "cashFlow": 320
+    },
+    {
+      "id": "realEstateB16",
+      "type": "realEstate",
+      "symbol": "4PLEX",
+      "heading": "4-plex for Sale",
+      "description": "4-plex for sale by owner, moving to another state. Full records, fully rented, low occupant turnover in good neighborhood.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 140000,
+      "mortgage": 108000,
+      "downPayment": 32000,
+      "cashFlow": 2000
+    },
+    {
+      "id": "realEstateB17",
+      "type": "realEstate",
+      "symbol": "3Br/2Ba",
+      "heading": "House for Sale - 3 Br/2 Ba",
+      "description": "Businessman liquidating this 3/2 house, needs cash to save his business. Currently occupied by happy tenant.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 65000,
+      "mortgage": 58000,
+      "downPayment": 7000,
+      "cashFlow": 150
+    },
+    {
+      "id": "realEstateB18",
+      "type": "realEstate",
+      "symbol": "3Br/2Ba",
+      "heading": "House for Sale - 3 Br/2 Ba",
+      "description": "Still level 3/2 house on out of way golf course offered by heirs of owner. Gold membership included.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 115000,
+      "mortgage": 105000,
+      "downPayment": 10000,
+      "cashFlow": 100
+    },
+    {
+      "id": "realEstateB19",
+      "type": "realEstate",
+      "symbol": "3Br/2Ba",
+      "heading": "House for Sale - 3 Br/2 Ba",
+      "description": "Nice 3/2 house with in ground pool and full appliances available in upper middle class area. Good schools.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 125000,
+      "mortgage": 105000,
+      "downPayment": 20000,
+      "cashFlow": 100
+    },
+    {
+      "id": "realEstateB20",
+      "type": "realEstate",
+      "symbol": "2x 24u",
+      "heading": "Apartment Houses for Sale",
+      "description": "2 buildings totaling 24 units for sale. Owner managed with on-site assistant. Retirement prompts sale.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 575000,
+      "mortgage": 500000,
+      "downPayment": 75000,
+      "cashFlow": 3400
+    },
+    {
+      "id": "realEstateB21",
+      "type": "realEstate",
+      "symbol": "CarWash",
+      "heading": "Car Wash for Sale",
+      "description": "Family car wash for sale. Family feuding. Wants out ASAP. Prime location in highgrowth area.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 350000,
+      "mortgage": 300000,
+      "downPayment": 50000,
+      "cashFlow": 1500
+    },
+    {
+      "id": "realEstateB22",
+      "type": "realEstate",
+      "symbol": "12Unit",
+      "heading": "Apartment House for Sale",
+      "description": "12 unit apartment house offered by out-of-state heirs of handyman/owner. Long waiting list for apartment in this building.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 350000,
+      "mortgage": 300000,
+      "downPayment": 50000,
+      "cashFlow": 2400
+    },
+    {
+      "id": "realEstateB23",
+      "type": "realEstate",
+      "symbol": "4PLEX",
+      "heading": "4-plex for Sale",
+      "description": "Nice, well maintained 4-plex in good neighborhood. Stable tenants, positive cash flow, few problems. Full records.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 125000,
+      "mortgage": 110000,
+      "downPayment": 15000,
+      "cashFlow": 600
+    },
+    {
+      "id": "realEstateB24",
+      "type": "realEstate",
+      "symbol": "60Unit",
+      "heading": "Apartment House for Sale",
+      "description": "60 unit complex available from pension fund that foreclosed on builder/owner. On-site management in place.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 1200000,
+      "mortgage": 1000000,
+      "downPayment": 200000,
+      "cashFlow": 11000
+    },
+    {
+      "id": "realEstateB25",
+      "type": "realEstate",
+      "symbol": "DUPLEX",
+      "heading": "Duplex for Sale",
+      "description": "This duplex is the best in the neighborhood! Proud owner retiring to another state to be near her grandchildren.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 70000,
+      "mortgage": 63000,
+      "downPayment": 7000,
+      "cashFlow": 140
+    },
+    {
+      "id": "realEstateB26",
+      "type": "realEstate",
+      "symbol": "MALL",
+      "heading": "Small Shopping Mall for Sale",
+      "description": "Bank has taken back mall from bankrupt owner. Mall is currently 50% occupied. Just listed today.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 50000,
+      "mortgage": 0,
+      "downPayment": 50000,
+      "cashFlow": 800
+    },
+    {
+      "id": "realEstateB27",
+      "type": "realEstate",
+      "symbol": "24Unit",
+      "heading": "Apartment House for Sale",
+      "description": "24 unit older building near community college available from retiring owner/builder. Fully rented, nice cash flow.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 550000,
+      "mortgage": 500000,
+      "downPayment": 50000,
+      "cashFlow": 2800
+    },
+    {
+      "id": "realEstateB28",
+      "type": "realEstate",
+      "symbol": "DUPLEX",
+      "heading": "Duplex for Sale",
+      "description": "Well maintained duplex in desirable area available due to transfer of owner. Excellent investment opportunity for right buyer.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 60000,
+      "mortgage": 54000,
+      "downPayment": 6000,
+      "cashFlow": 300
+    },
+    {
+      "id": "realEstateB29",
+      "type": "realEstate",
+      "symbol": "3Br/2Ba",
+      "heading": "House for Sale - 3 Br/2 Ba",
+      "description": "Downsized manager must sell this 3/2 house, cannot afford payments on new salary. Area in transition.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 70000,
+      "mortgage": 61000,
+      "downPayment": 9000,
+      "cashFlow": 300
+    },
+    {
+      "id": "realEstateB30",
+      "type": "realEstate",
+      "symbol": "4PLEX",
+      "heading": "4-plex for Sale",
+      "description": "4-plex in recovering neighborhood. Fully rented repairs kept up. Needs your down payment and patience.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 100000,
+      "mortgage": 80000,
+      "downPayment": 20000,
+      "cashFlow": 800
+    },
+    {
+      "id": "realEstateB31",
+      "type": "realEstate",
+      "symbol": "3Br/2Ba",
+      "heading": "House for Sale - 3 Br/2 Ba",
+      "description": "Transferred skilled tradesman kept this 3/2 house in excellent condition, so it commands top dollar rentals in older neighborhood.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 67000,
+      "mortgage": 551000,
+      "downPayment": 12000,
+      "cashFlow": 400
+    },
+    {
+      "id": "realEstateB32",
+      "type": "realEstate",
+      "symbol": "8PLEX",
+      "heading": "8-plex for Sale",
+      "description": "Owner's legal troubles lead to forced sale of this 8-plex. No qualifying on this loan, as mortgage holder is cooperating.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 200000,
+      "mortgage": 160000,
+      "downPayment": 40000,
+      "cashFlow": 1600
+    },
+    {
+      "id": "realEstateB33",
+      "type": "realEstate",
+      "symbol": "DUPLEX",
+      "heading": "Duplex for Sale",
+      "description": "Owner moving out of this duplex due to growing family. Tenant remains, well maintained, excellent landscaping.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 50000,
+      "mortgage": 42000,
+      "downPayment": 8000,
+      "cashFlow": 240
+    },
+    {
+      "id": "realEstateB34",
+      "type": "realEstate",
+      "symbol": "5Br/4Ba",
+      "heading": "Mansion for Sale - 5 Br/4 Ba",
+      "description": "5/4.5 house outside of metropolitan area offers potential capital gain plus current cash flow. Good rentals and nice financing.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 820000,
+      "mortgage": 750000,
+      "downPayment": 80000,
+      "cashFlow": 8200
+    },
+    {
+      "id": "realEstateB35",
+      "type": "realEstate",
+      "symbol": "6Br/6Ba",
+      "heading": "Mansion for Sale - 6 Br/6 Ba",
+      "description": "6/6 house in exclusive hollywood neighborhood offers potential capital gain plus current cash flow. Good rentals and nice financing.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 11000000,
+      "mortgage": 8000000,
+      "downPayment": 3000000,
+      "cashFlow": 55000
+    }
+  ],
+  "doodad": [
+    {
+      "id": "doodad1",
+      "type": "doodad",
+      "heading": "Water Heater Leaks",
+      "description": "Pay $450 for a new one",
+      "cost": 450,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad2",
+      "type": "doodad",
+      "heading": "Go Out to Dinner",
+      "description": "Spend $80",
+      "cost": 80,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad5",
+      "type": "doodad",
+      "heading": "Park in Handicapped Zone",
+      "description": "Pay $100 fine",
+      "cost": 100,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad6",
+      "type": "doodad",
+      "heading": "Buy Big Screen TV",
+      "description": "Pay $600",
+      "cost": 600,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad7",
+      "type": "doodad",
+      "heading": "Your Anniversary!",
+      "description": "Spend $200",
+      "cost": 200,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad8",
+      "type": "doodad",
+      "heading": "Son's College Tuition",
+      "description": "Pay $1500",
+      "cost": 1500,
+      "rule": "If you have child",
+      "isMandatory": true
+    },
+    {
+      "id": "doodad9",
+      "type": "doodad",
+      "heading": "Buy Toys for Your Kids",
+      "description": "Spend $50",
+      "cost": 50,
+      "rule": "If you have child",
+      "isMandatory": true
+    },
+    {
+      "id": "doodad10",
+      "type": "doodad",
+      "heading": "Buy New Fishing Rod",
+      "description": "Pay $100",
+      "cost": 100,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad11",
+      "type": "doodad",
+      "heading": "Play 2 Rounds of Golf",
+      "description": "Pay $100",
+      "cost": 100,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad12",
+      "type": "doodad",
+      "heading": "Car's Air Conditioning Dies",
+      "description": "Pay $700",
+      "cost": 700,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad13",
+      "type": "doodad",
+      "heading": "Tax Audit",
+      "description": "Pay Tax Authority $350 Ouch!",
+      "cost": 350,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad14",
+      "type": "doodad",
+      "heading": "Shopping!",
+      "description": "Pay $350 for fabulous fake jewels",
+      "cost": 350,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad15",
+      "type": "doodad",
+      "heading": "Family Vacation!",
+      "description": "Costs $2000",
+      "cost": 2000,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad16",
+      "type": "doodad",
+      "heading": "Go to Casino!",
+      "description": "Lose $200 at the tables",
+      "cost": 200,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad17",
+      "type": "doodad",
+      "heading": "Buy New Bowling Ball",
+      "description": "Pay $80",
+      "cost": 80,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad18",
+      "type": "doodad",
+      "heading": "Play Your Lucky Lottery Number!",
+      "description": "Lose $100",
+      "cost": 100,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad19",
+      "type": "doodad",
+      "heading": "Shopping Spree!",
+      "description": "Pay $150 Buy new wristwatch",
+      "cost": 150,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad20",
+      "type": "doodad",
+      "heading": "Go to Ball Game",
+      "description": "Pay $50",
+      "cost": 50,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad21",
+      "type": "doodad",
+      "heading": "Visit Dentist",
+      "description": "Filling costs $100",
+      "cost": 100,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad22",
+      "type": "doodad",
+      "heading": "Buy New Golf Balls",
+      "description": "Pay $20",
+      "cost": 20,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad23",
+      "type": "doodad",
+      "heading": "Furniture Sale",
+      "description": "Pay $300 Replace that old chair",
+      "cost": 300,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad24",
+      "type": "doodad",
+      "heading": "Go to a Concert",
+      "description": "Dinner, Tickets, & Coffee Sets you back $180",
+      "cost": 180,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad25",
+      "type": "doodad",
+      "heading": "Upgrade Smart Phone",
+      "description": "Pay $100",
+      "cost": 100,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad26",
+      "type": "doodad",
+      "heading": "Go to Coffee Shop",
+      "description": "Pay $10 for lattes for you and a friend",
+      "cost": 10,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad27",
+      "type": "doodad",
+      "heading": "High School Reunion",
+      "description": "You spend $250",
+      "cost": 250,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad28",
+      "type": "doodad",
+      "heading": "Repaint House",
+      "description": "Costs you $600",
+      "cost": 600,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad29",
+      "type": "doodad",
+      "heading": "Buy Painting",
+      "description": "Costs you $200. Couldn't resist new painting by local artist",
+      "cost": 200,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad30",
+      "type": "doodad",
+      "heading": "Your Child Needs Braces",
+      "description": "Pay $2000",
+      "cost": 2000,
+      "rule": "If you have child",
+      "isMandatory": true
+    },
+    {
+      "id": "doodad31",
+      "type": "doodad",
+      "heading": "Amusement Park",
+      "description": "Take kids to the Amusement Park and spend $100",
+      "cost": 100,
+      "rule": "If you have child",
+      "isMandatory": true
+    },
+    {
+      "id": "doodad32",
+      "type": "doodad",
+      "heading": "Buy Cappuccino Machine",
+      "description": "Pay $150",
+      "cost": 150,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad33",
+      "type": "doodad",
+      "heading": "Your Daughter's Wedding",
+      "description": "Costs you $2000",
+      "cost": 2000,
+      "rule": "If you have child",
+      "isMandatory": true
+    },
+    {
+      "id": "doodad34",
+      "type": "doodad",
+      "heading": "Buy New Tennis Racket",
+      "description": "You spend $200",
+      "cost": 200,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad35",
+      "type": "doodad",
+      "heading": "Buy New Clothes",
+      "description": "Pay $250",
+      "cost": 250,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad36",
+      "type": "doodad",
+      "heading": "Rumor of Layoff",
+      "description": "Go back to school for added skills.Pay $220 for tuition & books.",
+      "cost": 220,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad37",
+      "type": "doodad",
+      "heading": "Go to the Air Show",
+      "description": "Pay $120",
+      "cost": 120,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad38",
+      "type": "doodad",
+      "heading": "Must Have New Sunglasses",
+      "description": "Pay $70",
+      "cost": 70,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad39",
+      "type": "doodad",
+      "heading": "Buy a Food Processor",
+      "description": "Pay $150",
+      "cost": 150,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad40",
+      "type": "doodad",
+      "heading": "Lunch with Friends",
+      "description": "Pay $40",
+      "cost": 40,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad41",
+      "type": "doodad",
+      "heading": "Car Needs Tires",
+      "description": "Pay $300",
+      "cost": 300,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad42",
+      "type": "doodad",
+      "heading": "Family Vacation!",
+      "description": "Pay $2,000 to take the kids to a world famous theme park and resort.",
+      "cost": 2000,
+      "rule": "If you have child",
+      "isMandatory": true
+    },
+    {
+      "id": "doodad43",
+      "type": "doodad",
+      "heading": "Smartphone Broke!",
+      "description": "Pay $250 for replacement",
+      "cost": 250,
+      "rule": "",
+      "isMandatory": false
+    },
+    {
+      "id": "doodad44",
+      "type": "doodad",
+      "heading": "Movie Streaming Service",
+      "description": "Pay $15",
+      "cost": 15,
+      "rule": "",
+      "isMandatory": false
+    }
+  ],
+  "payday": [
+    {
+      "id": "payday",
+      "heading": "payday",
+      "type": "payday"
+    }
+  ],
+  "charity": [
+    {
+      "id": "charity",
+      "heading": "charity",
+      "description": "Donate 10% of your total income and use 1 or 2 dice for next 3 turns",
+      "type": "charity",
+      "symbol": "charity"
+    }
+  ],
+  "downsized": [
+    {
+      "id": "downsized",
+      "heading": "downsized",
+      "description": "Pay the amount of your total expenses to the bank and lose 2 turns",
+      "type": "downsized",
+      "symbol": "downsized"
+    }
+  ],
+  "baby": [
+    {
+      "id": "baby",
+      "heading": "New Baby",
+      "description": "Congratulations! Your family has a new arrival",
+      "type": "baby",
+      "symbol": "new baby"
     }
   ],
   "market": [
@@ -168,57 +1326,6 @@
       ],
       "cost": 500,
       "applicableToEveryOne": false
-    }
-  ],
-  "doodad": [
-    {
-      "id": "doodad02",
-      "type": "doodad",
-      "heading": "New gym clothes",
-      "cost": 300,
-      "isMandatory": true
-    },
-    {
-      "id": "doodad01",
-      "type": "doodad",
-      "heading": "Child needs braces",
-      "cost": 4000,
-      "isMandatory": false,
-      "rule": "If you have a child"
-    }
-  ],
-  "payday": [
-    {
-      "id": "payday",
-      "heading": "Payday",
-      "type": "payday"
-    }
-  ],
-  "charity": [
-    {
-      "id": "charity",
-      "heading": "Charity",
-      "description": "Donate 10% of your total income and use 1 or 2 dice for next 3 turns",
-      "type": "charity",
-      "symbol": "charity"
-    }
-  ],
-  "downsized": [
-    {
-      "id": "downsized",
-      "heading": "Downsized",
-      "description": "Pay the amount of your total expenses to the bank and lose 2 turns",
-      "type": "downsized",
-      "symbol": "downsized"
-    }
-  ],
-  "baby": [
-    {
-      "id": "baby",
-      "heading": "New Baby",
-      "description": "Congratulations! Your family has a new arrival",
-      "type": "baby",
-      "symbol": "new baby"
     }
   ]
 }
