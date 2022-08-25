@@ -196,30 +196,34 @@ a {
 .baby,
 .charity {
   border: var(--big-border);
-  border-color: black;
 }
 
 .deal {
-  background: radial-gradient(var(--deal-bg), var(--deal-border));
+  border-color: var(--deal-border);
+  background: radial-gradient(var(--deal-bg), #5eda6c);
 }
 
 .doodad {
-  background: radial-gradient(var(--doodad-bg), var(--doodad-border));
+  border-color: var(--doodad-border);
+  background: radial-gradient(var(--doodad-bg), #e75c6a);
 }
 
 .payday {
-  background: radial-gradient(var(--payday-bg), var(--payday-border));
+  border-color: var(--payday-border);
+  background: radial-gradient(var(--payday-bg), #e0c260);
 }
 
 .market {
-  background: radial-gradient(var(--market-bg), var(--market-border));
+  border-color: var(--market-border);
+  background: radial-gradient(var(--market-bg), #5e95e0);
 }
 
 .purples,
 .downsized,
 .baby,
 .charity {
-  background: radial-gradient(var(--others-bg), var(--others-border));
+  border-color: var(--others-border);
+  background: radial-gradient(var(--others-bg), #9e7cf6);
 }
 
 #board {
