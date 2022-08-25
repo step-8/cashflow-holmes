@@ -399,7 +399,8 @@
       "heading": "Coin Collector Liquidates",
       "description": "A coin collector needs cash quick to shore up a tax issue.Will sell you five(5) gold coins, well below going rate.",
       "rule": "Use this yourself or sell to another player",
-      "cost": 1000
+      "cost": 1000,
+      "count": 5
     },
     {
       "id": "gold2",
@@ -408,14 +409,15 @@
       "heading": "Friend Needs Cash Quick",
       "description": "A friend has urgent need for money.Will sell you ten(10) gold coins, well below going rate.",
       "rule": "Use this yourself or sell to another player",
-      "cost": 3000
+      "cost": 3000,
+      "count": 10
     },
     {
       "id": "lottery01",
       "type": "lottery",
       "symbol": "lottery",
       "heading": "Sister-In-Law borrows Money",
-      "lottery": "money",
+      "lottery": "gold",
       "description": "Sister-in-law is downsized.Needs $5,000 to make house payment. She promises to pay you back $10,000 after she finds a new job.",
       "rule": "If you choose to help. Pay $5,000 and roll 1 die:",
       "subRule": [
@@ -437,6 +439,102 @@
         "failure": 0,
         "success": 10000
       }
+    },
+    {
+      "id": "lottery02",
+      "type": "lottery",
+      "symbol": "lottery",
+      "heading": "Where There's a Will...",
+      "lottery": "money",
+      "description": "A distant relative passes away. You are named in the will but need to travel to attend.",
+      "rule": "If you attend, pay $750 and roll 1 die:",
+      "subRule": [
+        "Die = 1-5, You are bequeathed an elderly cat. Enjoy!",
+        "Die = 6, You are bequeathed ten (10) Gold Coins. Add these to your Asset sheet."
+      ],
+      "cost": 750,
+      "failure": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "success": [
+        6
+      ]
+    },
+    {
+      "id": "lottery03",
+      "type": "lottery",
+      "symbol": "lottery",
+      "heading": "What's in the Box?!",
+      "lottery": "gold",
+      "description": "You have the option to purchase a locked filing cabinet at an estate sale.",
+      "rule": "If you buy the cabinet, pay $500 and roll 1 die:",
+      "subRule": [
+        "Die = 1-5, You find...ABSOLUTELY NOTHING in the cabinet.",
+        "Die = 6, You are...ten (10) Gold Coins.CHA-CHING! Add these to your Asset sheet."
+      ],
+      "cost": 500,
+      "failure": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "success": [
+        6
+      ]
+    },
+    {
+      "id": "lottery04",
+      "type": "mlm",
+      "symbol": "MLM",
+      "heading": "Multi-Level Marketing Buy-In",
+      "lottery": "money",
+      "description": "You have a chance to invest in a Multi-Level-Marketing opportunity. Company is looking to spread the reach of their newest venture.",
+      "rule": "If you choose to buy-in, pay $500 and KEEP THIS CARD:\nEvery PayDay, roll 1 die:",
+      "subRule": [
+        "Die = 1-3, No returns this month, but keep trying.",
+        "Die = 4-6, Your sweat equity paid off! Collect $500."
+      ],
+      "cost": 500,
+      "failure": [
+        1,
+        2,
+        3
+      ],
+      "success": [
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "id": "lottery05",
+      "type": "mlm",
+      "symbol": "MLM",
+      "heading": "Multi-Level Marketing Buy-In",
+      "lottery": "money",
+      "description": "You have a chance to invest in a Multi-Level-Marketing opportunity. Company is looking to spread the reach of their newest venture.",
+      "rule": "If you choose to buy-in, pay $500 and KEEP THIS CARD:\nEvery PayDay, roll 1 die:",
+      "subRule": [
+        "Die = 1-3, No returns this month, but keep trying.",
+        "Die = 4-6, Your sweat equity paid off! Collect $500."
+      ],
+      "cost": 500,
+      "failure": [
+        1,
+        2,
+        3
+      ],
+      "success": [
+        4,
+        5,
+        6
+      ]
     }
   ],
   "bigDeal": [
