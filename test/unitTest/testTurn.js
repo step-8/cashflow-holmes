@@ -334,7 +334,7 @@ describe('Turn', () => {
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
 
-      turn.buyStocks(1);
+      turn.buyStocks('user', 1);
 
       assert.isOk(turn.info.state);
       assert.deepStrictEqual(

@@ -28,13 +28,13 @@ const acceptCard = (game, family, type) => {
   return game[family]();
 };
 
-const buyDeal = (game, type, count) => {
+const buyDeal = (game, type, count, username) => {
   if (type === 'realEstate') {
     return game.buyRealEstate();
   }
 
   if (type === 'stock') {
-    return game.buyStocks(count);
+    return game.buyStocks(username, count);
   }
 
   if (type === 'lottery') {
@@ -45,7 +45,7 @@ const buyDeal = (game, type, count) => {
     return game.buyGoldCoins();
   }
 
-  game.skip();
+  game.skip(username);
 };
 
 const cardActionsHandler = (req, res) => {
@@ -60,12 +60,11 @@ const cardActionsHandler = (req, res) => {
 
   const actions = {
     ok: () => acceptCard(game, family, type),
-    buy: () => buyDeal(game, type, +count),
+    buy: () => buyDeal(game, type, +count, username),
     skip: () => game.skip(username),
     roll: () => game.activateReroll(),
     sell: () => game.sellStocks(username, +count)
   };
-  console.log(action, '---------------------ACTION ++++++++++++++');
   actions[action]();
   res.end();
 };

@@ -90,14 +90,14 @@ class Turn {
     this.respond();
   }
 
-  buyStocks(count) {
+  buyStocks(username, count) {
     const status = this.#currentPlayer.buyStocks(this.#card, count);
     this.setTransactionState('deal', status);
     if (!status) {
       return;
     }
     this.#log.addLog(this.#playerInfo(), `bought ${count} ${this.#card.symbol} stocks`);
-    this.respond();
+    this.respond(username);
   }
 
   buyGoldCoins() {

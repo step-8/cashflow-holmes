@@ -184,8 +184,8 @@ class Game {
     return this.#currentTurn.buyRealEstate();
   }
 
-  buyStocks(count) {
-    return this.#currentTurn.buyStocks(count);
+  buyStocks(username, count) {
+    return this.#currentTurn.buyStocks(username, count);
   }
 
   buyLottery() {
