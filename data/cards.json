@@ -190,14 +190,14 @@
   "payday": [
     {
       "id": "payday",
-      "heading": "payday",
+      "heading": "Payday",
       "type": "payday"
     }
   ],
   "charity": [
     {
       "id": "charity",
-      "heading": "charity",
+      "heading": "Charity",
       "description": "Donate 10% of your total income and use 1 or 2 dice for next 3 turns",
       "type": "charity",
       "symbol": "charity"
@@ -206,7 +206,7 @@
   "downsized": [
     {
       "id": "downsized",
-      "heading": "downsized",
+      "heading": "Downsized",
       "description": "Pay the amount of your total expenses to the bank and lose 2 turns",
       "type": "downsized",
       "symbol": "downsized"
