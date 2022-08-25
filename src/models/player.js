@@ -39,6 +39,18 @@ class Player {
     this.#isInFastTrack = false;
   }
 
+  init({ isRolledDice, lastPosition, currentPosition, dualDiceCount, skippedTurns, canReRoll, isInFastTrack, transactions }) {
+    this.#isRolledDice = isRolledDice;
+    this.#currentPosition = currentPosition;
+    this.#lastPosition = lastPosition;
+    this.#dualDiceCount = dualDiceCount;
+    this.#skippedTurns = skippedTurns;
+    this.#canReRoll = canReRoll;
+    this.#isInFastTrack = isInFastTrack;
+    this.#isInFastTrack = isInFastTrack;
+    this.#transactions = transactions;
+  }
+
   #calculateCashFlow() {
     return this.#calculateTotalIncome() - this.#calculateTotalExpenses();
   }
@@ -377,6 +389,7 @@ class Player {
       profession: this.#profession,
       isRolledDice: this.#isRolledDice,
       lastPosition: this.#lastPosition,
+      transactions: this.#transactions,
       currentPosition: this.#currentPosition,
       dualDiceCount: this.#dualDiceCount,
       skippedTurns: this.#skippedTurns,

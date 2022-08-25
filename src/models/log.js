@@ -5,6 +5,10 @@ class Log {
     this.#logs = [];
   }
 
+  init(logs) {
+    this.#logs = logs;
+  }
+
   addLog(player, message) {
     const username = player.username;
     const color = player.color;

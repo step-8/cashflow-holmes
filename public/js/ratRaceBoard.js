@@ -840,7 +840,7 @@
 
   const draw = (logs) => {
     return res => {
-      const newState = res.stateHash;
+      const newState = res.hash;
       decideLoanActions(res);
       if (newState !== prevState.game) {
         drawScreen(res, logs);

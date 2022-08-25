@@ -28,7 +28,7 @@ const createGameRouter = (router, config) => {
   router.get('/host', hostHandler);
   router.get('/start-game', startGameHandler);
   router.post('/join', joinHandler);
-  router.use('/api', createApiRouter());
+  router.use('/api', createApiRouter(config));
   router.get('/host-lobby', hostLobbyHandler(config.DICE_VALUES));
   router.get('/guest-lobby', guestLobbyHandler);
   router.get('/leave-lobby', leaveLobbyHandler);

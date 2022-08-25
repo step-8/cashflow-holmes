@@ -123,7 +123,7 @@ class RatRace {
 
     if (validTypes.includes(type)) {
       return {
-        ...this.pickCard(type), family: getFamily(deals, type), cardName: type
+        ...this.pickCard(type), family: getFamily(deals, type), name: type
       };
     }
     return;

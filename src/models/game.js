@@ -3,7 +3,8 @@ const { RatRace } = require('./ratRace.js');
 const { Turn } = require('./turn.js');
 const { Log } = require('./log.js');
 const { toWords } = require('../utils/commonLib.js');
-const { Response, createResponses } = require('./response.js');
+const { Player } = require('./player');
+const { Response, createResponses } = require('./response');
 
 class Game {
   #gameID;
@@ -27,12 +28,26 @@ class Game {
     this.#currentPlayer = players[0];
     this.#dice = dice;
     this.#diceValues = this.#dice.face();
+    this.#ratRace = new RatRace(deck);
     this.#log = new Log();
+    this.#notifications = [];
     this.#currentTurn = new Turn(
       this.#currentCard, this.#currentPlayer, this.#log,
       new Response(createResponses(players)));
-    this.#ratRace = new RatRace(deck);
-    this.#notifications = [];
+  }
+
+  init({ currentPlayerIndex, gameID, players, currentCard, logs }) {
+    this.#currentPlayerIndex = currentPlayerIndex;
+    this.#gameID = gameID;
+    this.#players = players.map((details) => {
+      const { username, role, color, profile } = details;
+      const player = new Player(username, role, color, profile);
+      player.init(details);
+      return player;
+    });
+    this.#currentCard = currentCard;
+    this.#log = new Log();
+    this.#log.init(logs);
   }
 
   #getCardType() {
@@ -46,6 +61,7 @@ class Game {
     if (action) {
       type = action + 'Deal';
     }
+
     this.currentCard = this.#ratRace.getCard(type);
     return this.#currentCard;
   }
@@ -100,23 +116,14 @@ class Game {
     this.currentPlayer.changeDiceStatus(false);
   }
 
-  nextPlayer() {
+  changeTurn() {
     ++this.#currentPlayerIndex;
     this.#currentPlayerIndex = this.#currentPlayerIndex % this.#players.length;
-    return this.currentPlayer;
-  }
-
-  changeTurn() {
-    const responses = new Response(createResponses(this.#players));
-    this.#currentTurn = new Turn(null, this.nextPlayer(), this.#log, responses);
+    this.#currentTurn.updatePlayer(this.currentPlayer);
     this.resetDice();
+    this.#currentTurn.setTurnCompleted(false);
     this.#currentCard = null;
     this.#notifications = [];
-
-    if (this.currentPlayer.isInFastTrack) {
-      this.changeTurn();
-      return;
-    }
 
     if (this.currentPlayer.skippedTurns > 0) {
       this.currentPlayer.decrementSkippedTurns();
@@ -173,10 +180,6 @@ class Game {
     return this.#currentTurn.buyStocks(count);
   }
 
-  buyGoldCoins() {
-    return this.#currentTurn.buyGoldCoins();
-  }
-
   buyLottery() {
     return this.#currentTurn.buyLottery();
   }
@@ -209,8 +212,8 @@ class Game {
     this.#currentTurn.updateCard(card);
 
     const cards = ['smallDeal', 'bigDeal'];
-    if (cards.includes(card.cardName)) {
-      this.addLog(this.currentPlayer, `chose ${toWords(card.cardName)}`);
+    if (cards.includes(card.name)) {
+      this.addLog(this.currentPlayer, `chose ${toWords(card.name)}`);
       return;
     }
     this.addLog(this.currentPlayer, `landed on ${toWords(card.family)}`);
@@ -250,6 +253,7 @@ class Game {
   get state() {
     return {
       currentPlayer: this.currentPlayerDetails,
+      currentPlayerIndex: this.#currentPlayerIndex,
       status: this.#status,
       gameID: this.#gameID,
       players: this.allPlayerDetails,
