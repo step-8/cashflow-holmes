@@ -17,7 +17,7 @@ const hostLobbyHandler = (diceValues) => (req, res) => {
     dice = new RiggedDice(JSON.parse(diceValues));
   }
 
-  req.games.newGame(username, dice);
+  req.games.newLobby(username, dice);
   const { latestGameID } = req.games;
   req.session.gameID = latestGameID;
   const game = req.games.getGame(latestGameID);

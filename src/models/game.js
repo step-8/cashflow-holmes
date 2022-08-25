@@ -1,75 +1,35 @@
-const { Player } = require('./player.js');
 const deck = require('../../data/cards.json');
 const { RatRace } = require('./ratRace.js');
 const { Turn } = require('./turn.js');
 const { Log } = require('./log.js');
 const { toWords } = require('../utils/commonLib.js');
 
-const getColor = (players, colors) => {
-  const usedColors = players.map(player => player.details.color);
-  return colors.find(color => !usedColors.includes(color));
-};
-
-const getProfession = (players, professions) => {
-  const usedProfessions = players.map(player => player.profile().profession);
-  return professions.find(
-    ({ profession }) => !usedProfessions.includes(profession));
-};
-
-const gameStatus = {
-  started: 'started',
-  cancelled: 'cancelled',
-  waiting: 'waiting',
-  progress: 'inProgress'
-};
-
 class Game {
   #gameID;
-  #colors;
-  #professions;
   #players;
-  #maxPlayers;
   #status;
   #diceValues;
   #currentPlayerIndex;
   #ratRace;
   #currentCard;
+  #currentPlayer;
   #currentTurn;
   #notifications;
   #log;
   #dice;
 
-  constructor(gameID, colors, professions, dice) {
+  constructor(gameID, players, dice) {
     this.#gameID = gameID;
-    this.#colors = colors;
-    this.#professions = professions;
-    this.#maxPlayers = 6;
-    this.#players = [];
-    this.#status = gameStatus.waiting;
-    this.#currentPlayerIndex = null;
+    this.#players = players;
+    this.#status = 'started';
+    this.#currentPlayerIndex = 0;
+    this.#currentPlayer = players[0];
     this.#dice = dice;
     this.#diceValues = this.#dice.face();
     this.#ratRace = new RatRace(deck);
     this.#log = new Log();
     this.#notifications = [];
-    this.#currentTurn = new Turn(this.#currentCard, null, this.#log);
-  }
-
-  get currentPlayer() {
-    return this.#players[this.#currentPlayerIndex];
-  }
-
-  #isUserAlreadyJoined(username) {
-    const playerStatus = this.#getPlayerIndex(username);
-    return playerStatus > -1;
-  }
-
-  get currentPlayerName() {
-    return this.currentPlayer.username;
-  }
-
-  get isRolledDice() {
-    return this.currentPlayer.isRolledDice;
+    this.#currentTurn = new Turn(this.#currentCard, this.#currentPlayer, this.#log);
   }
 
   #getCardType() {
@@ -91,26 +51,6 @@ class Game {
   setNotifications() {
     const type = this.#getCardType();
     this.#notifications = this.#ratRace.getNotifications(type, this.currentPlayer.details);
-  }
-
-  #addPlayer(username, role) {
-    if (this.#isUserAlreadyJoined(username)) {
-      return;
-    }
-
-    const color = getColor(this.#players, this.#colors);
-    const profession = getProfession(this.#players, this.#professions);
-    const player = new Player(username, role, color, profession);
-    player.setDefaults();
-    this.#players.push(player);
-  }
-
-  assignHost(username) {
-    this.#addPlayer(username, 'host');
-  }
-
-  addGuest(username) {
-    this.#addPlayer(username, 'guest');
   }
 
   #calculateTotalSteps(diceCount) {
@@ -158,29 +98,6 @@ class Game {
     this.currentPlayer.changeDiceStatus(false);
   }
 
-  start() {
-    this.#status = gameStatus.started;
-    this.#currentPlayerIndex = 0;
-    const currentPlayer = this.currentPlayer;
-    this.#currentTurn.updatePlayer(currentPlayer);
-  }
-
-  cancel() {
-    this.#status = gameStatus.cancelled;
-  }
-
-  #getPlayerIndex(username) {
-    return this.#players.findIndex(player => player.details.username === username);
-  }
-
-  removePlayer(username) {
-    const playerIndex = this.#getPlayerIndex(username);
-    if (playerIndex <= -1) {
-      return;
-    }
-    this.#players.splice(playerIndex, 1);
-  }
-
   changeTurn() {
     ++this.#currentPlayerIndex;
     this.#currentPlayerIndex = this.#currentPlayerIndex % this.#players.length;
@@ -199,26 +116,6 @@ class Game {
 
   #moveCurrentPlayer(steps) {
     this.currentPlayer.move(steps);
-  }
-
-  isValidGameID(gameID) {
-    return this.#gameID === gameID;
-  }
-
-  isLobbyFull() {
-    return this.#maxPlayers === this.#players.length;
-  }
-
-  set currentCard(card) {
-    this.#currentCard = card;
-    this.#currentTurn.updateCard(card);
-
-    const cards = ['smallDeal', 'bigDeal'];
-    if (cards.includes(card.cardName)) {
-      this.addLog(this.currentPlayer, `chose ${toWords(card.cardName)}`);
-      return;
-    }
-    this.addLog(this.currentPlayer, `landed on ${toWords(card.family)}`);
   }
 
   addNotification(notification) {
@@ -278,7 +175,6 @@ class Game {
       return this.#currentTurn.setTransactionState('deal', status);
     }
     this.#currentTurn.setTransactionState('deal', status);
-
   }
 
   propertyDamage() {
@@ -287,6 +183,34 @@ class Game {
 
   skip() {
     this.#currentTurn.skip();
+  }
+
+  getPlayer(username) {
+    return this.#players.find(player => player.details.username === username);
+  }
+
+  set currentCard(card) {
+    this.#currentCard = card;
+    this.#currentTurn.updateCard(card);
+
+    const cards = ['smallDeal', 'bigDeal'];
+    if (cards.includes(card.cardName)) {
+      this.addLog(this.currentPlayer, `chose ${toWords(card.cardName)}`);
+      return;
+    }
+    this.addLog(this.currentPlayer, `landed on ${toWords(card.family)}`);
+  }
+
+  get currentPlayer() {
+    return this.#players[this.#currentPlayerIndex];
+  }
+
+  get currentPlayerName() {
+    return this.currentPlayer.username;
+  }
+
+  get isRolledDice() {
+    return this.currentPlayer.isRolledDice;
   }
 
   get currentPlayerDetails() {
@@ -302,10 +226,6 @@ class Game {
 
   get notifications() {
     return this.#notifications;
-  }
-
-  getPlayer(username) {
-    return this.#players.find(player => player.details.username === username);
   }
 
   get currentTurn() {

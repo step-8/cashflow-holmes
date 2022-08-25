@@ -2,18 +2,18 @@ const joinHandler = (req, res, next) => {
   const { gameID } = req.body;
   const { username } = req.session;
 
-  const game = req.games.getGame(gameID);
-  if (!game) {
+  const lobby = req.games.getGame(gameID);
+  if (!lobby) {
     res.sendStatus(400);
     return;
   }
 
-  if (game.isLobbyFull()) {
+  if (lobby.isFull()) {
     res.sendStatus(423);
     return;
   }
 
-  const player = game.state.players.find(
+  const player = lobby.state.players.find(
     player => player.username === username
   );
 
@@ -22,7 +22,7 @@ const joinHandler = (req, res, next) => {
     return;
   }
 
-  if (game.isValidGameID(+gameID) && game.state.status !== 'cancelled') {
+  if (lobby.isValid(+gameID) && lobby.state.status !== 'cancelled') {
     req.session.gameID = gameID;
     res.sendStatus(200);
     return;

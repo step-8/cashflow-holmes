@@ -24,6 +24,13 @@ describe('Change Turn', () => {
       .end(done);
   });
 
+  before((done) => {
+    request(app)
+      .get('/start-game')
+      .set('Cookie', cookies.join(';'))
+      .end(done);
+  });
+
   describe('loan', () => {
     it('/loan/take', (done) => {
       request(app)

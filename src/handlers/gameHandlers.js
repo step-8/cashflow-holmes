@@ -16,7 +16,8 @@ const hostHandler = (req, res) => {
 };
 
 const startGameHandler = (req, res) => {
-  req.game.start();
+  const gameID = req.session.gameID;
+  req.games.startGame(gameID);
   res.redirect('/show-profession');
 };
 

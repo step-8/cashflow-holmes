@@ -1,6 +1,5 @@
 const { shuffle } = require('../utils/shuffle.js');
-const { Dice } = require('./die.js');
-const { Game } = require('./game.js');
+const { Lobby } = require('./lobby.js');
 
 class Games {
   #colors;
@@ -14,16 +13,16 @@ class Games {
     this.#games = {};
   }
 
-  get latestGameID() {
-    return this.#latestGameID;
+  newLobby(host, dice) {
+    this.#latestGameID++;
+    const lobby = new Lobby(this.#latestGameID,
+      shuffle(this.#colors), shuffle(this.#professions), dice);
+    lobby.assignHost(host);
+    this.#games[this.#latestGameID] = lobby;
   }
 
-  newGame(host, dice) {
-    this.#latestGameID++;
-    const game = new Game(this.#latestGameID,
-      shuffle(this.#colors), shuffle(this.#professions), dice);
-    game.assignHost(host);
-    this.#games[this.#latestGameID] = game;
+  startGame(gameID) {
+    this.#games[gameID] = this.getGame(gameID).start();
   }
 
   endGame(gameID) {
@@ -32,6 +31,10 @@ class Games {
 
   getGame(gameID) {
     return this.#games[gameID];
+  }
+
+  get latestGameID() {
+    return this.#latestGameID;
   }
 }
 
