@@ -40,24 +40,24 @@
     monthlyCFEle.innerText = addDollar(profession.income.salary - totalExpenses);
   };
 
-  const drawProfession = (playerProfession) => {
+  const drawProfession = (profile) => {
     const nameEle = getElement('#profession');
-    nameEle.innerText = playerProfession.profession;
+    nameEle.innerText = profile.profession;
 
     const salaryEle = getElement('#salary');
-    salaryEle.innerText = addDollar(playerProfession.income.salary);
+    salaryEle.innerText = addDollar(profile.income.salary);
 
     const savingsEle = getElement('#savings');
-    savingsEle.innerText = addDollar(playerProfession.assets.savings);
+    savingsEle.innerText = addDollar(profile.assets.savings);
 
     const incomeEle = getElement('#income');
-    incomeEle.innerText = addDollar(playerProfession.income.salary);
+    incomeEle.innerText = addDollar(profile.income.salary);
 
     const totalIncomeEle = getElement('#total-income');
-    totalIncomeEle.innerText = addDollar(playerProfession.income.salary);
+    totalIncomeEle.innerText = addDollar(profile.income.salary);
 
-    drawExpenses(playerProfession);
-    drawLiabilites(playerProfession);
+    drawExpenses(profile);
+    drawLiabilites(profile);
   };
 
   const createPlayers = ({ players }, { username }) => {
@@ -74,7 +74,7 @@
       const playerTemplate = [
         'tr', {},
         ['td', {}, playerName],
-        ['td', {}, player.profession.profession]
+        ['td', {}, player.profile.profession]
       ];
       table.appendChild(html(playerTemplate));
     });

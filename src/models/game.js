@@ -4,12 +4,16 @@ const { RatRace } = require('./ratRace.js');
 const { Turn } = require('./turn.js');
 const { Log } = require('./log.js');
 const { toWords } = require('../utils/commonLib.js');
-const { Profile } = require('./profile.js');
-const { Dice } = require('./die.js');
 
-const getNextAttrib = (players, type, attribs) => {
-  const playersAttribs = players.map(player => player.details[type]);
-  return attribs.find(attrib => !playersAttribs.includes(attrib));
+const getColor = (players, colors) => {
+  const usedColors = players.map(player => player.details.color);
+  return colors.find(color => !usedColors.includes(color));
+};
+
+const getProfession = (players, professions) => {
+  const usedProfessions = players.map(player => player.profile().profession);
+  return professions.find(
+    ({ profession }) => !usedProfessions.includes(profession));
 };
 
 const gameStatus = {
@@ -59,6 +63,7 @@ class Game {
     const playerStatus = this.#getPlayerIndex(username);
     return playerStatus > -1;
   }
+
   get currentPlayerName() {
     return this.currentPlayer.username;
   }
@@ -94,11 +99,10 @@ class Game {
       return;
     }
 
-    const color = getNextAttrib(this.#players, 'color', this.#colors);
-    const profession = getNextAttrib(this.#players, 'profession', this.#professions);
-    const profile = new Profile(profession);
-    profile.setDefaults();
-    const player = new Player(username, role, color, profession, profile);
+    const color = getColor(this.#players, this.#colors);
+    const profession = getProfession(this.#players, this.#professions);
+    const player = new Player(username, role, color, profession);
+    player.setDefaults();
     this.#players.push(player);
   }
 
@@ -137,8 +141,7 @@ class Game {
   }
 
   rollDice(diceCount) {
-    // this.#diceValues = this.#dice.roll(diceCount);
-    this.#diceValues = [3, 1];
+    this.#diceValues = this.#dice.roll(diceCount);
     const currentPlayer = this.currentPlayer;
     const dualDiceCount = currentPlayer.dualDiceCount;
     const totalCount = this.#calculateTotalSteps(diceCount);

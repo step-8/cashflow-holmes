@@ -5,8 +5,8 @@ const classNames = {
   windowTitle: 'window-title',
 };
 
-const findPlayer = (players, playerName) => {
-  return players.find(player => player.username === playerName);
+const findPlayer = (players, username) => {
+  return players.find(player => player.username === username);
 };
 
 const transactionItem = ({ currentCash, amount, description, totalCash }) => {
@@ -19,7 +19,7 @@ const transactionItem = ({ currentCash, amount, description, totalCash }) => {
   ];
 };
 
-const windowHeader = ({ profession }, color, username) => {
+const windowHeader = (profession, color, username) => {
   return ['div', { className: classNames.windowHeader },
     ['div', { className: classNames.windowTitle }, 'Ledger'],
     ['div', { className: 'my-details' },
@@ -43,9 +43,9 @@ const ledgerHeader = () => {
 const ledgerEntries = (transactions) =>
   ['div', { className: 'ledger-entries' }, ...transactions.map(transactionItem)];
 
-const ledgerWindow = (profile, color, username, profession) => {
+const ledgerWindow = (profile, color, username) => {
   return ['div', { className: 'ledger-window' },
-    windowHeader(profession, color, username),
+    windowHeader(profile.profession, color, username),
     ['div', { className: 'ledger-view' },
       ledgerHeader(),
       ledgerEntries(profile.transactions)
@@ -56,15 +56,17 @@ const ledgerWindow = (profile, color, username, profession) => {
 
 const createExpansionScreens = ({ players }, username) => {
   const player = findPlayer(players, username);
-  const { profile, color, profession } = player;
+  const { profile, color } = player;
 
-  expansionWindowScreens.ledger =
-    html(ledgerWindow(profile, color, username, profession));
+  expansionWindowScreens.ledger = html(
+    ledgerWindow(profile, color, username)
+  );
+
   expansionWindowScreens.myProfile = generateProfile(player);
   expansionWindowScreens.otherPlayerProfiles = {};
   expansionWindowScreens.otherPlayersList =
     generateOtherPlayers(players, username);
-  
+
   players.forEach(player => {
     const { username } = player;
     expansionWindowScreens.otherPlayerProfiles[username] =

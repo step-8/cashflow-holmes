@@ -10,8 +10,8 @@ const serveProfession = (req, res) => {
     return;
   }
 
-  const { profession } = player;
-  res.json(profession);
+  const { profile } = player;
+  res.json(profile);
 };
 
 module.exports = { serveProfession };
