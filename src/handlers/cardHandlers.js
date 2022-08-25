@@ -14,7 +14,7 @@ const removeNotification = (game) => {
   game.removeTopNotification();
 };
 
-const acceptCard = (game, family) => {
+const acceptCard = (game, family, type) => {
   if (family === 'payday') {
     game.payday();
     return removeNotification(game);
@@ -48,7 +48,7 @@ const cardActionsHandler = (req, res) => {
   }
 
   if (action === 'ok') {
-    acceptCard(game, family);
+    acceptCard(game, family, type);
   }
 
   if (action === 'buy') {

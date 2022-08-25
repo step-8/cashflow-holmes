@@ -98,6 +98,20 @@
   ],
   "market": [
     {
+      "id": "marketDamage01",
+      "type": "damage",
+      "heading": "Sewer Line Breaks",
+      "symbol": "realEstate",
+      "description": "Water is everywhere at your property!.",
+      "rule": "Pay $2000 for a new sewer line(one time). Take out a bank loan if necessary",
+      "subRule": [
+        "Card applies only to person who drew it",
+        "If you own No real estate. Ignore the card"
+      ],
+      "cost": 2000,
+      "applicableToEveryOne": false
+    },
+    {
       "id": "marketLottery01",
       "type": "lottery",
       "lottery": "stock",
@@ -128,6 +142,20 @@
       "description": "Buyer offers $25,000 per unit for all units in any combination of duplexes, 4-plexes, or 8-plexes. Has own financing.",
       "isCash": false,
       "percent": 5
+    },
+    {
+      "id": "marketDamage02",
+      "type": "damage",
+      "heading": "Tenant Damages Your Property",
+      "symbol": "realEstate",
+      "description": "Tenant refuses to pay rent after the tenant has been evicted, you discover significant damage to your property",
+      "rule": "Pay $500 for the repairs. Take out a bank loan if necessary",
+      "subRule": [
+        "Card applies only to person who drew it",
+        "If you own No real estate. Ignore the card"
+      ],
+      "cost": 500,
+      "applicableToEveryOne": false
     }
   ],
   "doodad": [

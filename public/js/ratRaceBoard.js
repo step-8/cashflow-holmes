@@ -262,6 +262,7 @@
     },
     market: {
       realEstate: ['SELL', 'SKIP'],
+      damage: ['OK'],
       lottery: ['ROLL']
     },
     doodad: {
