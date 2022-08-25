@@ -49,8 +49,7 @@ const ledgerWindow = (profile, color, username) => {
     ['div', { className: 'ledger-view' },
       ledgerHeader(),
       ledgerEntries(profile.transactions)
-    ],
-    ['div', { onclick: closeExpansion, className: 'close-btn' }, 'Close']
+    ]
   ];
 };
 

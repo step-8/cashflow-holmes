@@ -327,14 +327,6 @@ a {
   grid-row: 6;
 }
 
-#rat-tile-12-1 {
-  background-image: url('/images/ratrace/one.png');
-}
-
-#rat-tile-12-2 {
-  background-image: url('/images/ratrace/two.png');
-}
-
 .game-area {
   grid-row: 2/6;
   grid-column: 2/8;
@@ -847,26 +839,33 @@ a {
 }
 
 #downsized-positions {
-  grid-row: 1;
-  grid-column: 3;
+  grid-row: 2;
+  grid-column: 5;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  margin: 0.5vmax 1vmax;
+  grid-template-rows: repeat(2, 1fr);
+  padding-bottom: 1vmax;
 }
 
-#downsized-positions>div {
+#downsized-positions :nth-child(2) {
+  border-bottom-left-radius: var(--def-curve);
+  border-bottom-right-radius: var(--def-curve);
+}
+
+#rat-tile-12-1,
+#rat-tile-12-2 {
   border: var(--def-border);
-  border-radius: 50%;
-  width: 4vmax;
-  aspect-ratio: 1;
+  border-color: var(--others-border);
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  background-color: var(--others-bg);
-  background-size: 30%;
-  background-repeat: no-repeat;
-  background-position: center;
+  position: relative;
+}
+
+.place-name {
+  position: absolute;
+  font-size: 2vmax;
+  width: 100%;
+  text-align: center;
 }
 
 /* Notifications styles */

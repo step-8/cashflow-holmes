@@ -239,17 +239,21 @@ const RAT_RACE_BOARD = `<html>
             <tr><th>Passive Income :</th><td id="passive-income"></td></tr>
           </table>
         </div>
-        <div id="downsized-positions" class="flex-row">
-          <div id="rat-tile-12-2"></div>
-          <div id="rat-tile-12-1"></div>
-        </div>
         <div class="interaction-space">
-          <div id="interaction-screen"></div>
-          <div id="main-card"></div>
-          <div id="message-space"></div>
+        <div id="interaction-screen"></div>
+        <div id="main-card"></div>
+        <div id="message-space"></div>
         </div>
-      </div>
-      ${generateRatTiles()}
+        </div>
+        ${generateRatTiles()}
+        <div id="downsized-positions" class="flex-row">
+        <div id="rat-tile-12-1" class="downsized">
+        <div class="place-name">1</div>
+        </div>
+        <div id="rat-tile-12-2" class="downsized">
+        <div class="place-name">2</div>
+        </div>
+        </div>
     </div>
     </div>
     <div id="game-panel" class="flex-column">

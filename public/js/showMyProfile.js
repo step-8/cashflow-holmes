@@ -106,15 +106,6 @@ const closeExpansion = () => {
   removeBlurBackground();
 };
 
-const createCloseButton = () => {
-  return ['div', { className: 'close' },
-    ['div', {
-      className: 'close-btn',
-      onclick: (event) => closeExpansion(event)
-    }, 'Close']
-  ];
-};
-
 const createExpansionHeader = ({ username, profile, color }) => {
   const professionName = profile.profession;
   return ['header', {},
@@ -325,8 +316,7 @@ const generateProfile = (player) => {
             ],
           ]
         ]
-      ],
-      createCloseButton()
+      ]
     ];
 
   return html(myProfileTemplate);

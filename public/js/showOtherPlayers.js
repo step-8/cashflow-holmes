@@ -32,7 +32,6 @@ const generateOtherPlayers = (players, username) => {
     ['div', { id: 'other-players' },
       createExpansionHeader(player),
       createOtherPlayersContainer(otherPlayers),
-      createCloseButton()
     ];
 
   return html(otherPlayersTemplate);

@@ -147,7 +147,7 @@ a {
 }
 
 .icon {
-  border-radius: 50%;
+  border-radius: 50% !important;
   aspect-ratio: 1;
   width: 1.8vmax;
   align-self: center;
