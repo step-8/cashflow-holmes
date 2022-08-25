@@ -43,7 +43,6 @@ class Game {
     if (action) {
       type = action + 'Deal';
     }
-
     this.currentCard = this.#ratRace.getCard(type);
     return this.#currentCard;
   }
@@ -106,6 +105,11 @@ class Game {
     this.#currentTurn.setTurnCompleted(false);
     this.#currentCard = null;
     this.#notifications = [];
+
+    if (this.currentPlayer.isInFastTrack) {
+      this.changeTurn();
+      return;
+    }
 
     if (this.currentPlayer.skippedTurns > 0) {
       this.currentPlayer.decrementSkippedTurns();

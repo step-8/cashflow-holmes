@@ -338,6 +338,10 @@ class Player {
     return this.#skippedTurns;
   }
 
+  get isInFastTrack() {
+    return this.#isInFastTrack;
+  }
+
   get color() {
     return this.#color;
   }

@@ -47,12 +47,12 @@ class RiggedDice {
   }
 
   roll() {
-    this.#face = this.#values.pop();
-    return this.#face;
+    this.#face = this.#values.shift();
+    return [this.#face];
   }
 
   face() {
-    return this.#face;
+    return [this.#face];
   }
 }
 

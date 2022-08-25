@@ -415,6 +415,20 @@
     ['div', { className: 'actions' }]
   ];
 
+  const marketDamageEvent = (card) => ['div', { className: 'card-wrapper' },
+    ['div', { className: 'card-heading' }, card.heading],
+    ['div', { className: 'card-contents' },
+      ['div', { className: 'card-rule' }, card.rule || ''],
+      ['div', { className: 'card-sub-rule' }, card.subRule[0]],
+      ['div', { className: 'card-sub-rule' }, card.subRule[1]],
+      ['div', { className: 'card-amount-block' },
+        ['div', {}, `Cost: $${card.cost}`],
+      ]
+    ],
+    ['div', { className: 'actions' }]
+  ];
+
+
   const noCard = () => ['div', {}];
 
   const cardTemplates = {
@@ -442,7 +456,8 @@
     },
     market: {
       lottery: marketStockEvent,
-      realEstate: marketRealEstate
+      realEstate: marketRealEstate,
+      damage: marketDamageEvent,
     },
   };
 
@@ -538,6 +553,11 @@
     };
 
     drawForCurrentUser(createNotifications)(game);
+
+    if (game.currentPlayer.isInFastTrack) {
+      return;
+    }
+
     API.changeTurn();
     return game;
   };
@@ -708,10 +728,6 @@
       baby: {
         1: 'You got a new baby'
       },
-      'money-lottery': {
-        0: 'You lost the lottery',
-        1: 'You won the lottery'
-      },
       'stocks-lottery': {
         0: 'You split the stocks',
         1: 'You reverse split the stocks'
@@ -732,6 +748,11 @@
       if (family === game.currentCard.family) {
         createNotification(game, family, currentPlayer, status);
         API.resetTransaction();
+      }
+
+      if (game.currentPlayer.isInFastTrack) {
+        drawRatRaceCompletion(game);
+        return;
       }
 
       API.changeTurn();
@@ -789,25 +810,33 @@
     actions.append(rollDiceMsg);
   };
 
+  const removePopUp = () => {
+    getElement('.escape-popup').remove();
+    API.changeTurn();
+    removeBlurBackground();
+  };
+
   const drawRatRaceCompletion = (game) => {
-    const player = game.players.find(player => player.isInFastTrack);
-    if (!player) {
+    const { currentPlayer } = game;
+    if (!currentPlayer.isInFastTrack) {
       return;
     }
 
     const popupTemplate =
       [
         'div', { className: 'escape-popup active flex-column flex-center gap' },
-        ['div', { className: 'username' }, `${player.username} has escaped from Rat Race`],
-        ['div', { className: 'button' },
-          [
-            'a', { href: '/cancel-game' }, 'OK'
-          ]
-        ]
+        ['div', { className: 'username' }, `${currentPlayer.username} has escaped from Rat Race`]
       ];
 
     const pageWrapperEle = getElement('.page-wrapper');
     pageWrapperEle.appendChild(html(popupTemplate));
+
+    const drawOkButton = () => {
+      const ok = ['div', { className: 'button', onclick: removePopUp }, 'OK'];
+      getElement('.escape-popup').appendChild(html(ok));
+    };
+
+    drawForCurrentUser(drawOkButton)(game);
     blurBackground();
   };
 
@@ -817,7 +846,6 @@
     addLogs(game, logs);
     createExpansionWindows(game);
     drawLottery(game);
-    drawRatRaceCompletion(game);
   };
 
   const prevState = { game: '' };
