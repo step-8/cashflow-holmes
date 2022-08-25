@@ -88,6 +88,10 @@ header>h3 {
   padding-top: 0.5vmax;
 }
 
+.profile-wrapper table tbody td {
+  text-align: right;
+}
+
 .profile-wrapper table thead th {
   font-weight: 600;
 }

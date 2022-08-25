@@ -751,6 +751,7 @@ a {
 
 .ledger-title {
   font-weight: 600;
+  text-align: right;
 }
 
 .ledger-title,

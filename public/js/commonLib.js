@@ -44,7 +44,13 @@ const getElement = (selector) => {
   return document.querySelector(selector);
 };
 
-const addDollar = (text) => `$${text}`;
+const addDollar = (number) => {
+  if (number < 0) {
+    return `-$${Math.abs(number)}`;
+  }
+
+  return `$${number}`;
+};
 
 const drawForCurrentUser = (fn) => (game) => {
   API.userInfo()
