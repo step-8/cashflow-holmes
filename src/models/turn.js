@@ -102,9 +102,9 @@ class Turn {
 
   buyGoldCoins() {
     const status = this.#currentPlayer.addGoldCoins(this.#card);
-    this.setTransactionState('deals', status);
+    this.setTransactionState('deal', status);
     this.#log.addLog(this.#playerInfo(), `bought ${this.#card.count} gold coins`);
-    this.#turnCompleted = true;
+    this.respond();
   }
 
   charity() {

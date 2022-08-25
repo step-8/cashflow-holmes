@@ -544,7 +544,6 @@
       notifications.forEach(notification => {
         const { family } = notification;
         createNotification(game, family, currentPlayer);
-        console.log('inside create notifications');
         const action = () => sendAction('ok', family, family);
         drawForCurrentUser(action)(game);
       });
