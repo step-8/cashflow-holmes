@@ -12,7 +12,7 @@ const drawLoan = (event) => {
   const selectLoanAmount =
     ['div', { className: 'flex-row flex-center gap' },
       ['div', {},
-        ['input', { onkeyup: fnTocall, type: 'number', min: '0', placeholder: 'Enter amount in 1000s', id: 'loan-amount' }]],
+        ['input', { onkeyup: fnTocall, type: 'number', min: '0', placeholder: 'Enter amount', id: 'loan-amount' }]],
       ['div', {
         className: 'fa-solid fa-check check',
         onclick: () => loanActions(type)
@@ -67,8 +67,11 @@ const loanActionOnEnter = (event, id) => {
 
 const loanActions = (id) => {
   const amount = +getElement('#loan-amount').value;
+  const method = id === 'take-loan' ? 'takeLoan' : 'payLoan';
 
-  if (amount < 0) {
+  if (amount < 0 || amount % 1000) {
+    const message = 'Enter amount in K\'s';
+    drawLoanResult(message, 'warning');
     return;
   }
 
@@ -78,7 +81,6 @@ const loanActions = (id) => {
     body: JSON.stringify({ amount })
   };
 
-  const method = id === 'take-loan' ? 'takeLoan' : 'payLoan';
 
   API[method](options)
     .then(res => decideLoanResult(res, method));

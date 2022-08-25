@@ -232,7 +232,7 @@ class Turn {
   propertyDamage() {
     const status = this.#currentPlayer.payDamages(this.#card);
     this.setTransactionState('market', status);
-    let message = 'has no realEstates';
+    let message = 'has no real estate';
     if (status) {
       message = `paid $${this.#card.cost} for damages`;
     }

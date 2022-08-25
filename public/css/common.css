@@ -42,6 +42,7 @@ body {
 img {
   image-rendering: optimizeSpeed;
 }
+
 .user-info-wrapper {
   width: 12vmax;
   position: fixed;
@@ -228,9 +229,9 @@ a {
 }
 
 .gap {
-  gap: 1vmax;
+  gap: 0.5vmax;
 }
 
 input {
-  padding: 0.5vmax;
+  padding: 0.3vmax;
 }

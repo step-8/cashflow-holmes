@@ -3,8 +3,8 @@ const takeLoan = (req, res) => {
   const { amount } = req.body;
   const { username } = req.session;
   const player = game.getPlayer(username);
-  player.takeLoan(amount * 1000);
-  const message = `took loan of $${amount * 1000}`;
+  player.takeLoan(amount);
+  const message = `took loan of $${amount}`;
   game.addLog(player, message);
   res.sendStatus(200);
 };
@@ -16,9 +16,9 @@ const payLoan = (req, res) => {
   const player = game.getPlayer(username);
   let status = 406;
 
-  if (player.payLoan(amount * 1000)) {
+  if (player.payLoan(amount)) {
     status = 200;
-    const message = `paid loan of $${amount * 1000}`;
+    const message = `paid loan of $${amount}`;
     game.addLog(player, message);
   }
 
