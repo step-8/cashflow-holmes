@@ -35,11 +35,13 @@
 
 body {
   font-family: var(--font-family);
-  image-rendering: optimizeSpeed;
   max-width: 100vw;
   max-height: 100vh;
 }
 
+img {
+  image-rendering: optimizeSpeed;
+}
 .user-info-wrapper {
   width: 12vmax;
   position: fixed;
