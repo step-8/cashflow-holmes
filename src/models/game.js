@@ -282,6 +282,10 @@ class Game {
 
   }
 
+  propertyDamage() {
+    return this.#currentTurn.propertyDamage();
+  }
+
   skip() {
     this.#currentTurn.skip();
   }

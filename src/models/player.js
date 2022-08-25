@@ -304,6 +304,19 @@ class Player {
     return this.updateCash(amount, 'Lottery');
   }
 
+  #hasRealEstate() {
+    return this.#assets.realEstates.length;
+  }
+
+  payDamages(card) {
+    if (!this.#hasRealEstate()) {
+      return 0;
+    }
+
+    this.updateCash(-card.cost, 'Property Damage');
+    return 1;
+  }
+
   profile() {
     return {
       profession: this.#profession,

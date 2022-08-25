@@ -556,6 +556,10 @@
         4: 'You won lottery',
         5: 'You lost lottery'
       },
+      market: {
+        0: 'You have no properties',
+        1: 'You have paid for the property damages'
+      },
       doodad: {
         0: 'Insufficient balance. Take loan to proceed',
         1: 'You are done with doodad'

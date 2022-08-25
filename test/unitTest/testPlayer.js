@@ -363,4 +363,26 @@ describe('Player', () => {
       assert.isOk(player.isIncomeStable());
     });
   });
+
+  describe('payDamage', () => {
+    it('Should return false if there is no realEstate', () => {
+      const profession = JSON.parse(professionStr);
+      const card = { cost: 400 };
+      const player = new Player('p3', 'guest', 'red', profession);
+      player.setDefaults();
+      assert.isNotOk(player.payDamages(card));
+      assert.strictEqual(player.profile().cash, 8400);
+    });
+
+    it('Should return true if there is realEstate and update cash', () => {
+      const profession = JSON.parse(professionStr);
+      const card = { cost: 400 };
+      const asset = { cost: 100, downPayment: 100 };
+      const player = new Player('p3', 'guest', 'red', profession);
+      player.setDefaults();
+      player.buyRealEstate(asset);
+      assert.isOk(player.payDamages(card));
+      assert.strictEqual(player.profile().cash, 7900);
+    });
+  });
 });

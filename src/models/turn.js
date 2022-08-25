@@ -222,6 +222,18 @@ class Turn {
     this.#turnCompleted = true;
   }
 
+  propertyDamage() {
+    const status = this.#currentPlayer.payDamages(this.#card);
+    this.setTransactionState('market', status);
+    let message = 'has no realEstates';
+    if (status) {
+      message = `paid $${this.#card.cost} for damages`;
+    }
+
+    this.#log.addLog(this.#playerInfo(), message);
+    this.#turnCompleted = true;
+  }
+
   get info() {
     return {
       player: this.#currentPlayer,

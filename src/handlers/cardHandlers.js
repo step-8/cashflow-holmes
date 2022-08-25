@@ -20,6 +20,11 @@ const acceptCard = (game, family, type) => {
     return removeNotification(game);
   }
 
+  if (family === 'market' && type === 'damage') {
+    game.propertyDamage();
+    return;
+  }
+
   return game[family]();
 };
 

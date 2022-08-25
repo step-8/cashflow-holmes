@@ -542,4 +542,67 @@ describe('Turn', () => {
 
     });
   });
+
+  describe('property Damages', () => {
+    const card = {
+      cost: 400,
+      type: 'damage'
+    };
+
+    it('Should add realEstate message on successful of paying damage', () => {
+      const log = new Log();
+      const player = {
+        skippedTurns: 0,
+        payDamages: successful,
+        username: 'user',
+        color: 'c',
+        details: {
+          profile: {
+            assets: {
+              realEstates: [{
+                heading: 'New Card',
+              }]
+            }
+          }
+        },
+        hasStock: identity,
+        deactivateReroll: identity
+      };
+
+      const turn = new Turn(card, player, log);
+      turn.propertyDamage();
+      assert.deepStrictEqual(
+        turn.info.transaction, { family: 'market', status: 1 }
+      );
+      assert.isOk(turn.info.state);
+    });
+  });
+
+  it('Should add no realEstate message on failure of paying damage', () => {
+    const log = new Log();
+    const player = {
+      skippedTurns: 0,
+      payDamages: failure,
+      username: 'user',
+      color: 'c',
+      details: {
+        profile: {
+          assets: {
+            realEstates: [{
+              heading: 'New Card',
+            }]
+          }
+        }
+      },
+      hasStock: identity,
+      deactivateReroll: identity
+    };
+
+    const turn = new Turn(card, player, log);
+    turn.propertyDamage();
+    assert.deepStrictEqual(
+      turn.info.transaction, { family: 'market', status: 0 }
+    );
+    assert.isOk(turn.info.state);
+  });
 });
