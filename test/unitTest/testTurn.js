@@ -1,3 +1,4 @@
+const professions = require('../../data/professions.json');
 const { Turn } = require('../../src/models/turn.js');
 const { Log } = require('../../src/models/log.js');
 const { Player } = require('../../src/models/player.js');
@@ -500,7 +501,6 @@ describe('Turn', () => {
     const card = {
       heading: 'New Card',
       symbol: 'a',
-      family: 'market',
       type: 'lottery',
       lottery: 'stock',
       success: [
@@ -509,37 +509,27 @@ describe('Turn', () => {
         3
       ]
     };
+    const professionStr = JSON.stringify(professions[0]);
 
-    it('Should not log the downsized messages', () => {
+    it('Should split stocks of the player', () => {
       const log = new Log();
-      const player = {
-        skippedTurns: 0,
-        initializeSkippedTurns: () => {
-          player.skippedTurns = 2;
-        },
-        username: 'user',
-        color: 'c',
-        details: {
-          profile: {
-            assets: {
-              stocks: [{
-                heading: 'New Card',
-                symbol: 'a',
-                family: 'deal',
-                type: 'stock',
-                price: 5,
-                count: 10
-              }]
-            }
-          }
-        },
-        hasStock: identity,
-        deactivateReroll: identity
-      };
-
+      const profession = JSON.parse(professionStr);
+      const player = new Player('p3', 'guest', 'red', profession);
+      player.setDefaults();
+      player.buyStocks(card, 10);
       const turn = new Turn(card, player, log);
       turn.lottery([player], 1);
-
+      assert.deepStrictEqual(player.profile().assets.stocks[0].count, 20);
+    });
+    it('Should reverse split stocks of the player', () => {
+      const log = new Log();
+      const profession = JSON.parse(professionStr);
+      const player = new Player('p3', 'guest', 'red', profession);
+      player.setDefaults();
+      player.buyStocks(card, 10);
+      const turn = new Turn(card, player, log);
+      turn.lottery([player], 4);
+      assert.deepStrictEqual(player.profile().assets.stocks[0].count, 5);
     });
   });
 

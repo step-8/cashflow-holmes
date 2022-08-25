@@ -385,4 +385,42 @@ describe('Player', () => {
       assert.strictEqual(player.profile().cash, 7900);
     });
   });
+
+  describe('split stocks', () => {
+    const card = {
+      heading: 'New Card',
+      symbol: 'a',
+      price: 5,
+      family: 'deal',
+      type: 'stock'
+    };
+
+    it('Should split stocks to the player', () => {
+      const profession = JSON.parse(professionStr);
+      const player = new Player('p3', 'guest', 'red', profession);
+      player.setDefaults();
+      player.buyStocks(card, 100);
+      player.splitStocks(card);
+      assert.deepStrictEqual(player.profile().assets.stocks[0].count, 200);
+    });
+  });
+
+  describe('reverse split stocks', () => {
+    const card = {
+      heading: 'New Card',
+      symbol: 'a',
+      price: 5,
+      family: 'deal',
+      type: 'stock'
+    };
+
+    it('Should split stocks to the player', () => {
+      const profession = JSON.parse(professionStr);
+      const player = new Player('p3', 'guest', 'red', profession);
+      player.setDefaults();
+      player.buyStocks(card, 100);
+      player.reverseSplitStocks(card);
+      assert.deepStrictEqual(player.profile().assets.stocks[0].count, 50);
+    });
+  });
 });

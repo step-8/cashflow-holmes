@@ -40,7 +40,7 @@ const createGameRouter = (router, config) => {
   router.get('/change-turn', changeTurnHandler);
   router.get('/show-profession', showProfessionHandler);
   router.get('/game-board', gameBoardHandler);
-  router.get('/remove-gameid', removeGameIdHandler);
+  router.get('/remove-game', removeGameIdHandler);
   router.use('/logout', logoutHandler);
   router.post('/card/card-action', cardActionsHandler);
   router.get('/card/type', serveCard);

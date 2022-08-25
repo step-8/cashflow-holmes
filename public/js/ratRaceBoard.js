@@ -303,7 +303,7 @@
 
   const lotteryCard = (card) => ['div', { className: 'card-wrapper' },
     ['div', { className: 'card-heading' }, card.heading],
-    ['div', {className: 'card-contents'}, 
+    ['div', { className: 'card-contents' },
       ['div', { className: 'card-description' }, card.description],
       ['div', { className: 'card-rule' }, card.rule],
       ['div', { className: 'card-sub-rule' }, card.subRule[0]],
@@ -314,10 +314,10 @@
     ],
     ['div', { className: 'actions' }]
   ];
-  
+
   const stocksCard = (card) => ['div', { className: 'card-wrapper' },
     ['div', { className: 'card-heading' }, card.heading],
-    ['div', {className: 'card-contents'}, 
+    ['div', { className: 'card-contents' },
       ['div', { className: 'card-description' }, card.description],
       ['div', { className: 'card-rule' }, card.rule],
       ['div', { className: 'card-amount-block' },
@@ -331,7 +331,7 @@
 
   const realEstateCard = (card) => ['div', { className: 'card-wrapper' },
     ['div', { className: 'card-heading' }, card.heading],
-    ['div', {className: 'card-contents'}, 
+    ['div', { className: 'card-contents' },
       ['div', { className: 'card-description' }, card.description],
       ['div', { className: 'card-rule' }, card.rule],
       ['div', { className: 'card-amount-block' },
@@ -343,10 +343,10 @@
     ],
     ['div', { className: 'actions' }]
   ];
-  
+
   const goldDealCard = (card) => ['div', { className: 'card-wrapper' },
     ['div', { className: 'card-heading' }, card.heading],
-    ['div', {className: 'card-contents'}, 
+    ['div', { className: 'card-contents' },
       ['div', { className: 'card-description' }, card.description],
       ['div', { className: 'card-rule' }, card.rule],
       ['div', { className: 'card-amount-block' },
@@ -355,10 +355,10 @@
     ],
     ['div', { className: 'actions' }]
   ];
-  
+
   const doodadCard = (card) => ['div', { className: 'card-wrapper' },
     ['div', { className: 'card-heading' }, card.heading],
-    ['div', {className: 'card-contents'}, 
+    ['div', { className: 'card-contents' },
       ['div', { className: 'card-rule' }, card.rule || ''],
       ['div', { className: 'card-amount-block' },
         ['div', {}, `Cost: $${card.cost}`],
@@ -369,7 +369,7 @@
 
   const downsizedCard = (card) => ['div', { className: 'card-wrapper' },
     ['div', { className: 'card-heading' }, card.heading],
-    ['div', {className: 'card-contents'}, 
+    ['div', { className: 'card-contents' },
       ['div', { className: 'card-description' }, card.description],
       ['div', { className: 'card-rule' }, ''],
     ],
@@ -378,7 +378,7 @@
 
   const charityCard = (card) => ['div', { className: 'card-wrapper' },
     ['div', { className: 'card-heading' }, card.heading],
-    ['div', {className: 'card-contents'}, 
+    ['div', { className: 'card-contents' },
       ['div', { className: 'card-description' }, card.description],
       ['div', { className: 'card-rule' }, ''],
     ],
@@ -387,14 +387,14 @@
 
   const dealPopup = (card) => ['div', { className: 'card-wrapper' },
     ['div', { className: 'card-heading' }, card.heading],
-    ['div', {className: 'card-contents'}, 
+    ['div', { className: 'card-contents' },
     ],
     ['div', { className: 'actions' }]
   ];
-  
+
   const marketRealEstate = (card) => ['div', { className: 'card-wrapper' },
     ['div', { className: 'card-heading' }, card.heading],
-    ['div', {className: 'card-contents'}, 
+    ['div', { className: 'card-contents' },
       ['div', { className: 'card-description' }, card.description],
     ],
     ['div', { className: 'actions' }]
@@ -402,7 +402,7 @@
 
   const marketStockEvent = (card) => ['div', { className: 'card-wrapper' },
     ['div', { className: 'card-heading' }, card.heading],
-    ['div', {className: 'card-contents'}, 
+    ['div', { className: 'card-contents' },
       ['div', { className: 'card-description' }, card.description],
       ['div', { className: 'card-rule' }, card.rule],
       ['div', { className: 'card-sub-rule' }, card.subRule[0]],
@@ -711,6 +711,10 @@
       'money-lottery': {
         0: 'You lost the lottery',
         1: 'You won the lottery'
+      },
+      'stocks-lottery': {
+        0: 'You split the stocks',
+        1: 'You reverse split the stocks'
       },
     };
 
