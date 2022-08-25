@@ -50,32 +50,23 @@ const buyDeal = (game, type, count) => {
 
 const cardActionsHandler = (req, res) => {
   const { action, family, type, count } = req.body;
-  const { game } = req;
+  const { game, session: { username } } = req;
   const deals = ['small', 'big'];
   if (deals.includes(action)) {
     game.getCard(action);
+    res.end();
+    return;
   }
 
-  if (action === 'ok') {
-    acceptCard(game, family, type);
-  }
-
-  if (action === 'buy') {
-    buyDeal(game, type, +count);
-  }
-
-  if (action === 'skip') {
-    game.skip();
-  }
-
-  if (action === 'roll') {
-    game.activateReroll();
-  }
-
-  if (action === 'sell') {
-    const { username } = req.session;
-    game.sellStocks(username, +count);
-  }
+  const actions = {
+    ok: () => acceptCard(game, family, type),
+    buy: () => buyDeal(game, type, +count),
+    skip: () => game.skip(username),
+    roll: () => game.activateReroll(),
+    sell: () => game.sellStocks(username, +count)
+  };
+  console.log(action, '---------------------ACTION ++++++++++++++');
+  actions[action]();
   res.end();
 };
 

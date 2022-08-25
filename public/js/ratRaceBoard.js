@@ -254,6 +254,7 @@
       deal: ['SMALL', 'BIG'],
       realEstate: ['BUY', 'SKIP'],
       stock: ['BUY', 'SELL', 'SKIP'],
+      stockOthers: ['SELL', 'SKIP'],
       lottery: ['BUY', 'SKIP'],
       MLM: ['ROLL', 'SKIP'],
       goldCoins: ['BUY', 'SKIP']
@@ -484,8 +485,14 @@
     let actions = '';
     const { assets } = currentPlayer.profile;
     const stock = findStock(currentCard, assets);
-    if (currentPlayer.username === username) {
+    const isCurrentUser = currentPlayer.username === username;
+
+    if (isCurrentUser) {
       actions = createActions(family, currentCard.type, stock);
+    }
+
+    if (family === 'deal' && currentCard.type === 'stock' && !isCurrentUser) {
+      actions = createActions(family, 'stockOthers', stock);
     }
 
     const actionsDiv = getElement('.actions');

@@ -187,11 +187,15 @@ class Game {
   sellStocks(username, count) {
     const player = this.getPlayer(username);
     let status = 2;
+
     if (player.sellStocks(this.#currentCard, count)) {
       status = 3;
       this.#log.addLog(player, `sold ${count} ${this.#currentCard.symbol} stocks`);
-      return this.#currentTurn.setTransactionState('deal', status);
+      this.#currentTurn.setTransactionState('deal', status);
+      return;
     }
+
+    this.#currentTurn.sellStocks(username, count);
     this.#currentTurn.setTransactionState('deal', status);
   }
 
@@ -199,8 +203,8 @@ class Game {
     return this.#currentTurn.propertyDamage();
   }
 
-  skip() {
-    this.#currentTurn.skip();
+  skip(username) {
+    this.#currentTurn.skip(username);
   }
 
   getPlayer(username) {
@@ -209,6 +213,7 @@ class Game {
 
   set currentCard(card) {
     this.#currentCard = card;
+
     this.#currentTurn.updateCard(card);
 
     const cards = ['smallDeal', 'bigDeal'];

@@ -1,17 +1,26 @@
 class Response {
   constructor(players) {
     this.players = players;
+    this.ResponseType = 'individual';
   }
+
+  forGroup() {
+    this.ResponseType = 'group';
+  }
+
   set responded(username) {
     const player = this.players.find(player => player.username === username);
     player.responded = true;
   }
 
-  areReceived() {
+  #areReceived() {
     return this.players.every(player => player.responded);
   }
 
   isReceived(username) {
+    if (this.ResponseType === 'group') {
+      return this.#areReceived();
+    }
     return this.players.find(player => player.username === username).responded;
   }
 

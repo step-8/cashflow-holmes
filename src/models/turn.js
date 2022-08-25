@@ -13,9 +13,9 @@ class Turn {
     this.#log = log;
   }
 
-  respond() {
+  respond(responder) {
     const username = this.#currentPlayer.username;
-    this.#response.responded = username;
+    this.#response.responded = responder || username;
   }
 
   #playerInfo() {
@@ -213,10 +213,10 @@ class Turn {
     this.#decideLottery(players, diceValue);
   }
 
-  skip() {
+  skip(username) {
     this.#log.addLog(this.#playerInfo(), `skipped ${this.#card.symbol}`);
 
-    this.respond();
+    this.respond(username);
   }
 
   setTurnCompleted(state) {
@@ -224,22 +224,25 @@ class Turn {
   }
 
   updateCard(card) {
+    if (card.type === 'stock' && card.family === 'deal') {
+      this.#response.forGroup();
+    }
     this.#card = card;
   }
 
-  updatePlayer(player) {
-    this.#currentPlayer = player;
-  }
+  // updatePlayer(player) {
+  //   this.#currentPlayer = player;
+  // }
 
   canPlayerContinue() {
     return this.#currentPlayer.canContinue();
   }
 
-  sellStocks(players, count) {
+  sellStocks(username, count) {
     this.setTransactionState('deals', 2);
     this.#log.addLog(this.#playerInfo(), `sold ${count} ${this.#card.symbol} stocks`);
 
-    this.respond();
+    this.respond(username);
   }
 
   propertyDamage() {
@@ -256,10 +259,12 @@ class Turn {
   }
 
   get info() {
+    const state = this.#response.isReceived(this.#currentPlayer.username);
+
     return {
       player: this.#currentPlayer,
       card: this.#card, //No need of card
-      state: this.#response.isReceived(this.#currentPlayer.username),
+      state,
       // state: this.#turnCompleted,
       transaction: this.#currentTransaction
     };
