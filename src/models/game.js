@@ -97,6 +97,13 @@ class Game {
     currentPlayer.changeDiceStatus(true);
   }
 
+  nextPlayer() {
+    ++this.#currentPlayerIndex;
+    this.#currentPlayerIndex = this.#currentPlayerIndex % this.#players.length;
+    return this.currentPlayer;
+  }
+
+
   rollDice(diceCount) {
     this.#diceValues = this.#dice.roll(diceCount);
     const currentPlayer = this.currentPlayer;
@@ -117,18 +124,15 @@ class Game {
   }
 
   changeTurn() {
-    ++this.#currentPlayerIndex;
-    this.#currentPlayerIndex = this.#currentPlayerIndex % this.#players.length;
-    this.#currentTurn.updatePlayer(this.currentPlayer);
+    const responses = new Response(createResponses(this.#players));
+    this.#currentTurn = new Turn(null, this.nextPlayer(), this.#log, responses);
     this.resetDice();
-    this.#currentTurn.setTurnCompleted(false);
     this.#currentCard = null;
     this.#notifications = [];
 
-    if (this.currentPlayer.skippedTurns > 0) {
-      this.currentPlayer.decrementSkippedTurns();
-      this.addLog(this.currentPlayer, 'skipped turn');
+    if (this.currentPlayer.isInFastTrack) {
       this.changeTurn();
+      return;
     }
   }
 
@@ -149,6 +153,10 @@ class Game {
       return;
     }
     this.#currentCard.notifications.shift();
+  }
+
+  buyGoldCoins() {
+    return this.#currentTurn.buyGoldCoins();
   }
 
   payday() {
