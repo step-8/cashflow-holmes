@@ -74,8 +74,7 @@ class Game {
 
   #getCardType() {
     const currentPosition = this.currentPlayer.currentPosition;
-    const type = this.#ratRace.getCardType(currentPosition);
-    return type;
+    return this.#ratRace.getCardType(currentPosition);
   }
 
   getCard(action) {

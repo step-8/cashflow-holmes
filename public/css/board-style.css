@@ -470,54 +470,75 @@ a {
   grid-row: 2/6;
   grid-column: 2/6;
   margin: 0.5vmax 0vmax;
+  position: relative;
   border-radius: 0.5vmax;
-  padding: 0.5em;
+  overflow: hidden;
+}
+
+.card-contents {
+  padding: 0.5vmax;
+  font-size: 0.9em;
+  height: 65%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
-
-#main-card .card-heading {
-  font-weight: 500;
+.actions {
+  align-self: flex-end;
   width: 100%;
+  height: 20%;
+  position: absolute;
+}
+.card-heading{
+  margin-top: 0.5vmax;
   text-align: center;
-}
-
-#main-card .description {
-  width: 100%;
-}
-
-#main-card .rule {
-  width: 100%;
-}
-
-#main-card .cost {
+  font-size: var(--normal-font);
   font-weight: 600;
+  width: 100%;
+  height: 10%;
+}
+
+.card-rule {
+  padding-top: 0.5vmax;
+  text-decoration: underline;
+}
+.card-rule, .card-sub-rule{
+  width: 100%;
+  font-weight: 500;
+}
+.card-amount-block {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.card-amount-block>div{
+  text-align: center;
+  min-width: 50%;
+  font-weight: 600;
+}
+
+
+.actions .warning {
+  width: 100%;
   text-align: center;
 }
 
-#main-card .actions {
-  width: 100%;
-  height: 15%;
-  display: flex;
-  justify-content: space-around;
-}
-
-#main-card .actions-wrapper {
+.actions-wrapper {
   width: 100%;
   height: 100%;
+  justify-content: space-evenly;
   display: flex;
-  justify-content: space-around;
+  padding: 0.5vmax;
 }
-
-#main-card .actions .action-btn {
-  width: 20%;
-  height: 80%;
-  border: 1px solid black;
+.actions-wrapper .action-btn {
+  width: 4vmax;
+  border: var(--def-border);
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  font-size: 0.8vmax;
 }
 
 /* Card design ends */

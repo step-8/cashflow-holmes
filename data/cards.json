@@ -30,8 +30,12 @@
       "symbol": "lottery",
       "heading": "Sister-In-Law borrows Money",
       "lottery": "money",
-      "description": "Sister-in-law is downsized.Needs $5000 to make house payment. She promises to pay you back $10000 after she finds a new job.If you choose to help, pay $5000 and roll die again",
-      "rule": "Die = 1-3, She never pays you back and you lost $5000 --- Die = 4-6, She pays you back $10000, but family get-togethers are still awkward",
+      "description": "Sister-in-law is downsized.Needs $5000 to make house payment. She promises to pay you back $10000 after she finds a new job.",
+      "rule": "If you choose to help. Pay cost and roll a die",
+      "subRule": [
+        "Die = 1-3, She never pays you back and you lost $5000",
+        "Die = 4-6, She pays you back $10000, but family get-togethers are still awkward"
+      ],
       "cost": 5000,
       "failure": [
         1,
@@ -65,8 +69,12 @@
       "id": "smallDealMLM01",
       "type": "MLM",
       "heading": "Multi-Level Marketing Buy-in",
-      "description": "Company is looking to spread the reach of the newest venture.",
-      "rule": "If you choose to buy in pay $500. Every payday roll 1 die. Die=1-3, No returns. Die=4-6, Collect $500",
+      "description": "You have a chance to invest in Multi-Level-Marketing opportunity. Company is looking to spread the reach of the newest venture.",
+      "rule": "If you choose to buy pay cost. Every payday roll 1 die",
+      "subRule": [
+        "Die = 1-3, No returns this month, Keep trying",
+        "Die = 4-6, Your sweat equity paid off!"
+      ],
       "cost": 500
     }
   ],
@@ -118,7 +126,11 @@
       "symbol": "OK4U",
       "heading": "Stock - OK4U Drug Co.",
       "description": "OK4U begins trail on possible life saving drug. Side effects are untested. Could change the world... if it works.",
-      "rule": "Cardholder rolls 1 die. Die=1-3,Double. Die=4-6,Half the stocks.",
+      "rule": "Cardholder rolls 1 die.",
+      "subRule": [
+        "Die = 1-3,Double.",
+        "Die = 4-6,Half the stocks."
+      ],
       "success": [
         1,
         2,

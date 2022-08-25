@@ -301,24 +301,154 @@
     })]);
   };
 
+  const lotteryCard = (card) => ['div', { className: 'card-wrapper' },
+    ['div', { className: 'card-heading' }, card.heading],
+    ['div', {className: 'card-contents'}, 
+      ['div', { className: 'card-description' }, card.description],
+      ['div', { className: 'card-rule' }, card.rule],
+      ['div', { className: 'card-sub-rule' }, card.subRule[0]],
+      ['div', { className: 'card-sub-rule' }, card.subRule[1]],
+      ['div', { className: 'card-amount-block' },
+        ['div', {}, `Cost: $${card.cost}`],
+      ]
+    ],
+    ['div', { className: 'actions' }]
+  ];
+  
+  const stocksCard = (card) => ['div', { className: 'card-wrapper' },
+    ['div', { className: 'card-heading' }, card.heading],
+    ['div', {className: 'card-contents'}, 
+      ['div', { className: 'card-description' }, card.description],
+      ['div', { className: 'card-rule' }, card.rule],
+      ['div', { className: 'card-amount-block' },
+        ['div', {}, `Symbol: ${card.symbol}`],
+        ['div', {}, `Today's Price: $${card.price}`],
+        ['div', {}, `Historic Trading Range: $${card.range[0]} - $${card.range[1]}`],
+      ]
+    ],
+    ['div', { className: 'actions' }]
+  ];
+
+  const realEstateCard = (card) => ['div', { className: 'card-wrapper' },
+    ['div', { className: 'card-heading' }, card.heading],
+    ['div', {className: 'card-contents'}, 
+      ['div', { className: 'card-description' }, card.description],
+      ['div', { className: 'card-rule' }, card.rule],
+      ['div', { className: 'card-amount-block' },
+        ['div', {}, `Cost: $${card.cost}`],
+        ['div', {}, `Mortgage: $${card.mortgage}`],
+        ['div', {}, `Down Payment: $${card.downPayment}`],
+        ['div', {}, `Cash Flow: +$${card.cashFlow}`]
+      ]
+    ],
+    ['div', { className: 'actions' }]
+  ];
+  
+  const goldDealCard = (card) => ['div', { className: 'card-wrapper' },
+    ['div', { className: 'card-heading' }, card.heading],
+    ['div', {className: 'card-contents'}, 
+      ['div', { className: 'card-description' }, card.description],
+      ['div', { className: 'card-rule' }, card.rule],
+      ['div', { className: 'card-amount-block' },
+        ['div', {}, `Cost: $${card.cost}`],
+      ]
+    ],
+    ['div', { className: 'actions' }]
+  ];
+  
+  const doodadCard = (card) => ['div', { className: 'card-wrapper' },
+    ['div', { className: 'card-heading' }, card.heading],
+    ['div', {className: 'card-contents'}, 
+      ['div', { className: 'card-rule' }, card.rule || ''],
+      ['div', { className: 'card-amount-block' },
+        ['div', {}, `Cost: $${card.cost}`],
+      ]
+    ],
+    ['div', { className: 'actions' }]
+  ];
+
+  const downsizedCard = (card) => ['div', { className: 'card-wrapper' },
+    ['div', { className: 'card-heading' }, card.heading],
+    ['div', {className: 'card-contents'}, 
+      ['div', { className: 'card-description' }, card.description],
+      ['div', { className: 'card-rule' }, ''],
+    ],
+    ['div', { className: 'actions' }]
+  ];
+
+  const charityCard = (card) => ['div', { className: 'card-wrapper' },
+    ['div', { className: 'card-heading' }, card.heading],
+    ['div', {className: 'card-contents'}, 
+      ['div', { className: 'card-description' }, card.description],
+      ['div', { className: 'card-rule' }, ''],
+    ],
+    ['div', { className: 'actions' }]
+  ];
+
+  const dealPopup = (card) => ['div', { className: 'card-wrapper' },
+    ['div', { className: 'card-heading' }, card.heading],
+    ['div', {className: 'card-contents'}, 
+    ],
+    ['div', { className: 'actions' }]
+  ];
+  
+  const marketRealEstate = (card) => ['div', { className: 'card-wrapper' },
+    ['div', { className: 'card-heading' }, card.heading],
+    ['div', {className: 'card-contents'}, 
+      ['div', { className: 'card-description' }, card.description],
+    ],
+    ['div', { className: 'actions' }]
+  ];
+
+  const marketStockEvent = (card) => ['div', { className: 'card-wrapper' },
+    ['div', { className: 'card-heading' }, card.heading],
+    ['div', {className: 'card-contents'}, 
+      ['div', { className: 'card-description' }, card.description],
+      ['div', { className: 'card-rule' }, card.rule],
+      ['div', { className: 'card-sub-rule' }, card.subRule[0]],
+      ['div', { className: 'card-sub-rule' }, card.subRule[1]],
+      ['div', { className: 'card-amount-block' },
+        ['div', {}, `Symbol: ${card.symbol}`],
+        ['div', {}, 'SPLIT or REVERSE ?'],
+      ]
+    ],
+    ['div', { className: 'actions' }]
+  ];
+
+  const noCard = () => ['div', {}];
+
+  const cardTemplates = {
+    deal: {
+      deal: dealPopup,
+      realEstate: realEstateCard,
+      stock: stocksCard,
+      lottery: lotteryCard,
+      gold: goldDealCard
+    },
+    doodad: {
+      doodad: doodadCard
+    },
+    payday: {
+      payday: noCard
+    },
+    downsized: {
+      downsized: downsizedCard
+    },
+    charity: {
+      charity: charityCard
+    },
+    baby: {
+      baby: noCard
+    },
+    market: {
+      lottery: marketStockEvent,
+      realEstate: marketRealEstate
+    },
+  };
+
   const createCardTemplate = (currentCard) => {
-    let { cost, downPayment } = currentCard;
-    if (cost) {
-      cost = `cost: $${currentCard.cost}`;
-    }
-
-    if (downPayment) {
-      downPayment = `down payment: $${currentCard.downPayment}`;
-    }
-
-    return ['div', {},
-      ['div', { className: 'card-heading normal-font' }, currentCard.heading.toUpperCase() || ''],
-      ['div', { className: 'description' }, currentCard.description || ''],
-      ['div', { className: 'rule' }, currentCard.rule || ''],
-      ['div', { className: 'cost small-font' }, cost || ''],
-      ['div', { className: 'cost small-font' }, downPayment || ''],
-      ['div', { className: 'actions' }]
-    ];
+    const { type, family } = currentCard;
+    return cardTemplates[family][type](currentCard);
   };
 
   const updateCurrentCardDetails = (card, player) => {
