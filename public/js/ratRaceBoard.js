@@ -135,6 +135,8 @@
       diceBox.style.opacity = 1;
       diceBox.style.border = '2px solid black';
       diceBox.style.zIndex = 1;
+      diceBox.style.boxShadow = 'grey 0px 0px 12px 6px';
+
       diceBox.onclick = () => {
         API.getGame()
           .then(res => res.json())
@@ -146,6 +148,7 @@
       diceBox.style.opacity = 0.5;
       diceBox.style.zIndex = -1;
       diceBox.style.border = '2px dashed black';
+      diceBox.style.boxShadow = 'none';
       diceBox.onclick = null;
       resetToggler();
     }
@@ -189,6 +192,9 @@
   };
 
   const buyStocks = (event, action) => {
+    if (!isEnter(event)) {
+      return;
+    }
     const inputDiv = event.target.parentElement.firstChild;
     const stockCount = inputDiv.firstChild.value;
     if (!stockCount) {
@@ -205,7 +211,10 @@
     const selectStockCount =
       ['div', { className: 'selection-box' },
         ['div', {},
-          ['input', { type: 'number', min: '0', placeholder: 'Enter no of stocks' }]],
+          ['input',
+            { onkeyup: event => buyStocks(event, action), type: 'number', min: '0', placeholder: 'Enter no of stocks' }
+          ]
+        ],
         ['div', {
           className: 'fa-solid fa-check check',
           onclick: (event) => buyStocks(event, action)
