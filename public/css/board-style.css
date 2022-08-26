@@ -878,16 +878,18 @@ a {
 /* Notifications styles */
 .notify-wrapper {
   width: 65%;
-  height: 40%;
-  padding: 0.2em;
+  height: 2vmax;
   display: flex;
   align-items: center;
   margin-bottom: 0.8vmax;
+  border: var(--def-border);
+  border-radius: var(--def-curve);
 }
 
 .notify-msg {
   width: 90%;
-  height: max-content;
+  padding-top: 0.4em;
+  height: 2vmax;
   text-align: center;
 }
 

@@ -118,7 +118,7 @@
     if (dualDiceCount <= 0) {
       return;
     }
-
+    chooseDice.replaceChildren('');
     chooseDice.appendChild(html(createToggler(game)));
   };
 
@@ -541,7 +541,7 @@
     }, 5000);
 
     notification = html(
-      ['div', { className: `notify-wrapper ${family} fade-${family} fade` },
+      ['div', { className: `notify-wrapper ${family} fade-${family} fade shadow` },
         ['div', { className: 'notify-msg' }, message],
         ['div', {
           className: 'fa-solid fa-xmark close',
