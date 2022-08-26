@@ -347,6 +347,40 @@ class Player {
     return 1;
   }
 
+  #sellAssets(asset, key) {
+    let totalCash = 0;
+
+    this.#assets[asset].forEach(property => {
+      totalCash += (property[key] / 2);
+    });
+
+    this.#assets[asset] = [];
+    this.#income.realEstates = [];
+    this.#liabilities.realEstates = [];
+    return totalCash;
+  }
+
+  #sellAllStocks() {
+    let totalCash = 0;
+
+    this.#assets.stocks.forEach(({ price, count }) => {
+      totalCash += ((count * price) / 2);
+    });
+
+    this.#assets.stocks = [];
+
+    return totalCash;
+  }
+
+  sellAllAssets() {
+    let cash = this.#sellAssets('realEstates', 'downPayment');
+
+    cash += this.#sellAssets('preciousMetals', 'cost');
+    cash += this.#sellAllStocks();
+    this.#cash += cash;
+    return this.#cash > 0;
+  }
+
   profile() {
     return {
       profession: this.#profession,

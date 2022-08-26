@@ -263,7 +263,6 @@
   };
 
   const performAction = (event, family, type, person) => {
-    console.log(event);
     const actionDiv = event.target;
     let [, action] = actionDiv.id.split('-');
     action = action === 'donate' ? 'ok' : action;
@@ -311,7 +310,6 @@
 
   const createActions = (family, type, stock, person) => {
     const actionTexts = actions[family][type];
-    console.log(family, type, stock, person);
     return html(['div', { className: 'actions-wrapper' },
       ...actionTexts.map(action => {
         if (action === 'SELL' && !stock) {

@@ -48,19 +48,36 @@ const drawLoanResult = (message, status) => {
   }, 2000);
 };
 
+const drawOutOfBankruptcy = () => {
+  const bankruptEle = getElement('#bankrupt-popup');
+  bankruptEle.replaceChildren('');
+  const OutOfBankruptcy = ['div', { className: 'username' }, 'You are out of bankruptcy'];
+  bankruptEle.appendChild(html(OutOfBankruptcy));
+
+  setTimeout(() => {
+    bankruptEle.remove();
+  }, 5000);
+};
+
 const sellAllAssets = () => {
   const options = {
     method: 'POST',
   };
 
   API.sellAllAssets(options)
-    .then(res => console.log('inside sell all assets'));
+    .then(res => {
+      if (res.status === 200) {
+        drawOutOfBankruptcy();
+        return;
+      }
+      getElement('#bankrupt-popup').remove();
+    });
 };
 
 const createBankruptPopup = () => {
   const popupTemplate =
     [
-      'div', { className: 'escape-popup active flex-column flex-center gap' },
+      'div', { className: 'escape-popup active flex-column flex-center gap', id: 'bankrupt-popup' },
       ['div', { className: 'username' }, 'You are going Bankrupted'],
       ['div', { className: 'button', onclick: sellAllAssets }, 'SELL']
     ];

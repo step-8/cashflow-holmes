@@ -71,8 +71,13 @@ const changeTurnHandler = (req, res) => {
 
 const sellAllAssetsHandler = (req, res) => {
   const { username } = req.session;
-  req.game.sellAllAssets(username);
-  res.end();
+  const { game } = req;
+  let status = 406;
+  if (game.sellAllAssets(username)) {
+    status = 200;
+  }
+
+  res.sendStatus(status);
 };
 
 module.exports = {

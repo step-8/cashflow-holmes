@@ -21,6 +21,7 @@ class Game {
   #notifications;
   #log;
   #dice;
+  #bankruptedPlayers;
 
   constructor(gameID, players, dice) {
     this.#gameID = gameID;
@@ -33,6 +34,7 @@ class Game {
     this.#ratRace = new RatRace(deck);
     this.#log = new Log();
     this.#notifications = [];
+    this.#bankruptedPlayers = [];
     this.#currentTurn = new Turn(
       this.#currentCard, this.#currentPlayer, this.#log,
       new Response(createResponses(players)));
@@ -254,8 +256,17 @@ class Game {
     return status;
   }
 
-  sellAllAssets() {
-    return;
+  sellAllAssets(username) {
+    const player = this.findPlayer(username);
+    const status = player.sellAllAssets();
+    let message = `${username} sold all assets`;
+    if (!status) {
+      this.#bankruptedPlayers.push(player);
+      message = `${username} has bankrupted`;
+    }
+
+    this.addLog(username, message);
+    return status;
   }
 
   set currentCard(card) {
@@ -318,7 +329,8 @@ class Game {
       isTurnEnded: this.#currentTurn.info.state,
       turnResponses: this.#currentTurn.responses,
       notifications: this.#notifications,
-      logs: this.#log.getAllLogs()
+      logs: this.#log.getAllLogs(),
+      bankruptedPlayers: this.#bankruptedPlayers
     };
   }
 }
