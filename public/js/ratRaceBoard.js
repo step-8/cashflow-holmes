@@ -646,9 +646,14 @@
   };
 
   const drawTwoDices = (diceValues) => {
+    let newDiceValues = diceValues;
+    if (newDiceValues.length < 2) {
+      newDiceValues = [...diceValues, 1];
+    }
+
     const dice = document.querySelector('#dice-box');
     dice.replaceChildren('');
-    diceValues.forEach(diceValue => {
+    newDiceValues.forEach(diceValue => {
       dice.appendChild(createDice(diceValue));
     });
 
