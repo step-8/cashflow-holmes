@@ -17,6 +17,7 @@ class Player {
   #skippedTurns;
   #canReRoll;
   #isInFastTrack;
+  #hasBankrupt;
 
   constructor(username, role, color, { profession, babies, income, expenses, assets, liabilities }) {
     this.#username = username;
@@ -37,6 +38,7 @@ class Player {
     this.#skippedTurns = 0;
     this.#canReRoll = false;
     this.#isInFastTrack = false;
+    this.#hasBankrupt = false;
   }
 
   init({ isRolledDice, lastPosition, currentPosition, dualDiceCount, skippedTurns, canReRoll, isInFastTrack, transactions }) {
@@ -252,10 +254,20 @@ class Player {
     return true;
   }
 
+  #isNegativeCF() {
+    return this.#calculateCashFlow() < 0;
+  }
+
   takeLoan(amount) {
     this.updateCash(amount, 'Took loan');
     this.#liabilities.bankLoan += amount;
     this.#expenses.bankLoanPayment = this.#liabilities.bankLoan / 10;
+
+    if (this.#isNegativeCF()) {
+      this.#hasBankrupt = true;
+      return false;
+    }
+
     return true;
   }
 
@@ -394,7 +406,8 @@ class Player {
       dualDiceCount: this.#dualDiceCount,
       skippedTurns: this.#skippedTurns,
       canReRoll: this.#canReRoll,
-      isInFastTrack: this.#isInFastTrack
+      isInFastTrack: this.#isInFastTrack,
+      hasBankrupt: this.#hasBankrupt
     };
   }
 }

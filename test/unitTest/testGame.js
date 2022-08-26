@@ -224,7 +224,7 @@ describe('Game', () => {
   });
 
   describe('loan', () => {
-    it('Should add loan amount to cash', () => {
+    it('Should add loan amount to cash and player to be bankrupted', () => {
       const game = new Game(1234,
         [new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]), new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])],
         new Dice(2, 6));
@@ -240,6 +240,8 @@ describe('Game', () => {
       game.takeLoan('p1', 1000);
       const player = game.findPlayer('p1');
       assert.strictEqual(player.profile().cash, 1000);
+      assert.isNotOk(player.profile().hasBankrupt);
+
     });
 
     it('Should remove loan amount to cash', () => {

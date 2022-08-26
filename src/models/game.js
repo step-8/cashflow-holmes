@@ -237,9 +237,10 @@ class Game {
 
   takeLoan(username, amount) {
     const player = this.findPlayer(username);
-    player.takeLoan(amount);
+    const status = player.takeLoan(amount);
     const message = `took loan of $${amount}`;
     this.addLog(username, message);
+    return status;
   }
 
   payLoan(username, amount) {

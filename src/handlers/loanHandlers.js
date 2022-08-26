@@ -2,8 +2,12 @@ const takeLoan = (req, res) => {
   const { game } = req;
   const { amount } = req.body;
   const { username } = req.session;
-  game.takeLoan(username, amount);
-  res.sendStatus(200);
+  let status = 406;
+  if (game.takeLoan(username, amount)) {
+    status = 200;
+  }
+
+  res.sendStatus(status);
 };
 
 const payLoan = (req, res) => {
