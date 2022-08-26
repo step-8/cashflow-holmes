@@ -24,6 +24,9 @@ class Response {
     return this.players.find(player => player.username === username).responded;
   }
 
+  get collection() {
+    return this.players.map(player => ({ ...player }));
+  }
 }
 
 const createResponses = (players) => {

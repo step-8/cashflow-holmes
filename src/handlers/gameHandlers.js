@@ -1,7 +1,8 @@
 const { RAT_RACE_BOARD, GUEST_LOBBY, MAIN_MENU_PAGE, PROFESSION_CARD } = require('../utils/pages.js');
 
 const reRollHandler = (req, res) => {
-  req.game.reRollDice();
+  const { username } = req.session;
+  req.game.reRollDice(username);
   res.end();
 };
 

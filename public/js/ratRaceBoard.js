@@ -215,7 +215,15 @@
       ['div', { className: 'selection-box' },
         ['div', {},
           ['input',
-            { autofocus: 'true', required: 'true', onkeyup: event => buyStocksOnEnter(event, action), type: 'number', min: '0', placeholder: 'Enter no of stocks', id: 'stock-count' }
+            {
+              autofocus: 'true',
+              required: 'true',
+              onkeyup: event => buyStocksOnEnter(event, action),
+              type: 'number',
+              min: '0',
+              placeholder: 'Enter no of stocks',
+              id: 'stock-count'
+            }
           ]
         ],
         ['div', {
@@ -255,11 +263,13 @@
   };
 
   const performAction = (event, family, type, person) => {
+    console.log(event);
     const actionDiv = event.target;
     let [, action] = actionDiv.id.split('-');
     action = action === 'donate' ? 'ok' : action;
 
-    if ((action === 'buy' || action === 'sell') && type === 'stock') {
+    if ((action === 'buy' || action === 'sell') &&
+      (type === 'stock' || type === 'stockOthers')) {
       drawBuyStocks(action);
       return;
     }
@@ -274,7 +284,7 @@
       stock: ['BUY', 'SELL', 'SKIP'],
       stockOthers: ['SELL', 'SKIP'],
       lottery: ['BUY', 'SKIP'],
-      MLM: ['ROLL', 'SKIP'],
+      mlm: ['ROLL', 'SKIP'],
       goldCoins: ['BUY', 'SKIP']
     },
     market: {
@@ -301,6 +311,7 @@
 
   const createActions = (family, type, stock, person) => {
     const actionTexts = actions[family][type];
+    console.log(family, type, stock, person);
     return html(['div', { className: 'actions-wrapper' },
       ...actionTexts.map(action => {
         if (action === 'SELL' && !stock) {
@@ -501,17 +512,23 @@
     return stock;
   };
 
-  const drawActions = (username, family, currentCard, currentPlayer, players) => {
-    let actions = '';
+  const isStock = (family, type) => family === 'deal' && type === 'stock';
+
+  const drawActions = (game) => {
+    const { username, currentCard, currentPlayer, players, turnResponses } = game;
+    const { family, type } = currentCard;
     const { assets } = currentPlayer.profile;
+    const response = turnResponses.find(response => response.username === username);
+
+    let actions = '';
     const stock = findStock(currentCard, assets);
     const isCurrentUser = currentPlayer.username === username;
 
-    if (isCurrentUser) {
-      actions = createActions(family, currentCard.type, stock, 'self');
+    if (isCurrentUser && !response.responded) {
+      actions = createActions(family, type, stock, 'self');
     }
 
-    if (family === 'deal' && currentCard.type === 'stock' && !isCurrentUser) {
+    if (isStock(family, type) && !isCurrentUser && !response.responded) {
       const { assets } = findPlayer(players, username).profile;
       const stock = findStock(currentCard, assets);
       actions = createActions(family, 'stockOthers', stock, 'others');
@@ -590,7 +607,7 @@
   };
 
   const drawCard = (game) => {
-    const { currentCard, currentPlayer, username, players } = game;
+    const { currentCard, currentPlayer } = game;
     const { canReRoll } = currentPlayer;
     const cardEle = getElement('#main-card');
     if (!currentCard || !currentCard.id) {
@@ -598,7 +615,7 @@
       return;
     }
 
-    const { family } = currentCard;
+
     const newCard = createCard(currentCard, currentPlayer);
     cardEle.replaceWith(newCard);
 
@@ -607,7 +624,8 @@
       return;
     }
 
-    drawActions(username, family, currentCard, currentPlayer, players);
+    drawActions(game);
+    // drawActions(username, family, currentCard, currentPlayer, players);
   };
 
   const drawPlayersList = (game) => {
@@ -808,7 +826,6 @@
 
     logsDiv.scrollTop = logsDiv.scrollHeight;
   };
-
 
   const decideLoanActions = (game) => {
     const username = game.username;

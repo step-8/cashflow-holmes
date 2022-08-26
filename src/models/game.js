@@ -112,7 +112,7 @@ class Game {
 
   rollDice(diceCount) {
     // this.#diceValues = this.#dice.roll(diceCount);
-    this.#diceValues = [4, 4];
+    this.#diceValues = [1, 2];
     const currentPlayer = this.currentPlayer;
     const dualDiceCount = currentPlayer.dualDiceCount;
     const totalCount = this.#calculateTotalSteps(diceCount);
@@ -214,12 +214,11 @@ class Game {
 
     if (player.sellStocks(this.#currentCard, count)) {
       status = 3;
-      this.addLog(username, `sold ${count} ${this.#currentCard.symbol} stocks`);
+      this.#currentTurn.sellStocks(player, count);
       this.#currentTurn.setTransactionState('deal', status);
       return;
     }
 
-    this.#currentTurn.sellStocks(username, count);
     this.#currentTurn.setTransactionState('deal', status);
   }
 
@@ -314,6 +313,7 @@ class Game {
       currentTurn: this.#currentTurn,
       transaction: this.#currentTurn.info.transaction,
       isTurnEnded: this.#currentTurn.info.state,
+      turnResponses: this.#currentTurn.responses,
       notifications: this.#notifications,
       logs: this.#log.getAllLogs()
     };

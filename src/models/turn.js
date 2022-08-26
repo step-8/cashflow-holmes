@@ -254,6 +254,7 @@ class Turn {
     this.respond(player.username);
   }
 
+  
   propertyDamage(player) {
     const status = player.payDamages(this.#card);
     this.setTransactionState('market', status);
@@ -265,6 +266,10 @@ class Turn {
 
     this.#log.addLog(player, message);
     this.respond(player.username);
+  }
+
+  get responses() {
+    return this.#response.collection;
   }
 
   get info() {
