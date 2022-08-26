@@ -214,16 +214,16 @@ const RAT_RACE_BOARD = `<html>
   <div class="expansion-window-screen"></div> 
     <div id="board">
       <div class="game-area">
-        <div class="card-deck flex-column market" id="market">
+        <div class="card-deck shadow flex-column market" id="market">
           <img src="images/ratrace/market.png" alt="market">
           <div class="tile-name">Market</div> </div>
-        <div class="card-deck flex-column deal" id="small-deal">
+        <div class="card-deck shadow flex-column deal" id="small-deal">
           <img src="images/ratrace/deal.png" alt="deals">
             <div class="tile-name">Deal</div> </div>
-        <div class="card-deck flex-column deal" id="big-deal">
+        <div class="card-deck shadow flex-column deal" id="big-deal">
           <img src="images/ratrace/deal.png" alt="deals">
             <div class="tile-name">Deal</div></div>
-        <div class="card-deck flex-column doodad" id="doodad">
+        <div class="card-deck shadow flex-column doodad" id="doodad">
           <img src="images/ratrace/doodad.png" alt="doodad">
           <div class="tile-name">Doodad</div></div>
         <div id="players"></div>

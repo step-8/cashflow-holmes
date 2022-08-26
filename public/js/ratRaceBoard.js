@@ -191,12 +191,17 @@
 
   };
 
-  const buyStocks = (event, action) => {
+  const buyStocksOnEnter = (event, action) => {
     if (!isEnter(event)) {
       return;
     }
-    const inputDiv = event.target.parentElement.firstChild;
-    const stockCount = inputDiv.firstChild.value;
+
+    buyStocks(event, action);
+  };
+
+  const buyStocks = (event, action) => {
+    const inputDiv = getElement('#stock-count');
+    const stockCount = inputDiv.value;
     if (!stockCount) {
       return;
     }
@@ -212,7 +217,7 @@
       ['div', { className: 'selection-box' },
         ['div', {},
           ['input',
-            { onkeyup: event => buyStocks(event, action), type: 'number', min: '0', placeholder: 'Enter no of stocks' }
+            { onkeyup: event => buyStocksOnEnter(event, action), type: 'number', min: '0', placeholder: 'Enter no of stocks', id: 'stock-count' }
           ]
         ],
         ['div', {
@@ -514,6 +519,7 @@
     const cardTemplate = createCardTemplate(currentCard);
     const newCard = html(cardTemplate);
     newCard.classList.add(currentCard.family);
+    addClasses(newCard, 'shadow');
     newCard.id = 'main-card';
     return newCard;
   };
@@ -579,7 +585,6 @@
     const { currentCard, currentPlayer, username } = game;
     const { canReRoll } = currentPlayer;
     const cardEle = getElement('#main-card');
-
     if (!currentCard || !currentCard.id) {
       removeCard();
       return;

@@ -235,3 +235,7 @@ a {
 input {
   padding: 0.3vmax;
 }
+
+.shadow {
+  box-shadow: 5px 5px 10px grey;
+}
