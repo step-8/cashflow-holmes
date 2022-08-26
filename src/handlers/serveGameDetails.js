@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 const { getDigest } = require('../utils/getDigest.js');
 
 const serveGameDetails = (req, res) => {
@@ -10,24 +8,25 @@ const serveGameDetails = (req, res) => {
   res.json(state);
 };
 
-const saveGameDetails = (gamesFile) => (req, res) => {
-  const { name, gameID } = req.params;// GET save/1/rat-race
+const saveGameDetails = (DB) => (req, res) => {
+  const { name } = req.params; // GET save/rat-race
+  const { gameID } = req.session;
   const game = req.games.getGame(gameID);
   const state = game.state;
-  const games = JSON.parse(fs.readFileSync(gamesFile, 'utf-8'));
-  games[gameID] = games[gameID] || {};
-  games[gameID][name] = state;
-  fs.writeFileSync(gamesFile, JSON.stringify(games));
-  res.json(games[gameID][name]);
+  DB.set(gameID + name, JSON.stringify(state))
+    .then(() => DB.get(gameID + name))
+    .then(state => res.json(state));
 };
 
-const loadGameDetails = (gamesFile) => (req, res) => {
-  const { name, gameID } = req.params;// GET load/1/rat-race
-  const game = req.games.getGame(gameID);
-  const games = JSON.parse(fs.readFileSync(gamesFile, 'utf-8'));
-  const state = games[gameID][name];
-  game.init(state);
-  res.json(games[gameID][name]);
+const loadGameDetails = (DB) => (req, res) => {
+  const { name, gameID } = req.params; // GET load/1/rat-race
+  const currentGame = req.session.gameID;
+  const game = req.games.getGame(currentGame);
+  DB.get(gameID + name)
+    .then(state => {
+      game.init(JSON.parse(state));
+      res.json(state);
+    });
 };
 
 module.exports = { serveGameDetails, saveGameDetails, loadGameDetails };

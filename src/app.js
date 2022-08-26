@@ -7,7 +7,7 @@ const { protectedRoutes } = require('./middleware/protectedRouter.js');
 const { createGameRouter } = require('./routers/gameRouter.js');
 const { authenticate } = require('./handlers/authHandlers.js');
 
-const createApp = (config, session) => {
+const createApp = (config, session, DB) => {
   const app = express();
   readCredentials(config);
 
@@ -23,7 +23,7 @@ const createApp = (config, session) => {
   app.use(['/register', '/login'], authenticate);
   app.use('/register', registerRouter(express.Router(), config));
   app.use('/login', loginRouter(express.Router(), config));
-  app.use(protectedRoutes(createGameRouter(express.Router(), config)));
+  app.use(protectedRoutes(createGameRouter(express.Router(), config, DB)));
 
   return app;
 };

@@ -40,6 +40,7 @@ class RiggedDice {
   #face;
   constructor(values) {
     this.#values = values;
+    this.#face = 1;
   }
 
   setNext(next) {

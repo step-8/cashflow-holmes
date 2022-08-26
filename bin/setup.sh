@@ -5,6 +5,7 @@ LOGIN_PAGE='./views/login.html'
 CRED_PATH='./private/credentials.json'
 GAMES='./private/games.json'
 SECRET='CASH-FLOW'
+URL='redis://Cashflow-holmes:Cashflow@123@redis-16306.c305.ap-south-1-1.ec2.cloud.redislabs.com:16306'
 ENV='dev'
 " >.env
 

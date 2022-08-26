@@ -4,10 +4,10 @@ const { serveProfession } = require('../handlers/serveProfession.js');
 const { playerInfo } = require('../handlers/apiHandlers.js');
 
 
-const createApiRouter = (config) => {
+const createApiRouter = (DB) => {
   const apiRouter = express.Router();
-  apiRouter.get('/save/:gameID/:name', saveGameDetails(config.GAMES));
-  apiRouter.get('/load/:gameID/:name', loadGameDetails(config.GAMES));
+  apiRouter.get('/save/:name', saveGameDetails(DB));
+  apiRouter.get('/load/:gameID/:name', loadGameDetails(DB));
   apiRouter.get('/game', serveGameDetails);
   apiRouter.get('/profession', serveProfession);
   apiRouter.get('/player-info', playerInfo);

@@ -22,13 +22,13 @@ const {
   reRollHandler,
 } = require('../handlers/gameHandlers.js');
 
-const createGameRouter = (router, config) => {
+const createGameRouter = (router, config, DB) => {
   router.use(injectGame());
   router.get('/', serveMainMenu);
   router.get('/host', hostHandler);
   router.get('/start-game', startGameHandler);
   router.post('/join', joinHandler);
-  router.use('/api', createApiRouter(config));
+  router.use('/api', createApiRouter(DB));
   router.get('/host-lobby', hostLobbyHandler(config.DICE_VALUES));
   router.get('/guest-lobby', guestLobbyHandler);
   router.get('/leave-lobby', leaveLobbyHandler);
