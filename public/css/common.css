@@ -163,6 +163,7 @@ a {
   display: flex;
   align-items: center;
   gap: 1vmax;
+  padding: 0.2vmax 0.5vmax;
   text-align: center;
 }
 

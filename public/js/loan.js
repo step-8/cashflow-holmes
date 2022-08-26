@@ -12,7 +12,11 @@ const drawLoan = (event) => {
   const selectLoanAmount =
     ['div', { className: 'flex-row flex-center gap' },
       ['div', {},
-        ['input', { onkeyup: fnTocall, type: 'number', min: '0', placeholder: 'Enter amount', id: 'loan-amount' }]],
+        ['input', {
+          onkeyup: fnTocall, type: 'number', min: '0', placeholder: 'Enter amount', id: 'loan-amount', autofocus: 'true', required: 'true'
+        }
+        ]
+      ],
       ['div', {
         className: 'fa-solid fa-check check',
         onclick: () => loanActions(type)

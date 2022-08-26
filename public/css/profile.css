@@ -93,5 +93,6 @@ header>h3 {
 }
 
 .profile-wrapper table thead th {
+  text-align: left;
   font-weight: 600;
 }

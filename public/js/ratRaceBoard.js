@@ -217,7 +217,7 @@
       ['div', { className: 'selection-box' },
         ['div', {},
           ['input',
-            { onkeyup: event => buyStocksOnEnter(event, action), type: 'number', min: '0', placeholder: 'Enter no of stocks', id: 'stock-count' }
+            { autofocus: 'true', required: 'true', onkeyup: event => buyStocksOnEnter(event, action), type: 'number', min: '0', placeholder: 'Enter no of stocks', id: 'stock-count' }
           ]
         ],
         ['div', {
