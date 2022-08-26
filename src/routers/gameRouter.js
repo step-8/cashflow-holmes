@@ -20,6 +20,7 @@ const {
   rollDiceHandler,
   changeTurnHandler,
   reRollHandler,
+  sellAllAssetsHandler,
 } = require('../handlers/gameHandlers.js');
 
 const createGameRouter = (router, config, DB) => {
@@ -38,6 +39,7 @@ const createGameRouter = (router, config, DB) => {
   router.get('/change-turn', changeTurnHandler);
   router.get('/show-profession', showProfessionHandler);
   router.get('/game-board', gameBoardHandler);
+  router.post('/sell-all-assets', sellAllAssetsHandler);
   router.get('/remove-game', removeGameIdHandler);
   router.use('/logout', logoutHandler);
   router.post('/card/card-action', cardActionsHandler);

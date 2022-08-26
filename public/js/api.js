@@ -22,5 +22,6 @@ const API = {
   resetTransaction: () => fetchReq('/card/reset-transaction'),
   takeLoan: (options) => fetchReq('/loan/take', options),
   payLoan: (options) => fetchReq('/loan/pay', options),
+  sellAllAssets: (options) => fetchReq('/sell-all-assets', options)
 };
 

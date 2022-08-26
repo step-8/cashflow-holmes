@@ -48,6 +48,27 @@ const drawLoanResult = (message, status) => {
   }, 2000);
 };
 
+const sellAllAssets = () => {
+  const options = {
+    method: 'POST',
+  };
+
+  API.sellAllAssets(options)
+    .then(res => console.log('inside sell all assets'));
+};
+
+const createBankruptPopup = () => {
+  const popupTemplate =
+    [
+      'div', { className: 'escape-popup active flex-column flex-center gap' },
+      ['div', { className: 'username' }, 'You are going Bankrupted'],
+      ['div', { className: 'button', onclick: sellAllAssets }, 'SELL']
+    ];
+
+  const pageWrapper = getElement('.page-wrapper');
+  pageWrapper.appendChild(html(popupTemplate));
+};
+
 const decideLoanResult = (res, method) => {
   if (res.status === 200 && method === 'takeLoan') {
     drawLoanResult('Loan Taken Succesfully', 'success');
@@ -59,6 +80,10 @@ const decideLoanResult = (res, method) => {
 
   if (res.status === 406 && method === 'payLoan') {
     drawLoanResult('Insufficient Balance', 'warning');
+  }
+
+  if (res.status === 406 && method === 'takeLoan') {
+    createBankruptPopup();
   }
 };
 
@@ -84,7 +109,6 @@ const loanActions = (id) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ amount })
   };
-
 
   API[method](options)
     .then(res => decideLoanResult(res, method));

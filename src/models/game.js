@@ -111,8 +111,7 @@ class Game {
   }
 
   rollDice(diceCount) {
-    // this.#diceValues = this.#dice.roll(diceCount);
-    this.#diceValues = [1, 2];
+    this.#diceValues = this.#dice.roll(diceCount);
     const currentPlayer = this.currentPlayer;
     const dualDiceCount = currentPlayer.dualDiceCount;
     const totalCount = this.#calculateTotalSteps(diceCount);
@@ -253,6 +252,10 @@ class Game {
     }
 
     return status;
+  }
+
+  sellAllAssets() {
+    return;
   }
 
   set currentCard(card) {

@@ -69,6 +69,12 @@ const changeTurnHandler = (req, res) => {
   res.end();
 };
 
+const sellAllAssetsHandler = (req, res) => {
+  const { username } = req.session;
+  req.game.sellAllAssets(username);
+  res.end();
+};
+
 module.exports = {
   serveMainMenu,
   hostHandler,
@@ -80,5 +86,6 @@ module.exports = {
   removeGameIdHandler,
   rollDiceHandler,
   changeTurnHandler,
-  reRollHandler
+  reRollHandler,
+  sellAllAssetsHandler
 };
