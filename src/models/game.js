@@ -6,6 +6,8 @@ const { toWords } = require('../utils/commonLib.js');
 const { Player } = require('./player');
 const { Response, createResponses } = require('./response');
 
+const findPlayer = (players, username) =>
+  players.find(player => player.username === username);
 class Game {
   #gameID;
   #players;
@@ -50,6 +52,10 @@ class Game {
     this.#log.init(logs);
   }
 
+  findPlayer(username) {
+    return this.#players.find(player => player.username === username);
+  }
+
   #getCardType() {
     const currentPosition = this.currentPlayer.currentPosition;
     return this.#ratRace.getCardType(currentPosition);
@@ -79,21 +85,22 @@ class Game {
     return totalCount;
   }
 
-  addLog(player, message) {
-    this.#log.addLog(player, message);
+  addLog(username, message) {
+    this.#log.addLog(this.findPlayer(username), message);
   }
 
   activateReroll() {
     this.#currentTurn.activateReroll();
   }
 
-  reRollDice() {
+  reRollDice(username) {
     this.#diceValues = this.#dice.roll(1);
     const diceValue = this.#diceValues[0];
     const currentPlayer = this.currentPlayer;
+    const player = this.findPlayer(username);
 
-    this.addLog(currentPlayer, `rolled ${diceValue}`);
-    this.#currentTurn.lottery(this.#players, diceValue);
+    this.addLog(username, `rolled ${diceValue}`);
+    this.#currentTurn.lottery(this.#players, player, diceValue);
     currentPlayer.changeDiceStatus(true);
   }
 
@@ -103,9 +110,9 @@ class Game {
     return this.currentPlayer;
   }
 
-
   rollDice(diceCount) {
-    this.#diceValues = this.#dice.roll(diceCount);
+    // this.#diceValues = this.#dice.roll(diceCount);
+    this.#diceValues = [4, 4];
     const currentPlayer = this.currentPlayer;
     const dualDiceCount = currentPlayer.dualDiceCount;
     const totalCount = this.#calculateTotalSteps(diceCount);
@@ -116,7 +123,7 @@ class Game {
 
     currentPlayer.changeDiceStatus(true);
     this.#moveCurrentPlayer(totalCount);
-    this.addLog(currentPlayer, `rolled ${totalCount}`);
+    this.addLog(currentPlayer.username, `rolled ${totalCount}`);
   }
 
   resetDice() {
@@ -125,10 +132,19 @@ class Game {
 
   changeTurn() {
     const responses = new Response(createResponses(this.#players));
-    this.#currentTurn = new Turn(null, this.nextPlayer(), this.#log, responses);
+    const currentPlayer = this.nextPlayer();
+    this.#currentTurn = new Turn(null, currentPlayer, this.#log, responses);
     this.resetDice();
     this.#currentCard = null;
     this.#notifications = [];
+
+
+    if (this.currentPlayer.skippedTurns > 0) {
+      this.addLog(this.currentPlayer.username, 'skipped turn');
+      this.currentPlayer.decrementSkippedTurns();
+      this.changeTurn();
+      return;
+    }
 
     if (this.currentPlayer.isInFastTrack) {
       this.changeTurn();
@@ -155,41 +171,41 @@ class Game {
     this.#currentCard.notifications.shift();
   }
 
-  buyGoldCoins() {
-    return this.#currentTurn.buyGoldCoins();
+  buyGoldCoins(username) {
+    return this.#currentTurn.buyGoldCoins(this.findPlayer(username));
   }
 
-  payday() {
-    return this.#currentTurn.payday();
+  payday(username) {
+    return this.#currentTurn.payday(this.findPlayer(username));
   }
 
-  doodad() {
-    this.#currentTurn.doodad();
+  doodad(username) {
+    this.#currentTurn.doodad(this.findPlayer(username));
     return this.#currentTurn.canPlayerContinue();
   }
 
-  charity() {
-    return this.#currentTurn.charity();
+  charity(username) {
+    return this.#currentTurn.charity(this.findPlayer(username));
   }
 
-  baby() {
-    return this.#currentTurn.baby();
+  baby(username) {
+    return this.#currentTurn.baby(this.findPlayer(username));
   }
 
-  downsized() {
-    return this.#currentTurn.downsized();
+  downsized(username) {
+    return this.#currentTurn.downsized(this.findPlayer(username));
   }
 
-  buyRealEstate() {
-    return this.#currentTurn.buyRealEstate();
+  buyRealEstate(username) {
+    return this.#currentTurn.buyRealEstate(this.findPlayer(username));
   }
 
   buyStocks(username, count) {
-    return this.#currentTurn.buyStocks(username, count);
+    return this.#currentTurn.buyStocks(this.findPlayer(username), count);
   }
 
-  buyLottery() {
-    return this.#currentTurn.buyLottery();
+  buyLottery(username) {
+    return this.#currentTurn.buyLottery(this.findPlayer(username));
   }
 
   sellStocks(username, count) {
@@ -198,7 +214,7 @@ class Game {
 
     if (player.sellStocks(this.#currentCard, count)) {
       status = 3;
-      this.#log.addLog(player, `sold ${count} ${this.#currentCard.symbol} stocks`);
+      this.addLog(username, `sold ${count} ${this.#currentCard.symbol} stocks`);
       this.#currentTurn.setTransactionState('deal', status);
       return;
     }
@@ -207,12 +223,16 @@ class Game {
     this.#currentTurn.setTransactionState('deal', status);
   }
 
-  propertyDamage() {
-    return this.#currentTurn.propertyDamage();
+  propertyDamage(username) {
+    return this.#currentTurn.propertyDamage(this.findPlayer(username));
   }
 
-  skip(username) {
-    this.#currentTurn.skip(username);
+  skip(username, person) {
+    if (person === 'others') {
+      this.#currentTurn.pass(this.findPlayer(username));
+      return;
+    }
+    this.#currentTurn.skip(this.findPlayer(username));
   }
 
   getPlayer(username) {
@@ -225,11 +245,12 @@ class Game {
     this.#currentTurn.updateCard(card);
 
     const cards = ['smallDeal', 'bigDeal'];
+    const username = this.currentPlayer.username;
     if (cards.includes(card.name)) {
-      this.addLog(this.currentPlayer, `chose ${toWords(card.name)}`);
+      this.addLog(username, `chose ${toWords(card.name)}`);
       return;
     }
-    this.addLog(this.currentPlayer, `landed on ${toWords(card.family)}`);
+    this.addLog(username, `landed on ${toWords(card.family)}`);
   }
 
   get currentPlayer() {
@@ -282,4 +303,4 @@ class Game {
   }
 }
 
-module.exports = { Game };
+module.exports = { Game, findPlayer };

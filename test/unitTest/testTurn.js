@@ -39,7 +39,7 @@ describe('Turn', () => {
 
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
-      turn.payday();
+      turn.payday(player);
 
       assert.isOk(turn.info.state);
       assert.deepStrictEqual(
@@ -71,7 +71,7 @@ describe('Turn', () => {
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
 
-      turn.doodad();
+      turn.doodad(player);
 
       assert.isOk(turn.info.state);
       assert.deepStrictEqual(
@@ -104,7 +104,7 @@ describe('Turn', () => {
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
 
-      turn.doodad();
+      turn.doodad(player);
 
       assert.isOk(!turn.info.state);
       assert.deepStrictEqual(log.getAllLogs(), []);
@@ -139,7 +139,7 @@ describe('Turn', () => {
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
 
-      turn.buyLottery();
+      turn.buyLottery(player);
 
       assert.isNotOk(turn.info.state);
       assert.deepStrictEqual(
@@ -173,7 +173,7 @@ describe('Turn', () => {
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
 
-      turn.buyLottery();
+      turn.buyLottery(player);
 
       assert.isNotOk(turn.info.state);
       assert.deepStrictEqual(log.getAllLogs(), []);
@@ -199,7 +199,7 @@ describe('Turn', () => {
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
 
-      turn.buyRealEstate();
+      turn.buyRealEstate(player);
 
       assert.isOk(turn.info.state);
       assert.deepStrictEqual(
@@ -227,7 +227,7 @@ describe('Turn', () => {
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
 
-      turn.buyRealEstate();
+      turn.buyRealEstate(player);
 
       assert.isOk(!turn.info.state);
       assert.deepStrictEqual(log.getAllLogs(), []);
@@ -266,7 +266,7 @@ describe('Turn', () => {
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
 
-      turn.charity();
+      turn.charity(player);
 
       assert.isOk(turn.info.state);
       assert.deepStrictEqual(
@@ -299,7 +299,7 @@ describe('Turn', () => {
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
 
-      turn.charity();
+      turn.charity(player);
 
       assert.isOk(!turn.info.state);
       assert.deepStrictEqual(log.getAllLogs(), []);
@@ -334,7 +334,7 @@ describe('Turn', () => {
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
 
-      turn.buyStocks('user', 1);
+      turn.buyStocks(player, 1);
 
       assert.isOk(turn.info.state);
       assert.deepStrictEqual(
@@ -364,7 +364,7 @@ describe('Turn', () => {
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
 
-      turn.buyStocks(1);
+      turn.buyStocks(player, 1);
 
       assert.isOk(!turn.info.state);
       assert.deepStrictEqual(log.getAllLogs(), []);
@@ -395,7 +395,7 @@ describe('Turn', () => {
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
 
-      turn.baby();
+      turn.baby(player);
 
       assert.isOk(turn.info.state);
       assert.deepStrictEqual(
@@ -418,7 +418,7 @@ describe('Turn', () => {
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
 
-      turn.baby();
+      turn.baby(player);
 
       assert.isOk(turn.info.state);
       assert.deepStrictEqual(log.getAllLogs(), [
@@ -434,7 +434,7 @@ describe('Turn', () => {
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
 
-      turn.skip();
+      turn.skip(player);
       assert.isOk(turn.info.state);
       assert.deepStrictEqual(
         log.getAllLogs(),
@@ -473,7 +473,7 @@ describe('Turn', () => {
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
 
-      turn.downsized();
+      turn.downsized(player);
 
       assert.isOk(turn.info.state);
       assert.deepStrictEqual(
@@ -507,7 +507,7 @@ describe('Turn', () => {
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
 
-      turn.downsized();
+      turn.downsized(player);
 
       assert.isNotOk(turn.info.state);
       assert.deepStrictEqual(
@@ -544,7 +544,7 @@ describe('Turn', () => {
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
 
-      turn.lottery([player], 1);
+      turn.lottery([player], player, 1);
       assert.deepStrictEqual(player.profile().assets.stocks[0].count, 20);
     });
     it('Should reverse split stocks of the player', () => {
@@ -557,7 +557,7 @@ describe('Turn', () => {
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
 
-      turn.lottery([player], 4);
+      turn.lottery([player], player, 4);
       assert.deepStrictEqual(player.profile().assets.stocks[0].count, 5);
     });
   });
@@ -589,7 +589,7 @@ describe('Turn', () => {
       };
       const response = new Response(createResponses([player]));
       const turn = new Turn(card, player, log, response);
-      turn.propertyDamage();
+      turn.propertyDamage(player);
       assert.deepStrictEqual(
         turn.info.transaction, { family: 'market', status: 1 }
       );
@@ -620,7 +620,7 @@ describe('Turn', () => {
     const response = new Response(createResponses([player]));
     const turn = new Turn(card, player, log, response);
 
-    turn.propertyDamage();
+    turn.propertyDamage(player);
     assert.deepStrictEqual(
       turn.info.transaction, { family: 'market', status: 0 }
     );

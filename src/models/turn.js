@@ -44,104 +44,107 @@ class Turn {
     if (this.#card.id) {
       return;
     }
-    this.respond();
+    this.respond(username);
   }
 
-  payday() {
-    const username = this.#currentPlayer.username;
-    this.#currentPlayer.payday();
-    this.#log.addLog(this.#playerInfo(), `received pay of $${this.#cashflow()}`);
+  payday(player) {
+    player.payday();
+    this.#log.addLog(player, `received pay of $${this.#cashflow()}`);
 
     this.setTransactionState('payday', 1);
-    this.#changeTurnIfNoCard(username);
+    this.#changeTurnIfNoCard(player.username);
     return true;
   }
 
-  doodad() {
+  doodad(player) {
     const cost = this.#card.cost;
-    const status = this.#currentPlayer.doodad(cost);
+    const status = player.doodad(cost);
+
     this.setTransactionState('doodad', status);
     if (!status) {
       return;
     }
 
-    this.#log.addLog(this.#playerInfo(), `payed $${cost} on ${this.#card.heading}`);
+    this.#log.addLog(player, `payed $${cost} on ${this.#card.heading}`);
     this.respond();
   }
 
-  buyLottery() {
+  buyLottery(player) {
     const { cost, type } = this.#card;
-    const status = this.#currentPlayer.buyLottery(cost);
+    const status = player.buyLottery(cost);
     this.setTransactionState('deal', status);
+
     if (!status) {
       return;
     }
 
-    this.#log.addLog(this.#playerInfo(), `bought ${type} for $${cost}`);
+    this.#log.addLog(player, `bought ${type} for $${cost}`);
   }
 
-  buyRealEstate() {
-    const status = this.#currentPlayer.buyRealEstate(this.#card);
+  buyRealEstate(player) {
+    const status = player.buyRealEstate(this.#card);
     this.setTransactionState('deal', status);
     if (!status) {
       return;
     }
-    this.#log.addLog(this.#playerInfo(), `bought ${this.#card.symbol}`);
-    this.respond();
+    this.#log.addLog(player, `bought ${this.#card.symbol}`);
+    this.respond(player.username);
   }
 
-  buyStocks(username, count) {
-    const status = this.#currentPlayer.buyStocks(this.#card, count);
+  buyStocks(player, count) {
+    const status = player.buyStocks(this.#card, count);
     this.setTransactionState('deal', status);
+
     if (!status) {
       return;
     }
-    this.#log.addLog(this.#playerInfo(), `bought ${count} ${this.#card.symbol} stocks`);
-    this.respond(username);
+    this.#log.addLog(player, `bought ${count} ${this.#card.symbol} stocks`);
+    this.respond(player.username);
   }
 
-  buyGoldCoins() {
-    const status = this.#currentPlayer.addGoldCoins(this.#card);
+  buyGoldCoins(player) {
+    const status = player.addGoldCoins(this.#card);
     this.setTransactionState('deal', status);
-    this.#log.addLog(this.#playerInfo(), `bought ${this.#card.count} gold coins`);
-    this.respond();
+    this.#log.addLog(player, `bought ${this.#card.count} gold coins`);
+    this.respond(player.username);
   }
 
-  charity() {
-    const amount = 0.1 * this.#currentPlayer.details.profile.totalIncome;
-    const status = this.#currentPlayer.charity();
+  charity(player) {
+    const amount = 0.1 * player.details.profile.totalIncome;
+    const status = player.charity();
     this.setTransactionState('charity', status);
+
     if (!status) {
       return;
     }
 
-    this.#currentPlayer.initializeDualDiceCount();
-    this.#log.addLog(this.#playerInfo(), `donated $${amount} to charity`);
-    this.respond();
+    player.initializeDualDiceCount();
+    this.#log.addLog(player, `donated $${amount} to charity`);
+    this.respond(player.username);
   }
 
-  downsized() {
-    const amount = this.#currentPlayer.details.profile.totalExpenses;
-    const status = this.#currentPlayer.downsized();
+  downsized(player) {
+    const amount = player.details.profile.totalExpenses;
+    const status = player.downsized();
     this.setTransactionState('downsized', status);
 
     if (!status) {
       return;
     }
 
-    this.#currentPlayer.initializeSkippedTurns();
-    this.#log.addLog(this.#playerInfo(), 'is downsized');
-    this.#log.addLog(this.#playerInfo(), `paid expenses $${amount}`);
+    player.initializeSkippedTurns();
+    this.#log.addLog(player, 'is downsized');
+    this.#log.addLog(player, `paid expenses $${amount}`);
 
-    this.respond();
+    this.respond(player.username);
   }
 
-  baby() {
+  baby(player) {
     let message = 'already have 3 babies';
-    if (this.#currentPlayer.baby()) {
+    if (player.baby()) {
       message = 'got new baby';
     }
-    this.#log.addLog(this.#playerInfo(), message);
+    this.#log.addLog(player, message);
 
     this.respond();
   }
@@ -182,7 +185,7 @@ class Turn {
     player.reverseSplitStocks(this.#card);
   }
 
-  #decideSplitOrReverse(players, diceValue) {
+  #decideSplitOrReverse(players, player, diceValue) {
     const { success } = this.#card;
     const playersHavingStock = players.filter((player) => this.#hasGivenStock(player));
     let status = 2;
@@ -203,7 +206,7 @@ class Turn {
     this.respond();
   }
 
-  #decideLottery(players, diceValue) {
+  #decideLottery(players, player, diceValue) {
     const { lottery } = this.#card;
 
     if (lottery === 'money') {
@@ -211,18 +214,22 @@ class Turn {
     }
 
     if (lottery === 'stock') {
-      this.#decideSplitOrReverse(players, diceValue);
+      this.#decideSplitOrReverse(players, player, diceValue);
     }
   }
 
-  lottery(players, diceValue) {
-    this.#decideLottery(players, diceValue);
+  lottery(players, player, diceValue) {
+    this.#decideLottery(players, player, diceValue);
   }
 
-  skip(username) {
-    this.#log.addLog(this.#playerInfo(), `skipped ${this.#card.symbol}`);
+  pass(player) {
+    this.#log.addLog(player, `passed ${this.#card.symbol}`);
+    this.respond(player.username);
+  }
 
-    this.respond(username);
+  skip(player) {
+    this.#log.addLog(player, `skipped ${this.#card.symbol}`);
+    this.respond(player.username);
   }
 
   setTurnCompleted(state) {
@@ -236,32 +243,28 @@ class Turn {
     this.#card = card;
   }
 
-  // updatePlayer(player) {
-  //   this.#currentPlayer = player;
-  // }
-
   canPlayerContinue() {
     return this.#currentPlayer.canContinue();
   }
 
-  sellStocks(username, count) {
+  sellStocks(player, count) {
     this.setTransactionState('deals', 2);
-    this.#log.addLog(this.#playerInfo(), `sold ${count} ${this.#card.symbol} stocks`);
+    this.#log.addLog(player, `sold ${count} ${this.#card.symbol} stocks`);
 
-    this.respond(username);
+    this.respond(player.username);
   }
 
-  propertyDamage() {
-    const status = this.#currentPlayer.payDamages(this.#card);
+  propertyDamage(player) {
+    const status = player.payDamages(this.#card);
     this.setTransactionState('market', status);
     let message = 'has no real estate';
+
     if (status) {
       message = `paid $${this.#card.cost} for damages`;
     }
 
-    this.#log.addLog(this.#playerInfo(), message);
-
-    this.respond();
+    this.#log.addLog(player, message);
+    this.respond(player.username);
   }
 
   get info() {

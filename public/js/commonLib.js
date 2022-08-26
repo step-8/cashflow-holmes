@@ -65,4 +65,8 @@ const camelToCapitalize = (word) => {
   return first.toUpperCase().concat(rest.join(''));
 };
 
+const findPlayer = (players, username) => {
+  return players.find(player => player.username === username);
+};
+
 const isEnter = (event) => event.key === 'Enter';

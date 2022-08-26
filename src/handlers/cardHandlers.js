@@ -6,7 +6,8 @@ const serveCard = (req, res) => {
 };
 
 const resetTransaction = (req, res) => {
-  req.game.state.currentTurn.resetTransaction();
+  const { game } = req;
+  game.currentTurn.resetTransaction();
   res.end();
 };
 
@@ -14,23 +15,23 @@ const removeNotification = (game) => {
   game.removeTopNotification();
 };
 
-const acceptCard = (game, family, type) => {
+const acceptCard = (game, family, type, username) => {
   if (family === 'payday') {
-    game.payday();
+    game.payday(username);
     return removeNotification(game);
   }
 
   if (family === 'market' && type === 'damage') {
-    game.propertyDamage();
+    game.propertyDamage(username);
     return;
   }
 
-  return game[family]();
+  return game[family](username);
 };
 
 const buyDeal = (game, type, count, username) => {
   if (type === 'realEstate') {
-    return game.buyRealEstate();
+    return game.buyRealEstate(username);
   }
 
   if (type === 'stock') {
@@ -38,18 +39,18 @@ const buyDeal = (game, type, count, username) => {
   }
 
   if (type === 'lottery') {
-    return game.buyLottery();
+    return game.buyLottery(username);
   }
 
   if (type === 'goldCoins') {
-    return game.buyGoldCoins();
+    return game.buyGoldCoins(username);
   }
 
   game.skip(username);
 };
 
 const cardActionsHandler = (req, res) => {
-  const { action, family, type, count } = req.body;
+  const { action, family, type, count, person } = req.body;
   const { game, session: { username } } = req;
   const deals = ['small', 'big'];
   if (deals.includes(action)) {
@@ -59,9 +60,9 @@ const cardActionsHandler = (req, res) => {
   }
 
   const actions = {
-    ok: () => acceptCard(game, family, type),
+    ok: () => acceptCard(game, family, type, username),
     buy: () => buyDeal(game, type, +count, username),
-    skip: () => game.skip(username),
+    skip: () => game.skip(username, person),
     roll: () => game.activateReroll(),
     sell: () => game.sellStocks(username, +count)
   };

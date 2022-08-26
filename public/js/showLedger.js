@@ -5,10 +5,6 @@ const classNames = {
   windowTitle: 'window-title',
 };
 
-const findPlayer = (players, username) => {
-  return players.find(player => player.username === username);
-};
-
 const transactionItem = ({ currentCash, amount, description, totalCash }) => {
   return ['div', { className: 'ledger-entry' },
     ['div', {}, addDollar(currentCash)],

@@ -103,7 +103,6 @@
     return diceOptions[id];
   };
 
-
   const createToggler = (game) => {
     const { diceValues } = game;
     return ['div', { className: 'choice-wrapper' },
@@ -188,7 +187,6 @@
 
     const passiveIncome = getElement('#passive-income');
     passiveIncome.innerText = addDollar(profile.passiveIncome);
-
   };
 
   const buyStocksOnEnter = (event, action) => {
@@ -235,13 +233,19 @@
     actions.replaceChildren(html(selectStockCount));
   };
 
-  const sendAction = (action, family, type, count) => {
+  const sendAction = (action, family, type, count, person) => {
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: `action=${action}&family=${family}&type=${type}&count=${count}`
+      body: [
+        `action=${action}`,
+        `family=${family}`,
+        `type=${type}`,
+        `count=${count}`,
+        `person=${person}`
+      ].join('&')
     };
 
     API.cardAction(options);
@@ -250,7 +254,7 @@
       .then(drawMessages);
   };
 
-  const performAction = (event, family, type) => {
+  const performAction = (event, family, type, person) => {
     const actionDiv = event.target;
     let [, action] = actionDiv.id.split('-');
     action = action === 'donate' ? 'ok' : action;
@@ -260,7 +264,7 @@
       return;
     }
 
-    sendAction(action, family, type);
+    sendAction(action, family, type, person);
   };
 
   const actions = {
@@ -295,23 +299,24 @@
     }
   };
 
-  const createActions = (family, type, stock) => {
+  const createActions = (family, type, stock, person) => {
     const actionTexts = actions[family][type];
-    return html(['div', { className: 'actions-wrapper' }, ...actionTexts.map(action => {
-      if (action === 'SELL' && !stock) {
-        return ['span', { style: 'position:absolute' }];
-      }
-      return ['div',
-        {
-          className: 'button action-btn',
-          id: `action-${action.toLowerCase()}`,
-          onclick: (event) => {
-            performAction(event, family, type);
-          }
-        },
-        action
-      ];
-    })]);
+    return html(['div', { className: 'actions-wrapper' },
+      ...actionTexts.map(action => {
+        if (action === 'SELL' && !stock) {
+          return ['span', { style: 'position:absolute' }];
+        }
+        return ['div',
+          {
+            className: 'button action-btn',
+            id: `action-${action.toLowerCase()}`,
+            onclick: (event) => {
+              performAction(event, family, type, person);
+            }
+          },
+          action
+        ];
+      })]);
   };
 
   const lotteryCard = (card) => ['div', { className: 'card-wrapper' },
@@ -451,6 +456,7 @@
       stock: stocksCard,
       lottery: lotteryCard,
       goldCoins: goldDealCard,
+      mlm: lotteryCard
     },
     doodad: {
       doodad: doodadCard
@@ -495,18 +501,20 @@
     return stock;
   };
 
-  const drawActions = (username, family, currentCard, currentPlayer) => {
+  const drawActions = (username, family, currentCard, currentPlayer, players) => {
     let actions = '';
     const { assets } = currentPlayer.profile;
     const stock = findStock(currentCard, assets);
     const isCurrentUser = currentPlayer.username === username;
 
     if (isCurrentUser) {
-      actions = createActions(family, currentCard.type, stock);
+      actions = createActions(family, currentCard.type, stock, 'self');
     }
 
     if (family === 'deal' && currentCard.type === 'stock' && !isCurrentUser) {
-      actions = createActions(family, 'stockOthers', stock);
+      const { assets } = findPlayer(players, username).profile;
+      const stock = findStock(currentCard, assets);
+      actions = createActions(family, 'stockOthers', stock, 'others');
     }
 
     const actionsDiv = getElement('.actions');
@@ -582,7 +590,7 @@
   };
 
   const drawCard = (game) => {
-    const { currentCard, currentPlayer, username } = game;
+    const { currentCard, currentPlayer, username, players } = game;
     const { canReRoll } = currentPlayer;
     const cardEle = getElement('#main-card');
     if (!currentCard || !currentCard.id) {
@@ -599,7 +607,7 @@
       return;
     }
 
-    drawActions(username, family, currentCard, currentPlayer);
+    drawActions(username, family, currentCard, currentPlayer, players);
   };
 
   const drawPlayersList = (game) => {

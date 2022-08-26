@@ -9,14 +9,22 @@ describe('Game', () => {
   const colors = ['a', 'b', 'c', 'd', 'e', 'f'];
 
   it('Should give the current player', () => {
-    // const game = new Game(1234, colors, JSON.parse(expectedProfessions), new Dice(2, 6));
-    const game = new Game(1234, [{ username: 'p1', role: 'host' }, { username: 'p2', role: 'guest' }], new Dice(2, 6));
+    const game = new Game(1234,
+      [
+        { username: 'p1', role: 'host' },
+        { username: 'p2', role: 'guest' }
+      ],
+      new Dice(2, 6));
+
     assert.isOk(game.currentPlayer.username === 'p1');
   });
 
   it('Should change the turn to other player', () => {
     const game = new Game(1234,
-      [new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]), new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])],
+      [
+        new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]),
+        new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])
+      ],
       new Dice(2, 6));
     game.changeTurn();
     assert.isOk(game.currentPlayer.username === 'p2');
@@ -24,7 +32,10 @@ describe('Game', () => {
 
   it('Should change the rolled dice of current player to true', () => {
     const game = new Game(1234,
-      [new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]), new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])],
+      [
+        new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]),
+        new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])
+      ],
       new Dice(2, 6));
     game.rollDice();
 
@@ -33,7 +44,10 @@ describe('Game', () => {
 
   it('Should change the turn to other player in downsized', () => {
     const game = new Game(1234,
-      [new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]), new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])],
+      [
+        new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]),
+        new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])
+      ],
       new Dice(2, 6));
     const card = {
       heading: 'New Card',
@@ -44,8 +58,8 @@ describe('Game', () => {
 
     game.changeTurn();
     game.currentCard = card;
-    game.payday();
-    game.downsized();
+    game.payday('p1');
+    game.downsized('p1');
     game.changeTurn();
 
     assert.isOk(game.currentPlayerName === 'p1');
@@ -53,7 +67,10 @@ describe('Game', () => {
 
   it('Should return the player matching with user name', () => {
     const game = new Game(1234,
-      [new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]), new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])],
+      [
+        new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]),
+        new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])
+      ],
       new Dice(2, 6));
 
     const actualPlayer = game.getPlayer('p2');
@@ -62,7 +79,10 @@ describe('Game', () => {
 
   it('Should allow player to play after skipping 2 of their chances', () => {
     const game = new Game(1234,
-      [new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]), new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])],
+      [
+        new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]),
+        new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])
+      ],
       new Dice(2, 6));
     const card = {
       heading: 'New Card',
@@ -73,8 +93,8 @@ describe('Game', () => {
 
     game.changeTurn();
     game.currentCard = card;
-    game.payday();
-    game.downsized();
+    game.payday('p1');
+    game.downsized('p1');
     game.changeTurn();
 
     game.rollDice();
@@ -86,8 +106,12 @@ describe('Game', () => {
 
   it('Should allow player to roll again after buying lottery', () => {
     const game = new Game(1234,
-      [new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]), new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])],
+      [
+        new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]),
+        new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])
+      ],
       new Dice(2, 6));
+
     const card = {
       heading: 'New Card',
       symbol: 'lottery',
@@ -103,14 +127,17 @@ describe('Game', () => {
 
     game.changeTurn();
     game.currentCard = card;
-    game.reRollDice();
+    game.reRollDice('p2');
 
     assert.isOk(game.currentTurn.info.state);
   });
 
   it('Should set the notifications to given notifiers', () => {
     const game = new Game(1234,
-      [new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]), new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])],
+      [
+        new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]),
+        new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])
+      ],
       new Dice(2, 6));
     const card = {
       heading: 'New Card',
@@ -130,7 +157,7 @@ describe('Game', () => {
       [player, new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])],
       new Dice(2, 6));
 
-    game.addLog(player, 'is red');
+    game.addLog('p1', 'is red');
     assert.deepStrictEqual(
       game.state.logs,
       [{ username: 'p1', color: 'red', message: 'is red' }]
@@ -139,7 +166,10 @@ describe('Game', () => {
 
   it('Should get a deal card', () => {
     const game = new Game(1234,
-      [new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]), new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])],
+      [
+        new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]),
+        new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])
+      ],
       new Dice(2, 6));
 
     game.rollDice();
@@ -149,7 +179,10 @@ describe('Game', () => {
 
   it('Should get other than deal card', () => {
     const game = new Game(1234,
-      [new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]), new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])],
+      [
+        new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]),
+        new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])
+      ],
       new Dice(2, 6));
 
     game.rollDice();
@@ -159,7 +192,10 @@ describe('Game', () => {
 
   it('Should set notification', () => {
     const game = new Game(1234,
-      [new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]), new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])],
+      [
+        new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]),
+        new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])
+      ],
       new Dice(2, 6));
 
     game.rollDice();
@@ -170,7 +206,10 @@ describe('Game', () => {
   describe('actions', () => {
     it('Should add payday amount', () => {
       const game = new Game(1234,
-        [new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]), new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])],
+        [
+          new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]),
+          new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])
+        ],
         new Dice(2, 6));
       const card = {
         heading: 'New Card',
@@ -180,7 +219,7 @@ describe('Game', () => {
       };
       game.currentCard = card;
 
-      assert.isOk(game.payday());
+      assert.isOk(game.payday('p1'));
     });
   });
 });
