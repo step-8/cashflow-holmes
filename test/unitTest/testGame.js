@@ -73,7 +73,7 @@ describe('Game', () => {
       ],
       new Dice(2, 6));
 
-    const actualPlayer = game.getPlayer('p2');
+    const actualPlayer = game.findPlayer('p2');
     assert.strictEqual(actualPlayer.username, 'p2');
   });
 
@@ -220,6 +220,45 @@ describe('Game', () => {
       game.currentCard = card;
 
       assert.isOk(game.payday('p1'));
+    });
+  });
+
+  describe('loan', () => {
+    it('Should add loan amount to cash', () => {
+      const game = new Game(1234,
+        [new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]), new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])],
+        new Dice(2, 6));
+
+      const card = {
+        heading: 'New Card',
+        symbol: 'a',
+        family: 'payday',
+        type: 'payday'
+      };
+
+      game.currentCard = card;
+      game.takeLoan('p1', 1000);
+      const player = game.findPlayer('p1');
+      assert.strictEqual(player.profile().cash, 1000);
+    });
+
+    it('Should remove loan amount to cash', () => {
+      const game = new Game(1234,
+        [new Player('p1', 'host', 'red', JSON.parse(expectedProfessions)[0]), new Player('p2', 'guest', 'red', JSON.parse(expectedProfessions)[1])],
+        new Dice(2, 6));
+
+      const card = {
+        heading: 'New Card',
+        symbol: 'a',
+        family: 'payday',
+        type: 'payday'
+      };
+
+      game.currentCard = card;
+      game.takeLoan('p1', 1000);
+      game.payLoan('p1', 1000);
+      const player = game.findPlayer('p1');
+      assert.strictEqual(player.profile().cash, 0);
     });
   });
 });

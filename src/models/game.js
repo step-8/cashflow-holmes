@@ -209,7 +209,7 @@ class Game {
   }
 
   sellStocks(username, count) {
-    const player = this.getPlayer(username);
+    const player = this.findPlayer(username);
     let status = 2;
 
     if (player.sellStocks(this.#currentCard, count)) {
@@ -235,8 +235,24 @@ class Game {
     this.#currentTurn.skip(this.findPlayer(username));
   }
 
-  getPlayer(username) {
-    return this.#players.find(player => player.details.username === username);
+  takeLoan(username, amount) {
+    const player = this.findPlayer(username);
+    player.takeLoan(amount);
+    const message = `took loan of $${amount}`;
+    this.addLog(username, message);
+  }
+
+  payLoan(username, amount) {
+    const player = this.findPlayer(username);
+    let status = 0;
+
+    if (player.payLoan(amount)) {
+      status = 1;
+      const message = `paid loan of $${amount}`;
+      this.addLog(username, message);
+    }
+
+    return status;
   }
 
   set currentCard(card) {
