@@ -254,7 +254,7 @@ class Turn {
     this.respond(player.username);
   }
 
-  
+
   propertyDamage(player) {
     const status = player.payDamages(this.#card);
     this.setTransactionState('market', status);

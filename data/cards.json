@@ -1453,6 +1453,15 @@
     },
     {
       "id": "marketLottery01",
+      "type": "goldCoins",
+      "symbol": "GOLD",
+      "heading": "Collector wants Gold Coins",
+      "description": "Wealthy collector is looking for gold coins. Cash offer of $500 for each coin.",
+      "rule": "Everyone may sell any number of coins at this price.",
+      "cost": 500
+    },
+    {
+      "id": "marketLottery03",
       "type": "lottery",
       "lottery": "stock",
       "symbol": "OK4U",

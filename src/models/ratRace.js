@@ -2,6 +2,8 @@ const random = (number) => {
   return Math.floor(Math.random() * number);
 };
 
+const getSpecificCard = (type, cards) => cards.find(card => card.type === type);
+
 const getFamily = (deals, type) => {
   if (deals.includes(type)) {
     type = 'deal';
@@ -72,6 +74,7 @@ class RatRace {
 
     if (type === 'smallDeal') {
       return this.#deck[type][random(Object.keys(this.#deck[type]).length - 1)];
+      // return getSpecificCard('lottery', this.#deck[type]);
     }
 
     return this.#deck[type][0];
