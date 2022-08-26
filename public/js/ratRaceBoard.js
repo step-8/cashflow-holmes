@@ -715,19 +715,21 @@
   };
 
   const getMessage = (family, status, currentPlayer) => {
-    const cashFlow = currentPlayer.profile.cashFlow;
+    const { cashFlow } = currentPlayer.profile;
     const messages = {
       deal: {
         0: 'Insufficient balance. Take loan to proceed',
         1: 'Successfully purchased',
-        2: 'Not enough resources',
+        2: 'Not enough stocks',
         3: 'Successfully sold',
         4: 'You won lottery',
         5: 'You lost lottery'
       },
       market: {
         0: 'You have no properties',
-        1: 'You have paid for the property damages'
+        1: 'You have paid for the property damages',
+        2: 'You split the stocks',
+        3: 'You reverse split the stocks'
       },
       doodad: {
         0: 'Insufficient balance. Take loan to proceed',

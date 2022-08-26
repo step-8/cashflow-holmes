@@ -185,15 +185,21 @@ class Turn {
   #decideSplitOrReverse(players, diceValue) {
     const { success } = this.#card;
     const playersHavingStock = players.filter((player) => this.#hasGivenStock(player));
-
+    let status = 2;
     if (success.includes(diceValue)) {
       playersHavingStock.forEach((player) => this.#splitStocks(player));
-      this.#currentPlayer.deactivateReroll();
-      this.respond();
-      return;
+    } else {
+      playersHavingStock.forEach((player) => this.#reverseSplitStocks(player));
+      status = 3;
     }
-    playersHavingStock.forEach((player) => this.#reverseSplitStocks(player));
+    const messages = {
+      2: `split ${this.#card.symbol} stocks`,
+      3: `reverse split ${this.#card.symbol} stocks`
+    };
+
+    this.#log.addLog(this.#playerInfo(), messages[status]);
     this.#currentPlayer.deactivateReroll();
+    this.setTransactionState('market', status);
     this.respond();
   }
 
