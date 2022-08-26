@@ -86,7 +86,7 @@ describe('Turn', () => {
       );
       assert.deepStrictEqual(
         turn.info.transaction,
-        { family: 'doodad', status: 1 }
+        { family: 'doodad', status: 1, username: 'user' }
       );
     });
 
@@ -110,7 +110,7 @@ describe('Turn', () => {
       assert.deepStrictEqual(log.getAllLogs(), []);
       assert.deepStrictEqual(
         turn.info.transaction,
-        { family: 'doodad', status: 0 }
+        { family: 'doodad', status: 0, username: 'user' }
       );
     });
   });
@@ -154,7 +154,7 @@ describe('Turn', () => {
       );
       assert.deepStrictEqual(
         turn.info.transaction,
-        { family: 'deal', status: 1 }
+        { family: 'deal', status: 1, username: 'user' }
       );
     });
 
@@ -179,7 +179,7 @@ describe('Turn', () => {
       assert.deepStrictEqual(log.getAllLogs(), []);
       assert.deepStrictEqual(
         turn.info.transaction,
-        { family: 'deal', status: 0 }
+        { family: 'deal', status: 0, username: 'user' }
       );
     });
   });
@@ -209,7 +209,7 @@ describe('Turn', () => {
 
       assert.deepStrictEqual(
         turn.info.transaction,
-        { family: 'deal', status: 1 }
+        { family: 'deal', status: 1, username: 'user' }
       );
     });
 
@@ -233,7 +233,7 @@ describe('Turn', () => {
       assert.deepStrictEqual(log.getAllLogs(), []);
       assert.deepStrictEqual(
         turn.info.transaction,
-        { family: 'deal', status: 0 }
+        { family: 'deal', status: 0, username: 'user' }
       );
     });
   });
@@ -278,7 +278,7 @@ describe('Turn', () => {
 
       assert.deepStrictEqual(
         turn.info.transaction,
-        { family: 'charity', status: 1 }
+        { family: 'charity', status: 1, username: 'user' }
       );
     });
 
@@ -305,7 +305,7 @@ describe('Turn', () => {
       assert.deepStrictEqual(log.getAllLogs(), []);
       assert.deepStrictEqual(
         turn.info.transaction,
-        { family: 'charity', status: 0 }
+        { family: 'charity', status: 0, username: 'user' }
       );
     });
   });
@@ -344,7 +344,7 @@ describe('Turn', () => {
 
       assert.deepStrictEqual(
         turn.info.transaction,
-        { family: 'deal', status: 1 }
+        { family: 'deal', status: 1, username: 'user' }
       );
     });
 
@@ -370,7 +370,7 @@ describe('Turn', () => {
       assert.deepStrictEqual(log.getAllLogs(), []);
       assert.deepStrictEqual(
         turn.info.transaction,
-        { family: 'deal', status: 0 }
+        { family: 'deal', status: 0, username: 'user' }
       );
     });
   });
@@ -486,7 +486,7 @@ describe('Turn', () => {
 
       assert.deepStrictEqual(
         turn.info.transaction,
-        { family: 'downsized', status: 1 }
+        { family: 'downsized', status: 1, username: 'user' }
       );
     });
 
@@ -516,7 +516,7 @@ describe('Turn', () => {
 
       assert.deepStrictEqual(
         turn.info.transaction,
-        { family: 'downsized', status: 0 }
+        { family: 'downsized', status: 0, username: 'user' }
       );
     });
   });
@@ -591,7 +591,7 @@ describe('Turn', () => {
       const turn = new Turn(card, player, log, response);
       turn.propertyDamage(player);
       assert.deepStrictEqual(
-        turn.info.transaction, { family: 'market', status: 1 }
+        turn.info.transaction, { family: 'market', status: 1, username: 'user' }
       );
       assert.isOk(turn.info.state);
     });
@@ -622,7 +622,7 @@ describe('Turn', () => {
 
     turn.propertyDamage(player);
     assert.deepStrictEqual(
-      turn.info.transaction, { family: 'market', status: 0 }
+      turn.info.transaction, { family: 'market', status: 0, username: 'user' }
     );
     assert.isOk(turn.info.state);
   });

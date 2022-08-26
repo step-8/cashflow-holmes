@@ -50,7 +50,7 @@ const buyDeal = (game, type, count, username) => {
 };
 
 const cardActionsHandler = (req, res) => {
-  const { action, family, type, count, person } = req.body;
+  const { action, family, type, count } = req.body;
   const { game, session: { username } } = req;
   const deals = ['small', 'big'];
   if (deals.includes(action)) {
@@ -62,7 +62,7 @@ const cardActionsHandler = (req, res) => {
   const actions = {
     ok: () => acceptCard(game, family, type, username),
     buy: () => buyDeal(game, type, +count, username),
-    skip: () => game.skip(username, person),
+    skip: () => game.skip(username),
     roll: () => game.activateReroll(),
     sell: () => game.sellStocks(username, +count)
   };

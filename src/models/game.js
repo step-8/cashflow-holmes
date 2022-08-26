@@ -216,22 +216,18 @@ class Game {
     if (player.sellStocks(this.#currentCard, count)) {
       status = 3;
       this.#currentTurn.sellStocks(player, count);
-      this.#currentTurn.setTransactionState('deal', status);
+      this.#currentTurn.setTransactionState('deal', status, username);
       return;
     }
 
-    this.#currentTurn.setTransactionState('deal', status);
+    this.#currentTurn.setTransactionState('deal', status, username);
   }
 
   propertyDamage(username) {
     return this.#currentTurn.propertyDamage(this.findPlayer(username));
   }
 
-  skip(username, person) {
-    if (person === 'others') {
-      this.#currentTurn.pass(this.findPlayer(username));
-      return;
-    }
+  skip(username) {
     this.#currentTurn.skip(this.findPlayer(username));
   }
 

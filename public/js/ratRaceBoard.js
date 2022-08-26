@@ -241,7 +241,7 @@
     actions.replaceChildren(html(selectStockCount));
   };
 
-  const sendAction = (action, family, type, count, person) => {
+  const sendAction = (action, family, type, count) => {
     const options = {
       method: 'POST',
       headers: {
@@ -251,8 +251,7 @@
         `action=${action}`,
         `family=${family}`,
         `type=${type}`,
-        `count=${count}`,
-        `person=${person}`
+        `count=${count}`
       ].join('&')
     };
 
@@ -262,7 +261,7 @@
       .then(drawMessages);
   };
 
-  const performAction = (event, family, type, person) => {
+  const performAction = (event, family, type) => {
     const actionDiv = event.target;
     let [, action] = actionDiv.id.split('-');
     action = action === 'donate' ? 'ok' : action;
@@ -273,7 +272,7 @@
       return;
     }
 
-    sendAction(action, family, type, person);
+    sendAction(action, family, type);
   };
 
   const actions = {
@@ -308,7 +307,7 @@
     }
   };
 
-  const createActions = (family, type, stock, person) => {
+  const createActions = (family, type, stock) => {
     const actionTexts = actions[family][type];
     return html(['div', { className: 'actions-wrapper' },
       ...actionTexts.map(action => {
@@ -320,7 +319,7 @@
             className: 'button action-btn',
             id: `action-${action.toLowerCase()}`,
             onclick: (event) => {
-              performAction(event, family, type, person);
+              performAction(event, family, type);
             }
           },
           action
@@ -362,13 +361,13 @@
     const isCurrentUser = currentPlayer.username === username;
 
     if (isCurrentUser && !response.responded) {
-      actions = createActions(family, type, stock, 'self');
+      actions = createActions(family, type, stock);
     }
 
     if (isStock(family, type) && !isCurrentUser && !response.responded) {
       const { assets } = findPlayer(players, username).profile;
       const stock = findStock(currentCard, assets);
-      actions = createActions(family, 'stockOthers', stock, 'others');
+      actions = createActions(family, 'stockOthers', stock);
     }
 
     const actionsDiv = getElement('.actions');
@@ -393,7 +392,7 @@
     return;
   };
 
-  const createNotification = (game, family, currentPlayer, status = 1) => {
+  const createNotification = (game, family, currentPlayer, status, username) => {
     const message = getMessage(family, status, currentPlayer);
     const notificationsScreen = document.querySelector('#message-space');
 
@@ -414,8 +413,9 @@
         }],
       ]
     );
-
-    notificationsScreen.appendChild(notification);
+    if (game.username === username) {
+      notificationsScreen.appendChild(notification);
+    }
   };
 
   const drawNotifications = (game) => {
@@ -427,7 +427,7 @@
     const createNotifications = () => {
       notifications.forEach(notification => {
         const { family } = notification;
-        createNotification(game, family, currentPlayer);
+        createNotification(game, family, currentPlayer, 1);
         const action = () => sendAction('ok', family, family);
         drawForCurrentUser(action)(game);
       });
@@ -627,10 +627,19 @@
       return;
     }
 
-    const { transaction: { family, status }, currentPlayer } = game;
+    if (game.turnResponses.every(({ responded }) => responded)) {
+      API.changeTurn();
+      return;
+    }
+
+    const {
+      transaction: { family, status, username: transactedUser },
+      currentPlayer
+    } = game;
+
     const message = () => {
       if (family === game.currentCard.family) {
-        createNotification(game, family, currentPlayer, status);
+        createNotification(game, family, currentPlayer, status, transactedUser);
         API.resetTransaction();
       }
 

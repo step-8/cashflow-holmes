@@ -36,8 +36,8 @@ class Turn {
     this.#currentTransaction = null;
   }
 
-  setTransactionState(family, status) {
-    this.#currentTransaction = { family, status };
+  setTransactionState(family, status, username) {
+    this.#currentTransaction = { family, status, username };
   }
 
   #changeTurnIfNoCard(username) {
@@ -51,7 +51,7 @@ class Turn {
     player.payday();
     this.#log.addLog(player, `received pay of $${this.#cashflow()}`);
 
-    this.setTransactionState('payday', 1);
+    this.setTransactionState('payday', 1, player.username);
     this.#changeTurnIfNoCard(player.username);
     return true;
   }
@@ -60,7 +60,7 @@ class Turn {
     const cost = this.#card.cost;
     const status = player.doodad(cost);
 
-    this.setTransactionState('doodad', status);
+    this.setTransactionState('doodad', status, player.username);
     if (!status) {
       return;
     }
@@ -72,7 +72,7 @@ class Turn {
   buyLottery(player) {
     const { cost, type } = this.#card;
     const status = player.buyLottery(cost);
-    this.setTransactionState('deal', status);
+    this.setTransactionState('deal', status, player.username);
 
     if (!status) {
       return;
@@ -83,7 +83,7 @@ class Turn {
 
   buyRealEstate(player) {
     const status = player.buyRealEstate(this.#card);
-    this.setTransactionState('deal', status);
+    this.setTransactionState('deal', status, player.username);
     if (!status) {
       return;
     }
@@ -93,7 +93,7 @@ class Turn {
 
   buyStocks(player, count) {
     const status = player.buyStocks(this.#card, count);
-    this.setTransactionState('deal', status);
+    this.setTransactionState('deal', status, player.username);
 
     if (!status) {
       return;
@@ -104,7 +104,7 @@ class Turn {
 
   buyGoldCoins(player) {
     const status = player.addGoldCoins(this.#card);
-    this.setTransactionState('deal', status);
+    this.setTransactionState('deal', status, player.username);
     this.#log.addLog(player, `bought ${this.#card.count} gold coins`);
     this.respond(player.username);
   }
@@ -112,7 +112,7 @@ class Turn {
   charity(player) {
     const amount = 0.1 * player.details.profile.totalIncome;
     const status = player.charity();
-    this.setTransactionState('charity', status);
+    this.setTransactionState('charity', status, player.username);
 
     if (!status) {
       return;
@@ -126,7 +126,7 @@ class Turn {
   downsized(player) {
     const amount = player.details.profile.totalExpenses;
     const status = player.downsized();
-    this.setTransactionState('downsized', status);
+    this.setTransactionState('downsized', status, player.username);
 
     if (!status) {
       return;
@@ -157,7 +157,7 @@ class Turn {
 
     this.#currentPlayer.updateLotteryAmount(amount);
     this.#log.addLog(this.#playerInfo(), messages[status]);
-    this.setTransactionState('deal', status);
+    this.setTransactionState('deal', status, this.#currentPlayer.username);
     this.respond();
   }
 
@@ -202,7 +202,7 @@ class Turn {
 
     this.#log.addLog(this.#playerInfo(), messages[status]);
     this.#currentPlayer.deactivateReroll();
-    this.setTransactionState('market', status);
+    this.setTransactionState('market', status, player.username);
     this.respond();
   }
 
@@ -220,11 +220,6 @@ class Turn {
 
   lottery(players, player, diceValue) {
     this.#decideLottery(players, player, diceValue);
-  }
-
-  pass(player) {
-    this.#log.addLog(player, `passed ${this.#card.symbol}`);
-    this.respond(player.username);
   }
 
   skip(player) {
@@ -248,7 +243,7 @@ class Turn {
   }
 
   sellStocks(player, count) {
-    this.setTransactionState('deals', 2);
+    this.setTransactionState('deals', 2, player.username);
     this.#log.addLog(player, `sold ${count} ${this.#card.symbol} stocks`);
 
     this.respond(player.username);
@@ -257,7 +252,7 @@ class Turn {
 
   propertyDamage(player) {
     const status = player.payDamages(this.#card);
-    this.setTransactionState('market', status);
+    this.setTransactionState('market', status, player.username);
     let message = 'has no real estate';
 
     if (status) {
