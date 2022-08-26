@@ -542,116 +542,6 @@
       "id": "realEstateB1",
       "type": "realEstate",
       "symbol": "8PLEX",
-      "heading": "8-plex for Sale",
-      "description": "Reinvesting owner offers 8-plex for sale at reasonable price. Financing already in place. All it needs is your down payment.",
-      "rule": "Use this yourself or sell to another player",
-      "cost": 220000,
-      "mortgage": 180000,
-      "downPayment": 40000,
-      "cashFlow": 1700
-    },
-    {
-      "id": "lottery02",
-      "type": "lottery",
-      "symbol": "lottery",
-      "heading": "Where There's a Will...",
-      "lottery": "money",
-      "description": "A distant relative passes away. You are named in the will but need to travel to attend.",
-      "rule": "If you attend, pay $750 and roll 1 die:",
-      "subRule": [
-        "Die = 1-5, You are bequeathed an elderly cat. Enjoy!",
-        "Die = 6, You are bequeathed ten (10) Gold Coins. Add these to your Asset sheet."
-      ],
-      "cost": 750,
-      "failure": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ],
-      "success": [
-        6
-      ]
-    },
-    {
-      "id": "lottery03",
-      "type": "lottery",
-      "symbol": "lottery",
-      "heading": "What's in the Box?!",
-      "lottery": "gold",
-      "description": "You have the option to purchase a locked filing cabinet at an estate sale.",
-      "rule": "If you buy the cabinet, pay $500 and roll 1 die:",
-      "subRule": [
-        "Die = 1-5, You find...ABSOLUTELY NOTHING in the cabinet.",
-        "Die = 6, You are...ten (10) Gold Coins.CHA-CHING! Add these to your Asset sheet."
-      ],
-      "cost": 500,
-      "failure": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ],
-      "success": [
-        6
-      ]
-    },
-    {
-      "id": "lottery04",
-      "type": "mlm",
-      "symbol": "MLM",
-      "heading": "Multi-Level Marketing Buy-In",
-      "lottery": "money",
-      "description": "You have a chance to invest in a Multi-Level-Marketing opportunity. Company is looking to spread the reach of their newest venture.",
-      "rule": "If you choose to buy-in, pay $500 and KEEP THIS CARD:\nEvery PayDay, roll 1 die:",
-      "subRule": [
-        "Die = 1-3, No returns this month, but keep trying.",
-        "Die = 4-6, Your sweat equity paid off! Collect $500."
-      ],
-      "cost": 500,
-      "failure": [
-        1,
-        2,
-        3
-      ],
-      "success": [
-        4,
-        5,
-        6
-      ]
-    },
-    {
-      "id": "lottery05",
-      "type": "mlm",
-      "symbol": "MLM",
-      "heading": "Multi-Level Marketing Buy-In",
-      "lottery": "money",
-      "description": "You have a chance to invest in a Multi-Level-Marketing opportunity. Company is looking to spread the reach of their newest venture.",
-      "rule": "If you choose to buy-in, pay $500 and KEEP THIS CARD:\nEvery PayDay, roll 1 die:",
-      "subRule": [
-        "Die = 1-3, No returns this month, but keep trying.",
-        "Die = 4-6, Your sweat equity paid off! Collect $500."
-      ],
-      "cost": 500,
-      "failure": [
-        1,
-        2,
-        3
-      ],
-      "success": [
-        4,
-        5,
-        6
-      ]
-    }
-  ],
-  "bigDeal": [
-    {
-      "id": "realEstateB1",
-      "type": "realEstate",
-      "symbol": "8PLEX",
       "heading": "8-Plex for Sale",
       "description": "Reinvesting owner offers 8-plex for sale at reasonable price. Financing already in place. All it needs is your down payment.",
       "rule": "Use this yourself or sell to another player",
@@ -1502,12 +1392,63 @@
       "heading": "Sewer Line Breaks",
       "symbol": "realEstate",
       "description": "Water is everywhere at your property!.",
-      "rule": "Pay $2000 for a new sewer line(one time). Take out a bank loan if necessary",
+      "rule": "Pay $2000 for a new sewer line(one time). Take out a bank loan if necessary to cover these expenses.",
       "subRule": [
-        "Card applies only to person who drew it",
-        "If you own No real estate. Ignore the card"
+        "Card applies only to person who drew it.If you own No real estate, ignore this card."
       ],
       "cost": 2000,
+      "applicableToEveryOne": false
+    },
+    {
+      "id": "marketDamage02",
+      "type": "damage",
+      "heading": "Sewer Line Breaks",
+      "symbol": "realEstate",
+      "description": "Water is everywhere at your property!.",
+      "rule": "Pay $1000 for a new sewer line(one time). Take out a bank loan if necessary to cover these expenses.",
+      "subRule": [
+        "Card applies only to person who drew it.If you own No real estate, ignore this card."
+      ],
+      "cost": 1000,
+      "applicableToEveryOne": false
+    },
+    {
+      "id": "marketDamage03",
+      "type": "damage",
+      "heading": "Tenant Damages Your Property",
+      "symbol": "realEstate",
+      "description": "Tenant refuses to pay rent. After the tenant has been evicted, you discover significant damage to your property.",
+      "rule": "Insurance covers most repairs, but you still must pay $500 (one time). Take out a bank loan if necessary to cover these expenses.",
+      "subRule": [
+        "Card applies only to person who drew it.If you own No real estate, ignore this card."
+      ],
+      "cost": 500,
+      "applicableToEveryOne": false
+    },
+    {
+      "id": "marketDamage04",
+      "type": "damage",
+      "heading": "Tenant Damages Your Property",
+      "symbol": "realEstate",
+      "description": "Tenant refuses to pay rent. After the tenant has been evicted, you discover significant damage to your property.",
+      "rule": "Insurance covers most repairs, but you still must pay $500 (one time). Take out a bank loan if necessary to cover these expenses.",
+      "subRule": [
+        "Card applies only to person who drew it.If you own No real estate, ignore this card."
+      ],
+      "cost": 500,
+      "applicableToEveryOne": false
+    },
+    {
+      "id": "marketDamage05",
+      "type": "damage",
+      "heading": "Tenant Damages Your Property",
+      "symbol": "realEstate",
+      "description": "Tenant refuses to pay rent. After the tenant has been evicted, you discover significant damage to your property.",
+      "rule": "Insurance covers most repairs, but you still must pay $1000 (one time). Take out a bank loan if necessary to cover these expenses.",
+      "subRule": [
+        "Card applies only to person who drew it.If you own No real estate, ignore this card."
+      ],
+      "cost": 1000,
       "applicableToEveryOne": false
     },
     {
@@ -1517,16 +1458,210 @@
       "symbol": "OK4U",
       "heading": "Stock - OK4U Drug Co.",
       "description": "OK4U begins trail on possible life saving drug. Side effects are untested. Could change the world... if it works.",
-      "rule": "Cardholder rolls 1 die.",
+      "rule": "Cardholder Rolls 1 die.",
       "subRule": [
-        "Die = 1-3,Double.",
-        "Die = 4-6,Half the stocks."
+        "Die = 1-3,STOCK SPLITS! Everyone hwo owns OK4U DOUBLES their number of shares.",
+        "Die = 4-6,STOCK REVERSE SPLITS! Everyone who owns OK4U loses half their shares."
       ],
       "success": [
         1,
         2,
         3
       ]
+    },
+    {
+      "id": "marketLottery02",
+      "type": "lottery",
+      "lottery": "stock",
+      "symbol": "GRO4US",
+      "heading": "Stock - GRO4US Fund",
+      "description": "The market is in flux and there will be monumental market swings over the next few months. How will mutual funds fair in this time of change?",
+      "rule": "Cardholder Rolls 1 die.",
+      "subRule": [
+        "Die = 1-3,STOCK SPLITS! Everyone hwo owns GRO4US DOUBLES their number of shares.",
+        "Die = 4-6,STOCK REVERSE SPLITS! Everyone who owns GRO4US loses half their shares."
+      ],
+      "success": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "marketLottery03",
+      "type": "lottery",
+      "lottery": "stock",
+      "symbol": "MYT4U",
+      "heading": "Stock - MYT4U Electronics Co.",
+      "description": "MYT4U takes a gamble on new home entertainment tech. Will it hit big or be the next Beta-Max?",
+      "rule": "Cardholder Rolls 1 die.",
+      "subRule": [
+        "Die = 1-3,STOCK SPLITS! Everyone hwo owns MYT4U DOUBLES their number of shares.",
+        "Die = 4-6,STOCK REVERSE SPLITS! Everyone who owns MYT4U loses half their shares."
+      ],
+      "success": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "marketPlexBuyer01",
+      "type": "realEstate",
+      "symbol": "PLEX",
+      "heading": "Plex Buyer",
+      "description": "Buyer looking for all Apartment and Plexes in any combination of units. Offers your original cost plus $1,000",
+      "rule": "Everyone may sell any number of properties at this price.",
+      "subRule": [
+        "If you sell, pay off the related mortgage and give up the cash flow on this property."
+      ]
+    },
+    {
+      "id": "marketPlexBuyer02",
+      "type": "realEstate",
+      "symbol": "PLEX",
+      "heading": "Plex Buyer",
+      "description": "Buyer looking for all Apartment and Plexes in any combination of units. Offers your original cost plus $5,000",
+      "rule": "Everyone may sell any number of properties at this price.",
+      "subRule": [
+        "If you sell, pay off the related mortgage and give up the cash flow on this property."
+      ]
+    },
+    {
+      "id": "marketPlexBuyer03",
+      "type": "realEstate",
+      "symbol": "PLEX",
+      "heading": "Plex Buyer",
+      "description": "Buyer looking for all Apartment and Plexes in any combination of units. Offers your original cost plus $10,000",
+      "rule": "Everyone may sell any number of properties at this price.",
+      "subRule": [
+        "If you sell, pay off the related mortgage and give up the cash flow on this property."
+      ]
+    },
+    {
+      "id": "marketPlexBuyer04",
+      "type": "realEstate",
+      "symbol": "PLEX",
+      "heading": "Plex Buyer",
+      "description": "Buyer looking for all Apartment and Plexes in any combination of units. Offers your original cost plus $15,000",
+      "rule": "Everyone may sell any number of properties at this price.",
+      "subRule": [
+        "If you sell, pay off the related mortgage and give up the cash flow on this property."
+      ]
+    },
+    {
+      "id": "marketPlexBuyer05",
+      "type": "realEstate",
+      "symbol": "PLEX",
+      "heading": "Plex Buyer",
+      "description": "Buyer looking for all Apartment and Plexes in any combination of units. Offers your original cost plus $20,000",
+      "rule": "Everyone may sell any number of properties at this price.",
+      "subRule": [
+        "If you sell, pay off the related mortgage and give up the cash flow on this property."
+      ]
+    },
+    {
+      "id": "marketPlexBuyer06",
+      "type": "realEstate",
+      "symbol": "PLEX",
+      "heading": "Plex Buyer",
+      "description": "Buyer looking for all Apartment and Plexes in any combination of units. Offers your original cost plus $30,000",
+      "rule": "Everyone may sell any number of properties at this price.",
+      "subRule": [
+        "If you sell, pay off the related mortgage and give up the cash flow on this property."
+      ]
+    },
+    {
+      "id": "marketPlexBuyer07",
+      "type": "realEstate",
+      "symbol": "PLEX",
+      "heading": "Plex Buyer",
+      "description": "Buyer looking for all Apartment and Plexes in any combination of units. Offers your original cost plus 5%",
+      "rule": "Everyone may sell any number of properties at this price.",
+      "subRule": [
+        "If you sell, pay off the related mortgage and give up the cash flow on this property."
+      ]
+    },
+    {
+      "id": "marketPlexBuyer08",
+      "type": "realEstate",
+      "symbol": "PLEX",
+      "heading": "Plex Buyer",
+      "description": "Buyer looking for all Apartment and Plexes in any combination of units. Offers your original cost plus 10%",
+      "rule": "Everyone may sell any number of properties at this price.",
+      "subRule": [
+        "If you sell, pay off the related mortgage and give up the cash flow on this property."
+      ]
+    },
+    {
+      "id": "marketPlexBuyer09",
+      "type": "realEstate",
+      "symbol": "PLEX",
+      "heading": "Plex Buyer",
+      "description": "Buyer looking for all Apartment and Plexes in any combination of units. Offers your original cost plus 15%",
+      "rule": "Everyone may sell any number of properties at this price.",
+      "subRule": [
+        "If you sell, pay off the related mortgage and give up the cash flow on this property."
+      ]
+    },
+    {
+      "id": "marketPlexBuyer10",
+      "type": "realEstate",
+      "symbol": "PLEX",
+      "heading": "Plex Buyer",
+      "description": "Buyer looking for all Apartment and Plexes in any combination of units. Offers your original cost plus 20%",
+      "rule": "Everyone may sell any number of properties at this price.",
+      "subRule": [
+        "If you sell, pay off the related mortgage and give up the cash flow on this property."
+      ]
+    },
+    {
+      "id": "marketGoldSale01",
+      "type": "goldCoins",
+      "symbol": "GOLD",
+      "heading": "Price of Gold Soars",
+      "description": "The Central Bank is printing money in an attempt to boost the economy causing massive inflation. The price of gold skyrockets. Buyer offers $2,000 for each gold coin.",
+      "rule": "Everyone may sell any number of coins at this price."
+    },
+    {
+      "id": "marketGoldSale02",
+      "type": "goldCoins",
+      "symbol": "GOLD",
+      "heading": "Price of Gold Soars",
+      "description": "Rioting Overseas. Oil prices threatened. Price of gold skyrockets. Buyer offers $1,000 cash for each gold coin.",
+      "rule": "Everyone may sell any number of coins at this price."
+    },
+    {
+      "id": "marketGoldSale03",
+      "type": "goldCoins",
+      "symbol": "GOLD",
+      "heading": "Collector wants Gold Coins",
+      "description": "Wealthy collector is looking for gold coins. Cash offer of $500 for each coin.",
+      "rule": "Everyone may sell any number of coins at this price."
+    },
+    {
+      "id": "marketGoldSale04",
+      "type": "goldCoins",
+      "symbol": "GOLD",
+      "heading": "Collector wants Gold Coins",
+      "description": "Wealthy collector is looking for gold coins. Cash offer of $1,000 for each coin.",
+      "rule": "Everyone may sell any number of coins at this price."
+    },
+    {
+      "id": "marketBusiness01",
+      "type": "business",
+      "symbol": "BUSINESS",
+      "heading": "New Management System",
+      "description": "A new management system creates new efficiencies and lowers costs. Only the person who drew the card is affected.",
+      "rule": "ALL businesses with a cash flow of $1000, or less, have their cash flow increased by $400."
+    },
+    {
+      "id": "marketBusiness02",
+      "type": "business",
+      "symbol": "BUSINESS",
+      "heading": "Small Business Boom!",
+      "description": "The downtown economy has exploded! EVERYONE is affected.",
+      "rule": "ALL businesses with a cash flow of $1000, or less, have their cash flow increased by $250."
     }
   ]
 }
