@@ -11,6 +11,7 @@ class Turn {
     this.#currentPlayer = currentPlayer;
     this.#response = response;
     this.#log = log;
+    this.#currentTransaction = null;
   }
 
   respond(responder) {
@@ -48,10 +49,10 @@ class Turn {
   }
 
   payday(player) {
-    player.payday();
-    this.#log.addLog(player, `received pay of $${this.#cashflow()}`);
+    this.#currentPlayer.payday();
+    this.#log.addLog(this.#currentPlayer, `received pay of $${this.#cashflow()}`);
 
-    this.setTransactionState('payday', 1, player.username);
+    this.setTransactionState('payday', 1, this.#currentPlayer.username);
     this.#changeTurnIfNoCard(player.username);
     return true;
   }
@@ -66,7 +67,7 @@ class Turn {
     }
 
     this.#log.addLog(player, `payed $${cost} on ${this.#card.heading}`);
-    this.respond();
+    this.respond(player.username);
   }
 
   buyLottery(player) {
@@ -146,10 +147,11 @@ class Turn {
     }
     this.#log.addLog(player, message);
 
-    this.respond();
+    this.respond(player.username);
   }
 
   #updateLotteryAmount(amount, status) {
+    const username = this.#currentPlayer.username;
     const messages = {
       4: `won $${amount}`,
       5: 'lost the lottery'
@@ -157,8 +159,8 @@ class Turn {
 
     this.#currentPlayer.updateLotteryAmount(amount);
     this.#log.addLog(this.#playerInfo(), messages[status]);
-    this.setTransactionState('deal', status, this.#currentPlayer.username);
-    this.respond();
+    this.setTransactionState('deal', status, username);
+    this.respond(username);
   }
 
   #decideMoneyLottery(diceValue) {
@@ -203,7 +205,7 @@ class Turn {
     this.#log.addLog(this.#playerInfo(), messages[status]);
     this.#currentPlayer.deactivateReroll();
     this.setTransactionState('market', status, player.username);
-    this.respond();
+    this.respond(player.username);
   }
 
   #decideLottery(players, player, diceValue) {
@@ -269,7 +271,6 @@ class Turn {
 
   get info() {
     const state = this.#response.isReceived(this.#currentPlayer.username);
-
     return {
       player: this.#currentPlayer,
       card: this.#card, //No need of card

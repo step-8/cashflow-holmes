@@ -427,7 +427,7 @@
     const createNotifications = () => {
       notifications.forEach(notification => {
         const { family } = notification;
-        createNotification(game, family, currentPlayer, 1);
+        createNotification(game, family, currentPlayer, 1, currentPlayer.username);
         const action = () => sendAction('ok', family, family);
         drawForCurrentUser(action)(game);
       });
@@ -633,13 +633,13 @@
     }
 
     const {
-      transaction: { family, status, username: transactedUser },
+      transaction: { family, status, username },
       currentPlayer
     } = game;
 
     const message = () => {
       if (family === game.currentCard.family) {
-        createNotification(game, family, currentPlayer, status, transactedUser);
+        createNotification(game, family, currentPlayer, status, username);
         API.resetTransaction();
       }
 
