@@ -72,12 +72,13 @@ class RatRace {
       return {};
     }
 
-    if (type === 'smallDeal') {
-      return this.#deck[type][random(Object.keys(this.#deck[type]).length - 1)];
-      // return getSpecificCard('lottery', this.#deck[type]);
-    }
+    // if (type === 'smallDeal') {
+    //   return this.#deck[type][random(Object.keys(this.#deck[type]).length - 1)];
+    //   // return getSpecificCard('lottery', this.#deck[type]);
+    // }
 
-    return this.#deck[type][0];
+    // return this.#deck[type][0];
+    return this.#deck[type].pop();
   }
 
   getNotifications(type, currentPlayer) {

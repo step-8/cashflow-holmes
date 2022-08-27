@@ -13,17 +13,32 @@
       "cashFlow": 220
     },
     {
-      "id": "ok4u05",
-      "type": "stock",
-      "symbol": "OK4U",
-      "heading": "Stock - OK4U Drug Co.",
-      "description": "Interest rates cripple share price of this longtime pharmaceutical company.",
-      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
-      "price": 5,
-      "range": [
+      "id": "lottery01",
+      "type": "lottery",
+      "symbol": "lottery",
+      "heading": "Sister-In-Law borrows Money",
+      "lottery": "money",
+      "description": "Sister-in-law is downsized.Needs $5,000 to make house payment. She promises to pay you back $10,000 after she finds a new job.",
+      "rule": "If you choose to help. Pay $5,000 and roll 1 die:",
+      "subRule": [
+        "Die = 1-3, She never pays you back and you're out $5,000",
+        "Die = 4-6, She pays you back $10,000, but family get-togethers are still awkward"
+      ],
+      "cost": 5000,
+      "failure": [
+        1,
+        2,
+        3
+      ],
+      "success": [
+        4,
         5,
-        30
-      ]
+        6
+      ],
+      "outcome": {
+        "failure": 0,
+        "success": 10000
+      }
     },
     {
       "id": "lottery01",
@@ -54,6 +69,129 @@
       }
     },
     {
+      "id": "lottery01",
+      "type": "lottery",
+      "symbol": "lottery",
+      "heading": "Sister-In-Law borrows Money",
+      "lottery": "money",
+      "description": "Sister-in-law is downsized.Needs $5,000 to make house payment. She promises to pay you back $10,000 after she finds a new job.",
+      "rule": "If you choose to help. Pay $5,000 and roll 1 die:",
+      "subRule": [
+        "Die = 1-3, She never pays you back and you're out $5,000",
+        "Die = 4-6, She pays you back $10,000, but family get-togethers are still awkward"
+      ],
+      "cost": 5000,
+      "failure": [
+        1,
+        2,
+        3
+      ],
+      "success": [
+        4,
+        5,
+        6
+      ],
+      "outcome": {
+        "failure": 0,
+        "success": 10000
+      }
+    },
+    {
+      "id": "realEstateS1",
+      "type": "realEstate",
+      "symbol": "2Br/1Ba",
+      "heading": "You Find a Great Deal!",
+      "description": "Older 2/1 house, repossessed by government agency. Ready to go with government financing and a tenant. Take out a loan if you must, but BUY THIS!",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 35000,
+      "mortgage": 33000,
+      "downPayment": 2000,
+      "cashFlow": 220
+    },
+    {
+      "id": "realEstateS1",
+      "type": "realEstate",
+      "symbol": "2Br/1Ba",
+      "heading": "You Find a Great Deal!",
+      "description": "Older 2/1 house, repossessed by government agency. Ready to go with government financing and a tenant. Take out a loan if you must, but BUY THIS!",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 35000,
+      "mortgage": 33000,
+      "downPayment": 2000,
+      "cashFlow": 220
+    },
+    {
+      "id": "realEstateS1",
+      "type": "realEstate",
+      "symbol": "2Br/1Ba",
+      "heading": "You Find a Great Deal!",
+      "description": "Older 2/1 house, repossessed by government agency. Ready to go with government financing and a tenant. Take out a loan if you must, but BUY THIS!",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 35000,
+      "mortgage": 33000,
+      "downPayment": 2000,
+      "cashFlow": 220
+    },
+    {
+      "id": "ok4u05",
+      "type": "stock",
+      "symbol": "OK4U",
+      "heading": "Stock - OK4U Drug Co.",
+      "description": "Interest rates cripple share price of this longtime pharmaceutical company.",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
+      "price": 5,
+      "range": [
+        5,
+        30
+      ]
+    },
+    {
+      "id": "ok4u05",
+      "type": "stock",
+      "symbol": "OK4U",
+      "heading": "Stock - OK4U Drug Co.",
+      "description": "Interest rates cripple share price of this longtime pharmaceutical company.",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
+      "price": 5,
+      "range": [
+        5,
+        30
+      ]
+    },
+    {
+      "id": "ok4u05",
+      "type": "stock",
+      "symbol": "OK4U",
+      "heading": "Stock - OK4U Drug Co.",
+      "description": "Interest rates cripple share price of this longtime pharmaceutical company.",
+      "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
+      "price": 5,
+      "range": [
+        5,
+        30
+      ]
+    },
+    {
+      "id": "gold1",
+      "type": "goldCoins",
+      "symbol": "GOLD",
+      "heading": "Coin Collector Liquidates",
+      "description": "A coin collector needs cash quick to shore up a tax issue.Will sell you five(5) gold coins, well below going rate.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 1000,
+      "count": 5
+    },
+    {
+      "id": "gold1",
+      "type": "goldCoins",
+      "symbol": "GOLD",
+      "heading": "Coin Collector Liquidates",
+      "description": "A coin collector needs cash quick to shore up a tax issue.Will sell you five(5) gold coins, well below going rate.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 1000,
+      "count": 5
+    },
+    {
       "id": "gold1",
       "type": "goldCoins",
       "symbol": "GOLD",
@@ -74,7 +212,31 @@
       "rule": "Use this yourself or sell to another player",
       "cost": 220000,
       "mortgage": 180000,
-      "downPayment": 40000,
+      "downPayment": 400,
+      "cashFlow": 17000
+    },
+    {
+      "id": "realEstateB1",
+      "type": "realEstate",
+      "symbol": "8PLEX",
+      "heading": "8-plex for Sale",
+      "description": "Reinvesting owner offers 8-plex for sale at reasonable price. Financing already in place. All it needs is your down payment.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 220000,
+      "mortgage": 180000,
+      "downPayment": 400,
+      "cashFlow": 17000
+    },
+    {
+      "id": "realEstateB1",
+      "type": "realEstate",
+      "symbol": "8PLEX",
+      "heading": "8-plex for Sale",
+      "description": "Reinvesting owner offers 8-plex for sale at reasonable price. Financing already in place. All it needs is your down payment.",
+      "rule": "Use this yourself or sell to another player",
+      "cost": 220000,
+      "mortgage": 180000,
+      "downPayment": 400,
       "cashFlow": 17000
     }
   ],
@@ -87,9 +249,43 @@
       "cost": 1500,
       "rule": "",
       "isMandatory": false
+    },
+    {
+      "id": "doodad1",
+      "type": "doodad",
+      "heading": "SEASON TICKETS",
+      "description": "PAY $1,500",
+      "cost": 1500,
+      "rule": "",
+      "isMandatory": false
     }
   ],
   "payday": [
+    {
+      "id": "payday",
+      "heading": "payday",
+      "type": "payday"
+    },
+    {
+      "id": "payday",
+      "heading": "payday",
+      "type": "payday"
+    },
+    {
+      "id": "payday",
+      "heading": "payday",
+      "type": "payday"
+    },
+    {
+      "id": "payday",
+      "heading": "payday",
+      "type": "payday"
+    },
+    {
+      "id": "payday",
+      "heading": "payday",
+      "type": "payday"
+    },
     {
       "id": "payday",
       "heading": "payday",
@@ -121,6 +317,20 @@
       "description": "Congratulations! Your family has a new arrival",
       "type": "baby",
       "symbol": "new baby"
+    },
+    {
+      "id": "baby",
+      "heading": "New Baby",
+      "description": "Congratulations! Your family has a new arrival",
+      "type": "baby",
+      "symbol": "new baby"
+    },
+    {
+      "id": "baby",
+      "heading": "New Baby",
+      "description": "Congratulations! Your family has a new arrival",
+      "type": "baby",
+      "symbol": "new baby"
     }
   ],
   "market": [
@@ -141,6 +351,70 @@
         2,
         3
       ]
+    },
+    {
+      "id": "marketLottery01",
+      "type": "lottery",
+      "lottery": "stock",
+      "symbol": "OK4U",
+      "heading": "Stock - OK4U Drug Co.",
+      "description": "OK4U begins trail on possible life saving drug. Side effects are untested. Could change the world... if it works.",
+      "rule": "Cardholder rolls 1 die.",
+      "subRule": [
+        "Die = 1-3,Double.",
+        "Die = 4-6,Half the stocks."
+      ],
+      "success": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "marketLottery01",
+      "type": "lottery",
+      "lottery": "stock",
+      "symbol": "OK4U",
+      "heading": "Stock - OK4U Drug Co.",
+      "description": "OK4U begins trail on possible life saving drug. Side effects are untested. Could change the world... if it works.",
+      "rule": "Cardholder rolls 1 die.",
+      "subRule": [
+        "Die = 1-3,Double.",
+        "Die = 4-6,Half the stocks."
+      ],
+      "success": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "marketDamage01",
+      "type": "damage",
+      "heading": "Sewer Line Breaks",
+      "symbol": "realEstate",
+      "description": "Water is everywhere at your property!.",
+      "rule": "Pay $2000 for a new sewer line(one time). Take out a bank loan if necessary",
+      "subRule": [
+        "Card applies only to person who drew it",
+        "If you own No real estate. Ignore the card"
+      ],
+      "cost": 2000,
+      "applicableToEveryOne": false
+    },
+    {
+      "id": "marketDamage01",
+      "type": "damage",
+      "heading": "Sewer Line Breaks",
+      "symbol": "realEstate",
+      "description": "Water is everywhere at your property!.",
+      "rule": "Pay $2000 for a new sewer line(one time). Take out a bank loan if necessary",
+      "subRule": [
+        "Card applies only to person who drew it",
+        "If you own No real estate. Ignore the card"
+      ],
+      "cost": 2000,
+      "applicableToEveryOne": false
     },
     {
       "id": "marketDamage01",
