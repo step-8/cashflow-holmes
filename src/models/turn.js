@@ -49,12 +49,12 @@ class Turn {
   }
 
   payday(player) {
-    this.#currentPlayer.payday();
+    const status = this.#currentPlayer.payday();
     this.#log.addLog(this.#currentPlayer, `received pay of $${this.#cashflow()}`);
 
     this.setTransactionState('payday', 1, this.#currentPlayer.username);
     this.#changeTurnIfNoCard(player.username);
-    return true;
+    return status;
   }
 
   doodad(player) {

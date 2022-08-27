@@ -131,6 +131,13 @@ class Game {
   changeTurn() {
     const responses = new Response(createResponses(this.#players));
     const currentPlayer = this.nextPlayer();
+
+    const { isInFastTrack, hasBankrupt } = currentPlayer.details;
+    if (isInFastTrack || hasBankrupt) {
+      this.changeTurn();
+      return;
+    }
+
     this.#currentTurn = new Turn(null, currentPlayer, this.#log, responses);
     this.resetDice();
     this.#currentCard = null;
@@ -140,11 +147,6 @@ class Game {
     if (this.currentPlayer.skippedTurns > 0) {
       this.addLog(this.currentPlayer.username, 'skipped turn');
       this.currentPlayer.decrementSkippedTurns();
-      this.changeTurn();
-      return;
-    }
-
-    if (this.currentPlayer.isInFastTrack) {
       this.changeTurn();
       return;
     }

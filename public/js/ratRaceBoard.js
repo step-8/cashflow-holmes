@@ -713,6 +713,7 @@
     if (players.length <= 0) {
       return;
     }
+
     const pageWrapper = getElement('.page-wrapper');
 
     players.forEach(player => {
@@ -723,6 +724,9 @@
 
       pageWrapper.appendChild(html(outOfGameTemplate));
     });
+
+    timeout(removePopUp, 3000, '#out-of-game-popup');
+
   };
 
   const decideLoanActions = (game) => {
@@ -751,8 +755,8 @@
     actions.append(rollDiceMsg);
   };
 
-  const removePopUp = () => {
-    getElement('.escape-popup').remove();
+  const removePopUp = (id) => {
+    getElement(id).remove();
     API.changeTurn();
     removeBlurBackground();
   };
@@ -767,7 +771,7 @@
       [
         'div', { className: 'escape-popup active flex-column flex-center gap' },
         ['div', { className: 'username' }, `${currentPlayer.username} has escaped from Rat Race`],
-        ['div', { className: 'button', onclick: removePopUp }, 'OK']
+        ['div', { className: 'button', onclick: () => removePopUp('.escape-popup') }, 'OK']
       ];
 
     const pageWrapperEle = getElement('#escape-rat-race');

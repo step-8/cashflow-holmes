@@ -74,13 +74,8 @@ const sellAllAssets = () => {
   };
 
   API.sellAllAssets(options)
-    .then(res => {
-      if (res.status === 200) {
-        drawOutOfBankruptcy();
-        return;
-      }
-      getElement('#bankrupt-popup').remove();
-    });
+    .then(res => drawOutOfBankruptcy())
+    .catch(res => getElement('#bankrupt-popup').remove());
 };
 
 const createBankruptPopup = () => {
@@ -108,10 +103,10 @@ const decideLoanResult = (res, method) => {
     drawLoanResult('Insufficient Balance', 'warning');
   }
 
-  if (res.status === 406 && method === 'takeLoan') {
-    replaceLoanElements('#loan-options');
-    createBankruptPopup();
-  }
+  // if (res.status === 406 && method === 'takeLoan') {
+  //   replaceLoanElements('#loan-options');
+  //   createBankruptPopup();
+  // }
 };
 
 const loanActionOnEnter = (event, id) => {

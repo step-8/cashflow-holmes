@@ -40,14 +40,6 @@ describe('Change Turn', () => {
         .expect(200, done);
     });
 
-    it('/loan/take', (done) => {
-      request(app)
-        .post('/loan/take')
-        .set('Cookie', cookies.join(';'))
-        .send({ amount: 1000000 })
-        .expect(406, done);
-    });
-
     it('/loan/pay', (done) => {
       request(app)
         .post('/loan/pay')

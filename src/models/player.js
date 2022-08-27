@@ -254,8 +254,9 @@ class Player {
     return true;
   }
 
-  #isNegativeCF() {
-    return this.#calculateCashFlow() < 0;
+  #isBankruptcy() {
+    const cashFlow = this.#calculateCashFlow();
+    return cashFlow < 0 && this.#cash < -cashFlow;
   }
 
   takeLoan(amount) {
@@ -263,8 +264,7 @@ class Player {
     this.#liabilities.bankLoan += amount;
     this.#expenses.bankLoanPayment = this.#liabilities.bankLoan / 10;
 
-    if (this.#isNegativeCF()) {
-      this.#hasBankrupt = true;
+    if (this.#isBankruptcy()) {
       return false;
     }
 
@@ -378,7 +378,11 @@ class Player {
     cash += this.#sellAssets('preciousMetals', 'cost');
     cash += this.#sellAllStocks();
     this.#cash += cash;
-    return this.#cash > 0;
+    const status = this.#cash > 0;
+    if (!status) {
+      this.#hasBankrupt = true;
+    }
+    return status;
   }
 
   profile() {

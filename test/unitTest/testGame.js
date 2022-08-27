@@ -241,7 +241,6 @@ describe('Game', () => {
       const player = game.findPlayer('p1');
       assert.strictEqual(player.profile().cash, 1000);
       assert.isNotOk(player.profile().hasBankrupt);
-
     });
 
     it('Should remove loan amount to cash', () => {
