@@ -738,6 +738,7 @@
   };
 
   const drawScreen = (game, logs) => {
+    console.log(game);
     drawPlayerPosition(game);
     drawPlayersList(game);
     addLogs(game, logs);

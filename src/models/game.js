@@ -97,10 +97,9 @@ class Game {
     this.#diceValues = this.#dice.roll(1);
     const diceValue = this.#diceValues[0];
     const currentPlayer = this.currentPlayer;
-    const player = this.findPlayer(username);
 
-    this.addLog(username, `rolled ${diceValue}`);
-    this.#currentTurn.lottery(this.#players, player, diceValue);
+    this.addLog(username, `rolled ${diceValue} again`);
+    this.#currentTurn.lottery(this.#players, currentPlayer, diceValue);
     currentPlayer.changeDiceStatus(true);
   }
 

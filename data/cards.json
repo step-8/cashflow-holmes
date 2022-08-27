@@ -417,7 +417,7 @@
       "type": "lottery",
       "symbol": "lottery",
       "heading": "Sister-In-Law borrows Money",
-      "lottery": "gold",
+      "lottery": "money",
       "description": "Sister-in-law is downsized.Needs $5,000 to make house payment. She promises to pay you back $10,000 after she finds a new job.",
       "rule": "If you choose to help. Pay $5,000 and roll 1 die:",
       "subRule": [

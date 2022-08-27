@@ -158,7 +158,7 @@ class Turn {
     };
 
     this.#currentPlayer.updateLotteryAmount(amount);
-    this.#log.addLog(this.#playerInfo(), messages[status]);
+    this.#log.addLog(this.#currentPlayer, messages[status]);
     this.setTransactionState('deal', status, username);
     this.respond(username);
   }
