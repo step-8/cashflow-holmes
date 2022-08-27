@@ -6,8 +6,6 @@ const { toWords } = require('../utils/commonLib.js');
 const { Player } = require('./player');
 const { Response, createResponses } = require('./response');
 
-const findPlayer = (players, username) =>
-  players.find(player => player.username === username);
 class Game {
   #gameID;
   #players;
@@ -331,4 +329,4 @@ class Game {
   }
 }
 
-module.exports = { Game, findPlayer };
+module.exports = { Game };

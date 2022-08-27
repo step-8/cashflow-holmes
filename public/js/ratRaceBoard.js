@@ -125,31 +125,43 @@
     document.querySelector('#choose-dice').innerHTML = '';
   };
 
+  const isEligibleToRoll = (you, currentPlayer) => {
+    const { username, isRolledDice, skippedTurns } = currentPlayer;
+    return you === username && !isRolledDice && skippedTurns === 0;
+  };
+
+  const activateRoll = (diceBox, game) => {
+    diceBox.style.opacity = 1;
+    diceBox.style.border = '2px solid black';
+    diceBox.style.zIndex = 1;
+    diceBox.style.boxShadow = 'grey 0px 0px 12px 6px';
+
+    diceBox.onclick = () => {
+      deactivateRoll(diceBox);
+      API.getGame()
+        .then(res => res.json())
+        .then(rollDice);
+    };
+    drawForCurrentUser(drawToggle)(game);
+  };
+
+  const deactivateRoll = (diceBox) => {
+    diceBox.style.opacity = 0.5;
+    diceBox.style.zIndex = -1;
+    diceBox.style.border = '2px dashed black';
+    diceBox.style.boxShadow = 'none';
+    diceBox.onclick = null;
+    resetToggler();
+  };
+
   const activateDice = (game) => {
-    const username = game.username;
-    const { username: currentPlayerName, isRolledDice, skippedTurns } = game.currentPlayer;
+    const { username, currentPlayer } = game;
     const diceBox = document.querySelector('#dice-box');
 
-    if (username === currentPlayerName && !isRolledDice && skippedTurns === 0) {
-      diceBox.style.opacity = 1;
-      diceBox.style.border = '2px solid black';
-      diceBox.style.zIndex = 1;
-      diceBox.style.boxShadow = 'grey 0px 0px 12px 6px';
-
-      diceBox.onclick = () => {
-        API.getGame()
-          .then(res => res.json())
-          .then(rollDice);
-      };
-      drawForCurrentUser(drawToggle)(game);
-
+    if (isEligibleToRoll(username, currentPlayer)) {
+      activateRoll(diceBox, game);
     } else {
-      diceBox.style.opacity = 0.5;
-      diceBox.style.zIndex = -1;
-      diceBox.style.border = '2px dashed black';
-      diceBox.style.boxShadow = 'none';
-      diceBox.onclick = null;
-      resetToggler();
+      deactivateRoll(diceBox);
     }
     return game;
   };

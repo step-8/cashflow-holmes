@@ -1,11 +1,11 @@
 class Response {
   constructor(players) {
     this.players = players;
-    this.ResponseType = 'individual';
+    this.isGroup = false;
   }
 
   forGroup() {
-    this.ResponseType = 'group';
+    this.isGroup = true;
   }
 
   set responded(username) {
@@ -18,7 +18,7 @@ class Response {
   }
 
   isReceived(username) {
-    if (this.ResponseType === 'group') {
+    if (this.isGroup) {
       return this.#areReceived();
     }
     return this.players.find(player => player.username === username).responded;
