@@ -70,3 +70,9 @@ const findPlayer = (players, username) => {
 };
 
 const isEnter = (event) => event.key === 'Enter';
+
+const timeout = (fn, time, ...args) => {
+  setTimeout(() => {
+    fn(...args);
+  }, time);
+};

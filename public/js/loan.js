@@ -33,6 +33,11 @@ const drawLoan = (event) => {
   loanOptions.replaceChildren(html(selectLoanAmount));
 };
 
+const replaceLoanElements = (id) => {
+  getElement(id).
+    replaceChildren(...childrens.loanChildren);
+};
+
 const drawLoanResult = (message, status) => {
   const classes = {
     success: 'success message',
@@ -43,20 +48,24 @@ const drawLoanResult = (message, status) => {
 
   loanOptions.replaceChildren(html(['div', { className: classes[status] }, message]));
 
-  setTimeout(() => {
-    loanOptions.replaceChildren(...childrens.loanChildren);
-  }, 2000);
+  timeout(replaceLoanElements, 2000, '#loan-options');
+};
+
+const removeBankruptPopup = (id) => {
+  getElement(id).remove();
 };
 
 const drawOutOfBankruptcy = () => {
   const bankruptEle = getElement('#bankrupt-popup');
   bankruptEle.replaceChildren('');
-  const OutOfBankruptcy = ['div', { className: 'username' }, 'You are out of bankruptcy'];
+
+  const OutOfBankruptcy = ['div', { className: 'username' },
+    'You are out of bankruptcy'
+  ];
+
   bankruptEle.appendChild(html(OutOfBankruptcy));
 
-  setTimeout(() => {
-    bankruptEle.remove();
-  }, 5000);
+  timeout(removeBankruptPopup, 5000, '#bankrupt-popup');
 };
 
 const sellAllAssets = () => {
@@ -78,7 +87,7 @@ const createBankruptPopup = () => {
   const popupTemplate =
     [
       'div', { className: 'escape-popup active flex-column flex-center gap', id: 'bankrupt-popup' },
-      ['div', { className: 'username' }, 'You are going Bankrupted'],
+      ['div', { className: 'username' }, 'You are going Bankrupt'],
       ['div', { className: 'button', onclick: sellAllAssets }, 'SELL']
     ];
 
@@ -100,6 +109,7 @@ const decideLoanResult = (res, method) => {
   }
 
   if (res.status === 406 && method === 'takeLoan') {
+    replaceLoanElements('#loan-options');
     createBankruptPopup();
   }
 };

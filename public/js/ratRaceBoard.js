@@ -17,6 +17,29 @@
     }
   }
 
+  class GameState {
+    #log;
+    #bankruptedPlayers;
+    constructor(log) {
+      this.#log = log;
+      this.#bankruptedPlayers = [];
+    }
+
+    mergeLogs(logs) {
+      return this.#log.mergeLogs(logs);
+    }
+
+    mergeBankruptedPlayers(players) {
+      const unMergedPlayers = players.length - this.#bankruptedPlayers.length;
+
+      if (unMergedPlayers <= 0) {
+        return [];
+      }
+      this.#bankruptedPlayers = players;
+      return this.#bankruptedPlayers.slice(-unMergedPlayers);
+    }
+  }
+
   const highlightCurrentPlayer = (game) => {
     const { username } = game.currentPlayer;
     const currentPlayerEle = document.querySelector(`#${username}`);
@@ -671,8 +694,8 @@
     return ['div', { className: 'log' }, userSpan, ['span', { className: 'log-msg' }, `${log.message}`]];
   };
 
-  const addLogs = (game, logs) => {
-    const newLogs = logs.mergeLogs(game.logs);
+  const addLogs = (game, gameState) => {
+    const newLogs = gameState.mergeLogs(game.logs);
     if (newLogs.length <= 0) {
       return;
     }
@@ -683,6 +706,23 @@
     });
 
     logsDiv.scrollTop = logsDiv.scrollHeight;
+  };
+
+  const drawOutOfGamePopup = (game, gameState) => {
+    const players = gameState.mergeBankruptedPlayers(game.bankruptedPlayers);
+    if (players.length <= 0) {
+      return;
+    }
+    const pageWrapper = getElement('.page-wrapper');
+
+    players.forEach(player => {
+      const outOfGameTemplate =
+        ['div', { className: 'escape-popup', id: 'out-of-game-popup' },
+          ['div', { className: 'username' }, `${player.username} has bankrupted`]
+        ];
+
+      pageWrapper.appendChild(html(outOfGameTemplate));
+    });
   };
 
   const decideLoanActions = (game) => {
@@ -737,23 +777,24 @@
     blurBackground();
   };
 
-  const drawScreen = (game, logs) => {
+  const drawScreen = (game, gameState) => {
     drawPlayerPosition(game);
     drawPlayersList(game);
-    addLogs(game, logs);
+    addLogs(game, gameState);
     createExpansionWindows(game);
     drawRatRaceCompletion(game);
     drawLottery(game);
+    drawOutOfGamePopup(game, gameState);
   };
 
   const prevState = { game: '' };
 
-  const draw = (logs) => {
+  const draw = (gameState) => {
     return res => {
       const newState = res.hash;
       decideLoanActions(res);
       if (newState !== prevState.game) {
-        drawScreen(res, logs);
+        drawScreen(res, gameState);
         prevState.game = newState;
       }
     };
@@ -761,11 +802,12 @@
 
   const main = () => {
     const logs = new Log();
+    const gameState = new GameState(logs);
 
     setInterval(() => {
       API.getGame()
         .then(res => res.json())
-        .then(draw(logs));
+        .then(draw(gameState));
     }, 1000);
   };
 

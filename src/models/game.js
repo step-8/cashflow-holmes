@@ -253,8 +253,9 @@ class Game {
     const player = this.findPlayer(username);
     const status = player.sellAllAssets();
     let message = `${username} sold all assets`;
+
     if (!status) {
-      this.#bankruptedPlayers.push(player);
+      this.#bankruptedPlayers.push(player.details);
       message = `${username} has bankrupted`;
     }
 
