@@ -1,867 +1,870 @@
-(function () {
-  class Log {
-    #logs;
+class Log {
+  #logs;
 
-    constructor() {
-      this.#logs = [];
-    }
-
-    mergeLogs(logs) {
-      const unLoggedLogsLength = logs.length - this.#logs.length;
-
-      if (unLoggedLogsLength <= 0) {
-        return [];
-      }
-      this.#logs = logs;
-      return logs.slice(-unLoggedLogsLength);
-    }
+  constructor() {
+    this.#logs = [];
   }
 
-  class GameState {
-    #log;
-    #bankruptedPlayers;
-    constructor(log) {
-      this.#log = log;
-      this.#bankruptedPlayers = [];
-    }
+  mergeLogs(logs) {
+    const unLoggedLogsLength = logs.length - this.#logs.length;
 
-    mergeLogs(logs) {
-      return this.#log.mergeLogs(logs);
+    if (unLoggedLogsLength <= 0) {
+      return [];
     }
+    this.#logs = logs;
+    return logs.slice(-unLoggedLogsLength);
+  }
+}
 
-    mergeBankruptedPlayers(players) {
-      const unMergedPlayers = players.length - this.#bankruptedPlayers.length;
-
-      if (unMergedPlayers <= 0) {
-        return [];
-      }
-      this.#bankruptedPlayers = players;
-      return this.#bankruptedPlayers.slice(-unMergedPlayers);
-    }
+class GameState {
+  #log;
+  #bankruptedPlayers;
+  constructor(log) {
+    this.#log = log;
+    this.#bankruptedPlayers = [];
   }
 
-  const highlightCurrentPlayer = (game) => {
-    const { username } = game.currentPlayer;
-    const currentPlayerEle = document.querySelector(`#${username}`);
-    currentPlayerEle.style.backgroundColor = 'lightgrey';
-    currentPlayerEle.style.fontWeight = '900';
-    return game;
-  };
+  mergeLogs(logs) {
+    return this.#log.mergeLogs(logs);
+  }
 
-  const decideCard = (game) => {
-    API.assignCard();
-    return game;
-  };
+  mergeBankruptedPlayers(players) {
+    const unMergedPlayers = players.length - this.#bankruptedPlayers.length;
 
-  const getSelectedDice = () => {
-    const diceVals = {
-      'one': '1',
-      'two': '2',
-    };
-
-    const diceDiv = document.querySelector('.selected');
-    if (!diceDiv) {
-      return diceVals['one'];
+    if (unMergedPlayers <= 0) {
+      return [];
     }
+    this.#bankruptedPlayers = players;
+    return this.#bankruptedPlayers.slice(-unMergedPlayers);
+  }
+}
 
-    const [dice, __] = diceDiv.id.split('-');
-    return diceVals[dice];
+const highlightCurrentPlayer = (game) => {
+  const { username } = game.currentPlayer;
+  const currentPlayerEle = document.querySelector(`#${username}`);
+  currentPlayerEle.style.backgroundColor = 'lightgrey';
+  currentPlayerEle.style.fontWeight = '900';
+  return game;
+};
+
+const decideCard = (game) => {
+  API.assignCard();
+  return game;
+};
+
+const getSelectedDice = () => {
+  const diceVals = {
+    'one': '1',
+    'two': '2',
   };
 
-  const drawLotteryMessage = () => {
-    API.getGame()
-      .then(res => res.json())
-      .then(drawMessages);
-  };
+  const diceDiv = document.querySelector('.selected');
+  if (!diceDiv) {
+    return diceVals['one'];
+  }
 
-  const rollDice = (game) => {
-    const { currentPlayer: { canReRoll }, currentCard } = game;
-    if (canReRoll && currentCard) {
-      API.reRollDice()
-        .then(drawLotteryMessage);
-      return;
-    }
+  const [dice, __] = diceDiv.id.split('-');
+  return diceVals[dice];
+};
 
-    const diceCount = getSelectedDice();
-    API.rollDice(diceCount)
-      .then(API.getGame()
-        .then(res => res.json())
-        .then(decideCard));
+const drawLotteryMessage = () => {
+  API.getGame()
+    .then(res => res.json())
+    .then(drawMessages);
+};
+
+const rollDice = (game) => {
+  const { currentPlayer: { canReRoll }, currentCard } = game;
+  if (canReRoll && currentCard) {
+    API.reRollDice()
+      .then(drawLotteryMessage);
     return;
-  };
+  }
 
-  const selectDiceOption = (event) => {
-    const die = event.target.id;
+  const diceCount = getSelectedDice();
+  API.rollDice(diceCount)
+    .then(API.getGame()
+      .then(res => res.json())
+      .then(decideCard));
+  return;
+};
 
-    if (die === 'one-die') {
-      document.querySelector('#one-die').className = 'dice-option selected';
-      document.querySelector('#two-die').className = 'dice-option';
-      return;
-    }
+const selectDiceOption = (event) => {
+  const die = event.target.id;
 
-    document.querySelector('#two-die').className = 'dice-option selected';
-    document.querySelector('#one-die').className = 'dice-option';
+  if (die === 'one-die') {
+    document.querySelector('#one-die').className = 'dice-option selected';
+    document.querySelector('#two-die').className = 'dice-option';
+    return;
+  }
 
-  };
+  document.querySelector('#two-die').className = 'dice-option selected';
+  document.querySelector('#one-die').className = 'dice-option';
 
-  const getDiceOptions = (id, diceValues) => {
-    const diceOptions = {
-      'one': {
-        className: 'dice-option',
-        onclick: (event) => {
-          drawOneDice(diceValues[0]);
-          selectDiceOption(event);
-        },
-        id: 'one-die'
+};
+
+const getDiceOptions = (id, diceValues) => {
+  const diceOptions = {
+    'one': {
+      className: 'dice-option',
+      onclick: (event) => {
+        drawOneDice(diceValues[0]);
+        selectDiceOption(event);
       },
-      'two': {
-        className: 'dice-option selected',
-        onclick: (event) => {
-          drawTwoDices(diceValues);
-          selectDiceOption(event);
-        },
-        id: 'two-die'
-      }
-    };
-    return diceOptions[id];
-  };
-
-  const createToggler = (game) => {
-    const { diceValues } = game;
-    return ['div', { className: 'choice-wrapper' },
-      ['div', getDiceOptions('one', diceValues), '1 Dice'],
-      ['div', getDiceOptions('two', diceValues), '2 Dice']
-    ];
-  };
-
-  const drawToggle = (game) => {
-    const { currentPlayer: { dualDiceCount } } = game;
-    const chooseDice = document.querySelector('#choose-dice');
-    if (dualDiceCount <= 0) {
-      return;
-    }
-    chooseDice.replaceChildren('');
-    chooseDice.appendChild(html(createToggler(game)));
-  };
-
-  const resetToggler = () => {
-    document.querySelector('#choose-dice').innerHTML = '';
-  };
-
-  const isEligibleToRoll = (you, currentPlayer) => {
-    const { username, isRolledDice, skippedTurns } = currentPlayer;
-    return you === username && !isRolledDice && skippedTurns === 0;
-  };
-
-  const activateRoll = (diceBox, game) => {
-    diceBox.style.opacity = 1;
-    diceBox.style.border = '2px solid black';
-    diceBox.style.zIndex = 1;
-    diceBox.style.boxShadow = 'grey 0px 0px 12px 6px';
-
-    diceBox.onclick = () => {
-      deactivateRoll(diceBox);
-      API.getGame()
-        .then(res => res.json())
-        .then(rollDice);
-    };
-    drawForCurrentUser(drawToggle)(game);
-  };
-
-  const deactivateRoll = (diceBox) => {
-    diceBox.style.opacity = 0.5;
-    diceBox.style.zIndex = -1;
-    diceBox.style.border = '2px dashed black';
-    diceBox.style.boxShadow = 'none';
-    diceBox.onclick = null;
-    resetToggler();
-  };
-
-  const activateDice = (game) => {
-    const { username, currentPlayer } = game;
-    const diceBox = document.querySelector('#dice-box');
-
-    if (isEligibleToRoll(username, currentPlayer)) {
-      activateRoll(diceBox, game);
-    } else {
-      deactivateRoll(diceBox);
-    }
-    return game;
-  };
-
-  const createIconEle = ({ color, username }) => {
-    const iconTemplate = ['div', { className: `${color} icon`, id: `icon-${username}` }];
-    return html(iconTemplate);
-  };
-
-  const createPlayerEle = (player, playerName) => {
-    const { username, color } = player;
-    let name = username;
-
-    if (playerName === username) {
-      name = username + '(you)';
-    }
-    const playerTemplate = ['div', { className: 'row', id: username },
-      ['div', { className: `${color} icon` }],
-      ['div', { className: 'name' }, name]
-    ];
-
-    return html(playerTemplate);
-  };
-
-  const drawStatus = (player) => {
-    const { profile } = player;
-    const cashEle = getElement('#total-cash');
-    cashEle.innerText = addDollar(profile.cash);
-
-    const cfEle = getElement('#cashflow-amount');
-    cfEle.innerText = addDollar(profile.cashFlow);
-
-    const expensesEle = getElement('#expenses');
-    expensesEle.innerText = addDollar(profile.totalExpenses);
-
-    const passiveIncome = getElement('#passive-income');
-    passiveIncome.innerText = addDollar(profile.passiveIncome);
-  };
-
-  const submitOnEnter = (event, action, cardDetails) => {
-    if (!isEnter(event)) {
-      return;
-    }
-
-    submitCount(event, action, cardDetails);
-  };
-
-  const submitCount = (event, action, cardDetails) => {
-    const inputDiv = getElement('#input-count');
-    const count = inputDiv.value;
-    if (!count) {
-      return;
-    }
-    const [type] = cardDetails.type.split('Others');
-    sendAction(action, cardDetails.family, type, count);
-  };
-
-  const drawInputBox = (action, cardDetails) => {
-    const actions = getElement('.actions');
-    const actionsChildren = [...actions.children];
-
-    const selectStockCount =
-      ['div', { className: 'selection-box' },
-        ['div', {},
-          ['input',
-            {
-              autofocus: 'true',
-              required: 'true',
-              onkeyup: event => submitOnEnter(event, action, cardDetails),
-              type: 'number',
-              min: '0',
-              placeholder: 'Enter count',
-              id: 'input-count'
-            }
-          ]
-        ],
-        ['div', {
-          className: 'fa-solid fa-check check',
-          onclick: (event) => submitCount(event, action, cardDetails)
-        }],
-        ['div', {
-          className: 'fa-solid fa-xmark close',
-          onclick: (event) => {
-            actions.replaceChildren(...actionsChildren);
-          }
-        }],
-      ];
-
-    actions.replaceChildren(html(selectStockCount));
-  };
-
-  const sendAction = (action, family, type, count) => {
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+      id: 'one-die'
+    },
+    'two': {
+      className: 'dice-option selected',
+      onclick: (event) => {
+        drawTwoDices(diceValues);
+        selectDiceOption(event);
       },
-      body: [
-        `action=${action}`,
-        `family=${family}`,
-        `type=${type}`,
-        `count=${count}`
-      ].join('&')
-    };
+      id: 'two-die'
+    }
+  };
+  return diceOptions[id];
+};
 
-    API.cardAction(options);
+const createToggler = (game) => {
+  const { diceValues } = game;
+  return ['div', { className: 'choice-wrapper' },
+    ['div', getDiceOptions('one', diceValues), '1 Dice'],
+    ['div', getDiceOptions('two', diceValues), '2 Dice']
+  ];
+};
+
+const drawToggle = (game) => {
+  const { currentPlayer: { dualDiceCount } } = game;
+  const chooseDice = document.querySelector('#choose-dice');
+  if (dualDiceCount <= 0) {
+    return;
+  }
+  chooseDice.replaceChildren('');
+  chooseDice.appendChild(html(createToggler(game)));
+};
+
+const resetToggler = () => {
+  document.querySelector('#choose-dice').innerHTML = '';
+};
+
+const isEligibleToRoll = (you, currentPlayer) => {
+  const { username, isRolledDice, skippedTurns } = currentPlayer;
+  return you === username && !isRolledDice && skippedTurns === 0;
+};
+
+const activateRoll = (diceBox, game) => {
+  diceBox.style.opacity = 1;
+  diceBox.style.border = '2px solid black';
+  diceBox.style.zIndex = 1;
+  diceBox.style.boxShadow = 'grey 0px 0px 12px 6px';
+
+  diceBox.onclick = () => {
+    deactivateRoll(diceBox);
     API.getGame()
       .then(res => res.json())
-      .then(drawMessages);
+      .then(rollDice);
+  };
+  drawForCurrentUser(drawToggle)(game);
+};
+
+const deactivateRoll = (diceBox) => {
+  diceBox.style.opacity = 0.5;
+  diceBox.style.zIndex = -1;
+  diceBox.style.border = '2px dashed black';
+  diceBox.style.boxShadow = 'none';
+  diceBox.onclick = null;
+  resetToggler();
+};
+
+const activateDice = (game) => {
+  const { username, currentPlayer } = game;
+  const diceBox = document.querySelector('#dice-box');
+
+  if (isEligibleToRoll(username, currentPlayer)) {
+    activateRoll(diceBox, game);
+  } else {
+    deactivateRoll(diceBox);
+  }
+  return game;
+};
+
+const createIconEle = ({ color, username }) => {
+  const iconTemplate = ['div', { className: `${color} icon`, id: `icon-${username}` }];
+  return html(iconTemplate);
+};
+
+const createPlayerEle = (player, playerName) => {
+  const { username, color } = player;
+  let name = username;
+
+  if (playerName === username) {
+    name = username + '(you)';
+  }
+  const playerTemplate = ['div', { className: 'row', id: username },
+    ['div', { className: `${color} icon` }],
+    ['div', { className: 'name' }, name]
+  ];
+
+  return html(playerTemplate);
+};
+
+const drawStatus = (player) => {
+  const { profile } = player;
+  const cashEle = getElement('#total-cash');
+  cashEle.innerText = addDollar(profile.cash);
+
+  const cfEle = getElement('#cashflow-amount');
+  cfEle.innerText = addDollar(profile.cashFlow);
+
+  const expensesEle = getElement('#expenses');
+  expensesEle.innerText = addDollar(profile.totalExpenses);
+
+  const passiveIncome = getElement('#passive-income');
+  passiveIncome.innerText = addDollar(profile.passiveIncome);
+};
+
+const submitOnEnter = (event, action, cardDetails) => {
+  if (!isEnter(event)) {
+    return;
+  }
+
+  submitCount(event, action, cardDetails);
+};
+
+const submitCount = (event, action, cardDetails) => {
+  const inputDiv = getElement('#input-count');
+  const count = inputDiv.value;
+  if (!count) {
+    return;
+  }
+  const [type] = cardDetails.type.split('Others');
+  sendAction(action, cardDetails.family, type, count);
+};
+
+const drawInputBox = (action, cardDetails) => {
+  const actions = getElement('.actions');
+  const actionsChildren = [...actions.children];
+
+  const selectStockCount =
+    ['div', { className: 'selection-box' },
+      ['div', {},
+        ['input',
+          {
+            autofocus: 'true',
+            required: 'true',
+            onkeyup: event => submitOnEnter(event, action, cardDetails),
+            type: 'number',
+            min: '0',
+            placeholder: 'Enter count',
+            id: 'input-count'
+          }
+        ]
+      ],
+      ['div', {
+        className: 'fa-solid fa-check check',
+        onclick: (event) => submitCount(event, action, cardDetails)
+      }],
+      ['div', {
+        className: 'fa-solid fa-xmark close',
+        onclick: (event) => {
+          actions.replaceChildren(...actionsChildren);
+        }
+      }],
+    ];
+
+  actions.replaceChildren(html(selectStockCount));
+};
+
+const sendAction = (action, family, type, count) => {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: [
+      `action=${action}`,
+      `family=${family}`,
+      `type=${type}`,
+      `count=${count}`
+    ].join('&')
   };
 
-  const isInteractive = (action, type) => {
-    const interactive = {
-      buy: {
-        stock: true,
-        stockOthers: true
-      },
-      sell: {
-        stock: true,
-        stockOthers: true,
-        goldCoins: true,
-        goldCoinsOthers: true
-      }
-    };
-    return interactive[action]?.[type];
-  };
+  API.cardAction(options);
+  API.getGame()
+    .then(res => res.json())
+    .then(drawMessages);
+};
 
-  const performAction = (event, family, type) => {
-    const actionDiv = event.target;
-    let [, action] = actionDiv.id.split('-');
-    action = action === 'donate' ? 'ok' : action;
-
-    if (isInteractive(action, type)) {
-      drawInputBox(action, { family, type });
-      return;
+const isInteractive = (action, type) => {
+  const interactive = {
+    buy: {
+      stock: true,
+      stockOthers: true
+    },
+    sell: {
+      stock: true,
+      stockOthers: true,
+      goldCoins: true,
+      goldCoinsOthers: true
     }
-
-    sendAction(action, family, type);
   };
+  return interactive[action]?.[type];
+};
 
-  const actions = {
+const performAction = (event, family, type) => {
+  const actionDiv = event.target;
+  let [, action] = actionDiv.id.split('-');
+  action = action === 'donate' ? 'ok' : action;
+
+  if (isInteractive(action, type)) {
+    drawInputBox(action, { family, type });
+    return;
+  }
+
+  sendAction(action, family, type);
+};
+
+const actions = {
+  deal: {
+    deal: ['SMALL', 'BIG'],
+    realEstate: ['BUY', 'SKIP'],
+    stock: ['BUY', 'SELL', 'SKIP'],
+    stockOthers: ['SELL', 'SKIP'],
+    lottery: ['BUY', 'SKIP'],
+    mlm: ['ROLL', 'SKIP'],
+    goldCoins: ['BUY', 'SKIP']
+  },
+  market: {
+    realEstate: ['SELL', 'SKIP'],
+    damage: ['OK'],
+    lottery: ['ROLL'],
+    goldCoins: ['SELL', 'SKIP'],
+    goldCoinsOthers: ['SELL', 'SKIP']
+  },
+  doodad: {
+    doodad: ['OK']
+  },
+  payday: {
+    payday: ['OK']
+  },
+  baby: {
+    baby: ['OK']
+  },
+  charity: {
+    charity: ['DONATE', 'SKIP']
+  },
+  downsized: {
+    downsized: ['OK']
+  }
+};
+
+const createActions = (family, type, asset) => {
+  const actionTexts = actions[family][type];
+  return html(['div', { className: 'actions-wrapper' },
+    ...actionTexts.map(action => {
+      if (action === 'SELL' && !asset) {
+        return ['span', { style: 'position:absolute' }];
+      }
+      return ['div',
+        {
+          className: 'button action-btn',
+          id: `action-${action.toLowerCase()}`,
+          onclick: (event) => {
+            performAction(event, family, type);
+          }
+        },
+        action
+      ];
+    })]);
+};
+
+const createCardTemplate = (currentCard) => {
+  const { type, family } = currentCard;
+  return cardTemplates[family][type](currentCard);
+};
+
+const updateCurrentCardDetails = (card, player) => {
+  if (card.family === 'payday') {
+    card.description = `Received pay of ${player.profile.cashFlow}`;
+  }
+
+  if (card.type === 'stock') {
+    card.cost = card.price;
+  }
+  return;
+};
+
+const matchCard = (assets, symbol) => assets.find(asset => asset.symbol === symbol);
+
+const findAsset = (card, assets) => {
+  const allAssets = [...assets.stocks, ...assets.preciousMetals];
+  return matchCard(allAssets, card.symbol);
+};
+
+const multiUserFlow = (family, type) => {
+  const multiFlows = {
     deal: {
-      deal: ['SMALL', 'BIG'],
-      realEstate: ['BUY', 'SKIP'],
-      stock: ['BUY', 'SELL', 'SKIP'],
-      stockOthers: ['SELL', 'SKIP'],
-      lottery: ['BUY', 'SKIP'],
-      mlm: ['ROLL', 'SKIP'],
-      goldCoins: ['BUY', 'SKIP']
+      stock: true
     },
     market: {
-      realEstate: ['SELL', 'SKIP'],
-      damage: ['OK'],
-      lottery: ['ROLL'],
-      goldCoins: ['SELL', 'SKIP'],
-      goldCoinsOthers: ['SELL', 'SKIP']
+      goldCoins: true
+    }
+  };
+  return multiFlows[family]?.[type];
+};
+
+const drawActions = (game) => {
+  const { username, currentCard, currentPlayer, players, turnResponses } = game;
+  const { family, type } = currentCard;
+  const { assets } = currentPlayer.profile;
+  const response = turnResponses.find(response => response.username === username);
+
+  let actions = '';
+  const asset = findAsset(currentCard, assets);
+  const isCurrentUser = currentPlayer.username === username;
+
+  if (isCurrentUser && !response.responded) {
+    actions = createActions(family, type, asset);
+  }
+
+  if (multiUserFlow(family, type) && !isCurrentUser && !response.responded) {
+    const { assets } = findPlayer(players, username).profile;
+    const asset = findAsset(currentCard, assets);
+    actions = createActions(family, `${currentCard.type}Others`, asset);
+  }
+
+  const actionsDiv = getElement('.actions');
+  actionsDiv.replaceChildren('');
+  actionsDiv.append(actions);
+};
+
+const createCard = (currentCard, currentPlayer) => {
+  updateCurrentCardDetails(currentCard, currentPlayer);
+  const cardTemplate = createCardTemplate(currentCard);
+  const newCard = html(cardTemplate);
+  newCard.classList.add(currentCard.family);
+  addClasses(newCard, 'shadow');
+  newCard.id = 'main-card';
+  return newCard;
+};
+
+const removeCard = () => {
+  const cardEle = getElement('#main-card');
+  cardEle.innerHTML = '';
+  cardEle.classList = '';
+  return;
+};
+
+const createNotification = (game, family, player, status) => {
+  const message = getMessage(family, status, player);
+  const notificationsScreen = document.querySelector('#message-space');
+
+  let notification = null;
+  const notifyId = setTimeout(() => {
+    notification.remove();
+  }, 5000);
+
+  notification = html(
+    ['div', { className: `notify-wrapper ${family} fade-${family} fade shadow` },
+      ['div', { className: 'notify-msg' }, message],
+      ['div', {
+        className: 'fa-solid fa-xmark close',
+        onclick: (event) => {
+          notification.remove();
+          clearInterval(notifyId);
+        }
+      }],
+    ]
+  );
+
+  notificationsScreen.appendChild(notification);
+};
+
+const filterUserNotifications = (notifications, username) =>
+  notifications.filter(notification => notification.username === username);
+
+const createNotifications = (game) => {
+  const { notifications, players, username } = game;
+  const player = findPlayer(players, username);
+
+  const userNotifications =
+    filterUserNotifications(notifications, username);
+
+  userNotifications.forEach(notification => {
+    const { family } = notification;
+
+    createNotification(game, family, player, 1);
+    sendAction('ok', family, family);
+    checkBankruptcy();
+  });
+
+};
+
+const checkBankruptcy = () => {
+  API.getGameJson()
+    .then(game => {
+      if (game.currentPlayer.aboutToBankrupt) {
+        return createBankruptPopup();
+      }
+    });
+};
+
+const drawNotifications = (game) => {
+  // console.log(game.notifications, game.transaction);
+  const { notifications } = game;
+  if (!notifications.length) {
+    return game;
+  }
+
+  createNotifications(game);
+
+  if (game.currentPlayer.isInFastTrack) {
+    return game;
+  }
+  API.changeTurn();
+  return game;
+};
+
+const drawCard = (game) => {
+  const { currentCard, currentPlayer } = game;
+  const { canReRoll } = currentPlayer;
+  const cardEle = getElement('#main-card');
+  if (!currentCard || !currentCard.id) {
+    removeCard();
+    return;
+  }
+
+  const newCard = createCard(currentCard, currentPlayer);
+  cardEle.replaceWith(newCard);
+
+  if (canReRoll) {
+    drawLottery(game);
+    return;
+  }
+
+  drawActions(game);
+};
+
+const drawPlayersList = (game) => {
+  const { players } = game;
+  API.playerInfo()
+    .then(res => res.json()).then(currentPlayer => {
+      const playersEle = getElement('#players');
+      playersEle.innerText = '';
+
+      players.forEach(player => {
+        const playerEle = createPlayerEle(player, currentPlayer.username);
+        playersEle.append(playerEle);
+      });
+
+      drawStatus(currentPlayer);
+    }).then(__ => highlightCurrentPlayer(game))
+    .then(activateDice)
+    .then(drawDice)
+    .then(drawNotifications)
+    .then(drawCard);
+  return game;
+};
+
+const diceFaces = {
+  '1': ['div', { className: 'dice' }, ['div', { className: 'dot one-1' }]],
+  '2': ['div', { className: 'dice' },
+    ['div', { className: 'dot two-1' }],
+    ['div', { className: 'dot two-2' }]],
+  '3': ['div', { className: 'dice' },
+    ['div', { className: 'dot three-1' }],
+    ['div', { className: 'dot three-2' }],
+    ['div', { className: 'dot three-3' }]],
+  '4': ['div', { className: 'dice' },
+    ['div', { className: 'dot four-1' }],
+    ['div', { className: 'dot four-2' }],
+    ['div', { className: 'dot four-3' }],
+    ['div', { className: 'dot four-4' }]],
+  '5': ['div', { className: 'dice' },
+    ['div', { className: 'dot five-1' }],
+    ['div', { className: 'dot five-2' }],
+    ['div', { className: 'dot five-3' }],
+    ['div', { className: 'dot five-4' }],
+    ['div', { className: 'dot five-5' }]],
+  '6': ['div', { className: 'dice' },
+    ['div', { className: 'dot six-1' }],
+    ['div', { className: 'dot six-2' }],
+    ['div', { className: 'dot six-3' }],
+    ['div', { className: 'dot six-4' }],
+    ['div', { className: 'dot six-5' }],
+    ['div', { className: 'dot six-6' }]],
+};
+
+const createDice = (diceValue) => html(diceFaces[diceValue]);
+const drawOneDice = (diceValue) => {
+  const dice = document.querySelector('#dice-box');
+  dice.replaceChildren('');
+  dice.appendChild(createDice(diceValue));
+};
+
+const drawTwoDices = (diceValues) => {
+  let newDiceValues = diceValues;
+  if (newDiceValues.length < 2) {
+    newDiceValues = [...diceValues, 1];
+  }
+
+  const dice = document.querySelector('#dice-box');
+  dice.replaceChildren('');
+  newDiceValues.forEach(diceValue => {
+    dice.appendChild(createDice(diceValue));
+  });
+
+};
+
+const drawDice = (game) => {
+  const { diceValues, currentPlayer: { dualDiceCount } } = game;
+
+  if (dualDiceCount > 0) {
+    drawTwoDices(diceValues);
+    return game;
+  }
+
+  drawOneDice(diceValues[0]);
+  return game;
+};
+
+const drawPlayerPosition = (game) => {
+  const { players, currentPlayer } = game;
+
+  players.forEach((player) => {
+    const { username, currentPosition } = player;
+    const boardTile = document.querySelector(`#rat-tile-${currentPosition}`);
+    let playerIcon = document.getElementById(`icon-${username}`);
+
+    if (!playerIcon) {
+      playerIcon = createIconEle(player);
+    }
+
+    if (currentPlayer.username === username) {
+      playerIcon.classList.add('pulsate');
+    } else {
+      playerIcon.classList.remove('pulsate');
+    }
+
+    if (player.skippedTurns > 0) {
+      const downsizedPosition = document.querySelector(`#rat-tile-12-${player.skippedTurns}`);
+      downsizedPosition.append(playerIcon);
+      return;
+    }
+
+    boardTile.appendChild(playerIcon);
+  });
+  return game;
+};
+
+const getMessage = (family, status, currentPlayer) => {
+  const { cashFlow } = currentPlayer.profile;
+  const messages = {
+    deal: {
+      0: 'Insufficient balance. Take loan to proceed',
+      1: 'Successfully purchased',
+      2: 'Not enough stocks',
+      3: 'Successfully sold',
+      4: 'You won lottery',
+      5: 'You lost lottery'
+    },
+    market: {
+      0: 'You have no properties',
+      1: 'You have paid for the property damages',
+      2: 'You split the stocks',
+      3: 'You reverse split the stocks',
+      4: 'Insufficient gold coins',
+      5: 'Successfully sold gold coins'
     },
     doodad: {
-      doodad: ['OK']
-    },
-    payday: {
-      payday: ['OK']
-    },
-    baby: {
-      baby: ['OK']
+      0: 'Insufficient balance. Take loan to proceed',
+      1: 'You are done with doodad'
     },
     charity: {
-      charity: ['DONATE', 'SKIP']
+      0: 'Insufficient balance. Take loan to proceed',
+      1: 'You donated to charity'
+    },
+    payday: {
+      1: `Received payday of ${cashFlow}.`
     },
     downsized: {
-      downsized: ['OK']
-    }
+      0: 'Insufficient balance. Take loan to proceed',
+      1: 'You\'re downsized'
+    },
+    baby: {
+      1: 'You got a new baby'
+    },
+    'stocks-lottery': {
+      0: 'You split the stocks',
+      1: 'You reverse split the stocks'
+    },
   };
 
-  const createActions = (family, type, asset) => {
-    const actionTexts = actions[family][type];
-    return html(['div', { className: 'actions-wrapper' },
-      ...actionTexts.map(action => {
-        if (action === 'SELL' && !asset) {
-          return ['span', { style: 'position:absolute' }];
-        }
-        return ['div',
-          {
-            className: 'button action-btn',
-            id: `action-${action.toLowerCase()}`,
-            onclick: (event) => {
-              performAction(event, family, type);
-            }
-          },
-          action
-        ];
-      })]);
-  };
+  return messages[family][status];
+};
 
-  const createCardTemplate = (currentCard) => {
-    const { type, family } = currentCard;
-    return cardTemplates[family][type](currentCard);
-  };
+const isTransactionCompleted = game => !game.transaction || !game.currentCard.id;
+const isEveryoneResponded = (game) => game.turnResponses.every(({ responded }) => responded);
 
-  const updateCurrentCardDetails = (card, player) => {
-    if (card.family === 'payday') {
-      card.description = `Received pay of ${player.profile.cashFlow}`;
-    }
+const message = (game, username) => {
+  const { transaction: { family, status }, currentPlayer } = game;
 
-    if (card.type === 'stock') {
-      card.cost = card.price;
-    }
+  if (family === game.currentCard.family) {
+    createNotification(game, family, currentPlayer, status, username);
+    API.resetTransaction();
+  }
+
+  if (game.currentPlayer.isInFastTrack) {
+    drawRatRaceCompletion(game);
     return;
-  };
+  }
 
-  const matchCard = (assets, symbol) => assets.find(asset => asset.symbol === symbol);
+  API.changeTurn();
+};
 
-  const findAsset = (card, assets) => {
-    const allAssets = [...assets.stocks, ...assets.preciousMetals];
-    return matchCard(allAssets, card.symbol);
-  };
-
-  const multiUserFlow = (family, type) => {
-    const multiFlows = {
-      deal: {
-        stock: true
-      },
-      market: {
-        goldCoins: true
-      }
-    };
-    return multiFlows[family]?.[type];
-  };
-
-  const drawActions = (game) => {
-    const { username, currentCard, currentPlayer, players, turnResponses } = game;
-    const { family, type } = currentCard;
-    const { assets } = currentPlayer.profile;
-    const response = turnResponses.find(response => response.username === username);
-
-    let actions = '';
-    const asset = findAsset(currentCard, assets);
-    const isCurrentUser = currentPlayer.username === username;
-
-    if (isCurrentUser && !response.responded) {
-      actions = createActions(family, type, asset);
-    }
-
-    if (multiUserFlow(family, type) && !isCurrentUser && !response.responded) {
-      const { assets } = findPlayer(players, username).profile;
-      const asset = findAsset(currentCard, assets);
-      actions = createActions(family, `${currentCard.type}Others`, asset);
-    }
-
-    const actionsDiv = getElement('.actions');
-    actionsDiv.replaceChildren('');
-    actionsDiv.append(actions);
-  };
-
-  const createCard = (currentCard, currentPlayer) => {
-    updateCurrentCardDetails(currentCard, currentPlayer);
-    const cardTemplate = createCardTemplate(currentCard);
-    const newCard = html(cardTemplate);
-    newCard.classList.add(currentCard.family);
-    addClasses(newCard, 'shadow');
-    newCard.id = 'main-card';
-    return newCard;
-  };
-
-  const removeCard = () => {
-    const cardEle = getElement('#main-card');
-    cardEle.innerHTML = '';
-    cardEle.classList = '';
+const drawMessages = (game) => {
+  if (isTransactionCompleted(game)) {
+    API.changeTurn();
     return;
-  };
+  }
 
-  const createNotification = (game, family, player, status) => {
-    const message = getMessage(family, status, player);
-    const notificationsScreen = document.querySelector('#message-space');
-
-    let notification = null;
-    const notifyId = setTimeout(() => {
-      notification.remove();
-    }, 5000);
-
-    notification = html(
-      ['div', { className: `notify-wrapper ${family} fade-${family} fade shadow` },
-        ['div', { className: 'notify-msg' }, message],
-        ['div', {
-          className: 'fa-solid fa-xmark close',
-          onclick: (event) => {
-            notification.remove();
-            clearInterval(notifyId);
-          }
-        }],
-      ]
-    );
-
-    notificationsScreen.appendChild(notification);
-  };
-
-  const filterUserNotifications = (notifications, username) =>
-    notifications.filter(notification => notification.username === username);
-
-  const createNotifications = (game) => {
-    const { notifications, players, username } = game;
-    const player = findPlayer(players, username);
-
-    const userNotifications =
-      filterUserNotifications(notifications, username);
-
-    userNotifications.forEach(notification => {
-      const { family } = notification;
-
-      createNotification(game, family, player, 1);
-      sendAction('ok', family, family);
-      checkBankruptcy();
-    });
-
-  };
-
-  const checkBankruptcy = () => {
-    API.getGameJson()
-      .then(game => {
-        if (game.currentPlayer.aboutToBankrupt) {
-          return createBankruptPopup();
-        }
-      });
-  };
-
-  const drawNotifications = (game) => {
-    // console.log(game.notifications, game.transaction);
-    const { notifications } = game;
-    if (!notifications.length) {
-      return game;
-    }
-
-    createNotifications(game);
-
-    if (game.currentPlayer.isInFastTrack) {
-      return game;
-    }
+  if (isEveryoneResponded(game)) {
     API.changeTurn();
-    return game;
-  };
+    return;
+  }
 
-  const drawCard = (game) => {
-    const { currentCard, currentPlayer } = game;
-    const { canReRoll } = currentPlayer;
-    const cardEle = getElement('#main-card');
-    if (!currentCard || !currentCard.id) {
-      removeCard();
-      return;
-    }
+  const transactedUser = game.transaction?.username;
+  if (transactedUser === game.username) {
+    message(game, transactedUser);
+  }
+};
 
-    const newCard = createCard(currentCard, currentPlayer);
-    cardEle.replaceWith(newCard);
+const createLog = (log) => {
+  const userSpan = ['div', { className: `${log.color} icon log-icon`, }];
+  return ['div', { className: 'log' }, userSpan, ['span', { className: 'log-msg' }, `${log.message}`]];
+};
 
-    if (canReRoll) {
-      drawLottery(game);
-      return;
-    }
+const addLogs = (game, gameState) => {
+  const newLogs = gameState.mergeLogs(game.logs);
+  if (newLogs.length <= 0) {
+    return;
+  }
 
-    drawActions(game);
-  };
+  const logsDiv = document.querySelector('#logs');
+  newLogs.forEach(log => {
+    logsDiv.appendChild(html(createLog(log)));
+  });
 
-  const drawPlayersList = (game) => {
-    const { players } = game;
-    API.playerInfo()
-      .then(res => res.json()).then(currentPlayer => {
-        const playersEle = getElement('#players');
-        playersEle.innerText = '';
+  logsDiv.scrollTop = logsDiv.scrollHeight;
+};
 
-        players.forEach(player => {
-          const playerEle = createPlayerEle(player, currentPlayer.username);
-          playersEle.append(playerEle);
-        });
+const drawOutOfGamePopup = (game, gameState) => {
+  const players = gameState.mergeBankruptedPlayers(game.bankruptedPlayers);
+  if (players.length <= 0) {
+    return;
+  }
 
-        drawStatus(currentPlayer);
-      }).then(__ => highlightCurrentPlayer(game))
-      .then(activateDice)
-      .then(drawDice)
-      .then(drawNotifications)
-      .then(drawCard);
-    return game;
-  };
+  const pageWrapper = getElement('.page-wrapper');
 
-  const diceFaces = {
-    '1': ['div', { className: 'dice' }, ['div', { className: 'dot one-1' }]],
-    '2': ['div', { className: 'dice' },
-      ['div', { className: 'dot two-1' }],
-      ['div', { className: 'dot two-2' }]],
-    '3': ['div', { className: 'dice' },
-      ['div', { className: 'dot three-1' }],
-      ['div', { className: 'dot three-2' }],
-      ['div', { className: 'dot three-3' }]],
-    '4': ['div', { className: 'dice' },
-      ['div', { className: 'dot four-1' }],
-      ['div', { className: 'dot four-2' }],
-      ['div', { className: 'dot four-3' }],
-      ['div', { className: 'dot four-4' }]],
-    '5': ['div', { className: 'dice' },
-      ['div', { className: 'dot five-1' }],
-      ['div', { className: 'dot five-2' }],
-      ['div', { className: 'dot five-3' }],
-      ['div', { className: 'dot five-4' }],
-      ['div', { className: 'dot five-5' }]],
-    '6': ['div', { className: 'dice' },
-      ['div', { className: 'dot six-1' }],
-      ['div', { className: 'dot six-2' }],
-      ['div', { className: 'dot six-3' }],
-      ['div', { className: 'dot six-4' }],
-      ['div', { className: 'dot six-5' }],
-      ['div', { className: 'dot six-6' }]],
-  };
-
-  const createDice = (diceValue) => html(diceFaces[diceValue]);
-  const drawOneDice = (diceValue) => {
-    const dice = document.querySelector('#dice-box');
-    dice.replaceChildren('');
-    dice.appendChild(createDice(diceValue));
-  };
-
-  const drawTwoDices = (diceValues) => {
-    let newDiceValues = diceValues;
-    if (newDiceValues.length < 2) {
-      newDiceValues = [...diceValues, 1];
-    }
-
-    const dice = document.querySelector('#dice-box');
-    dice.replaceChildren('');
-    newDiceValues.forEach(diceValue => {
-      dice.appendChild(createDice(diceValue));
-    });
-
-  };
-
-  const drawDice = (game) => {
-    const { diceValues, currentPlayer: { dualDiceCount } } = game;
-
-    if (dualDiceCount > 0) {
-      drawTwoDices(diceValues);
-      return game;
-    }
-
-    drawOneDice(diceValues[0]);
-    return game;
-  };
-
-  const drawPlayerPosition = (game) => {
-    const { players, currentPlayer } = game;
-
-    players.forEach((player) => {
-      const { username, currentPosition } = player;
-      const boardTile = document.querySelector(`#rat-tile-${currentPosition}`);
-      let playerIcon = document.getElementById(`icon-${username}`);
-
-      if (!playerIcon) {
-        playerIcon = createIconEle(player);
-      }
-
-      if (currentPlayer.username === username) {
-        playerIcon.classList.add('pulsate');
-      } else {
-        playerIcon.classList.remove('pulsate');
-      }
-
-      if (player.skippedTurns > 0) {
-        const downsizedPosition = document.querySelector(`#rat-tile-12-${player.skippedTurns}`);
-        downsizedPosition.append(playerIcon);
-        return;
-      }
-
-      boardTile.appendChild(playerIcon);
-    });
-    return game;
-  };
-
-  const getMessage = (family, status, currentPlayer) => {
-    const { cashFlow } = currentPlayer.profile;
-    const messages = {
-      deal: {
-        0: 'Insufficient balance. Take loan to proceed',
-        1: 'Successfully purchased',
-        2: 'Not enough stocks',
-        3: 'Successfully sold',
-        4: 'You won lottery',
-        5: 'You lost lottery'
-      },
-      market: {
-        0: 'You have no properties',
-        1: 'You have paid for the property damages',
-        2: 'You split the stocks',
-        3: 'You reverse split the stocks',
-        4: 'Insufficient gold coins',
-        5: 'Successfully sold gold coins'
-      },
-      doodad: {
-        0: 'Insufficient balance. Take loan to proceed',
-        1: 'You are done with doodad'
-      },
-      charity: {
-        0: 'Insufficient balance. Take loan to proceed',
-        1: 'You donated to charity'
-      },
-      payday: {
-        1: `Received payday of ${cashFlow}.`
-      },
-      downsized: {
-        0: 'Insufficient balance. Take loan to proceed',
-        1: 'You\'re downsized'
-      },
-      baby: {
-        1: 'You got a new baby'
-      },
-      'stocks-lottery': {
-        0: 'You split the stocks',
-        1: 'You reverse split the stocks'
-      },
-    };
-
-    return messages[family][status];
-  };
-
-  const isTransactionCompleted = game => !game.transaction || !game.currentCard.id;
-  const isEveryoneResponded = (game) => game.turnResponses.every(({ responded }) => responded);
-
-  const message = (game, username) => {
-    const { transaction: { family, status }, currentPlayer } = game;
-
-    if (family === game.currentCard.family) {
-      createNotification(game, family, currentPlayer, status, username);
-      API.resetTransaction();
-    }
-
-    if (game.currentPlayer.isInFastTrack) {
-      drawRatRaceCompletion(game);
-      return;
-    }
-
-    API.changeTurn();
-  };
-
-  const drawMessages = (game) => {
-    if (isTransactionCompleted(game)) {
-      API.changeTurn();
-      return;
-    }
-
-    if (isEveryoneResponded(game)) {
-      API.changeTurn();
-      return;
-    }
-
-    const transactedUser = game.transaction?.username;
-    if (transactedUser === game.username) {
-      message(game, transactedUser);
-    }
-  };
-
-  const createLog = (log) => {
-    const userSpan = ['div', { className: `${log.color} icon log-icon`, }];
-    return ['div', { className: 'log' }, userSpan, ['span', { className: 'log-msg' }, `${log.message}`]];
-  };
-
-  const addLogs = (game, gameState) => {
-    const newLogs = gameState.mergeLogs(game.logs);
-    if (newLogs.length <= 0) {
-      return;
-    }
-
-    const logsDiv = document.querySelector('#logs');
-    newLogs.forEach(log => {
-      logsDiv.appendChild(html(createLog(log)));
-    });
-
-    logsDiv.scrollTop = logsDiv.scrollHeight;
-  };
-
-  const drawOutOfGamePopup = (game, gameState) => {
-    const players = gameState.mergeBankruptedPlayers(game.bankruptedPlayers);
-    if (players.length <= 0) {
-      return;
-    }
-
-    const pageWrapper = getElement('.page-wrapper');
-
-    players.forEach(player => {
-      const outOfGameTemplate =
-        ['div', { className: 'escape-popup', id: 'out-of-game-popup' },
-          ['div', { className: 'username' }, `${player.username} has bankrupted`]
-        ];
-
-      pageWrapper.appendChild(html(outOfGameTemplate));
-    });
-
-    timeout(removePopUp, 3000, '#out-of-game-popup');
-  };
-
-  const decideLoanActions = (game) => {
-    const username = game.username;
-    const player = findPlayer(game.players, username);
-    const liabilities = player.profile.liabilities;
-
-    const payLoan = getElement('#pay-loan');
-    if (!payLoan) {
-      return;
-    }
-
-    payLoan.onclick = (event) => drawLoanSelection(event, liabilities);
-  };
-
-  const drawLottery = (game) => {
-    const { currentPlayer: { canReRoll } } = game;
-    const actions = document.querySelector('.actions');
-    if (!canReRoll || !actions) {
-      return;
-    }
-
-    const rollDiceMsg = html(['div', { className: 'warning' }, 'Roll the dice.']);
-    actions.replaceChildren('');
-    actions.append(rollDiceMsg);
-  };
-
-  const removePopUp = (id) => {
-    getElement(id).remove();
-    removeBlurBackground();
-  };
-
-  const drawRatRaceCompletion = (game) => {
-    const { currentPlayer } = game;
-    if (!currentPlayer.isInFastTrack) {
-      return;
-    }
-
-    const popupTemplate =
-      [
-        'div', { className: 'escape-popup active flex-column flex-center gap' },
-        ['div', { className: 'username' }, `${currentPlayer.username} has escaped from Rat Race`],
-        ['div', { className: 'button', onclick: () => removePopUp('.escape-popup') }, 'OK']
+  players.forEach(player => {
+    const outOfGameTemplate =
+      ['div', { className: 'escape-popup', id: 'out-of-game-popup' },
+        ['div', { className: 'username' }, `${player.username} has bankrupted`]
       ];
 
-    const pageWrapperEle = getElement('#escape-rat-race');
-    pageWrapperEle.replaceChildren('');
-    pageWrapperEle.appendChild(html(popupTemplate));
+    pageWrapper.appendChild(html(outOfGameTemplate));
+  });
 
-    blurBackground();
+  timeout(removePopUp, 3000, '#out-of-game-popup');
+};
+
+const decideLoanActions = (game) => {
+  const username = game.username;
+  const player = findPlayer(game.players, username);
+  const liabilities = player.profile.liabilities;
+
+  const payLoan = getElement('#pay-loan');
+  if (!payLoan) {
+    return;
+  }
+
+  payLoan.onclick = (event) => drawLoanSelection(event, liabilities);
+};
+
+const drawLottery = (game) => {
+  const { currentPlayer: { canReRoll } } = game;
+  const actions = document.querySelector('.actions');
+  if (!canReRoll || !actions) {
+    return;
+  }
+
+  const rollDiceMsg = html(['div', { className: 'warning' }, 'Roll the dice.']);
+  actions.replaceChildren('');
+  actions.append(rollDiceMsg);
+};
+
+const removePopUp = (id) => {
+  getElement(id).remove();
+  removeBlurBackground();
+};
+
+const drawRatRaceCompletion = (game) => {
+  const { currentPlayer } = game;
+  if (!currentPlayer.isInFastTrack) {
+    return;
+  }
+
+  const popupTemplate =
+    [
+      'div', { className: 'escape-popup active flex-column flex-center gap' },
+      ['div', { className: 'username' }, `${currentPlayer.username} has escaped from Rat Race`],
+      ['div', { className: 'button', onclick: () => removePopUp('.escape-popup') }, 'OK']
+    ];
+
+  const pageWrapperEle = getElement('#escape-rat-race');
+  pageWrapperEle.replaceChildren('');
+  pageWrapperEle.appendChild(html(popupTemplate));
+
+  blurBackground();
+};
+
+const drawScreen = (game, gameState) => {
+  drawPlayerPosition(game);
+  drawPlayersList(game);
+  addLogs(game, gameState);
+  createExpansionWindows(game);
+  drawRatRaceCompletion(game);
+  drawLottery(game);
+  drawOutOfGamePopup(game, gameState);
+};
+
+const prevState = { game: '' };
+
+const draw = (gameState,) => {
+  return res => {
+    const newState = res.hash;
+    decideLoanActions(res);
+    if (newState !== prevState.game) {
+      drawScreen(res, gameState);
+      prevState.game = newState;
+    }
   };
+};
 
-  const drawScreen = (game, gameState) => {
-    drawPlayerPosition(game);
-    drawPlayersList(game);
-    addLogs(game, gameState);
-    createExpansionWindows(game);
-    drawRatRaceCompletion(game);
-    drawLottery(game);
-    drawOutOfGamePopup(game, gameState);
-  };
+const main = () => {
+  const logs = new Log();
+  const gameState = new GameState(logs);
 
-  const prevState = { game: '' };
+  setInterval(() => {
+    API.getGame()
+      .then(res => res.json())
+      .then(game => {
+        console.log(game.notifications, game.transaction);
+        return game;
+      })
+      .then(draw(gameState));
+  }, 1000);
+};
 
-  const draw = (gameState,) => {
-    return res => {
-      const newState = res.hash;
-      decideLoanActions(res);
-      if (newState !== prevState.game) {
-        drawScreen(res, gameState);
-        prevState.game = newState;
-      }
-    };
-  };
+window.onload = main;
 
-  const main = () => {
-    const logs = new Log();
-    const gameState = new GameState(logs);
-
-    setInterval(() => {
-      API.getGame()
-        .then(res => res.json())
-        .then(draw(gameState));
-    }, 1000);
-  };
-
-  window.onload = main;
-})();

@@ -202,6 +202,7 @@ const RAT_RACE_BOARD = `<html>
   <script src="js/api.js"></script>
   <script src="js/commonLib.js"></script>
   <script src="js/loan.js"></script>
+  <script src="js/createExpansionWindows.js"></script>
   <script src="js/showLedger.js"></script>
   <script src="js/cardBuilder.js"></script>
   <script src="js/ratRaceBoard.js"></script>

@@ -1,5 +1,3 @@
-const expansionWindowScreens = {};
-
 const classNames = {
   windowHeader: 'window-header',
   windowTitle: 'window-title',
@@ -47,24 +45,4 @@ const ledgerWindow = (profile, color, username) => {
       ledgerEntries(profile.transactions)
     ]
   ];
-};
-
-const createExpansionWindows = ({ players, username }) => {
-  const player = findPlayer(players, username);
-  const { profile, color } = player;
-
-  expansionWindowScreens.ledger = html(
-    ledgerWindow(profile, color, username)
-  );
-
-  expansionWindowScreens.myProfile = generateProfile(player);
-  expansionWindowScreens.otherPlayerProfiles = {};
-  expansionWindowScreens.otherPlayersList =
-    generateOtherPlayers(players, username);
-
-  players.forEach(player => {
-    const { username } = player;
-    expansionWindowScreens.otherPlayerProfiles[username] =
-      generateProfile(player);
-  });
 };
