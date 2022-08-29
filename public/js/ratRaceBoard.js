@@ -510,7 +510,6 @@ const checkBankruptcy = () => {
 };
 
 const drawNotifications = (game) => {
-  // console.log(game.notifications, game.transaction);
   const { notifications } = game;
   if (!notifications.length) {
     return game;
@@ -723,19 +722,14 @@ const message = (game, username) => {
 };
 
 const drawMessages = (game) => {
-  if (isTransactionCompleted(game)) {
-    API.changeTurn();
-    return;
-  }
-
-  if (isEveryoneResponded(game)) {
-    API.changeTurn();
-    return;
-  }
-
   const transactedUser = game.transaction?.username;
   if (transactedUser === game.username) {
     message(game, transactedUser);
+  }
+
+  if (isTransactionCompleted(game) || isEveryoneResponded(game)) {
+    API.changeTurn();
+    return;
   }
 };
 
@@ -858,10 +852,6 @@ const main = () => {
   setInterval(() => {
     API.getGame()
       .then(res => res.json())
-      .then(game => {
-        console.log(game.notifications, game.transaction);
-        return game;
-      })
       .then(draw(gameState));
   }, 1000);
 };
