@@ -262,4 +262,31 @@ describe('Game', () => {
       assert.strictEqual(player.profile().cash, 0);
     });
   });
+
+  describe('sellGoldCoins', () => {
+    it('should set transaction status to 5 if transaction is successful', () => {
+      const profession = JSON.parse(expectedProfessions)[0];
+      profession.assets.preciousMetals.push({ symbol: 'GOLD', count: 5, cost: 1000 });
+
+      const player = new Player('p3', 'guest', 'red', profession);
+
+      player.addGoldCoins({
+        heading: 'gold',
+        symbol: 'GOLD',
+        cost: 5,
+        count: 10
+      });
+
+      const card = {
+        family: 'a',
+        symbol: 'GOLD',
+        cost: 500
+      };
+
+      const game = new Game(1234, [player], new Dice(2, 6));
+      game.currentCard = card;
+      game.sellGoldCoins('p3', 2);
+      assert.isOk(game.state.transaction.status === 5);
+    });
+  });
 });

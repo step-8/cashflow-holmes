@@ -626,4 +626,33 @@ describe('Turn', () => {
     );
     assert.isOk(turn.info.state);
   });
+
+  describe('Gold coins', () => {
+
+    it('Should set transaction as successful when sold gold coins', () => {
+      const card = {};
+      const log = new Log();
+      const player = {
+        username: 'user',
+        color: 'c',
+        profile: { cashFlow: 100, totalIncome: 100 }
+      };
+
+      const response = new Response(createResponses([player]));
+      const turn = new Turn(card, player, log, response);
+
+      turn.sellGold(player, 1);
+
+      assert.isOk(turn.info.state);
+      assert.deepStrictEqual(
+        log.getAllLogs(),
+        [{ username: 'user', color: 'c', message: 'sold gold coins of count 1' }]
+      );
+
+      assert.deepStrictEqual(
+        turn.info.transaction,
+        { family: 'market', status: 5, username: 'user' }
+      );
+    });
+  });
 });

@@ -176,7 +176,6 @@ class Player {
 
   #findAsset(card, type) {
     return this.#assets[type].find(item => item.symbol === card.symbol);
-    // this.#assets.find(card);
   }
 
   #findAssetIndex(card, type) {

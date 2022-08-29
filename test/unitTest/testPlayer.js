@@ -457,4 +457,39 @@ describe('Player', () => {
       assert.isOk(player.addGoldCoins(card));
     });
   });
+
+  describe('sellGoldCoins', () => {
+    const card = {
+      heading: 'New Card',
+      symbol: 'GOLD',
+      cost: 1000,
+      family: 'market',
+      type: 'goldCoins'
+    };
+
+    it('Should not sell if the count is exceeding the coins player has',
+      () => {
+        const profession = JSON.parse(professionStr);
+        profession.assets.preciousMetals.push({ symbol: 'GOLD', count: 5, cost: 1000 });
+        const player = new Player('p3', 'guest', 'red', profession);
+        player.setDefaults();
+
+        assert.isNotOk(player.sellGold(card, 10));
+
+        const asset = player.profile().assets.preciousMetals[0];
+        assert.strictEqual(asset.count, 5);
+      });
+
+    it('Should sell if the count is exceeding the coins player has',
+      () => {
+        const profession = JSON.parse(professionStr);
+        profession.assets.preciousMetals.push({ symbol: 'GOLD', count: 5, cost: 1000 });
+        const player = new Player('p3', 'guest', 'red', profession);
+        player.setDefaults();
+
+        assert.isOk(player.sellGold(card, 3));
+        const asset = player.profile().assets.preciousMetals[0];
+        assert.strictEqual(asset.count, 2);
+      });
+  });
 });

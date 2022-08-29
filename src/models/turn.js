@@ -266,7 +266,7 @@ class Turn {
 
   sellGold(player, count) {
     this.setTransactionState('market', 5, player.username);
-    this.#log.addLog(player, `sold ${count} gold coins`);
+    this.#log.addLog(player, `sold gold coins of count ${count}`);
 
     this.respond(player.username);
   }
@@ -298,7 +298,6 @@ class Turn {
       player: this.#currentPlayer,
       card: this.#card, //No need of card
       state,
-      // state: this.#turnCompleted,
       transaction: this.#currentTransaction
     };
   }
