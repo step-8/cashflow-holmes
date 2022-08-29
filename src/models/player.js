@@ -279,7 +279,7 @@ class Player {
 
   isBankrupt() {
     const cashFlow = this.#calculateCashFlow();
-    const status = this.#cash + cashFlow < 0;
+    const status = (this.#cash + cashFlow) < 0;
     if (status) {
       this.#hasBankrupt = true;
     }
@@ -369,6 +369,10 @@ class Player {
   }
 
   addGoldCoins(card) {
+    if (this.#cash < card.cost) {
+      return 0;
+    }
+
     this.#assets.preciousMetals.push(card);
     this.updateCash(-card.cost, 'Gold Coins');
     return 1;

@@ -11,14 +11,14 @@ const removeBlurBackground = () => {
 };
 
 const createTwoColumnRow = (value1, value2) => {
-  const element1 = ['td', {}, value1];
+  const element1 = ['th', {}, value1];
   const element2 = ['td', {}, value2];
   const row = ['tr', {}, element1, element2];
   return row;
 };
 
 const createThreeColumnRow = (value1, value2, value3) => {
-  const element1 = ['td', {}, value1];
+  const element1 = ['th', {}, value1];
   const element2 = ['td', {}, value2];
   const element3 = ['td', {}, value3];
   const row = ['tr', {}, element1, element2, element3];

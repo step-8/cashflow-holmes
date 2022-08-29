@@ -266,12 +266,12 @@ class Game {
     const player = this.findPlayer(username);
     player.sellAllAssets();
 
-    let message = `${username} sold all assets`;
+    let message = 'sold all assets';
     this.addLog(username, message);
 
     if (player.isBankrupt()) {
       this.#bankruptedPlayers.push(player.details);
-      message = `${username} has bankrupted`;
+      message = 'has bankrupted';
       this.addLog(username, message);
       this.changeTurn();
     }
