@@ -201,12 +201,13 @@ const RAT_RACE_BOARD = `<html>
   <link rel="stylesheet" href="css/profile.css">
   <script src="js/api.js"></script>
   <script src="js/commonLib.js"></script>
+  <script src="js/loan.js"></script>
   <script src="js/showLedger.js"></script>
   <script src="js/cardBuilder.js"></script>
   <script src="js/ratRaceBoard.js"></script>
   <script src="js/showMyProfile.js"></script>
   <script src="js/showOtherPlayers.js"></script>
-  <script src="js/loan.js"></script>
+  
   <script src="https://kit.fontawesome.com/74138aff63.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -279,7 +280,7 @@ const RAT_RACE_BOARD = `<html>
       </nav>
       <div id="loan-options">
         <div class="small-font" id="take-loan" onclick="drawLoan(event)">Take Loan</div>
-        <div class="small-font" id="pay-loan">Pay Loan</div>
+        <div class="small-font" id="pay-loan">Pay Debt</div>
       </div>
       <div id="logs"></div>
       <div id="choose-dice"></div>

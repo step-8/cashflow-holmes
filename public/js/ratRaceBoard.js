@@ -743,15 +743,14 @@
   const decideLoanActions = (game) => {
     const username = game.username;
     const player = findPlayer(game.players, username);
-    const loan = player.profile.liabilities.bankLoan;
-    const payLoanEle = getElement('#pay-loan');
-    if (!payLoanEle) {
+    const liabilities = player.profile.liabilities;
+
+    const payLoan = getElement('#pay-loan');
+    if (!payLoan) {
       return;
     }
-    payLoanEle.onclick = (event) => event;
-    if (loan > 0) {
-      payLoanEle.onclick = (event) => drawLoan(event);
-    }
+
+    payLoan.onclick = (event) => drawLoanSelection(event, liabilities);
   };
 
   const drawLottery = (game) => {
@@ -803,7 +802,7 @@
 
   const prevState = { game: '' };
 
-  const draw = (gameState) => {
+  const draw = (gameState,) => {
     return res => {
       const newState = res.hash;
       decideLoanActions(res);

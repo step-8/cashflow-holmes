@@ -1,25 +1,112 @@
-const childrens = {};
+const children = {};
 
-const drawLoan = (event) => {
+const loanActionOnEnter = (event, cb) => {
+  if (event.key !== 'Enter') {
+    return;
+  }
+  cb();
+};
+
+const createInputBox = (actionToCall) => {
   const loanOptions = getElement('#loan-options');
-  const type = event.target.id;
 
-  const loanChildren = [...loanOptions.children];
-  childrens.loanChildren = loanChildren;
-
-  const fnTocall = (event) => loanActionOnEnter(event, type);
-
-  const selectLoanAmount =
+  return html(
     ['div', { className: 'flex-row flex-center gap' },
       ['div', {},
         ['input', {
-          onkeyup: fnTocall, type: 'number', min: '0', placeholder: 'Enter amount', id: 'loan-amount', autofocus: 'true', required: 'true'
+          onkeyup: (event) => loanActionOnEnter(event, actionToCall), type: 'number', min: '0',
+          placeholder: 'Enter amount', id: 'loan-amount', autofocus: 'true', required: 'true'
         }
         ]
       ],
       ['div', {
         className: 'fa-solid fa-check check',
-        onclick: () => loanActions(type)
+        onclick: () => actionToCall()
+      }
+      ],
+      ['div', {
+        className: 'fa-solid fa-xmark close',
+        onclick: () => {
+          loanOptions.replaceChildren(...children.loanChildren);
+        }
+      }],
+    ]
+  );
+};
+
+const payBankLoan = () => {
+  const amount = +getElement('#loan-amount').value;
+
+  if (amount < 0 || amount % 1000) {
+    const message = 'Enter amount in K\'s';
+    drawLoanResult(message, 'warning');
+    return;
+  }
+
+  const options = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ amount, type: 'bankLoan' })
+  };
+
+  API.payLoan(options)
+    .then(res => decideLoanResult(res, 'payLoan'));
+};
+
+const payLoan = (event, liabilities) => {
+  const select = getElement('#debt-options');
+  const type = select.value;
+
+  if (type === ' ') {
+    return;
+  }
+
+  if (type === 'bankLoan') {
+    const loanOptions = getElement('#loan-options');
+    loanOptions.replaceChildren(createInputBox(payBankLoan));
+    return;
+  }
+
+  const options = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type, amount: liabilities[type] })
+  };
+
+  API.payLoan(options)
+    .then(res => decideLoanResult(res, 'payLoan'));
+};
+
+const createDebtSelection = (liabilities) => {
+  const debtOptions = Object.entries(liabilities);
+  const debtSelection = html(['select', { name: 'pay-loan', id: 'debt-options' }, '']);
+  debtSelection.append(html(['option', { value: ' ' }, '--Choose liability--']));
+
+  debtOptions.forEach(([liability, amount]) => {
+    const label = camelToCapitalize(liability);
+    if (label === 'Real estates' || amount <= 0) {
+      return;
+    }
+
+    const optionTemplate = ['option', { value: liability }, `${label} - $${amount}`];
+    debtSelection.append(html(optionTemplate));
+  });
+
+  return debtSelection;
+};
+
+const drawLoanSelection = (event, liabilities) => {
+  const loanOptions = getElement('#loan-options');
+  const loanChildren = [...loanOptions.children];
+  children.loanChildren = loanChildren;
+  const debtSelection = createDebtSelection(liabilities);
+
+  const selectAmount =
+    ['div', { className: 'flex-row flex-center gap' },
+      ['div', {}, debtSelection],
+      ['div', {
+        className: 'fa-solid fa-check check',
+        onclick: (event) => payLoan(event, liabilities)
       }
       ],
       ['div', {
@@ -27,15 +114,28 @@ const drawLoan = (event) => {
         onclick: () => {
           loanOptions.replaceChildren(...loanChildren);
         }
-      }],
+      }]
     ];
 
-  loanOptions.replaceChildren(html(selectLoanAmount));
+  loanOptions.replaceChildren(html(selectAmount));
+};
+
+const drawLoan = (event) => {
+  const loanOptions = getElement('#loan-options');
+  const type = event.target.id;
+
+  const loanChildren = [...loanOptions.children];
+  children.loanChildren = loanChildren;
+
+  const selectLoanAmount =
+    createInputBox(takeLoan);
+
+  loanOptions.replaceChildren(selectLoanAmount);
 };
 
 const replaceLoanElements = (id) => {
   getElement(id).
-    replaceChildren(...childrens.loanChildren);
+    replaceChildren(...children.loanChildren);
 };
 
 const drawLoanResult = (message, status) => {
@@ -101,7 +201,7 @@ const decideLoanResult = (res, method) => {
   }
 
   if (res.status === 200 && method === 'payLoan') {
-    drawLoanResult('Loan Paid Succesfully', 'success');
+    drawLoanResult('Loan Paid Successfully', 'success');
   }
 
   if (res.status === 406 && method === 'payLoan') {
@@ -109,16 +209,8 @@ const decideLoanResult = (res, method) => {
   }
 };
 
-const loanActionOnEnter = (event, id) => {
-  if (!isEnter(event)) {
-    return;
-  }
-  loanActions(id);
-};
-
-const loanActions = (id) => {
+const takeLoan = () => {
   const amount = +getElement('#loan-amount').value;
-  const method = id === 'take-loan' ? 'takeLoan' : 'payLoan';
 
   if (amount < 0 || amount % 1000) {
     const message = 'Enter amount in K\'s';
@@ -132,6 +224,6 @@ const loanActions = (id) => {
     body: JSON.stringify({ amount })
   };
 
-  API[method](options)
-    .then(res => decideLoanResult(res, method));
+  API.takeLoan(options)
+    .then(res => decideLoanResult(res, 'takeLoan'));
 };
