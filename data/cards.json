@@ -931,7 +931,7 @@
       "description": "PAY $1,500",
       "cost": 1500,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad2",
@@ -940,7 +940,7 @@
       "description": "Pay $500",
       "cost": 500,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad5",
@@ -949,7 +949,7 @@
       "description": "Pay $300",
       "cost": 300,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad6",
@@ -958,7 +958,7 @@
       "description": "PAY $2,500",
       "cost": 2500,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad7",
@@ -967,7 +967,7 @@
       "description": "Spend $2,000",
       "cost": 2000,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad8",
@@ -976,7 +976,7 @@
       "description": "Pay $500",
       "cost": 500,
       "rule": "If you have child",
-      "isMandatory": true
+      "isConditional": true
     },
     {
       "id": "doodad9",
@@ -985,7 +985,7 @@
       "description": "Spend $500",
       "cost": 500,
       "rule": "If you have child",
-      "isMandatory": true
+      "isConditional": true
     },
     {
       "id": "doodad10",
@@ -994,7 +994,7 @@
       "description": "PAY $5,000",
       "cost": 5000,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad11",
@@ -1003,7 +1003,7 @@
       "description": "Pay $1,000",
       "cost": 1000,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad12",
@@ -1012,7 +1012,7 @@
       "description": "PAY $700",
       "cost": 700,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad13",
@@ -1021,7 +1021,7 @@
       "description": "PAY $1,000",
       "cost": 1000,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad14",
@@ -1030,7 +1030,7 @@
       "description": "Pay $400",
       "cost": 400,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad15",
@@ -1039,7 +1039,7 @@
       "description": "PAY $2,500",
       "cost": 2500,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad16",
@@ -1048,7 +1048,7 @@
       "description": "PAY $800",
       "cost": 800,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad17",
@@ -1057,7 +1057,7 @@
       "description": "Pay $100",
       "cost": 100,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad18",
@@ -1066,7 +1066,7 @@
       "description": "PAY $700",
       "cost": 700,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad19",
@@ -1075,7 +1075,7 @@
       "description": "Pay $200",
       "cost": 200,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad20",
@@ -1084,7 +1084,7 @@
       "description": "PAY $600",
       "cost": 600,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad21",
@@ -1093,7 +1093,7 @@
       "description": "PAY $700",
       "cost": 700,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad22",
@@ -1102,7 +1102,7 @@
       "description": "Pay $800",
       "cost": 800,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad23",
@@ -1111,7 +1111,7 @@
       "description": "PAY $500",
       "cost": 500,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad24",
@@ -1120,7 +1120,7 @@
       "description": "PAY $200",
       "cost": 200,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad25",
@@ -1129,7 +1129,7 @@
       "description": "Pay $300",
       "cost": 300,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad26",
@@ -1138,7 +1138,7 @@
       "description": "PAY $7,500",
       "cost": 7500,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad27",
@@ -1147,7 +1147,7 @@
       "description": "PAY $500",
       "cost": 500,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad28",
@@ -1156,7 +1156,7 @@
       "description": "PAY $600",
       "cost": 600,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad29",
@@ -1165,7 +1165,7 @@
       "description": "PAY $800",
       "cost": 800,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad30",
@@ -1174,7 +1174,7 @@
       "description": "PAY $4000",
       "cost": 4000,
       "rule": "If you have child",
-      "isMandatory": true
+      "isConditional": true
     },
     {
       "id": "doodad31",
@@ -1183,7 +1183,7 @@
       "description": "PAY $5,000",
       "cost": 5000,
       "rule": "If you have child",
-      "isMandatory": true
+      "isConditional": true
     },
     {
       "id": "doodad32",
@@ -1192,7 +1192,7 @@
       "description": "Pay $300",
       "cost": 300,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad33",
@@ -1201,7 +1201,7 @@
       "description": "PAY $500",
       "cost": 500,
       "rule": "If you have child",
-      "isMandatory": true
+      "isConditional": true
     },
     {
       "id": "doodad34",
@@ -1210,7 +1210,7 @@
       "description": "PAY $200",
       "cost": 200,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad35",
@@ -1219,7 +1219,7 @@
       "description": "Pay $1000",
       "cost": 1000,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad36",
@@ -1228,7 +1228,7 @@
       "description": "PAY $1,500",
       "cost": 1500,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad37",
@@ -1237,7 +1237,7 @@
       "description": "PAY $3000",
       "cost": 3000,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad38",
@@ -1246,7 +1246,7 @@
       "description": "Pay $200",
       "cost": 200,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad39",
@@ -1255,7 +1255,7 @@
       "description": "PAY $200",
       "cost": 200,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad40",
@@ -1264,7 +1264,7 @@
       "description": "Pay $200",
       "cost": 200,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad41",
@@ -1273,7 +1273,7 @@
       "description": "Pay $600",
       "cost": 600,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad42",
@@ -1282,7 +1282,7 @@
       "description": "PAY $3,000",
       "cost": 3000,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad43",
@@ -1291,7 +1291,7 @@
       "description": "Pay $1,800",
       "cost": 1800,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad44",
@@ -1300,7 +1300,7 @@
       "description": "Pay $2,000",
       "cost": 2000,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     }
   ],
   "payday": [

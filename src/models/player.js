@@ -131,7 +131,12 @@ class Player {
     return true;
   }
 
-  doodad(cost) {
+  doodad(card) {
+    const cost = card.cost;
+    if (card.isConditional && this.profile().babies <= 0) {
+      return 2;
+    }
+
     if (this.#cash < cost) {
       return 0;
     }

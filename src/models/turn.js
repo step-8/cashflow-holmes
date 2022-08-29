@@ -72,14 +72,19 @@ class Turn {
 
   doodad(player) {
     const cost = this.#card.cost;
-    const status = player.doodad(cost);
+    const status = player.doodad(this.#card);
 
     this.setTransactionState('doodad', status, player.username);
     if (!status) {
       return;
     }
 
-    this.#log.addLog(player, `payed $${cost} on ${this.#card.heading}`);
+    let message = `payed $${cost} on ${this.#card.heading}`;
+    if (status === 2) {
+      message = 'escaped from doodad';
+    }
+
+    this.#log.addLog(player, message);
     this.respond(player.username);
   }
 

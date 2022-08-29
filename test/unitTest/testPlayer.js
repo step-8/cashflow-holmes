@@ -137,15 +137,25 @@ describe('Player', () => {
 
   describe('doodad', () => {
     it('Should return true when cash is above 0', () => {
+      const card = { isConditional: false, cost: 10 };
       const profession = JSON.parse(professionStr);
       const player = new Player('p3', 'guest', 'red', profession);
-      assert.isOk(player.doodad());
+      player.setDefaults();
+      assert.strictEqual(player.doodad(card), 1);
     });
 
     it('Should return false when cash is less than 0', () => {
+      const card = { isConditional: false, cost: 10000 };
       const profession = JSON.parse(professionStr);
       const player = new Player('p3', 'guest', 'red', profession);
-      assert.isNotOk(player.doodad(30000));
+      assert.strictEqual(player.doodad(card), 0);
+    });
+
+    it('Should return 2 when player escaped from doodad', () => {
+      const card = { isConditional: true, cost: 10000 };
+      const profession = JSON.parse(professionStr);
+      const player = new Player('p3', 'guest', 'red', profession);
+      assert.strictEqual(player.doodad(card), 2);
     });
   });
 
@@ -173,7 +183,7 @@ describe('Player', () => {
       const player = new Player('p3', 'guest', 'red', profession);
       const card = { downPayment: 300000 };
       player.setDefaults();
-      player.doodad(100);
+      player.doodad({ cost: 100 });
       const status = player.buyRealEstate(card);
       assert.isOk(!status);
     });
@@ -294,7 +304,7 @@ describe('Player', () => {
       const profession = JSON.parse(professionStr);
       const player = new Player('p3', 'guest', 'red', profession);
       player.takeLoan(1100);
-      player.doodad(1100);
+      player.doodad({ cost: 1100 });
       assert.isNotOk(player.payLoan(1500));
     });
 

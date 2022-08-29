@@ -248,7 +248,7 @@
       "description": "PAY $1,500",
       "cost": 1500,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     },
     {
       "id": "doodad1",
@@ -257,7 +257,7 @@
       "description": "PAY $1,500",
       "cost": 1500,
       "rule": "",
-      "isMandatory": false
+      "isConditional": false
     }
   ],
   "payday": [

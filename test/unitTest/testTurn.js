@@ -113,6 +113,36 @@ describe('Turn', () => {
         { family: 'doodad', status: 0, username: 'user' }
       );
     });
+
+    it('Should escape doodad if conditional doodad is', () => {
+      const log = new Log();
+      const escaped = () => 2;
+      const player = {
+        username: 'user',
+        color: 'c',
+        profile: { cashFlow: 100 },
+        doodad: escaped,
+        payday: identity,
+        buyRealEstate: identity
+      };
+
+      const response = new Response(createResponses([player]));
+      const turn = new Turn(card, player, log, response);
+
+      turn.doodad(player);
+
+      assert.deepStrictEqual(log.getAllLogs(),
+        [{
+          color: 'c',
+          message: 'escaped from doodad',
+          username: 'user'
+        }]
+      );
+      assert.deepStrictEqual(
+        turn.info.transaction,
+        { family: 'doodad', status: 2, username: 'user' }
+      );
+    });
   });
 
   describe('buyLottery', () => {
@@ -625,6 +655,36 @@ describe('Turn', () => {
       turn.info.transaction, { family: 'market', status: 0, username: 'user' }
     );
     assert.isOk(turn.info.state);
+  });
+
+  
+  it('Should return if player doesn\'t have enough cash', () => {
+    const log = new Log();
+    const player = {
+      skippedTurns: 0,
+      payDamages: () => 6,
+      username: 'user',
+      color: 'c',
+      details: {
+        profile: {
+          assets: {
+            realEstates: [{
+              heading: 'New Card',
+            }]
+          }
+        }
+      },
+      hasStock: identity,
+      deactivateReroll: identity
+    };
+
+    const response = new Response(createResponses([player]));
+    const turn = new Turn(card, player, log, response);
+
+    turn.propertyDamage(player);
+    assert.deepStrictEqual(
+      turn.info.transaction, { family: 'market', status: 6, username: 'user' }
+    );
   });
 
   describe('Gold coins', () => {

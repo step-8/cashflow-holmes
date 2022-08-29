@@ -210,7 +210,6 @@ const createNotification = (game, family, player, status) => {
   const notifyId = setTimeout(() => {
     notification.remove();
   }, 5000);
-
   notification = html(
     ['div', { className: `notify-wrapper ${family} fade-${family} fade shadow` },
       ['div', { className: 'notify-msg' }, message],
@@ -391,7 +390,8 @@ const getMessage = (family, status, currentPlayer) => {
       'Successfully sold gold coins',
       'Insufficient balance. Take loan to proceed'],
     doodad: ['Insufficient balance. Take loan to proceed',
-      'You are done with doodad'],
+      'You are done with doodad',
+      'You escaped from doodad'],
     charity: [
       'Insufficient balance. Take loan to proceed',
       'You donated to charity'],
