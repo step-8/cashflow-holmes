@@ -2,9 +2,14 @@ const fetchReq = (path, options) => {
   return fetch(path, options);
 };
 
+const fetchHandler = (path, options) => {
+  return fetch(path, options)
+    .then((response) => new Promise((res, rej) => res.status >= 400 ? rej(response) : res(response)));
+};
+
 const fetchJson = (path, options) => {
   return fetchReq(path, options)
-    .then(res => res.json);
+    .then(res => res.json());
 };
 
 const API = {
@@ -15,6 +20,7 @@ const API = {
   cancelGame: () => fetchReq('/remove-game'),
   playerInfo: () => fetchReq('/api/player-info'),
   getGame: () => fetchReq('/api/game'),
+  getGameJson: () => fetchJson('/api/game'),
   changeTurn: () => fetchReq('/change-turn'),
   rollDice: (diceCount) => fetchReq(`/roll-dice/${diceCount}`),
   reRollDice: () => fetchReq('/reroll'),

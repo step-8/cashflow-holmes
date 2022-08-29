@@ -459,12 +459,22 @@
       return game;
     }
 
+    const checkBankruptcy = () => {
+      API.getGameJson()
+        .then(game => {
+          if (game.currentPlayer.aboutToBankrupt) {
+            return createBankruptPopup();
+          }
+        });
+    };
+
     const createNotifications = () => {
       notifications.forEach(notification => {
         const { family } = notification;
         createNotification(game, family, currentPlayer, 1, currentPlayer.username);
         const action = () => sendAction('ok', family, family);
         drawForCurrentUser(action)(game);
+        checkBankruptcy();
       });
     };
 
@@ -487,7 +497,6 @@
       return;
     }
 
-
     const newCard = createCard(currentCard, currentPlayer);
     cardEle.replaceWith(newCard);
 
@@ -497,7 +506,6 @@
     }
 
     drawActions(game);
-    // drawActions(username, family, currentCard, currentPlayer, players);
   };
 
   const drawPlayersList = (game) => {
@@ -656,13 +664,17 @@
     return messages[family][status];
   };
 
+  const isTransactionCompleted = game => !game.transaction || !game.currentCard.id;
+
+  const isEveryoneResponded = (game) => game.turnResponses.every(({ responded }) => responded);
+
   const drawMessages = (game) => {
-    if (!game.transaction || !game.currentCard.id) {
+    if (isTransactionCompleted(game)) {
       API.changeTurn();
       return;
     }
 
-    if (game.turnResponses.every(({ responded }) => responded)) {
+    if (isEveryoneResponded(game)) {
       API.changeTurn();
       return;
     }
@@ -726,7 +738,6 @@
     });
 
     timeout(removePopUp, 3000, '#out-of-game-popup');
-
   };
 
   const decideLoanActions = (game) => {
@@ -757,7 +768,6 @@
 
   const removePopUp = (id) => {
     getElement(id).remove();
-    API.changeTurn();
     removeBlurBackground();
   };
 

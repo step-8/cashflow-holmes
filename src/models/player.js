@@ -18,6 +18,7 @@ class Player {
   #canReRoll;
   #isInFastTrack;
   #hasBankrupt;
+  #aboutToBankrupt;
 
   constructor(username, role, color, { profession, babies, income, expenses, assets, liabilities }) {
     this.#username = username;
@@ -39,6 +40,7 @@ class Player {
     this.#canReRoll = false;
     this.#isInFastTrack = false;
     this.#hasBankrupt = false;
+    this.#aboutToBankrupt = false;
   }
 
   init({ isRolledDice, lastPosition, currentPosition, dualDiceCount, skippedTurns, canReRoll, isInFastTrack, transactions }) {
@@ -121,6 +123,9 @@ class Player {
 
   payday() {
     this.updateCash(this.#calculateCashFlow(), 'Payday');
+    if (this.isBankrupt()) {
+      this.#aboutToBankrupt = true;
+    }
     return true;
   }
 
@@ -254,9 +259,13 @@ class Player {
     return true;
   }
 
-  #isBankruptcy() {
+  isBankrupt() {
     const cashFlow = this.#calculateCashFlow();
-    return cashFlow < 0 && this.#cash < -cashFlow;
+    const status = this.#cash + cashFlow < 0;
+    if (status) {
+      this.#hasBankrupt = true;
+    }
+    return status;
   }
 
   takeLoan(amount) {
@@ -264,7 +273,7 @@ class Player {
     this.#liabilities.bankLoan += amount;
     this.#expenses.bankLoanPayment = this.#liabilities.bankLoan / 10;
 
-    if (this.#isBankruptcy()) {
+    if (this.isBankrupt()) {
       return false;
     }
 
@@ -378,11 +387,7 @@ class Player {
     cash += this.#sellAssets('preciousMetals', 'cost');
     cash += this.#sellAllStocks();
     this.#cash += cash;
-    const status = this.#cash > 0;
-    if (!status) {
-      this.#hasBankrupt = true;
-    }
-    return status;
+    return true;
   }
 
   profile() {
@@ -445,7 +450,8 @@ class Player {
       skippedTurns: this.#skippedTurns,
       canReRoll: this.#canReRoll,
       isInFastTrack: this.#isInFastTrack,
-      hasBankrupt: this.#hasBankrupt
+      hasBankrupt: this.#hasBankrupt,
+      aboutToBankrupt: this.#aboutToBankrupt
     };
   }
 }

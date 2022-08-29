@@ -8,7 +8,7 @@ const showInvalidMessage = (resolve) => {
     return;
   }
 
-  let message = 'Invalid Game id';
+  let message = 'Invalid Game ID';
 
   if (resolve.status === 423) {
     message = 'lobby is full';
@@ -49,7 +49,7 @@ const createJoinPopup = (event) => {
       ['div', { className: 'join-popup-wrapper', id: 'join-popup' },
         [
           'form', { className: 'join-form', id: 'join-popup-form', onsubmit: (event) => joinGame(event) },
-          ['input', { id: 'input-game-id', type: 'text', name: 'gameID', placeholder: 'Game id', autofocus: 'true', required: 'true', className: 'game-id large-font' }],
+          ['input', { id: 'input-game-id', type: 'text', name: 'gameID', placeholder: 'Game ID', autofocus: 'true', required: 'true', className: 'game-id large-font' }],
           ['div', { className: 'btn-wrapper large-font flex-column' },
             ['div', { id: 'enter-game', className: 'btn normal-font', onclick: (event) => joinGame(event) }, 'Enter'],
             ['div', { id: 'cancel-join-popup', className: 'btn normal-font', onclick: (event) => removePopup(event) }, 'Cancel']

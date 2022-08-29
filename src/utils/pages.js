@@ -43,7 +43,7 @@ const HOST_LOBBY = `<html>
     <div class="lobby">
     <div id="lobby-header">
       <div class="game-id" id="game-id">
-        Game Id : __GAME_ID__
+        Game ID : __GAME_ID__
       </div>
       <div id="error-message" class="message"></div>
       </div>
@@ -77,7 +77,7 @@ const GUEST_LOBBY = `<html>
     <div class="lobby">
       <div id="lobby-header">
       <div class="game-id" id="game-id">
-        Game Id : __GAME_ID__
+        Game ID : __GAME_ID__
       </div>
       <div class="message" id="message">Waiting for host to start the game...</div>
       </div>

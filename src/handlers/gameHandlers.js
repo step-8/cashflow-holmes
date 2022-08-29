@@ -49,7 +49,7 @@ const gameBoardHandler = (req, res) => {
   res.send(RAT_RACE_BOARD);
 };
 
-const removeGameIdHandler = (req, res) => {
+const removeGameIDHandler = (req, res) => {
   req.session.gameID = null;
   res.end();
 };
@@ -88,7 +88,7 @@ module.exports = {
   guestLobbyHandler,
   showProfessionHandler,
   gameBoardHandler,
-  removeGameIdHandler,
+  removeGameIDHandler,
   rollDiceHandler,
   changeTurnHandler,
   reRollHandler,

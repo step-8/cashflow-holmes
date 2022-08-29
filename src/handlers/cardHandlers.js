@@ -11,14 +11,11 @@ const resetTransaction = (req, res) => {
   res.end();
 };
 
-const removeNotification = (game) => {
-  game.removeTopNotification();
-};
-
 const acceptCard = (game, family, type, username) => {
   if (family === 'payday') {
-    game.payday(username);
-    return removeNotification(game);
+    const status = game.payday(username);
+    game.removeTopNotification();
+    return status;
   }
 
   if (family === 'market' && type === 'damage') {
@@ -69,7 +66,6 @@ const cardActionsHandler = (req, res) => {
   actions[action]();
   res.end();
 };
-
 
 module.exports = {
   serveCard, cardActionsHandler, resetTransaction, acceptCard, buyDeal

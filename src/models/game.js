@@ -143,7 +143,6 @@ class Game {
     this.#currentCard = null;
     this.#notifications = [];
 
-
     if (this.currentPlayer.skippedTurns > 0) {
       this.addLog(this.currentPlayer.username, 'skipped turn');
       this.currentPlayer.decrementSkippedTurns();
@@ -161,7 +160,7 @@ class Game {
   }
 
   removeTopNotification() {
-    this.#notifications = this.#notifications.slice(1);
+    this.#notifications.shift();
   }
 
   removeNotifier() {
@@ -253,16 +252,19 @@ class Game {
 
   sellAllAssets(username) {
     const player = this.findPlayer(username);
-    const status = player.sellAllAssets();
-    let message = `${username} sold all assets`;
+    player.sellAllAssets();
 
-    if (!status) {
+    let message = `${username} sold all assets`;
+    this.addLog(username, message);
+
+    if (player.isBankrupt()) {
       this.#bankruptedPlayers.push(player.details);
       message = `${username} has bankrupted`;
+      this.addLog(username, message);
+      this.changeTurn();
     }
 
-    this.addLog(username, message);
-    return status;
+    return !player.isBankrupt();
   }
 
   set currentCard(card) {

@@ -53,7 +53,9 @@ class Turn {
     this.#log.addLog(this.#currentPlayer, `received pay of $${this.#cashflow()}`);
 
     this.setTransactionState('payday', 1, this.#currentPlayer.username);
-    this.#changeTurnIfNoCard(player.username);
+    if (status) {
+      this.#changeTurnIfNoCard(player.username);
+    }
     return status;
   }
 

@@ -1355,7 +1355,8 @@
     {
       "id": "payday",
       "heading": "payday",
-      "type": "payday"
+      "type": "payday",
+      "symbol": "payday"
     }
   ],
   "charity": [

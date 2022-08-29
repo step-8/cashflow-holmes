@@ -35,7 +35,7 @@ describe('Cancel Game', () => {
   });
 
   describe('GET /remove-game', () => {
-    it('Should remove game id from session', (done) => {
+    it('Should remove game ID from session', (done) => {
       request(app)
         .get('/remove-game')
         .set('Cookie', cookies.join(';'))

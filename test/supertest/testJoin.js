@@ -25,7 +25,7 @@ describe('Join', () => {
   });
 
   describe('POST /join', () => {
-    it('Should send status code of 400 for invalid game id', (done) => {
+    it('Should send status code of 400 for invalid game ID', (done) => {
       request(app)
         .post('/join')
         .set('Cookie', cookies.join(';'))
@@ -40,7 +40,7 @@ describe('Join', () => {
         .send('gameID=1')
         .expect(401, done);
     });
-    
+
     it('Should send status code of 200 when player join game successfully', (done) => {
       request(app)
         .post('/register')
@@ -61,7 +61,7 @@ describe('Join', () => {
       request(app)
         .get('/guest-lobby')
         .set('Cookie', cookies.join(';'))
-        .expect(/Game Id :/)
+        .expect(/Game ID :/)
         .expect(200, done);
     });
   });

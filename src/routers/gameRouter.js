@@ -16,7 +16,7 @@ const {
   startGameHandler,
   cancelGameHandler,
   hostHandler,
-  removeGameIdHandler,
+  removeGameIDHandler,
   rollDiceHandler,
   changeTurnHandler,
   reRollHandler,
@@ -40,7 +40,7 @@ const createGameRouter = (router, config, DB) => {
   router.get('/show-profession', showProfessionHandler);
   router.get('/game-board', gameBoardHandler);
   router.post('/sell-all-assets', sellAllAssetsHandler);
-  router.get('/remove-game', removeGameIdHandler);
+  router.get('/remove-game', removeGameIDHandler);
   router.use('/logout', logoutHandler);
   router.post('/card/card-action', cardActionsHandler);
   router.get('/card/type', serveCard);
