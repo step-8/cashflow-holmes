@@ -1,3 +1,5 @@
+const { camelToCapitalize } = require('../utils/commonLib.js');
+
 class Player {
   #username;
   #color;
@@ -298,18 +300,27 @@ class Player {
     return true;
   }
 
-  payLoan(amount) {
-    if (amount > this.#liabilities.bankLoan) {
-      amount = this.#liabilities.bankLoan;
-    }
-
+  payLoan(amount, type) {
     if (this.#cash < amount) {
       return false;
     }
 
-    this.updateCash(-amount, 'Paid loan');
-    this.#liabilities.bankLoan -= amount;
-    this.#expenses.bankLoanPayment = this.#liabilities.bankLoan / 10;
+    const loanMapper = {
+      homeMortgage: 'homeMortgagePayment',
+      schoolLoans: 'schoolLoanPayment',
+      carLoans: 'carLoanPayment',
+      creditCardDebt: 'creditCardPayment'
+    };
+
+    this.updateCash(-amount, `Paid ${camelToCapitalize(type)}`);
+    this.#liabilities[type] -= amount;
+
+    if (type === 'bankLoan') {
+      this.#expenses.bankLoanPayment = this.#liabilities[type] / 10;
+    } else {
+      this.#expenses[loanMapper[type]] = 0;
+    }
+
     this.#setFastTrack();
     return true;
   }

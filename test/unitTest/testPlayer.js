@@ -270,7 +270,8 @@ describe('Player', () => {
     it('Should deduct loan in players profile', () => {
       const profession = JSON.parse(professionStr);
       const player = new Player('p3', 'guest', 'red', profession);
-      assert.isOk(player.payLoan(100));
+      player.takeLoan(100);
+      assert.isOk(player.payLoan(100, 'bankLoan'));
     });
 
     it('Should deduct amount from the cash', () => {
@@ -281,7 +282,7 @@ describe('Player', () => {
       const expected = player.profile();
       const expectedCash = player.profile().cash;
       const expectedBankLoanPayment = player.profile().expenses.bankLoanPayment;
-      player.payLoan(100);
+      player.payLoan(100, 'bankLoan');
       const actual = player.profile();
 
       assert.deepStrictEqual(actual.totalExpenses, expected.totalExpenses - 10);
@@ -295,6 +296,13 @@ describe('Player', () => {
       player.takeLoan(1100);
       player.doodad(1100);
       assert.isNotOk(player.payLoan(1500));
+    });
+
+    it('Should pay the loan amount of specified type', () => {
+      const profession = JSON.parse(professionStr);
+      const player = new Player('p3', 'guest', 'red', profession);
+      player.takeLoan(10000);
+      assert.isOk(player.payLoan(10000, 'creditCardDebt'));
     });
   });
 

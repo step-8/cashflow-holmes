@@ -50,4 +50,10 @@ const generateRatTiles = () => {
   return tiles.map((type, index) => generateRatTile(type, index + 1)).join('');
 };
 
-module.exports = { toWords, generateRatTiles, generateRatTile, capitalize };
+const camelToCapitalize = (word) => {
+  const spacedWord = ('' + word).replace(/([A-Z])/g, ' $1').toLowerCase();
+  const [first, ...rest] = spacedWord;
+  return first.toUpperCase().concat(rest.join(''));
+};
+
+module.exports = { toWords, generateRatTiles, generateRatTile, capitalize, camelToCapitalize };

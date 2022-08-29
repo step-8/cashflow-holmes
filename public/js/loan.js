@@ -34,11 +34,17 @@ const createInputBox = (actionToCall) => {
   );
 };
 
-const payBankLoan = () => {
+const payBankLoan = (loanAmount) => {
   const amount = +getElement('#loan-amount').value;
+  let message = 'Enter amount in K\'s';
 
   if (amount < 0 || amount % 1000) {
-    const message = 'Enter amount in K\'s';
+    drawLoanResult(message, 'warning');
+    return;
+  }
+
+  if (amount > loanAmount) {
+    message = `You have loan of $${loanAmount} only`;
     drawLoanResult(message, 'warning');
     return;
   }
@@ -63,7 +69,7 @@ const payLoan = (event, liabilities) => {
 
   if (type === 'bankLoan') {
     const loanOptions = getElement('#loan-options');
-    loanOptions.replaceChildren(createInputBox(payBankLoan));
+    loanOptions.replaceChildren(createInputBox(() => payBankLoan(liabilities.bankLoan)));
     return;
   }
 

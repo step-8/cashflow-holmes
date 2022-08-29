@@ -2,7 +2,7 @@ const deck = require('../../data/cards.json');
 const { RatRace } = require('./ratRace.js');
 const { Turn } = require('./turn.js');
 const { Log } = require('./log.js');
-const { toWords } = require('../utils/commonLib.js');
+const { camelToCapitalize, toWords } = require('../utils/commonLib.js');
 const { Player } = require('./player');
 const { Response, createResponses } = require('./response');
 
@@ -249,13 +249,13 @@ class Game {
     return status;
   }
 
-  payLoan(username, amount) {
+  payLoan(username, amount, type) {
     const player = this.findPlayer(username);
     let status = 0;
 
-    if (player.payLoan(amount)) {
+    if (player.payLoan(amount, type)) {
       status = 1;
-      const message = `paid loan of $${amount}`;
+      const message = `paid ${camelToCapitalize(type)} of $${amount}`;
       this.addLog(username, message);
     }
 

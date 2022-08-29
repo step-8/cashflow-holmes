@@ -12,11 +12,11 @@ const takeLoan = (req, res) => {
 
 const payLoan = (req, res) => {
   const { game } = req;
-  const { amount } = req.body;
+  const { amount, type } = req.body;
   const { username } = req.session;
 
   let status = 406;
-  if (game.payLoan(username, amount)) {
+  if (game.payLoan(username, amount, type)) {
     status = 200;
   }
 
