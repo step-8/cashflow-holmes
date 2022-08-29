@@ -377,44 +377,27 @@ const drawPlayerPosition = (game) => {
 const getMessage = (family, status, currentPlayer) => {
   const { cashFlow } = currentPlayer.profile;
   const messages = {
-    deal: {
-      0: 'Insufficient balance. Take loan to proceed',
-      1: 'Successfully purchased',
-      2: 'Not enough stocks',
-      3: 'Successfully sold',
-      4: 'You won lottery',
-      5: 'You lost lottery'
-    },
-    market: {
-      0: 'You have no properties',
-      1: 'You have paid for the property damages',
-      2: 'You split the stocks',
-      3: 'You reverse split the stocks',
-      4: 'Insufficient gold coins',
-      5: 'Successfully sold gold coins'
-    },
-    doodad: {
-      0: 'Insufficient balance. Take loan to proceed',
-      1: 'You are done with doodad'
-    },
-    charity: {
-      0: 'Insufficient balance. Take loan to proceed',
-      1: 'You donated to charity'
-    },
-    payday: {
-      1: `Received payday of ${cashFlow}.`
-    },
-    downsized: {
-      0: 'Insufficient balance. Take loan to proceed',
-      1: 'You\'re downsized'
-    },
-    baby: {
-      1: 'You got a new baby'
-    },
-    'stocks-lottery': {
-      0: 'You split the stocks',
-      1: 'You reverse split the stocks'
-    },
+    deal: ['Insufficient balance. Take loan to proceed',
+      'Successfully purchased',
+      'Not enough stocks',
+      'Successfully sold',
+      'You won lottery',
+      'You lost lottery'],
+    market: ['You have no properties',
+      'You have paid for the property damages',
+      'You split the stocks',
+      'You reverse split the stocks',
+      'Insufficient gold coins',
+      'Successfully sold gold coins',
+      'Insufficient balance. Take loan to proceed'],
+    doodad: ['Insufficient balance. Take loan to proceed',
+      'You are done with doodad'],
+    charity: [
+      'Insufficient balance. Take loan to proceed',
+      'You donated to charity'],
+    payday: ['', `Received payday of ${cashFlow}.`],
+    downsized: ['Insufficient balance. Take loan to proceed', 'You\'re downsized'],
+    baby: ['', 'You got a new baby']
   };
 
   return messages[family][status];

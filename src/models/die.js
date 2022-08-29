@@ -8,8 +8,7 @@ class Die {
 
   roll() {
     this.#face = Math.ceil(Math.random() * this.#numberOfSides);
-    // return this.#face;
-    return 4;
+    return this.#face;
   }
 
   face() {

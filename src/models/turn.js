@@ -274,8 +274,12 @@ class Turn {
   propertyDamage(player) {
     const status = player.payDamages(this.#card);
     this.setTransactionState('market', status, player.username);
-    let message = 'has no real estate';
 
+    if (status === 6) {
+      return;
+    }
+
+    let message = 'has no real estate';
     if (status) {
       message = `paid $${this.#card.cost} for damages`;
     }

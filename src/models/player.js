@@ -367,6 +367,10 @@ class Player {
   }
 
   payDamages(card) {
+    if (this.#cash < card.cost) {
+      return 6;
+    }
+
     if (!this.#hasRealEstate()) {
       return 0;
     }
