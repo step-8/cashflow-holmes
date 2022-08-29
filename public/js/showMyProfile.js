@@ -219,13 +219,14 @@ const createPreciousMetals = ({ preciousMetals }) => {
   const table = ['table', {},
     ['thead', {},
       ['th', {}, 'Metal Name'],
+      ['th', {}, '# of coins'],
       ['th', {}, 'Cost'],
     ]
   ];
 
   const tbody = ['tbody', {}];
-  preciousMetals.forEach(({ symbol, cost }) => {
-    const row = createTwoColumnRow(symbol, `$${cost}`);
+  preciousMetals.forEach(({ symbol, count, cost }) => {
+    const row = createThreeColumnRow(symbol, count, `$${cost}`);
     tbody.push(row);
   });
 
