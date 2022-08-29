@@ -224,25 +224,25 @@
     passiveIncome.innerText = addDollar(profile.passiveIncome);
   };
 
-  const buyStocksOnEnter = (event, action) => {
+  const submitOnEnter = (event, action, cardDetails) => {
     if (!isEnter(event)) {
       return;
     }
 
-    buyStocks(event, action);
+    submitCount(event, action, cardDetails);
   };
 
-  const buyStocks = (event, action) => {
-    const inputDiv = getElement('#stock-count');
-    const stockCount = inputDiv.value;
-    if (!stockCount) {
+  const submitCount = (event, action, cardDetails) => {
+    const inputDiv = getElement('#input-count');
+    const count = inputDiv.value;
+    if (!count) {
       return;
     }
-
-    sendAction(action, 'deal', 'stock', stockCount);
+    const [type] = cardDetails.type.split('Others');
+    sendAction(action, cardDetails.family, type, count);
   };
 
-  const drawBuyStocks = (action) => {
+  const drawInputBox = (action, cardDetails) => {
     const actions = getElement('.actions');
     const actionsChildren = [...actions.children];
 
@@ -253,17 +253,17 @@
             {
               autofocus: 'true',
               required: 'true',
-              onkeyup: event => buyStocksOnEnter(event, action),
+              onkeyup: event => submitOnEnter(event, action, cardDetails),
               type: 'number',
               min: '0',
-              placeholder: 'Enter no of stocks',
-              id: 'stock-count'
+              placeholder: 'Enter count',
+              id: 'input-count'
             }
           ]
         ],
         ['div', {
           className: 'fa-solid fa-check check',
-          onclick: (event) => buyStocks(event, action)
+          onclick: (event) => submitCount(event, action, cardDetails)
         }],
         ['div', {
           className: 'fa-solid fa-xmark close',
@@ -296,14 +296,29 @@
       .then(drawMessages);
   };
 
+  const isInteractive = (action, type) => {
+    const interactive = {
+      buy: {
+        stock: true,
+        stockOthers: true
+      },
+      sell: {
+        stock: true,
+        stockOthers: true,
+        goldCoins: true,
+        goldCoinsOthers: true
+      }
+    };
+    return interactive[action]?.[type];
+  };
+
   const performAction = (event, family, type) => {
     const actionDiv = event.target;
     let [, action] = actionDiv.id.split('-');
     action = action === 'donate' ? 'ok' : action;
 
-    if ((action === 'buy' || action === 'sell') &&
-      (type === 'stock' || type === 'stockOthers')) {
-      drawBuyStocks(action);
+    if (isInteractive(action, type)) {
+      drawInputBox(action, { family, type });
       return;
     }
 
@@ -323,7 +338,9 @@
     market: {
       realEstate: ['SELL', 'SKIP'],
       damage: ['OK'],
-      lottery: ['ROLL']
+      lottery: ['ROLL'],
+      goldCoins: ['SELL', 'SKIP'],
+      goldCoinsOthers: ['SELL', 'SKIP']
     },
     doodad: {
       doodad: ['OK']
@@ -342,11 +359,11 @@
     }
   };
 
-  const createActions = (family, type, stock) => {
+  const createActions = (family, type, asset) => {
     const actionTexts = actions[family][type];
     return html(['div', { className: 'actions-wrapper' },
       ...actionTexts.map(action => {
-        if (action === 'SELL' && !stock) {
+        if (action === 'SELL' && !asset) {
           return ['span', { style: 'position:absolute' }];
         }
         return ['div',
@@ -378,12 +395,24 @@
     return;
   };
 
-  const findStock = (card, assets) => {
-    const stock = assets.stocks.find(stock => stock.symbol === card.symbol);
-    return stock;
+  const matchCard = (assets, symbol) => assets.find(asset => asset.symbol === symbol);
+
+  const findAsset = (card, assets) => {
+    const allAssets = [...assets.stocks, ...assets.preciousMetals];
+    return matchCard(allAssets, card.symbol);
   };
 
-  const isStock = (family, type) => family === 'deal' && type === 'stock';
+  const multiUserFlow = (family, type) => {
+    const multiFlows = {
+      deal: {
+        stock: true
+      },
+      market: {
+        goldCoins: true
+      }
+    };
+    return multiFlows[family]?.[type];
+  };
 
   const drawActions = (game) => {
     const { username, currentCard, currentPlayer, players, turnResponses } = game;
@@ -392,17 +421,17 @@
     const response = turnResponses.find(response => response.username === username);
 
     let actions = '';
-    const stock = findStock(currentCard, assets);
+    const asset = findAsset(currentCard, assets);
     const isCurrentUser = currentPlayer.username === username;
 
     if (isCurrentUser && !response.responded) {
-      actions = createActions(family, type, stock);
+      actions = createActions(family, type, asset);
     }
 
-    if (isStock(family, type) && !isCurrentUser && !response.responded) {
+    if (multiUserFlow(family, type) && !isCurrentUser && !response.responded) {
       const { assets } = findPlayer(players, username).profile;
-      const stock = findStock(currentCard, assets);
-      actions = createActions(family, 'stockOthers', stock);
+      const asset = findAsset(currentCard, assets);
+      actions = createActions(family, `${currentCard.type}Others`, asset);
     }
 
     const actionsDiv = getElement('.actions');
@@ -427,8 +456,8 @@
     return;
   };
 
-  const createNotification = (game, family, currentPlayer, status, username) => {
-    const message = getMessage(family, status, currentPlayer);
+  const createNotification = (game, family, player, status) => {
+    const message = getMessage(family, status, player);
     const notificationsScreen = document.querySelector('#message-space');
 
     let notification = null;
@@ -448,42 +477,51 @@
         }],
       ]
     );
-    if (game.username === username) {
-      notificationsScreen.appendChild(notification);
-    }
+
+    notificationsScreen.appendChild(notification);
+  };
+
+  const filterUserNotifications = (notifications, username) =>
+    notifications.filter(notification => notification.username === username);
+
+  const createNotifications = (game) => {
+    const { notifications, players, username } = game;
+    const player = findPlayer(players, username);
+
+    const userNotifications =
+      filterUserNotifications(notifications, username);
+
+    userNotifications.forEach(notification => {
+      const { family } = notification;
+
+      createNotification(game, family, player, 1);
+      sendAction('ok', family, family);
+      checkBankruptcy();
+    });
+
+  };
+
+  const checkBankruptcy = () => {
+    API.getGameJson()
+      .then(game => {
+        if (game.currentPlayer.aboutToBankrupt) {
+          return createBankruptPopup();
+        }
+      });
   };
 
   const drawNotifications = (game) => {
-    const { notifications, currentPlayer } = game;
+    // console.log(game.notifications, game.transaction);
+    const { notifications } = game;
     if (!notifications.length) {
       return game;
     }
 
-    const checkBankruptcy = () => {
-      API.getGameJson()
-        .then(game => {
-          if (game.currentPlayer.aboutToBankrupt) {
-            return createBankruptPopup();
-          }
-        });
-    };
-
-    const createNotifications = () => {
-      notifications.forEach(notification => {
-        const { family } = notification;
-        createNotification(game, family, currentPlayer, 1, currentPlayer.username);
-        const action = () => sendAction('ok', family, family);
-        drawForCurrentUser(action)(game);
-        checkBankruptcy();
-      });
-    };
-
-    drawForCurrentUser(createNotifications)(game);
+    createNotifications(game);
 
     if (game.currentPlayer.isInFastTrack) {
-      return;
+      return game;
     }
-
     API.changeTurn();
     return game;
   };
@@ -635,7 +673,9 @@
         0: 'You have no properties',
         1: 'You have paid for the property damages',
         2: 'You split the stocks',
-        3: 'You reverse split the stocks'
+        3: 'You reverse split the stocks',
+        4: 'Insufficient gold coins',
+        5: 'Successfully sold gold coins'
       },
       doodad: {
         0: 'Insufficient balance. Take loan to proceed',
@@ -665,8 +705,23 @@
   };
 
   const isTransactionCompleted = game => !game.transaction || !game.currentCard.id;
-
   const isEveryoneResponded = (game) => game.turnResponses.every(({ responded }) => responded);
+
+  const message = (game, username) => {
+    const { transaction: { family, status }, currentPlayer } = game;
+
+    if (family === game.currentCard.family) {
+      createNotification(game, family, currentPlayer, status, username);
+      API.resetTransaction();
+    }
+
+    if (game.currentPlayer.isInFastTrack) {
+      drawRatRaceCompletion(game);
+      return;
+    }
+
+    API.changeTurn();
+  };
 
   const drawMessages = (game) => {
     if (isTransactionCompleted(game)) {
@@ -679,26 +734,10 @@
       return;
     }
 
-    const {
-      transaction: { family, status, username },
-      currentPlayer
-    } = game;
-
-    const message = () => {
-      if (family === game.currentCard.family) {
-        createNotification(game, family, currentPlayer, status, username);
-        API.resetTransaction();
-      }
-
-      if (game.currentPlayer.isInFastTrack) {
-        drawRatRaceCompletion(game);
-        return;
-      }
-
-      API.changeTurn();
-    };
-
-    drawForCurrentUser(message)(game);
+    const transactedUser = game.transaction?.username;
+    if (transactedUser === game.username) {
+      message(game, transactedUser);
+    }
   };
 
   const createLog = (log) => {

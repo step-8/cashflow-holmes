@@ -72,9 +72,9 @@ class Game {
     return this.#currentCard;
   }
 
-  setNotifications() {
+  setNotifications(username) {
     const type = this.#getCardType();
-    this.#notifications = this.#ratRace.getNotifications(type, this.currentPlayer.details);
+    this.#notifications = this.#ratRace.getNotifications(type, this.currentPlayer.details, username);
   }
 
   #calculateTotalSteps(diceCount) {
@@ -205,6 +205,18 @@ class Game {
 
   buyLottery(username) {
     return this.#currentTurn.buyLottery(this.findPlayer(username));
+  }
+
+  sellGoldCoins(username, count) {
+    const player = this.findPlayer(username);
+    let status = 4;
+
+    if (player.sellGold(this.#currentCard, count)) {
+      status = 5;
+      this.#currentTurn.sellGold(player, count);
+    }
+
+    this.#currentTurn.setTransactionState('market', status, username);
   }
 
   sellStocks(username, count) {

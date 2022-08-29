@@ -2,7 +2,9 @@ const random = (number) => {
   return Math.floor(Math.random() * number);
 };
 
-const getSpecificCard = (type, cards) => cards.find(card => card.type === type);
+const getSpecificCard = (type, cards) => {
+  return cards.find(card => card.type === type);
+};
 
 const getFamily = (deals, type) => {
   if (deals.includes(type)) {
@@ -76,11 +78,19 @@ class RatRace {
       // return getSpecificCard('lottery', this.#deck[type]);
       return this.#deck[type][random(Object.keys(this.#deck[type]).length - 1)];
     }
+    // if (type === 'smallDeal') {
+    //   return this.#deck[type][random(Object.keys(this.#deck[type]).length - 1)];
+    //   return getSpecificCard('lottery', this.#deck[type]);
+    //   return getSpecificCard('goldCoins', this.#deck[type]);
+    // }
+    // if (type === 'market') {
+    //   return getSpecificCard('goldCoins', this.#deck[type]);
+    // }
 
-    return this.#deck[type][0];
+    return this.#deck[type][random(Object.keys(this.#deck[type]).length - 1)];
   }
 
-  getNotifications(type, currentPlayer) {
+  getNotifications(type, currentPlayer, username) {
     const deals = ['smallDeal', 'bigDeal'];
     if (deals.includes(type)) {
       return [];
@@ -99,7 +109,7 @@ class RatRace {
     }
 
     return crossers.map(tile => {
-      return { ...this.#deck[tile][0], family: tile };
+      return { ...this.#deck[tile][0], family: tile, username };
     });
   }
 

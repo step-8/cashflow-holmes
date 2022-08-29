@@ -1,7 +1,7 @@
 const serveCard = (req, res) => {
-  const { game } = req;
+  const { game, session: { username } } = req;
   const card = game.getCard();
-  game.setNotifications();
+  game.setNotifications(username);
   res.json(card);
 };
 
@@ -26,24 +26,29 @@ const acceptCard = (game, family, type, username) => {
   return game[family](username);
 };
 
-const buyDeal = (game, type, count, username) => {
-  if (type === 'realEstate') {
-    return game.buyRealEstate(username);
-  }
+const buyAsset = (game, type, count, username) => {
+  const types = {
+    realEstate: () => game.buyRealEstate(username),
+    stock: () => game.buyStocks(username, count),
+    lottery: () => game.buyLottery(username),
+    goldCoins: () => game.buyGoldCoins(username),
+    default: () => game.skip(username)
+  };
 
-  if (type === 'stock') {
-    return game.buyStocks(username, count);
-  }
+  const executor = types[type] ? types[type] : types.default;
+  executor();
+};
 
-  if (type === 'lottery') {
-    return game.buyLottery(username);
-  }
+const sellAsset = (game, type, count, username) => {
+  const types = {
+    realEstate: () => game.sellRealEstate(username),
+    stock: () => game.sellStocks(username, count),
+    goldCoins: () => game.sellGoldCoins(username, count),
+    default: () => game.skip(username)
+  };
 
-  if (type === 'goldCoins') {
-    return game.buyGoldCoins(username);
-  }
-
-  game.skip(username);
+  const executor = types[type] ? types[type] : types.default;
+  executor();
 };
 
 const cardActionsHandler = (req, res) => {
@@ -58,15 +63,15 @@ const cardActionsHandler = (req, res) => {
 
   const actions = {
     ok: () => acceptCard(game, family, type, username),
-    buy: () => buyDeal(game, type, +count, username),
+    buy: () => buyAsset(game, type, +count, username),
     skip: () => game.skip(username),
     roll: () => game.activateReroll(),
-    sell: () => game.sellStocks(username, +count)
+    sell: () => sellAsset(game, type, +count, username)
   };
   actions[action]();
   res.end();
 };
 
 module.exports = {
-  serveCard, cardActionsHandler, resetTransaction, acceptCard, buyDeal
+  serveCard, cardActionsHandler, resetTransaction, acceptCard, buyAsset
 };

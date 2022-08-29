@@ -125,6 +125,11 @@ const marketDamageEvent = card => CardBuilder.getInstanceWith(card)
   .onlyCost()
   .build();
 
+const goldSellEvent = card => CardBuilder.getInstanceWith(card)
+  .withRule()
+  .onlyCost()
+  .build();
+
 const noCard = () => ['div', {}];
 
 const cardTemplates = {
@@ -133,7 +138,7 @@ const cardTemplates = {
     realEstate: realEstateCard,
     stock: stocksCard,
     lottery: lotteryCard,
-    goldCoins: goldDealCard,
+    goldCoins: goldDealCard
   },
   doodad: {
     doodad: doodadCard
@@ -154,5 +159,6 @@ const cardTemplates = {
     lottery: marketStockEvent,
     realEstate: marketRealEstate,
     damage: marketDamageEvent,
+    goldCoins: goldSellEvent
   },
 };

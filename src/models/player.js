@@ -157,7 +157,7 @@ class Player {
       return 0;
     }
 
-    const stock = this.#findStock(card);
+    const stock = this.#findAsset(card, 'stocks');
     if (stock) {
       const existingTotalCost = stock.count * stock.price;
       const totalCount = count + stock.count;
@@ -172,21 +172,39 @@ class Player {
     return 1;
   }
 
-  #findStock(card) {
-    return this.#assets.stocks.find(stock => stock.symbol === card.symbol);
+  #findAsset(card, type) {
+    return this.#assets[type].find(item => item.symbol === card.symbol);
+    // this.#assets.find(card);
   }
 
-  #findStockIndex(card) {
-    return this.#assets.stocks.findIndex(stock => stock.symbol === card.symbol);
+  #findAssetIndex(card, type) {
+    return this.#assets[type].findIndex(item => item.symbol === card.symbol);
   }
 
-  #removeStock(stock) {
-    const stockIndex = this.#findStockIndex(stock);
-    this.#assets.stocks.splice(stockIndex, 1);
+  #removeAsset(card, type) {
+    const index = this.#findAssetIndex(card, type);
+    this.#assets[type].splice(index, 1);
+  }
+
+  sellGold(card, count) {
+    const gold = this.#findAsset(card, 'preciousMetals');
+    const totalCost = card.cost * count;
+
+    if (gold.count < count) {
+      return false;
+    }
+
+    gold.count -= count;
+    this.updateCash(totalCost, card.symbol);
+
+    if (gold.count <= 0) {
+      this.#removeAsset(gold, 'preciousMetals');
+    }
+    return true;
   }
 
   sellStocks(card, count) {
-    const stock = this.#findStock(card);
+    const stock = this.#findAsset(card, 'stocks');
     const totalCost = card.price * count;
 
     if (stock.count < count) {
@@ -197,7 +215,7 @@ class Player {
     this.updateCash(totalCost, card.symbol);
 
     if (stock.count <= 0) {
-      this.#removeStock(stock);
+      this.#removeAsset(stock, 'stocks');
     }
     return true;
   }
@@ -309,17 +327,17 @@ class Player {
   }
 
   hasStock(card) {
-    return this.#findStock(card);
+    return this.#findAsset(card, 'stocks');
   }
 
   splitStocks(card) {
-    const stock = this.#findStock(card);
+    const stock = this.#findAsset(card, 'stocks');
     stock.count *= 2;
     this.deactivateReroll();
   }
 
   reverseSplitStocks(card) {
-    const stock = this.#findStock(card);
+    const stock = this.#findAsset(card, 'stocks');
     stock.count = Math.ceil(stock.count / 2);
     this.deactivateReroll();
   }

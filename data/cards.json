@@ -441,54 +441,6 @@
       }
     },
     {
-      "id": "lottery02",
-      "type": "lottery",
-      "symbol": "lottery",
-      "heading": "Where There's a Will...",
-      "lottery": "money",
-      "description": "A distant relative passes away. You are named in the will but need to travel to attend.",
-      "rule": "If you attend, pay $750 and roll 1 die:",
-      "subRule": [
-        "Die = 1-5, You are bequeathed an elderly cat. Enjoy!",
-        "Die = 6, You are bequeathed ten (10) Gold Coins. Add these to your Asset sheet."
-      ],
-      "cost": 750,
-      "failure": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ],
-      "success": [
-        6
-      ]
-    },
-    {
-      "id": "lottery03",
-      "type": "lottery",
-      "symbol": "lottery",
-      "heading": "What's in the Box?!",
-      "lottery": "gold",
-      "description": "You have the option to purchase a locked filing cabinet at an estate sale.",
-      "rule": "If you buy the cabinet, pay $500 and roll 1 die:",
-      "subRule": [
-        "Die = 1-5, You find...ABSOLUTELY NOTHING in the cabinet.",
-        "Die = 6, You are...ten (10) Gold Coins.CHA-CHING! Add these to your Asset sheet."
-      ],
-      "cost": 500,
-      "failure": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ],
-      "success": [
-        6
-      ]
-    },
-    {
       "id": "lottery04",
       "type": "mlm",
       "symbol": "MLM",
@@ -541,7 +493,7 @@
     {
       "id": "realEstateB1",
       "type": "realEstate",
-      "symbol": "8PLEX",
+      "symbol": "8-PLEX",
       "heading": "8-Plex for Sale",
       "description": "Reinvesting owner offers 8-plex for sale at reasonable price. Financing already in place. All it needs is your down payment.",
       "rule": "Use this yourself or sell to another player",
@@ -553,7 +505,7 @@
     {
       "id": "realEstateB5",
       "type": "realEstate",
-      "symbol": "8PLEX",
+      "symbol": "8-PLEX",
       "heading": "8-Plex for Sale",
       "description": "Professional person urgently needs cash to save partnership. 8-plex is being sold to raise capital. Great opportunity for the right person.",
       "rule": "Use this yourself or sell to another player",
@@ -565,7 +517,7 @@
     {
       "id": "realEstateB32",
       "type": "realEstate",
-      "symbol": "8PLEX",
+      "symbol": "8-PLEX",
       "heading": "8-Plex for Sale",
       "description": "Owner's legal troubles lead to forced sale of this 8-plex. Jump on this deal before someone else does.",
       "rule": "Use this yourself or sell to another player",
@@ -577,7 +529,7 @@
     {
       "id": "realEstateB8",
       "type": "realEstate",
-      "symbol": "8PLEX",
+      "symbol": "8-PLEX",
       "heading": "8-Plex for Sale",
       "description": "Owner offers his 8-plex at the current, appraised value. It has all the amenities renters look for. Fully rented at market rent with excellent records.",
       "rule": "Use this yourself or sell to another player",
@@ -685,7 +637,7 @@
     {
       "id": "realEstateB4",
       "type": "realEstate",
-      "symbol": "4PLEX",
+      "symbol": "4-PLEX",
       "heading": "4-Plex for Sale",
       "description": "Older 4-plex available - forced sale. Out-of-state, financially-distressed owner years behind on taxes. Some records available.",
       "rule": "Use this yourself or sell to another player",
@@ -697,7 +649,7 @@
     {
       "id": "realEstateB9",
       "type": "realEstate",
-      "symbol": "4PLEX",
+      "symbol": "4-PLEX",
       "heading": "4-Plex for Sale",
       "description": "4-plex for sale in rehabilitating neighborhood. Owner being forced out by income tax liens.",
       "rule": "Use this yourself or sell to another player",
@@ -709,7 +661,7 @@
     {
       "id": "realEstateB10",
       "type": "realEstate",
-      "symbol": "4PLEX",
+      "symbol": "4-PLEX",
       "heading": "4-Plex for Sale",
       "description": "4-plex next to new highway for sale. Owner/occupant moving to quieter area. Priced for quick sale.",
       "rule": "Use this yourself or sell to another player",
@@ -721,7 +673,7 @@
     {
       "id": "realEstateB23",
       "type": "realEstate",
-      "symbol": "4PLEX",
+      "symbol": "4-PLEX",
       "heading": "4-Plex for Sale",
       "description": "Nice, well maintained 4-plex in good neighborhood. Stable tenants, positive cash flow, minor repairs.",
       "rule": "Use this yourself or sell to another player",
@@ -733,7 +685,7 @@
     {
       "id": "realEstateB30",
       "type": "realEstate",
-      "symbol": "4PLEX",
+      "symbol": "4-PLEX",
       "heading": "4-Plex for Sale",
       "description": "4-plex in recovering neighborhood. Fully rented, repairs kept up. Needs your down payment and patience.",
       "rule": "Use this yourself or sell to another player",
@@ -745,7 +697,7 @@
     {
       "id": "realEstateB16",
       "type": "realEstate",
-      "symbol": "4PLEX",
+      "symbol": "4-PLEX",
       "heading": "4-Plex for Sale",
       "description": "4-plex for sale by owner, moving to another state. Full records, fully rented, low occupant turnover in good neighborhood.",
       "rule": "Use this yourself or sell to another player",
@@ -1631,7 +1583,8 @@
       "symbol": "GOLD",
       "heading": "Price of Gold Soars",
       "description": "The Central Bank is printing money in an attempt to boost the economy causing massive inflation. The price of gold skyrockets. Buyer offers $2,000 for each gold coin.",
-      "rule": "Everyone may sell any number of coins at this price."
+      "rule": "Everyone may sell any number of coins at this price.",
+      "cost": 2000
     },
     {
       "id": "marketGoldSale02",
@@ -1639,7 +1592,8 @@
       "symbol": "GOLD",
       "heading": "Price of Gold Soars",
       "description": "Rioting Overseas. Oil prices threatened. Price of gold skyrockets. Buyer offers $1,000 cash for each gold coin.",
-      "rule": "Everyone may sell any number of coins at this price."
+      "rule": "Everyone may sell any number of coins at this price.",
+      "cost": 1000
     },
     {
       "id": "marketGoldSale03",
@@ -1647,7 +1601,8 @@
       "symbol": "GOLD",
       "heading": "Collector wants Gold Coins",
       "description": "Wealthy collector is looking for gold coins. Cash offer of $500 for each coin.",
-      "rule": "Everyone may sell any number of coins at this price."
+      "rule": "Everyone may sell any number of coins at this price.",
+      "cost": 500
     },
     {
       "id": "marketGoldSale04",
@@ -1655,23 +1610,8 @@
       "symbol": "GOLD",
       "heading": "Collector wants Gold Coins",
       "description": "Wealthy collector is looking for gold coins. Cash offer of $1,000 for each coin.",
-      "rule": "Everyone may sell any number of coins at this price."
-    },
-    {
-      "id": "marketBusiness01",
-      "type": "business",
-      "symbol": "BUSINESS",
-      "heading": "New Management System",
-      "description": "A new management system creates new efficiencies and lowers costs. Only the person who drew the card is affected.",
-      "rule": "ALL businesses with a cash flow of $1000, or less, have their cash flow increased by $400."
-    },
-    {
-      "id": "marketBusiness02",
-      "type": "business",
-      "symbol": "BUSINESS",
-      "heading": "Small Business Boom!",
-      "description": "The downtown economy has exploded! EVERYONE is affected.",
-      "rule": "ALL businesses with a cash flow of $1000, or less, have their cash flow increased by $250."
+      "rule": "Everyone may sell any number of coins at this price.",
+      "cost": 1000
     }
   ]
 }

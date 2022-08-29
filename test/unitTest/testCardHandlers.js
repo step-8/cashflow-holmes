@@ -1,5 +1,5 @@
 const { assert } = require('chai');
-const { acceptCard, buyDeal } = require('../../src/handlers/cardHandlers.js');
+const { acceptCard, buyAsset } = require('../../src/handlers/cardHandlers.js');
 
 describe('accept card', () => {
   const game = {
@@ -33,14 +33,14 @@ describe('buy deal', () => {
   const count = 0;
 
   it('Should invoke buyRealEstate in game ', () => {
-    buyDeal(game, 'realEstate', count);
+    buyAsset(game, 'realEstate', count);
   });
 
   it('Should invoke buyStocks event in game', () => {
-    buyDeal(game, 'stock', count);
+    buyAsset(game, 'stock', count);
   });
 
   it('Should invoke skip event in game if no event matched', () => {
-    buyDeal(game, '', count);
+    buyAsset(game, '', count);
   });
 });
