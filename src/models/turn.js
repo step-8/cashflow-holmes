@@ -128,6 +128,13 @@ class Turn {
     this.respond(player.username);
   }
 
+  buyMlm(player) {
+    const status = player.buyMlm(this.#card);
+    this.setTransactionState('deal', status, player.username);
+    this.#log.addLog(player, 'bought MLM card');
+    this.respond(player.username);
+  }
+
   charity(player) {
     const amount = 0.1 * player.details.profile.totalIncome;
     const status = player.charity();

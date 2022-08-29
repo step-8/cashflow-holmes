@@ -26,12 +26,13 @@ const acceptCard = (game, family, type, username) => {
   return game[family](username);
 };
 
-const buyAsset = (game, type, count, username) => {
+const buyDeals = (game, type, count, username) => {
   const types = {
     realEstate: () => game.buyRealEstate(username),
     stock: () => game.buyStocks(username, count),
     lottery: () => game.buyLottery(username),
     goldCoins: () => game.buyGoldCoins(username),
+    mlm: () => game.buyMlmDeal(username),
     default: () => game.skip(username)
   };
 
@@ -63,7 +64,7 @@ const cardActionsHandler = (req, res) => {
 
   const actions = {
     ok: () => acceptCard(game, family, type, username),
-    buy: () => buyAsset(game, type, +count, username),
+    buy: () => buyDeals(game, type, +count, username),
     skip: () => game.skip(username),
     roll: () => game.activateReroll(),
     sell: () => sellAsset(game, type, +count, username)
@@ -73,5 +74,5 @@ const cardActionsHandler = (req, res) => {
 };
 
 module.exports = {
-  serveCard, cardActionsHandler, resetTransaction, acceptCard, buyAsset
+  serveCard, cardActionsHandler, resetTransaction, acceptCard, buyAsset: buyDeals
 };

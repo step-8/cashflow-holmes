@@ -210,6 +210,10 @@ class Game {
     return this.#currentTurn.buyLottery(this.findPlayer(username));
   }
 
+  buyMlmDeal(username) {
+    return this.#currentTurn.buyMlm(this.findPlayer(username));
+  }
+
   sellGoldCoins(username, count) {
     const player = this.findPlayer(username);
     let status = 4;

@@ -289,4 +289,27 @@ describe('Game', () => {
       assert.isOk(game.state.transaction.status === 5);
     });
   });
+  //  
+
+  describe('buying MLM', () => {
+    it('should buy MLM card when cash is sufficient to buy mlm card', () => {
+      const profession = JSON.parse(expectedProfessions)[0];
+      const player = new Player('p3', 'guest', 'red', profession);
+      player.setDefaults();
+
+      const card = {
+        family: 'deal',
+        symbol: 'MLM',
+        type: 'mlm',
+        cost: 500
+      };
+
+      const game = new Game(1234, [player], new Dice(2, 6));
+      game.currentCard = card;
+      game.buyMlmDeal('p3');
+
+      const playerMlm = game.state.currentPlayer.hasMlm;
+      assert.isOk(playerMlm);
+    });
+  });
 });

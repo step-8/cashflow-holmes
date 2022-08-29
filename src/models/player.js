@@ -21,6 +21,7 @@ class Player {
   #isInFastTrack;
   #hasBankrupt;
   #aboutToBankrupt;
+  #hasMlm;
 
   constructor(username, role, color, { profession, babies, income, expenses, assets, liabilities }) {
     this.#username = username;
@@ -43,9 +44,10 @@ class Player {
     this.#isInFastTrack = false;
     this.#hasBankrupt = false;
     this.#aboutToBankrupt = false;
+    this.#hasMlm = false;
   }
 
-  init({ isRolledDice, lastPosition, currentPosition, dualDiceCount, skippedTurns, canReRoll, isInFastTrack, transactions }) {
+  init({ isRolledDice, lastPosition, currentPosition, dualDiceCount, skippedTurns, canReRoll, isInFastTrack, transactions, hasMlm }) {
     this.#isRolledDice = isRolledDice;
     this.#currentPosition = currentPosition;
     this.#lastPosition = lastPosition;
@@ -55,6 +57,7 @@ class Player {
     this.#isInFastTrack = isInFastTrack;
     this.#isInFastTrack = isInFastTrack;
     this.#transactions = transactions;
+    this.#hasMlm = hasMlm;
   }
 
   #calculateCashFlow() {
@@ -176,6 +179,16 @@ class Player {
 
     this.#assets.stocks.push({ ...card, count });
     this.updateCash(-totalCost, card.symbol);
+    return 1;
+  }
+
+  buyMlm(card) {
+    if (this.#cash < card.cost) {
+      return 0;
+    }
+
+    this.updateCash(-card.cost, card.symbol.toUpperCase());
+    this.#hasMlm = true;
     return 1;
   }
 
@@ -491,7 +504,8 @@ class Player {
       canReRoll: this.#canReRoll,
       isInFastTrack: this.#isInFastTrack,
       hasBankrupt: this.#hasBankrupt,
-      aboutToBankrupt: this.#aboutToBankrupt
+      aboutToBankrupt: this.#aboutToBankrupt,
+      hasMlm: this.#hasMlm
     };
   }
 }
