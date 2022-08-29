@@ -497,7 +497,6 @@ const createNotifications = (game) => {
     sendAction('ok', family, family);
     checkBankruptcy();
   });
-
 };
 
 const checkBankruptcy = () => {
@@ -852,6 +851,9 @@ const main = () => {
   setInterval(() => {
     API.getGame()
       .then(res => res.json())
+      .then(game => {
+        return game;
+      })
       .then(draw(gameState));
   }, 1000);
 };

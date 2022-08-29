@@ -281,11 +281,7 @@ class Player {
 
   isBankrupt() {
     const cashFlow = this.#calculateCashFlow();
-    const status = (this.#cash + cashFlow) < 0;
-    if (status) {
-      this.#hasBankrupt = true;
-    }
-    return status;
+    return (this.#cash + cashFlow) < 0;
   }
 
   takeLoan(amount) {
@@ -420,6 +416,9 @@ class Player {
     cash += this.#sellAssets('preciousMetals', 'cost');
     cash += this.#sellAllStocks();
     this.#cash += cash;
+    if (this.isBankrupt()) {
+      this.#hasBankrupt = true;
+    }
     return true;
   }
 

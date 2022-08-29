@@ -74,19 +74,6 @@ class RatRace {
       return {};
     }
 
-    if (type === 'smallDeal') {
-      // return getSpecificCard('lottery', this.#deck[type]);
-      return this.#deck[type][random(Object.keys(this.#deck[type]).length - 1)];
-    }
-    // if (type === 'smallDeal') {
-    //   return this.#deck[type][random(Object.keys(this.#deck[type]).length - 1)];
-    //   return getSpecificCard('lottery', this.#deck[type]);
-    //   return getSpecificCard('goldCoins', this.#deck[type]);
-    // }
-    // if (type === 'market') {
-    //   return getSpecificCard('goldCoins', this.#deck[type]);
-    // }
-
     return this.#deck[type][random(Object.keys(this.#deck[type]).length - 1)];
   }
 
