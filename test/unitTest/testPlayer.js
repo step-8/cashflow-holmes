@@ -3,52 +3,52 @@ const professions = require('../../data/professions.json');
 const { assert } = require('chai');
 
 describe('Player', () => {
-  const professionMain = professions[0];
+  const professionMain = JSON.stringify(professions[0]);
 
   it('Should get details of profile', () => {
-    const profession = structuredClone(professionMain);
+    const profession = JSON.parse(professionMain);
     const player = new Player('p3', 'guest', 'red', profession);
     const expectedProfession = 'Doctor(MD)';
     assert.strictEqual(player.profile().profession, expectedProfession);
   });
 
   it('Should set defaults for the profile', () => {
-    const profession = structuredClone(professionMain);
+    const profession = JSON.parse(professionMain);
     const player = new Player('p3', 'guest', 'red', profession);
     player.setDefaults();
     assert.strictEqual(player.profile().cash, 8400);
   });
 
   it('Should calculate the total income', () => {
-    const profession = structuredClone(professionMain);
+    const profession = JSON.parse(professionMain);
     const player = new Player('p3', 'guest', 'red', profession);
     const expectedTotalIncome = 13200;
     assert.strictEqual(player.profile().totalIncome, expectedTotalIncome);
   });
 
   it('Should calculate the total expenses', () => {
-    const profession = structuredClone(professionMain);
+    const profession = JSON.parse(professionMain);
     const player = new Player('p3', 'guest', 'red', profession);
     const expectedTotalExpenses = 8300;
     assert.strictEqual(player.profile().totalExpenses, expectedTotalExpenses);
   });
 
   it('Should calculate the cash flow', () => {
-    const profession = structuredClone(professionMain);
+    const profession = JSON.parse(professionMain);
     const player = new Player('p3', 'guest', 'red', profession);
     const expectedCF = 4900;
     assert.strictEqual(player.profile().cashFlow, expectedCF);
   });
 
   it('Should calculate the passive income', () => {
-    const profession = structuredClone(professionMain);
+    const profession = JSON.parse(professionMain);
     const player = new Player('p3', 'guest', 'red', profession);
     const expectedPassiveIncome = 0;
     assert.strictEqual(player.profile().passiveIncome, expectedPassiveIncome);
   });
 
   it('Should update current and last positions on movement', () => {
-    const profession = structuredClone(professionMain);
+    const profession = JSON.parse(professionMain);
     const player = new Player('p3', 'guest', 'red', profession);
     player.move(3);
     assert.strictEqual(player.details.currentPosition, 3);
@@ -56,7 +56,7 @@ describe('Player', () => {
   });
 
   it('Should move to 24 if position is 0', () => {
-    const profession = structuredClone(professionMain);
+    const profession = JSON.parse(professionMain);
     const player = new Player('p3', 'guest', 'red', profession);
     player.move(24);
     assert.strictEqual(player.details.currentPosition, 24);
@@ -64,7 +64,7 @@ describe('Player', () => {
 
   describe('downsized', () => {
     it('Should not deduct amount from the cash', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
       assert.isOk(player.downsized() !== 0);
@@ -72,7 +72,7 @@ describe('Player', () => {
     });
 
     it('Should deduct amount from the cash', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
       player.payday();
@@ -83,7 +83,7 @@ describe('Player', () => {
 
   describe('donateCash', () => {
     it('Should not deduct amount from the cash', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
       player.downsized();
@@ -92,7 +92,7 @@ describe('Player', () => {
     });
 
     it('Should deduct amount from the cash', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
       assert.isOk(player.charity());
@@ -110,14 +110,14 @@ describe('Player', () => {
     };
 
     it('Should not add stocks to the player', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
       assert.isOk(player.buyStocks(card, 10000) === 0);
     });
 
     it('Should add stocks to the player', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
       assert.isOk(player.buyStocks(card, 100) === 1);
@@ -127,7 +127,7 @@ describe('Player', () => {
 
   describe('payday', () => {
     it('Should add cashflow amount to the cash', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
       player.payday();
@@ -138,7 +138,7 @@ describe('Player', () => {
   describe('doodad', () => {
     it('Should return true when cash is above 0', () => {
       const card = { isConditional: false, cost: 10 };
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
 
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
@@ -147,7 +147,7 @@ describe('Player', () => {
 
     it('Should return false when cash is less than 0', () => {
       const card = { isConditional: false, cost: 10000 };
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
 
       const player = new Player('p3', 'guest', 'red', profession);
       assert.strictEqual(player.doodad(card), 0);
@@ -155,7 +155,7 @@ describe('Player', () => {
 
     it('Should return 2 when player escaped from doodad', () => {
       const card = { isConditional: true, cost: 10000 };
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
 
       const player = new Player('p3', 'guest', 'red', profession);
       assert.strictEqual(player.doodad(card), 2);
@@ -164,7 +164,7 @@ describe('Player', () => {
 
   describe('lottery', () => {
     it('Should deduct lottery amount from the cash on successful purchase', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
       player.buyLottery(100);
@@ -172,7 +172,7 @@ describe('Player', () => {
     });
 
     it('Should not deduct lottery amount from the cash on unsuccessful purchase', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
       player.buyLottery(100000);
@@ -182,7 +182,7 @@ describe('Player', () => {
 
   describe('buyRealEstate', () => {
     it('Should not add asset if player has insufficient cash', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       const card = { downPayment: 300000 };
       player.setDefaults();
@@ -192,7 +192,7 @@ describe('Player', () => {
     });
 
     it('Should add card to assets', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       const card = { downPayment: 300 };
       player.setDefaults();
@@ -202,7 +202,7 @@ describe('Player', () => {
     });
 
     it('Should add card to liabilities', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       const card = { downPayment: 300 };
       player.setDefaults();
@@ -212,7 +212,7 @@ describe('Player', () => {
     });
 
     it('Should add card to income', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       const card = { downPayment: 300 };
       player.setDefaults();
@@ -233,14 +233,14 @@ describe('Player', () => {
     };
 
     it('Should not add stocks to the player', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
       assert.isOk(player.buyStocks(card, 10000) === 0);
     });
 
     it('Should add stocks to the player', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
       assert.isOk(player.buyStocks(card, 100) === 1);
@@ -249,7 +249,7 @@ describe('Player', () => {
   });
 
   it('Should deduct cash from players profile in doodad', () => {
-    const profession = structuredClone(professionMain);
+    const profession = JSON.parse(professionMain);
     const player = new Player('p3', 'guest', 'red', profession);
     player.setDefaults();
     assert.isOk(player.doodad(10));
@@ -257,13 +257,13 @@ describe('Player', () => {
 
   describe('take loan', () => {
     it('Should add loan in players profile', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       assert.isOk(player.takeLoan(100));
     });
 
     it('Should add amount to the cash', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
       const expected = player.profile();
@@ -281,14 +281,14 @@ describe('Player', () => {
 
   describe('pay loan', () => {
     it('Should deduct loan in players profile', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.takeLoan(100);
       assert.isOk(player.payLoan(100, 'bankLoan'));
     });
 
     it('Should deduct amount from the cash', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
       player.takeLoan(100);
@@ -304,7 +304,7 @@ describe('Player', () => {
     });
 
     it('Should not deduct cash when player doesn\'t have sufficient cash', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.takeLoan(1100);
       player.doodad({ cost: 1100 });
@@ -312,7 +312,7 @@ describe('Player', () => {
     });
 
     it('Should pay the loan amount of specified type', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.takeLoan(10000);
       assert.isOk(player.payLoan(10000, 'creditCardDebt'));
@@ -321,13 +321,13 @@ describe('Player', () => {
 
   describe('baby', () => {
     it('should add baby to the player', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       assert.isOk(player.baby());
     });
 
     it('Should not add baby when player have 3 babies', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
       player.baby();
@@ -338,14 +338,14 @@ describe('Player', () => {
   });
 
   it('should initialize skipped turns count to 2', () => {
-    const profession = structuredClone(professionMain);
+    const profession = JSON.parse(professionMain);
     const player = new Player('p3', 'guest', 'red', profession);
     player.initializeSkippedTurns();
     assert.strictEqual(player.skippedTurns, 2);
   });
 
   it('should decrement skipped turns count', () => {
-    const profession = structuredClone(professionMain);
+    const profession = JSON.parse(professionMain);
     const player = new Player('p3', 'guest', 'red', profession);
     player.initializeSkippedTurns();
     player.decrementSkippedTurns();
@@ -353,14 +353,14 @@ describe('Player', () => {
   });
 
   it('should increment dual dice count by 3', () => {
-    const profession = structuredClone(professionMain);
+    const profession = JSON.parse(professionMain);
     const player = new Player('p3', 'guest', 'red', profession);
     player.incrementDualDiceCount();
     assert.strictEqual(player.dualDiceCount, 3);
   });
 
   it('should decrement dual dice count', () => {
-    const profession = structuredClone(professionMain);
+    const profession = JSON.parse(professionMain);
     const player = new Player('p3', 'guest', 'red', profession);
     player.incrementDualDiceCount();
     player.decrementDualDiceCount();
@@ -369,14 +369,14 @@ describe('Player', () => {
 
   describe('isIncomeStable', () => {
     it('Should return false when income is unstable', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
       assert.isNotOk(player.isIncomeStable());
     });
 
     it('Should return true when income is stable', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       const card = { cashFlow: 100000, downPayment: 5 };
       player.setDefaults();
@@ -387,7 +387,7 @@ describe('Player', () => {
 
   describe('payDamage', () => {
     it('Should return 0 if there is no realEstate', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const card = { cost: 400 };
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
@@ -396,7 +396,7 @@ describe('Player', () => {
     });
 
     it('Should return 1 if there is realEstate and update cash', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const card = { cost: 400 };
       const asset = { cost: 100, downPayment: 100 };
       const player = new Player('p3', 'guest', 'red', profession);
@@ -407,7 +407,7 @@ describe('Player', () => {
     });
 
     it('Should return 6 if there is realEstate and not eno cash', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const card = { cost: 9000 };
       const asset = { cost: 100, downPayment: 100 };
       const player = new Player('p3', 'guest', 'red', profession);
@@ -428,7 +428,7 @@ describe('Player', () => {
     };
 
     it('Should split stocks to the player', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
       player.buyStocks(card, 100);
@@ -447,7 +447,7 @@ describe('Player', () => {
     };
 
     it('Should split stocks to the player', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
       player.buyStocks(card, 100);
@@ -464,7 +464,7 @@ describe('Player', () => {
     };
 
     it('Should add card to precious metals', () => {
-      const profession = structuredClone(professionMain);
+      const profession = JSON.parse(professionMain);
       const player = new Player('p3', 'guest', 'red', profession);
       player.setDefaults();
       assert.isOk(player.addGoldCoins(card));
@@ -482,7 +482,7 @@ describe('Player', () => {
 
     it('Should not sell if the count is exceeding the coins player has',
       () => {
-        const profession = structuredClone(professionMain);
+        const profession = JSON.parse(professionMain);
         profession.assets.preciousMetals.push({ symbol: 'GOLD', count: 5, cost: 1000 });
         const player = new Player('p3', 'guest', 'red', profession);
         player.setDefaults();
@@ -495,7 +495,7 @@ describe('Player', () => {
 
     it('Should sell if the count is exceeding the coins player has',
       () => {
-        const profession = structuredClone(professionMain);
+        const profession = JSON.parse(professionMain);
         profession.assets.preciousMetals.push({ symbol: 'GOLD', count: 5, cost: 1000 });
         const player = new Player('p3', 'guest', 'red', profession);
         player.setDefaults();
