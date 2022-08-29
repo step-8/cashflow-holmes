@@ -128,7 +128,7 @@ class Player {
     if (this.isBankrupt()) {
       this.#aboutToBankrupt = true;
     }
-    return true;
+    return !this.isBankrupt();
   }
 
   doodad(card) {

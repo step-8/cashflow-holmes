@@ -237,7 +237,7 @@ const drawNotifications = (game) => {
   if (game.currentPlayer.isInFastTrack) {
     return game;
   }
-  API.changeTurn();
+
   return game;
 };
 
