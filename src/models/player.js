@@ -97,8 +97,8 @@ class Player {
     this.#isRolledDice = status;
   }
 
-  initializeDualDiceCount() {
-    this.#dualDiceCount = 3;
+  incrementDualDiceCount() {
+    this.#dualDiceCount += 3;
   }
 
   decrementDualDiceCount() {

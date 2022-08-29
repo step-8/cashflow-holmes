@@ -251,8 +251,8 @@ describe('Turn', () => {
         username: 'user',
         color: 'c',
         dualDiceCount: 0,
-        initializeDualDiceCount: () => {
-          player.dualDiceCount = 3;
+        incrementDualDiceCount: () => {
+          player.dualDiceCount += 3;
         },
         details: {
           profile: { cashFlow: 100, totalIncome: 100 }

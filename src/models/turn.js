@@ -132,7 +132,7 @@ class Turn {
       return;
     }
 
-    player.initializeDualDiceCount();
+    player.incrementDualDiceCount();
     this.#log.addLog(player, `donated $${amount} to charity`);
     this.respond(player.username);
   }

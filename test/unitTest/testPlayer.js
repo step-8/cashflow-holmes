@@ -339,17 +339,17 @@ describe('Player', () => {
     assert.strictEqual(player.skippedTurns, 1);
   });
 
-  it('should initialize dual dice count to 3', () => {
+  it('should increment dual dice count by 3', () => {
     const profession = JSON.parse(professionStr);
     const player = new Player('p3', 'guest', 'red', profession);
-    player.initializeDualDiceCount();
+    player.incrementDualDiceCount();
     assert.strictEqual(player.dualDiceCount, 3);
   });
 
   it('should decrement dual dice count', () => {
     const profession = JSON.parse(professionStr);
     const player = new Player('p3', 'guest', 'red', profession);
-    player.initializeDualDiceCount();
+    player.incrementDualDiceCount();
     player.decrementDualDiceCount();
     assert.strictEqual(player.dualDiceCount, 2);
   });

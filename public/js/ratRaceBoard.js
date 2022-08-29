@@ -159,10 +159,10 @@ const activateRoll = (diceBox, game) => {
   diceBox.style.boxShadow = 'grey 0px 0px 12px 6px';
 
   diceBox.onclick = () => {
-    deactivateRoll(diceBox);
     API.getGame()
       .then(res => res.json())
-      .then(rollDice);
+      .then(rollDice)
+      .then(() => deactivateRoll(diceBox));
   };
   drawForCurrentUser(drawToggle)(game);
 };

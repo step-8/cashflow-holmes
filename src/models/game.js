@@ -146,6 +146,9 @@ class Game {
     if (this.currentPlayer.skippedTurns > 0) {
       this.addLog(this.currentPlayer.username, 'skipped turn');
       this.currentPlayer.decrementSkippedTurns();
+      if (this.currentPlayer.dualDiceCount > 0) {
+        this.currentPlayer.decrementDualDiceCount();
+      }
       this.changeTurn();
       return;
     }
