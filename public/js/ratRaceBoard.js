@@ -432,7 +432,11 @@ const getMessage = (family, status, currentPlayer) => {
     charity: [
       'Insufficient balance. Take loan to proceed',
       'You donated to charity'],
-    payday: ['', `Received payday of ${cashFlow}.`],
+    payday: [
+      `Received payday of ${cashFlow}`,
+      `Received payday of ${cashFlow} and won $500 in MLM`,
+      `Received payday of ${cashFlow} and lost MLM`
+    ],
     downsized: ['Insufficient balance. Take loan to proceed', 'You\'re downsized'],
     baby: ['', 'You got a new baby']
   };

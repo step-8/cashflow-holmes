@@ -138,7 +138,7 @@ const actions = {
     stock: ['BUY', 'SELL', 'SKIP'],
     stockOthers: ['SELL', 'SKIP'],
     lottery: ['BUY', 'SKIP'],
-    mlm: ['ROLL', 'SKIP'],
+    mlm: ['BUY', 'SKIP'],
     goldCoins: ['BUY', 'SKIP']
   },
   market: {

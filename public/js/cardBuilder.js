@@ -138,7 +138,8 @@ const cardTemplates = {
     realEstate: realEstateCard,
     stock: stocksCard,
     lottery: lotteryCard,
-    goldCoins: goldDealCard
+    goldCoins: goldDealCard,
+    mlm: lotteryCard
   },
   doodad: {
     doodad: doodadCard

@@ -60,11 +60,31 @@ class Turn {
     this.respond(username);
   }
 
+  paydayWithMlm(player, diceValue) {
+    const status = this.#currentPlayer.payday();
+    this.#log.addLog(this.#currentPlayer, `received pay of $${this.#cashflow()}`);
+    this.#log.addLog(this.#currentPlayer, `rolled ${diceValue} in MLM`);
+
+    if (diceValue >= 4) {
+      this.#log.addLog(this.#currentPlayer, 'got $500 cash');
+      this.#currentPlayer.updateCash(500, 'MLM');
+      this.setTransactionState('payday', 1, this.#currentPlayer.username);
+    } else {
+      this.#log.addLog(this.#currentPlayer, 'lost MLM');
+      this.setTransactionState('payday', 2, this.#currentPlayer.username);
+    }
+
+    if (status) {
+      this.#changeTurnIfNoCard(player.username);
+    }
+    return status;
+  }
+
   payday(player) {
     const status = this.#currentPlayer.payday();
     this.#log.addLog(this.#currentPlayer, `received pay of $${this.#cashflow()}`);
 
-    this.setTransactionState('payday', 1, this.#currentPlayer.username);
+    this.setTransactionState('payday', 0, this.#currentPlayer.username);
     if (status) {
       this.#changeTurnIfNoCard(player.username);
     }
