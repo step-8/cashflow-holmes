@@ -549,14 +549,17 @@ const drawRatRaceCompletion = (game) => {
     [
       'div', { className: 'escape-popup active flex-column flex-center gap' },
       ['div', { className: 'username' }, `${currentPlayer.username} has escaped from Rat Race`],
-      ['div', { className: 'button', onclick: () => removePopUp('.escape-popup') }, 'OK']
+      ['div', { className: 'button', onclick: (event) => removePopUp('.escape-popup') }, 'OK']
     ];
 
   const pageWrapperEle = getElement('#escape-rat-race');
   pageWrapperEle.replaceChildren('');
   pageWrapperEle.appendChild(html(popupTemplate));
-
   blurBackground();
+  
+  if (currentPlayer.username === game.username) {
+    timeout(() => API.changeTurn(), 5000);
+  }
 };
 
 const drawScreen = (game, gameState) => {

@@ -55,7 +55,6 @@ class Player {
     this.#skippedTurns = skippedTurns;
     this.#canReRoll = canReRoll;
     this.#isInFastTrack = isInFastTrack;
-    this.#isInFastTrack = isInFastTrack;
     this.#transactions = transactions;
     this.#hasMlm = hasMlm;
   }
@@ -271,7 +270,8 @@ class Player {
   }
 
   isIncomeStable() {
-    return this.#calculatePassiveIncome() > this.#calculateTotalExpenses();
+    return true;
+    // return this.#calculatePassiveIncome() > this.#calculateTotalExpenses();
   }
 
   #setFastTrack() {

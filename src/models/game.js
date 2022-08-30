@@ -133,6 +133,7 @@ class Game {
     const currentPlayer = this.nextPlayer();
 
     const { isInFastTrack, hasBankrupt } = currentPlayer.details;
+    console.log(isInFastTrack, 'fast track in change turn');
     if (isInFastTrack || hasBankrupt) {
       this.changeTurn();
       return;

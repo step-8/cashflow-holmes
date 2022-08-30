@@ -73,6 +73,10 @@ class RatRace {
     if (this.#notifications.includes(type)) {
       return {};
     }
+    
+    if (type === 'smallDeal') {
+      return getSpecificCard('realEstate', this.#deck[type]);
+    }
 
     return this.#deck[type][random(Object.keys(this.#deck[type]).length - 1)];
   }
