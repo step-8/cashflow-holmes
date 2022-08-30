@@ -111,7 +111,10 @@ const charityCard = card => CardBuilder.getInstanceWith(card)
 
 const dealPopup = card => CardBuilder.getInstanceWith(card).build();
 
-const marketRealEstate = card => CardBuilder.getInstanceWith(card).build();
+const marketRealEstate = card => CardBuilder.getInstanceWith(card)
+  .withRule()
+  .withSubRule()
+  .build();
 
 const marketStockEvent = card => CardBuilder.getInstanceWith(card)
   .withRule()
