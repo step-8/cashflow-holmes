@@ -140,10 +140,7 @@
       "description": "Powerhouse market drives fund's price up to record high",
       "rule": "Only you may buy as many units as you want at this price. Everyone may sell at this price",
       "price": 40,
-      "range": [
-        20,
-        30
-      ]
+      "range": [20, 30]
     },
     {
       "id": "gro4us30",
@@ -153,10 +150,7 @@
       "description": "Brilliant young fund manager. Everyone believes he has the Midas touch",
       "rule": "Only you may buy as many units as you want at this price. Everyone may sell at this price",
       "price": 30,
-      "range": [
-        20,
-        30
-      ]
+      "range": [20, 30]
     },
     {
       "id": "gro4us20",
@@ -166,10 +160,7 @@
       "description": "Lower interest rates drive market and fund to strong showing.",
       "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price",
       "price": 20,
-      "range": [
-        20,
-        30
-      ]
+      "range": [20, 30]
     },
     {
       "id": "gro4us10",
@@ -179,10 +170,7 @@
       "description": "Weak showing in job growth causes lack of consumer confidence. Shares fall with public opinion.",
       "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price",
       "price": 10,
-      "range": [
-        20,
-        30
-      ]
+      "range": [20, 30]
     },
     {
       "id": "gro4us05",
@@ -192,10 +180,7 @@
       "description": "Weak earnings report leads to weak price of mutual fund.",
       "rule": "Only you may buy as many units as you want at this price. Everyone may sell at this price",
       "price": 5,
-      "range": [
-        20,
-        30
-      ]
+      "range": [20, 30]
     },
     {
       "id": "myt4u40",
@@ -205,10 +190,7 @@
       "description": "Booming market leads to record share price of this electronics seller!",
       "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
       "price": 40,
-      "range": [
-        10,
-        30
-      ]
+      "range": [10, 30]
     },
     {
       "id": "myt4u30",
@@ -218,10 +200,7 @@
       "description": "Low interest rates lead to favorable share price for this electronics seller.",
       "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
       "price": 30,
-      "range": [
-        10,
-        30
-      ]
+      "range": [10, 30]
     },
     {
       "id": "myt4u20",
@@ -231,10 +210,7 @@
       "description": "Weak market leads to sagging share price for this electronics seller.",
       "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
       "price": 10,
-      "range": [
-        10,
-        30
-      ]
+      "range": [10, 30]
     },
     {
       "id": "myt4u10",
@@ -244,10 +220,7 @@
       "description": "New product flops and tough losses are reported! Share price drops.",
       "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
       "price": 10,
-      "range": [
-        10,
-        30
-      ]
+      "range": [10, 30]
     },
     {
       "id": "myt4u05",
@@ -257,10 +230,7 @@
       "description": "Record interest rates lead to substandard share price for this electronics seller",
       "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
       "price": 5,
-      "range": [
-        10,
-        30
-      ]
+      "range": [10, 30]
     },
     {
       "id": "ok4u40",
@@ -270,10 +240,7 @@
       "description": "Booming market raises share price of this longtime pharmaceutical company.",
       "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
       "price": 40,
-      "range": [
-        5,
-        30
-      ]
+      "range": [5, 30]
     },
     {
       "id": "ok4u30",
@@ -283,10 +250,7 @@
       "description": "Low inflation leads to high share price for this long time pharmaceutical company.",
       "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
       "price": 30,
-      "range": [
-        5,
-        30
-      ]
+      "range": [5, 30]
     },
     {
       "id": "ok4u20",
@@ -296,10 +260,7 @@
       "description": "Inflation worries cause poor share price for this longtime pharmaceutical company.",
       "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
       "price": 20,
-      "range": [
-        5,
-        30
-      ]
+      "range": [5, 30]
     },
     {
       "id": "ok4u10",
@@ -309,10 +270,7 @@
       "description": "Research and development delays cause low share price for this longtime pharmaceutical company",
       "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
       "price": 10,
-      "range": [
-        5,
-        40
-      ]
+      "range": [5, 40]
     },
     {
       "id": "ok4u05",
@@ -322,10 +280,7 @@
       "description": "Interest rates cripple share price of this longtime pharmaceutical company.",
       "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
       "price": 5,
-      "range": [
-        5,
-        30
-      ]
+      "range": [5, 30]
     },
     {
       "id": "on2u40",
@@ -335,10 +290,7 @@
       "description": "Box office hit by children's division causes record share price.",
       "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
       "price": 40,
-      "range": [
-        10,
-        30
-      ]
+      "range": [10, 30]
     },
     {
       "id": "on2u30",
@@ -348,10 +300,7 @@
       "description": "Strong demand for company's library of old movies leads to good share price.",
       "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
       "price": 30,
-      "range": [
-        10,
-        30
-      ]
+      "range": [10, 30]
     },
     {
       "id": "on2u20",
@@ -361,10 +310,7 @@
       "description": "New director of movie acquisitions brings revived prospects for share price.",
       "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
       "price": 20,
-      "range": [
-        10,
-        30
-      ]
+      "range": [10, 30]
     },
     {
       "id": "on2u10",
@@ -374,10 +320,7 @@
       "description": "Movie buyer fired after third mega-flop! Shares sink. Chairman's bonus canceled.",
       "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
       "price": 10,
-      "range": [
-        10,
-        30
-      ]
+      "range": [10, 30]
     },
     {
       "id": "on2u05",
@@ -387,10 +330,7 @@
       "description": "Newest theme park is a huge flop, reports record losses. Share price hits all-time low.",
       "rule": "Only you may buy as many shares as you want at this price. Everyone may sell at this price.",
       "price": 5,
-      "range": [
-        10,
-        30
-      ]
+      "range": [10, 30]
     },
     {
       "id": "gold1",
@@ -425,16 +365,8 @@
         "Die = 4-6, She pays you back $10,000, but family get-togethers are still awkward"
       ],
       "cost": 5000,
-      "failure": [
-        1,
-        2,
-        3
-      ],
-      "success": [
-        4,
-        5,
-        6
-      ],
+      "failure": [1, 2, 3],
+      "success": [4, 5, 6],
       "outcome": {
         "failure": 0,
         "success": 10000
@@ -453,16 +385,8 @@
         "Die = 4-6, Your sweat equity paid off! Collect $500."
       ],
       "cost": 500,
-      "failure": [
-        1,
-        2,
-        3
-      ],
-      "success": [
-        4,
-        5,
-        6
-      ]
+      "failure": [1, 2, 3],
+      "success": [4, 5, 6]
     },
     {
       "id": "lottery05",
@@ -477,16 +401,8 @@
         "Die = 4-6, Your sweat equity paid off! Collect $500."
       ],
       "cost": 500,
-      "failure": [
-        1,
-        2,
-        3
-      ],
-      "success": [
-        4,
-        5,
-        6
-      ]
+      "failure": [1, 2, 3],
+      "success": [4, 5, 6]
     }
   ],
   "bigDeal": [
@@ -565,7 +481,7 @@
     {
       "id": "realEstateB3",
       "type": "realEstate",
-      "symbol": "3Br/2ba",
+      "symbol": "3Br/2Ba",
       "heading": "House for Sale - 3Br/2Ba",
       "description": "Split level 3/2 house on out-of-way golf course offered by heirs of owner. Golf membership is included",
       "rule": "Use this yourself or sell to another player",
@@ -1425,11 +1341,7 @@
         "Die = 1-3,STOCK SPLITS! Everyone hwo owns OK4U DOUBLES their number of shares.",
         "Die = 4-6,STOCK REVERSE SPLITS! Everyone who owns OK4U loses half their shares."
       ],
-      "success": [
-        1,
-        2,
-        3
-      ]
+      "success": [1, 2, 3]
     },
     {
       "id": "marketLottery02",
@@ -1443,11 +1355,7 @@
         "Die = 1-3,STOCK SPLITS! Everyone hwo owns GRO4US DOUBLES their number of shares.",
         "Die = 4-6,STOCK REVERSE SPLITS! Everyone who owns GRO4US loses half their shares."
       ],
-      "success": [
-        1,
-        2,
-        3
-      ]
+      "success": [1, 2, 3]
     },
     {
       "id": "marketLottery03",
@@ -1461,11 +1369,7 @@
         "Die = 1-3,STOCK SPLITS! Everyone hwo owns MYT4U DOUBLES their number of shares.",
         "Die = 4-6,STOCK REVERSE SPLITS! Everyone who owns MYT4U loses half their shares."
       ],
-      "success": [
-        1,
-        2,
-        3
-      ]
+      "success": [1, 2, 3]
     },
     {
       "id": "marketPlexBuyer01",
@@ -1632,6 +1536,84 @@
       "description": "Wealthy collector is looking for gold coins. Cash offer of $1,000 for each coin.",
       "rule": "Everyone may sell any number of coins at this price.",
       "cost": 1000
+    },
+    {
+      "id": "marketPlexBuyer11",
+      "type": "realEstate",
+      "symbol": "2Br/1Ba",
+      "heading": "House Buyer - 2BR/1BA",
+      "plus": false,
+      "value": 10,
+      "description": "Buyer looking to acquire 2Br/1Ba rentals. Offers your original cost plus 10%",
+      "rule": "Everyone may sell any number of properties at this price.",
+      "subRule": [
+        "If you sell, pay off the related mortgage and give up the cash flow on this property."
+      ]
+    },
+    {
+      "id": "marketPlexBuyer12",
+      "type": "realEstate",
+      "symbol": "2Br/1Ba",
+      "heading": "House Buyer - 2BR/1BA",
+      "plus": false,
+      "value": 15,
+      "description": "You are offered 15% more for a 2Br/1Ba House or Condo. Buyer has their own financing.",
+      "rule": "Everyone may sell any number of properties at this price.",
+      "subRule": [
+        "If you sell, pay off the related mortgage and give up the cash flow on this property."
+      ]
+    },
+    {
+      "id": "marketPlexBuyer14",
+      "type": "realEstate",
+      "symbol": "3Br/2Ba",
+      "heading": "House Buyer - 3BR/2BA",
+      "plus": true,
+      "value": 10000,
+      "description": "Buyer searching for 3Br/2Ba house. Offers your original cost plus $10,000",
+      "rule": "Everyone may sell any number of properties at this price.",
+      "subRule": [
+        "If you sell, pay off the related mortgage and give up the cash flow on this property."
+      ]
+    },
+    {
+      "id": "marketPlexBuyer15",
+      "type": "realEstate",
+      "symbol": "3Br/2Ba",
+      "heading": "House Buyer - 3BR/2BA",
+      "plus": true,
+      "value": 15000,
+      "description": "Buyer searching for 3Br/2Ba house. Offers your original cost plus $15,000",
+      "rule": "Everyone may sell any number of properties at this price.",
+      "subRule": [
+        "If you sell, pay off the related mortgage and give up the cash flow on this property."
+      ]
+    },
+    {
+      "id": "marketPlexBuyer16",
+      "type": "realEstate",
+      "symbol": "3Br/2Ba",
+      "heading": "House Buyer - 3BR/2BA",
+      "plus": true,
+      "value": 5000,
+      "description": "Buyer searching for 3Br/2Ba house. Offers your original cost plus $5,000",
+      "rule": "Everyone may sell any number of properties at this price.",
+      "subRule": [
+        "If you sell, pay off the related mortgage and give up the cash flow on this property."
+      ]
+    },
+    {
+      "id": "marketPlexBuyer16",
+      "type": "realEstate",
+      "symbol": "3Br/2Ba",
+      "heading": "House Buyer - 3BR/2BA",
+      "plus": true,
+      "value": 20000,
+      "description": "Buyer searching for 3Br/2Ba house. Offers your original cost plus $20,000",
+      "rule": "Everyone may sell any number of properties at this price.",
+      "subRule": [
+        "If you sell, pay off the related mortgage and give up the cash flow on this property."
+      ]
     }
   ]
 }
