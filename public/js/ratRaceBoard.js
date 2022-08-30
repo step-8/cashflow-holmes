@@ -433,6 +433,7 @@ const getMessage = (family, status, currentPlayer) => {
       'Insufficient balance. Take loan to proceed',
       'You donated to charity'],
     payday: [
+      '',
       `Received payday of ${cashFlow}`,
       `Received payday of ${cashFlow} and won $500 in MLM`,
       `Received payday of ${cashFlow} and lost MLM`
@@ -450,7 +451,7 @@ const isEveryoneResponded = (game) => game.turnResponses.every(({ responded }) =
 const message = (game, username) => {
   const { transaction: { family, status }, currentPlayer } = game;
 
-  if (family === game.currentCard.family) {
+  if (family === game.currentCard.family && family !== 'payday') {
     createNotification(game, family, currentPlayer, status, username);
     API.resetTransaction();
   }

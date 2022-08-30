@@ -49,6 +49,66 @@ describe('Turn', () => {
     });
   });
 
+  describe('paydayWithMlm', () => {
+    it('Should invoke the players payday and add extra money on MLM', () => {
+      const log = new Log();
+      const player = {
+        username: 'user',
+        color: 'c',
+        details: {
+          profile: { cashFlow: 100, totalIncome: 100 }
+        },
+        doodad: identity,
+        payday: successful,
+        buyRealEstate: identity,
+        updateCash: identity,
+        hasMlm: true
+      };
+
+      const response = new Response(createResponses([player]));
+      const turn = new Turn(card, player, log, response);
+      turn.paydayWithMlm(player, 4);
+
+      assert.isOk(turn.info.state);
+      assert.deepStrictEqual(
+        log.getAllLogs(),
+        [
+          { username: 'user', color: 'c', message: 'received pay of $100' },
+          { username: 'user', color: 'c', message: 'rolled 4 in MLM' },
+          { username: 'user', color: 'c', message: 'got $500 cash' }]
+      );
+    });
+
+    it('Should invoke the players payday and not add extra money on MLM', () => {
+      const log = new Log();
+      const player = {
+        username: 'user',
+        color: 'c',
+        details: {
+          profile: { cashFlow: 100, totalIncome: 100 }
+        },
+        doodad: identity,
+        payday: successful,
+        buyRealEstate: identity,
+        updateCash: identity,
+        hasMlm: true
+      };
+
+      const response = new Response(createResponses([player]));
+      const turn = new Turn(card, player, log, response);
+      turn.paydayWithMlm(player, 3);
+
+      assert.isOk(turn.info.state);
+      assert.deepStrictEqual(
+        log.getAllLogs(),
+        [
+          { username: 'user', color: 'c', message: 'received pay of $100' },
+          { username: 'user', color: 'c', message: 'rolled 3 in MLM' },
+          { username: 'user', color: 'c', message: 'lost MLM' }]
+      );
+    });
+  });
+
   describe('doodad', () => {
     const card = {
       heading: 'New Card',
@@ -657,7 +717,7 @@ describe('Turn', () => {
     assert.isOk(turn.info.state);
   });
 
-  
+
   it('Should return if player doesn\'t have enough cash', () => {
     const log = new Log();
     const player = {

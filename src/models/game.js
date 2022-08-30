@@ -178,7 +178,8 @@ class Game {
   }
 
   payday(username) {
-    if (this.#currentPlayer.details.hasMlm) {
+    const player = this.findPlayer(username);
+    if (player.details.hasMlm) {
       const [diceValue] = this.#dice.roll(1);
       return this.#currentTurn.paydayWithMlm(this.findPlayer(username), diceValue);
     }

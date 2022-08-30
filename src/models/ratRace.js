@@ -74,6 +74,10 @@ class RatRace {
       return {};
     }
 
+    if (type === 'smallDeal') {
+      return getSpecificCard('mlm', this.#deck[type]);
+    }
+
     return this.#deck[type][random(Object.keys(this.#deck[type]).length - 1)];
   }
 
