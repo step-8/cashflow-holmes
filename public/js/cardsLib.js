@@ -24,10 +24,7 @@ const submitValue = (event, action, cardDetails) => {
 const createRealEstateSelection = ({ realEstates }, { symbol }) => {
   const filtered = realEstates.filter(
     realEstate => realEstate.symbol.includes(symbol));
-  console.log(filtered);
-  console.log(realEstates);
-  console.log(symbol);
-
+  
   const realEstateSelection = html(['select', { name: 'real-estate', id: 'real-estate-options' }, '']);
   realEstateSelection.append(html(['option', { value: ' ' }, '--Choose real estate--']));
 
@@ -45,7 +42,6 @@ const createRealEstateSelection = ({ realEstates }, { symbol }) => {
 const drawInputBox = (action, cardDetails, { profile }) => {
   const actions = getElement('.actions');
   const actionsChildren = [...actions.children];
-  console.log(cardDetails);
 
   const dropDown = createRealEstateSelection(profile.assets, cardDetails);
 

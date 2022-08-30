@@ -63,7 +63,7 @@ a {
   border: var(--def-border);
   border-top-left-radius: 1em;
   border-bottom-left-radius: 1em;
-  background: linear-gradient(-60deg, #db5b5b, #ffd795);
+  background: var(--panel-button);
   display: flex;
   align-items: center;
   font-size: var(--normal-font);
@@ -79,7 +79,7 @@ a {
 }
 
 #loan-options>div {
-  background: linear-gradient(-60deg, #db5b5b, #ffd795);
+  background:var(--panel-button);
   padding: 0.5vmax;
   border: var(--def-border);
   border-radius: var(--def-curve);
@@ -870,7 +870,7 @@ a {
 }
 
 #game-nav li:hover {
-  filter: brightness(1.3);
+  filter: brightness(1.2);
 }
 
 /* stocks styles */
