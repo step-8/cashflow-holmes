@@ -260,7 +260,7 @@ class Player {
       totalCost = realEstate.cost + card.value;
     }
 
-    this.updateCash(totalCost, card.symbol);
+    this.updateCash(totalCost - realEstate.mortgage, card.symbol);
     this.#removeRealEstate(id);
     return true;
   }

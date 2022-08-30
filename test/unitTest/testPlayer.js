@@ -505,4 +505,40 @@ describe('Player', () => {
         assert.strictEqual(asset.count, 2);
       });
   });
+
+  describe('sellRealEstate', () => {
+    const card = {
+      heading: 'New Card',
+      symbol: 'GOLD',
+      cost: 1000,
+      family: 'market',
+      type: 'goldCoins'
+    };
+
+    it('Should sell the given real estate',
+      () => {
+        const profession = JSON.parse(professionMain);
+        profession.assets.realEstates.push(
+          {
+            id: 'realEstateB1',
+            type: '8-PLEX',
+            cost: 32000,
+            downPayment: 40000,
+            cashFlow: 1700
+          });
+
+        const player = new Player('p3', 'guest', 'red', profession);
+        player.setDefaults();
+
+        const card = {
+          id: 'marketPlexBuyer01',
+          symbol: 'PLEX',
+          family: 'market',
+          plus: true,
+          value: 1000,
+        };
+
+        assert.isOk(player.sellRealEstate(card, 'realEstateB1'));
+      });
+  });
 });

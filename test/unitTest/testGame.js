@@ -263,6 +263,35 @@ describe('Game', () => {
     });
   });
 
+  describe('sellRealEstate', () => {
+    it('should set transaction status to 7 if transaction is successful', () => {
+      const profession = JSON.parse(expectedProfessions)[0];
+      profession.assets.realEstates.push(
+        {
+          id: 'realEstateB1',
+          type: '8-PLEX',
+          cost: 32000,
+          downPayment: 40000,
+          cashFlow: 1700
+        });
+
+      const player = new Player('p3', 'guest', 'red', profession);
+
+      const card = {
+        id: 'marketPlexBuyer01',
+        symbol: 'PLEX',
+        family: 'market',
+        plus: true,
+        value: 1000,
+      };
+
+      const game = new Game(1234, [player], new Dice(2, 6));
+      game.currentCard = card;
+      game.sellRealEstate('p3', 'realEstateB1');
+      assert.isOk(game.state.transaction.status === 7);
+    });
+  });
+
   describe('sellGoldCoins', () => {
     it('should set transaction status to 5 if transaction is successful', () => {
       const profession = JSON.parse(expectedProfessions)[0];
@@ -289,7 +318,6 @@ describe('Game', () => {
       assert.isOk(game.state.transaction.status === 5);
     });
   });
-  //  
 
   describe('buying MLM', () => {
     it('should buy MLM card when cash is sufficient to buy mlm card', () => {
