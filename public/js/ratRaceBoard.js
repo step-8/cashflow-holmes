@@ -36,29 +36,36 @@ const drawLotteryMessage = () => {
     .then(drawMessages);
 };
 
-const rollDice = (game) => {
-  const { currentPlayer: { canReRoll }, currentCard } = game;
-  if (canReRoll && currentCard) {
-    API.reRollDice()
-      .then(drawLotteryMessage);
-    return;
-  }
-  
+const preAnimateDice = (game) => {
   const diceSet = new Set();
   [1, 2, 3, 4, 5, 6].forEach(item => diceSet.add(item));
+  game.diceValues.forEach(val => diceSet.delete(val));
+  
+  const randDice = [...diceSet.values()].slice(0, 2);
+  animateRollDice(randDice, game.diceValues);
+  return game;
+};
+
+const rollDice = (game) => {
+  const { currentPlayer: { canReRoll }, currentCard } = game;
+  
+
+  if (canReRoll && currentCard) {
+    API.reRollDice()
+      .then(drawLotteryMessage)
+      .then(API.getGameJson()
+        .then(preAnimateDice)
+      );
+    return;
+  }
 
   const diceCount = getSelectedDice();
   API.rollDice(diceCount)
     .then(
-      API.getGame()
-        .then(res => res.json())
-        .then(game => {
-          game.diceValues.forEach(val => diceSet.delete(val));
-          const randDice = [...diceSet.values()].slice(0, 2);
-          animateRollDice(randDice, game.diceValues);
-          return game;
-        })
-        .then(decideCard));
+      API.getGameJson()
+        .then(preAnimateDice)
+        .then(decideCard)
+        .then());
   return;
 };
 
