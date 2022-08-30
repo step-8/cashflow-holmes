@@ -24,6 +24,7 @@
   --violet-p: #7145f7;
   --orange-p: #fc880c;
   --grey-p: lightgray;
+  --panel-button:linear-gradient(90deg, #db5b5b, #ffd795);
 }
 
 * {

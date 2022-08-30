@@ -263,7 +263,9 @@ const RAT_RACE_BOARD = `<html>
     </div>
     <div id="game-panel" class="flex-column">
       <header class="flex-row">
-        <h2 class="large-font"><a href="/">Cashflow</a></h2>
+        <a class="flex-row" href="/">
+          <img src="images/cashflow name.png">
+        </a>
       </header>
       <nav id="game-nav">
         <ul>
