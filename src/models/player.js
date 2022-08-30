@@ -270,8 +270,7 @@ class Player {
   }
 
   isIncomeStable() {
-    return true;
-    // return this.#calculatePassiveIncome() > this.#calculateTotalExpenses();
+    return this.#calculatePassiveIncome() > this.#calculateTotalExpenses();
   }
 
   #setFastTrack() {
