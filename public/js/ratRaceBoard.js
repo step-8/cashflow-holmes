@@ -46,9 +46,15 @@ const rollDice = (game) => {
 
   const diceCount = getSelectedDice();
   API.rollDice(diceCount)
-    .then(API.getGame()
-      .then(res => res.json())
-      .then(decideCard));
+    .then(
+      API.getGame()
+        .then(res => res.json())
+        .then(game => {
+          animateRollDice(game.diceValues.reverse());
+          animateRollDice(game.diceValues.reverse());
+          return game;
+        })
+        .then(decideCard));
   return;
 };
 
@@ -71,7 +77,7 @@ const getDiceOptions = (id, diceValues) => {
     'one': {
       className: 'dice-option',
       onclick: (event) => {
-        drawOneDice(diceValues[0]);
+        drawOneDice(diceValues);
         selectDiceOption(event);
       },
       id: 'one-die'
@@ -145,9 +151,10 @@ const activateDice = (game) => {
 
   if (isEligibleToRoll(username, currentPlayer)) {
     activateRoll(diceBox, game);
-  } else {
-    deactivateRoll(diceBox);
+    return game;
   }
+
+  deactivateRoll(diceBox);
   return game;
 };
 
@@ -312,35 +319,47 @@ const diceFaces = {
 };
 
 const createDice = (diceValue) => html(diceFaces[diceValue]);
-const drawOneDice = (diceValue) => {
-  const dice = document.querySelector('#dice-box');
-  dice.replaceChildren('');
-  dice.appendChild(createDice(diceValue));
+
+const drawOneDice = (diceValues) => {
+  const secondDice = getElement('#dice-2-container');
+  secondDice.style.display = 'none';
 };
 
 const drawTwoDices = (diceValues) => {
-  let newDiceValues = diceValues;
-  if (newDiceValues.length < 2) {
-    newDiceValues = [...diceValues, 1];
+  const secondDice = getElement('#dice-2-container');
+  secondDice.style.display = 'block';
+};
+
+const animateRollDice = ([value1, value2]) => {
+  const diceOne = document.getElementById('dice1');
+  const diceTwo = document.getElementById('dice2');
+
+  for (let side = 1; side <= 6; side++) {
+    diceOne.classList.remove('show-' + side);
+    if (value1 === side) {
+      diceOne.classList.add('show-' + side);
+    }
   }
 
-  const dice = document.querySelector('#dice-box');
-  dice.replaceChildren('');
-  newDiceValues.forEach(diceValue => {
-    dice.appendChild(createDice(diceValue));
-  });
-
+  for (let side = 1; side <= 6; side++) {
+    diceTwo.classList.remove('show-' + side);
+    if (value2 === side) {
+      diceTwo.classList.add('show-' + side);
+    }
+  }
 };
 
 const drawDice = (game) => {
-  const { diceValues, currentPlayer: { dualDiceCount } } = game;
-
+  const { diceValues, currentPlayer: { dualDiceCount, isRolledDice } } = game;
+  
+  if (isRolledDice) {
+    return game;
+  }
   if (dualDiceCount > 0) {
     drawTwoDices(diceValues);
     return game;
   }
-
-  drawOneDice(diceValues[0]);
+  drawOneDice(diceValues); 
   return game;
 };
 
