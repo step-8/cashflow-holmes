@@ -8,11 +8,11 @@ const submitOnEnter = (event, action, cardDetails) => {
     return;
   }
 
-  submitCount(event, action, cardDetails);
+  submitValue(event, action, cardDetails);
 };
 
-const submitCount = (event, action, cardDetails) => {
-  const inputDiv = getElement('#input-count');
+const submitValue = (event, action, cardDetails) => {
+  const inputDiv = getElement('#input-count') || getElement('#real-estate-options');
   const count = inputDiv.value;
   if (!count) {
     return;
@@ -21,28 +21,56 @@ const submitCount = (event, action, cardDetails) => {
   sendAction(action, cardDetails.family, type, count);
 };
 
-const drawInputBox = (action, cardDetails) => {
+const createRealEstateSelection = ({ realEstates }, { symbol }) => {
+  const filtered = realEstates.filter(
+    realEstate => realEstate.symbol.includes(symbol));
+  console.log(filtered);
+  console.log(realEstates);
+  console.log(symbol);
+
+  const realEstateSelection = html(['select', { name: 'real-estate', id: 'real-estate-options' }, '']);
+  realEstateSelection.append(html(['option', { value: ' ' }, '--Choose real estate--']));
+
+  filtered.forEach(({ id, symbol, cashFlow, cost }) => {
+    const optionTemplate = ['option',
+      { value: id },
+      `${symbol}, Cost: $${cost}, Cashflow: $${cashFlow}`
+    ];
+    realEstateSelection.append(html(optionTemplate));
+  });
+
+  return realEstateSelection;
+};
+
+const drawInputBox = (action, cardDetails, { profile }) => {
   const actions = getElement('.actions');
   const actionsChildren = [...actions.children];
+  console.log(cardDetails);
 
-  const countInput =
+  const dropDown = createRealEstateSelection(profile.assets, cardDetails);
+
+  const input = ['input',
+    {
+      autofocus: 'true',
+      required: 'true',
+      onkeyup: event => submitOnEnter(event, action, cardDetails),
+      type: 'number',
+      min: '0',
+      placeholder: 'Enter count',
+      id: 'input-count'
+    }
+  ];
+
+  const children = cardDetails.type === 'realEstate' && action === 'sell' ? dropDown : input;
+
+  const selection =
     ['div', { className: 'selection-box' },
       ['div', {},
-        ['input',
-          {
-            autofocus: 'true',
-            required: 'true',
-            onkeyup: event => submitOnEnter(event, action, cardDetails),
-            type: 'number',
-            min: '0',
-            placeholder: 'Enter count',
-            id: 'input-count'
-          }
-        ]
+        children
       ],
       ['div', {
         className: 'fa-solid fa-check check',
-        onclick: (event) => submitCount(event, action, cardDetails)
+        onclick: (event) => submitValue(event, action, cardDetails)
       }],
       ['div', {
         className: 'fa-solid fa-xmark close',
@@ -52,10 +80,10 @@ const drawInputBox = (action, cardDetails) => {
       }],
     ];
 
-  actions.replaceChildren(html(countInput));
+  actions.replaceChildren(html(selection));
 };
 
-const sendAction = (action, family, type, count) => {
+const sendAction = (action, family, type, value) => {
   const options = {
     method: 'POST',
     headers: {
@@ -65,7 +93,7 @@ const sendAction = (action, family, type, count) => {
       `action=${action}`,
       `family=${family}`,
       `type=${type}`,
-      `count=${count}`
+      `value=${value}`
     ].join('&')
   };
 
@@ -85,19 +113,22 @@ const isInteractive = (action, type) => {
       stock: true,
       stockOthers: true,
       goldCoins: true,
-      goldCoinsOthers: true
+      goldCoinsOthers: true,
+      realEstate: true,
+      realEstateOthers: true
     }
   };
   return interactive[action]?.[type];
 };
 
-const performAction = (event, family, type) => {
+const performAction = (event, card, player) => {
+  const { family, type } = card;
   const actionDiv = event.target;
   let [, action] = actionDiv.id.split('-');
   action = action === 'donate' ? 'ok' : action;
 
   if (isInteractive(action, type)) {
-    drawInputBox(action, { family, type });
+    drawInputBox(action, card, player);
     return;
   }
 
@@ -116,6 +147,7 @@ const actions = {
   },
   market: {
     realEstate: ['SELL', 'SKIP'],
+    realEstateOthers: ['SELL', 'SKIP'],
     damage: ['OK'],
     lottery: ['ROLL'],
     goldCoins: ['SELL', 'SKIP'],
@@ -138,7 +170,8 @@ const actions = {
   }
 };
 
-const createActions = (family, type, asset) => {
+const createActions = (card, type, asset, player) => {
+  const { family } = card;
   const actionTexts = actions[family][type];
   return html(['div', { className: 'actions-wrapper' },
     ...actionTexts.map(action => {
@@ -150,7 +183,7 @@ const createActions = (family, type, asset) => {
           className: 'button action-btn',
           id: `action-${action.toLowerCase()}`,
           onclick: (event) => {
-            performAction(event, family, type);
+            performAction(event, card, player);
           }
         },
         action
@@ -174,10 +207,12 @@ const updateCurrentCardDetails = (card, player) => {
   return;
 };
 
-const matchCard = (assets, symbol) => assets.find(asset => asset.symbol === symbol);
+const matchCard = (assets, symbol) => assets.find(
+  asset => asset.symbol.includes(symbol));
 
 const findAsset = (card, assets) => {
-  const allAssets = [...assets.stocks, ...assets.preciousMetals];
+  const allAssets =
+    [...assets.stocks, ...assets.preciousMetals, ...assets.realEstates];
   return matchCard(allAssets, card.symbol);
 };
 
@@ -187,6 +222,7 @@ const multiUserFlow = (family, type) => {
       stock: true
     },
     market: {
+      realEstate: true,
       goldCoins: true
     }
   };
@@ -202,15 +238,16 @@ const drawActions = (game) => {
   let actions = '';
   const asset = findAsset(currentCard, assets);
   const isCurrentUser = currentPlayer.username === username;
-
+  const player = findPlayer(players, username);
   if (isCurrentUser && !response.responded) {
-    actions = createActions(family, type, asset);
+    actions = createActions(currentCard, type, asset, player);
   }
 
   if (multiUserFlow(family, type) && !isCurrentUser && !response.responded) {
+
     const { assets } = findPlayer(players, username).profile;
     const asset = findAsset(currentCard, assets);
-    actions = createActions(family, `${currentCard.type}Others`, asset);
+    actions = createActions(currentCard, `${currentCard.type}Others`, asset, player);
   }
 
   const actionsDiv = getElement('.actions');

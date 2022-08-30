@@ -240,6 +240,20 @@ class Game {
     this.#currentTurn.setTransactionState('deal', status, username);
   }
 
+  sellRealEstate(username, id) {
+    const player = this.findPlayer(username);
+    let status = 8;
+
+    if (player.sellRealEstate(this.#currentCard, id)) {
+      status = 7;
+      this.#currentTurn.sellRealEstate(player, id);
+      this.#currentTurn.setTransactionState('market', status, username);
+      return;
+    }
+
+    this.#currentTurn.setTransactionState('market', status, username);
+  }
+
   propertyDamage(username) {
     return this.#currentTurn.propertyDamage(this.findPlayer(username));
   }

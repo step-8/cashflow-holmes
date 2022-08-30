@@ -4,7 +4,8 @@ const multiUserFlow = (family, type) => {
       stock: true
     },
     market: {
-      goldCoins: true
+      goldCoins: true,
+      realEstate: true
     }
   };
   return multiFlows[family]?.[type];
@@ -279,6 +280,14 @@ class Turn {
   sellGold(player, count) {
     this.setTransactionState('market', 5, player.username);
     this.#log.addLog(player, `sold gold coins of count ${count}`);
+
+    this.respond(player.username);
+  }
+
+  sellRealEstate(player) {
+    this.setTransactionState('market', 7, player.username);
+
+    this.#log.addLog(player, `sold ${this.#card.symbol} `);
 
     this.respond(player.username);
   }

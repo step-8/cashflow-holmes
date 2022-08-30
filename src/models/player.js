@@ -239,6 +239,33 @@ class Player {
     return true;
   }
 
+  #findRealEstate(id) {
+    return this.#assets.realEstates.find((realEstate) => realEstate.id === id);
+  }
+
+  #removeRealEstate(id) {
+    const index = this.#assets.realEstates.findIndex(
+      realEstate => realEstate.id === id);
+
+    this.#assets.realEstates.splice(index, 1);
+    this.#liabilities.realEstates.splice(index, 1);
+    this.#income.realEstates.splice(index, 1);
+  }
+
+  sellRealEstate(card, id) {
+    const realEstate = this.#findRealEstate(id);
+    const value = (realEstate.cost / 100) * card.value;
+    let totalCost = realEstate.cost + value;
+
+    if (card.plus) {
+      totalCost = realEstate.cost + card.value;
+    }
+
+    this.updateCash(totalCost, card.symbol);
+    this.#removeRealEstate(id);
+    return true;
+  }
+
   #recordToLedger(transaction) {
     this.#transactions.unshift(transaction);
   }

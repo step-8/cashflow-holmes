@@ -40,11 +40,11 @@ const buyDeals = (game, type, count, username) => {
   executor();
 };
 
-const sellAsset = (game, type, count, username) => {
+const sellAsset = (game, type, value, username) => {
   const types = {
-    realEstate: () => game.sellRealEstate(username),
-    stock: () => game.sellStocks(username, count),
-    goldCoins: () => game.sellGoldCoins(username, count),
+    realEstate: () => game.sellRealEstate(username, value),
+    stock: () => game.sellStocks(username, +value),
+    goldCoins: () => game.sellGoldCoins(username, +value),
     default: () => game.skip(username)
   };
 
@@ -53,7 +53,7 @@ const sellAsset = (game, type, count, username) => {
 };
 
 const cardActionsHandler = (req, res) => {
-  const { action, family, type, count } = req.body;
+  const { action, family, type, value } = req.body;
   const { game, session: { username } } = req;
   const deals = ['small', 'big'];
   if (deals.includes(action)) {
@@ -64,10 +64,10 @@ const cardActionsHandler = (req, res) => {
 
   const actions = {
     ok: () => acceptCard(game, family, type, username),
-    buy: () => buyDeals(game, type, +count, username),
+    buy: () => buyDeals(game, type, +value, username),
     skip: () => game.skip(username),
     roll: () => game.activateReroll(),
-    sell: () => sellAsset(game, type, +count, username)
+    sell: () => sellAsset(game, type, value, username)
   };
   actions[action]();
   res.end();
