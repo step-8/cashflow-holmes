@@ -43,6 +43,9 @@ const rollDice = (game) => {
       .then(drawLotteryMessage);
     return;
   }
+  
+  const diceSet = new Set();
+  [1, 2, 3, 4, 5, 6].forEach(item => diceSet.add(item));
 
   const diceCount = getSelectedDice();
   API.rollDice(diceCount)
@@ -50,8 +53,9 @@ const rollDice = (game) => {
       API.getGame()
         .then(res => res.json())
         .then(game => {
-          animateRollDice(game.diceValues.reverse());
-          animateRollDice(game.diceValues.reverse());
+          game.diceValues.forEach(val => diceSet.delete(val));
+          const randDice = [...diceSet.values()].slice(0, 2);
+          animateRollDice(randDice, game.diceValues);
           return game;
         })
         .then(decideCard));
@@ -330,9 +334,9 @@ const drawTwoDices = (diceValues) => {
   secondDice.style.display = 'block';
 };
 
-const animateRollDice = ([value1, value2]) => {
-  const diceOne = document.getElementById('dice1');
-  const diceTwo = document.getElementById('dice2');
+const animateRollDice = ([value1, value2], next) => {
+  const diceOne = getElement('#dice1');
+  const diceTwo = getElement('#dice2');
 
   for (let side = 1; side <= 6; side++) {
     diceOne.classList.remove('show-' + side);
@@ -346,6 +350,12 @@ const animateRollDice = ([value1, value2]) => {
     if (value2 === side) {
       diceTwo.classList.add('show-' + side);
     }
+  }
+
+  if (next) {
+    setTimeout(() => {
+      animateRollDice(next);
+    }, 500);
   }
 };
 
