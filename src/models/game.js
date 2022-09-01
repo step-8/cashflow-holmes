@@ -1,4 +1,4 @@
-const deck = require('../../data/demoCards.json');
+const deck = require('../../data/cards.json');
 const { RatRace } = require('./ratRace.js');
 const { Turn } = require('./turn.js');
 const { Log } = require('./log.js');

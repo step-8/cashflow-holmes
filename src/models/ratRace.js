@@ -74,8 +74,7 @@ class RatRace {
       return {};
     }
 
-    // return this.#deck[type][random(Object.keys(this.#deck[type]).length - 1)];
-    return this.#deck[type].shift();
+    return this.#deck[type][random(Object.keys(this.#deck[type]).length - 1)];
   }
 
   getNotifications(type, currentPlayer, username) {
