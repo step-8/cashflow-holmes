@@ -2,6 +2,7 @@
   "name": "cashflow-holmes",
   "version": "1.0.0",
   "description": "",
+  "engines": "v18.11.0",
   "main": "index.js",
   "directories": {
     "test": "test"
