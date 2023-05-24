@@ -13,8 +13,11 @@ const createApp = (config, session, DB) => {
 
   app.use(session);
   if (config.ENV === 'dev') {
-//     app.use(morgan('dev'));
-    app.use(morgan(':req[ip] :method :url :status :res[content-length] - :response-time ms'));
+    app.use(morgan('dev'));
+    app.use((req, res, next) => {
+		console.log(req.ip);
+		next();
+	});
   }
   app.use(cookieParser());
   app.use(express.urlencoded({ extended: true }));
